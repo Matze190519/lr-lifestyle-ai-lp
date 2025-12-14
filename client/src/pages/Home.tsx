@@ -2,7 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, MessageCircle, ShieldCheck, Zap, Info, Car, TrendingUp, Smartphone } from "lucide-react";
+import { ArrowRight, CheckCircle2, MessageCircle, ShieldCheck, Zap, Info, Car, TrendingUp, Smartphone, Users, HelpCircle } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useLocation } from "wouter";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -142,6 +144,149 @@ const WhatIsLRSection = () => {
   );
 };
 
+const SocialProofSection = () => {
+  const testimonials = [
+    {
+      quote: "Ich hatte null Plan – jetzt hab ich endlich einen klaren Startablauf und weiß, was ich täglich machen soll.",
+      author: "Sabrina, 34",
+      role: "Nebenjob",
+      badge: "Onboarding"
+    },
+    {
+      quote: "Das Beste: Die Vorlagen. Ich muss nichts erfinden – ich setze nur um.",
+      author: "Kevin, 27",
+      role: "Quereinsteiger",
+      badge: "Vorlagen"
+    },
+    {
+      quote: "Ich wollte erst nur Infos. Nach dem Kurz-Check war alles plötzlich logisch.",
+      author: "Miriam, 41",
+      role: "Familie & Job",
+      badge: "Kurz-Check"
+    },
+    {
+      quote: "Lina spart mir Zeit: Antworten, Ideen, Follow-ups – ich bleibe dran.",
+      author: "Tobias, 38",
+      role: "selbstständig",
+      badge: "WhatsApp Support"
+    },
+    {
+      quote: "Kein Druck, kein Gelaber – einfach Schritt-für-Schritt.",
+      author: "Anja, 52",
+      role: "Neustart",
+      badge: "Onboarding"
+    },
+    {
+      quote: "Ich hatte Angst vor Technik. Setup war easy, weil ich geführt werde.",
+      author: "Deniz, 29",
+      role: "digital interessiert",
+      badge: "Vorlagen"
+    }
+  ];
+
+  return (
+    <section className="py-16 bg-card/30 border-y border-white/5">
+      <div className="container max-w-6xl">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold font-poppins mb-2">Echte Menschen. Echte Umsetzung.</h2>
+          <p className="text-sm text-muted-foreground">Ergebnisse ohne leere Versprechen.</p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((t, i) => (
+            <Card key={i} className="bg-background/40 border-primary/10 hover:border-primary/30 transition-all backdrop-blur-sm">
+              <CardContent className="p-6 relative">
+                <div className="absolute top-4 right-4 px-2 py-1 bg-primary/10 rounded text-[10px] font-mono text-primary uppercase tracking-wider">
+                  {t.badge}
+                </div>
+                <p className="text-sm italic text-muted-foreground mb-4 leading-relaxed">"{t.quote}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-xs font-bold">
+                    {t.author.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-bold text-sm">{t.author}</p>
+                    <p className="text-[10px] text-muted-foreground uppercase">{t.role}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const FAQSection = () => {
+  const faqs = [
+    {
+      q: "Was bekomme ich auf WhatsApp?",
+      a: "Du bekommst das kostenlose Info-Paket: Startplan, Übersicht Fast Track*, Autokonzept-Ablauf* und Lina-Vorlagen."
+    },
+    {
+      q: "Kostet mich das Info-Paket etwas?",
+      a: "Nein. Kostenlos und unverbindlich."
+    },
+    {
+      q: "Wie läuft das nach dem Kontakt ab?",
+      a: "Kurz-Check (10–15 Min): Wir klären Ziele, Zeit, Fragen – dann bekommst du den passenden Startplan."
+    },
+    {
+      q: "Muss ich verkaufen?",
+      a: "Du lernst Empfehlung + Online-Abläufe strukturiert. Kein Druck, kein “Freunde nerven”-Zwang."
+    },
+    {
+      q: "Wie viel Zeit brauche ich pro Woche?",
+      a: "Das hängt von deinem Ziel ab. Wir bauen einen Plan, der realistisch zu deinem Alltag passt."
+    },
+    {
+      q: "Was ist der Fast Track Bonus genau?",
+      a: "Es gibt gestaffelte Bonus-Stufen (300 € / 1.100 € / 2.000 €)* – Details und Bedingungen bekommst du im Info-Paket. *Nur bei Qualifikation/Programmbedingungen."
+    },
+    {
+      q: "Wie funktioniert das Autokonzept?",
+      a: "Je nach Stufe sind Partnerkonditionen und/oder Zuschüsse möglich.* Wir erklären dir Voraussetzungen, Ablauf und Beispiele. *Abhängig von Voraussetzungen/Bonität/Qualifikation/Modell."
+    },
+    {
+      q: "Was ist Lina (KI) konkret?",
+      a: "Lina unterstützt bei Content-Vorlagen, FAQ/Antworten, Follow-up-Struktur und Onboarding-Schritten."
+    },
+    {
+      q: "Ist das seriös?",
+      a: "Du bekommst klare Infos, Bedingungen und einen strukturierten Prozess – und entscheidest selbst, ob du startest."
+    },
+    {
+      q: "Was, wenn ich unsicher bin?",
+      a: "Dann hol dir erstmal nur das Info-Paket. Null Verpflichtung."
+    }
+  ];
+
+  return (
+    <section className="py-16">
+      <div className="container max-w-3xl">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold font-poppins mb-2">Häufige Fragen</h2>
+          <p className="text-sm text-muted-foreground">Alles, was du wissen musst.</p>
+        </div>
+        
+        <Accordion type="single" collapsible className="w-full space-y-2">
+          {faqs.map((faq, i) => (
+            <AccordionItem key={i} value={`item-${i}`} className="border border-white/5 bg-card/20 rounded-lg px-4">
+              <AccordionTrigger className="text-sm font-medium hover:text-primary text-left">
+                {faq.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                {faq.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+};
+
 const FastTrackSection = () => {
   return (
     <section className="py-16">
@@ -268,6 +413,7 @@ const LinaSection = () => {
 
 const FinalCTASection = () => {
   const whatsappLink = "https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.%20Interesse%3A%20%5BFast%20Track%2FAuto%2FBeides%5D.%20Vorname%3A%20____";
+  const [_, setLocation] = useLocation();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -286,6 +432,7 @@ const FinalCTASection = () => {
       description: "Wir melden uns in Kürze bei dir.",
     });
     form.reset();
+    setLocation("/danke");
   }
 
   return (
@@ -432,6 +579,8 @@ export default function Home() {
       <WhatIsLRSection />
       <FastTrackSection />
       <LinaSection />
+      <SocialProofSection />
+      <FAQSection />
       <FinalCTASection />
       <Footer />
       
