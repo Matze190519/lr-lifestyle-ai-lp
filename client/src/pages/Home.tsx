@@ -558,8 +558,8 @@ const Footer = () => {
       <div className="container space-y-4 max-w-4xl">
         <p>*Details zu Voraussetzungen, Fast Track Bonus und Autokonzept im kostenlosen Info-Paket. Keine Erfolgsgarantie; Ergebnisse hängen von individuellem Einsatz ab.</p>
         <div className="flex justify-center gap-6 text-xs">
-          <a href="#" className="hover:text-primary transition-colors">Impressum</a>
-          <a href="#" className="hover:text-primary transition-colors">Datenschutz</a>
+          <a href="/impressum" className="hover:text-primary transition-colors">Impressum</a>
+          <a href="/datenschutz" className="hover:text-primary transition-colors">Datenschutz</a>
         </div>
         <p className="opacity-50">© 2025 LR Lifestyle AI</p>
       </div>
