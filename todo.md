@@ -19,3 +19,6 @@
 - [x] Landing Page nach Upgrade wiederherstellen
 - [x] Routing für neue Seiten in App.tsx (Impressum, Datenschutz)
 - [x] Footer-Links aktualisiert
+
+## Bugs Fixed
+- [x] Botpress Chatbot nicht sichtbar auf der Seite - Behoben durch manuellen Trigger-Button

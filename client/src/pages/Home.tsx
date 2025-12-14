@@ -12,6 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import LinaChatbot from "@/components/LinaChatbot";
 
 // --- Schema & Types ---
 const formSchema = z.object({
@@ -571,10 +572,10 @@ export default function Home() {
   useEffect(() => {
     // Initial PageView Tracking
     trackEvent('PageView');
-  }, []);
-
-  return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 pb-20 md:pb-0">
+  }, []);  return (
+    <div className="min-h-screen bg-background text-foreground font-sans">
+      <LinaChatbot />
+      <div className="selection:bg-primary/30 pb-20 md:pb-0">
       <HeroSection />
       <WhatIsLRSection />
       <FastTrackSection />
@@ -596,6 +597,7 @@ export default function Home() {
           <MessageCircle className="mr-2 w-5 h-5" />
           WhatsApp Infos
         </Button>
+      </div>
       </div>
     </div>
   );
