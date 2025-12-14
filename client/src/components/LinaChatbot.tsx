@@ -8,7 +8,6 @@ declare global {
       open: () => void;
       close: () => void;
       toggle: () => void;
-      isOpen: () => boolean;
     };
   }
 }
@@ -45,7 +44,8 @@ export default function LinaChatbot() {
     if (window.botpress) {
       try {
         window.botpress.toggle();
-        setIsChatOpen(window.botpress.isOpen());
+        // Toggle den lokalen State (ohne isOpen() zu verwenden)
+        setIsChatOpen(prev => !prev);
       } catch (error) {
         console.error("Fehler beim Öffnen des Chatbots:", error);
         // Fallback: Öffne WhatsApp

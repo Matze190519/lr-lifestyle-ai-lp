@@ -34,3 +34,6 @@
 - [x] Botpress Custom CSS auf Purple Gradient Design umgestellt
 - [x] CSS auf CDN hochgeladen (https://files.manuscdn.com/...)
 - [x] Anleitung für Botpress-Dashboard erstellt
+
+## Bugs Fixed (Phase 5)
+- [x] Botpress isOpen() Fehler behoben - Lokales State-Tracking statt API-Aufruf
