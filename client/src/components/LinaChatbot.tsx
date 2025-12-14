@@ -2,33 +2,65 @@ import { Button } from "@/components/ui/button";
 import { MessageCircle, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
+declare global {
+  interface Window {
+    botpress?: {
+      open: () => void;
+      close: () => void;
+      toggle: () => void;
+      isOpen: () => boolean;
+    };
+  }
+}
+
 export default function LinaChatbot() {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isBotpressReady, setIsBotpressReady] = useState(false);
 
   useEffect(() => {
     // Warte darauf, dass Botpress geladen ist
     const checkBotpress = setInterval(() => {
-      if ((window as any).botpress) {
+      if (window.botpress) {
+        setIsBotpressReady(true);
         clearInterval(checkBotpress);
-        console.log("✓ Botpress Webchat geladen");
+        console.log("✓ Botpress Webchat geladen und bereit");
       }
     }, 500);
 
-    return () => clearInterval(checkBotpress);
+    // Cleanup nach 10 Sekunden
+    const timeout = setTimeout(() => {
+      clearInterval(checkBotpress);
+      if (!window.botpress) {
+        console.warn("⚠️ Botpress konnte nicht geladen werden");
+      }
+    }, 10000);
+
+    return () => {
+      clearInterval(checkBotpress);
+      clearTimeout(timeout);
+    };
   }, []);
 
   const toggleChat = () => {
-    if ((window as any).botpressWebChat) {
-      if (isChatOpen) {
-        (window as any).botpressWebChat.close();
-      } else {
-        (window as any).botpressWebChat.open();
+    if (window.botpress) {
+      try {
+        window.botpress.toggle();
+        setIsChatOpen(window.botpress.isOpen());
+      } catch (error) {
+        console.error("Fehler beim Öffnen des Chatbots:", error);
+        // Fallback: Öffne WhatsApp
+        window.open("https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.", "_blank");
       }
-      setIsChatOpen(!isChatOpen);
     } else {
-      console.error("Botpress Webchat nicht verfügbar");
+      console.warn("Botpress nicht verfügbar - Fallback zu WhatsApp");
+      window.open("https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.", "_blank");
     }
   };
+
+  // Zeige den Button nur, wenn Botpress bereit ist
+  if (!isBotpressReady) {
+    return null;
+  }
 
   return (
     <>
