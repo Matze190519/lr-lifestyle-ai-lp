@@ -1,0 +1,356 @@
+/* 
+ * Botpress Webchat Custom Styling - Purple Gradient Edition
+ * Design: Purple Gradient (#9333EA → #7C3AED → #6366F1)
+ * Background: Light/White (#FFFFFF)
+ * Client ID: 32dfe644-9e09-4072-bd72-34340d56cb7b
+ */
+
+/* ========================================
+   MAIN CONTAINER & LAYOUT
+   ======================================== */
+
+#bp-web-widget-container,
+#bp-web-widget,
+.bpWebchatContainer {
+  font-family: 'Poppins', 'Inter', sans-serif !important;
+}
+
+/* Chat Window - Light Background */
+.bpw-layout,
+.bpWebchatContainer {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(147, 51, 234, 0.2) !important;
+  box-shadow: 0 20px 60px rgba(147, 51, 234, 0.15), 
+              0 0 40px rgba(147, 51, 234, 0.1) !important;
+  border-radius: 16px !important;
+}
+
+/* ========================================
+   HEADER - PURPLE GRADIENT
+   ======================================== */
+
+#bp-web-widget header,
+.bpHeader,
+.bpw-header,
+[class*="header"],
+[class*="Header"] {
+  background: linear-gradient(135deg, #9333EA 0%, #7C3AED 50%, #6366F1 100%) !important;
+  backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgba(147, 51, 234, 0.2) !important;
+  padding: 16px !important;
+}
+
+.bpw-header-title,
+[class*="header-title"],
+[class*="HeaderTitle"] {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.bpw-header-subtitle,
+[class*="header-subtitle"] {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 12px !important;
+}
+
+/* Bot Avatar */
+.bpw-bot-avatar,
+[class*="bot-avatar"],
+[class*="BotAvatar"] {
+  border: 2px solid #FFFFFF !important;
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.5) !important;
+}
+
+/* ========================================
+   MESSAGES CONTAINER
+   ======================================== */
+
+.bpw-msg-list-container,
+[class*="msg-list"],
+[class*="MessageList"] {
+  background: #FFFFFF !important;
+}
+
+/* ========================================
+   BOT MESSAGES - PURPLE GRADIENT
+   ======================================== */
+
+.bpw-from-bot .bpw-chat-bubble,
+.bpMessageBubbleBot,
+[class*="bot-message"],
+[class*="BotMessage"],
+[class*="from-bot"] {
+  background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+}
+
+.bpw-from-bot .bpw-chat-bubble *,
+.bpMessageBubbleBot * {
+  color: #FFFFFF !important;
+}
+
+/* ========================================
+   USER MESSAGES - SOLID PURPLE
+   ======================================== */
+
+.bpw-from-user .bpw-chat-bubble,
+.bpMessageBubbleUser,
+[class*="user-message"],
+[class*="UserMessage"],
+[class*="from-user"] {
+  background: #9333EA !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+}
+
+.bpw-from-user .bpw-chat-bubble *,
+.bpMessageBubbleUser * {
+  color: #FFFFFF !important;
+}
+
+/* ========================================
+   INPUT AREA - LIGHT BACKGROUND
+   ======================================== */
+
+.bpw-composer,
+[class*="composer"],
+[class*="Composer"] {
+  background: #FFFFFF !important;
+  border-top: 1px solid rgba(147, 51, 234, 0.2) !important;
+  padding: 12px !important;
+}
+
+.bpw-composer-inner,
+[class*="composer-inner"] {
+  background: #F8F9FA !important;
+  border: 1px solid rgba(147, 51, 234, 0.3) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+.bpw-composer-inner:focus-within {
+  border-color: #9333EA !important;
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.3) !important;
+}
+
+.bpw-composer-textarea,
+.bpComposerTextarea,
+input[type="text"],
+textarea {
+  background: #F8F9FA !important;
+  color: #1F2937 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.bpw-composer-textarea::placeholder,
+.bpComposerTextarea::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(31, 41, 55, 0.5) !important;
+}
+
+/* ========================================
+   SEND BUTTON - PURPLE GRADIENT
+   ======================================== */
+
+.bpw-send-button,
+.bpComposerSendButton,
+button[type="submit"],
+[class*="send-button"],
+[class*="SendButton"] {
+  background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.4) !important;
+  border: none !important;
+}
+
+.bpw-send-button:hover,
+.bpComposerSendButton:hover {
+  background: linear-gradient(135deg, #A855F7 0%, #8B5CF6 100%) !important;
+  box-shadow: 0 0 25px rgba(147, 51, 234, 0.6) !important;
+  transform: scale(1.05) !important;
+}
+
+.bpw-send-button svg,
+.bpComposerSendButton svg {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+/* ========================================
+   QUICK REPLIES & BUTTONS
+   ======================================== */
+
+.bpw-quick-reply,
+[class*="quick-reply"],
+[class*="QuickReply"] {
+  background: rgba(147, 51, 234, 0.1) !important;
+  border: 1px solid rgba(147, 51, 234, 0.3) !important;
+  color: #9333EA !important;
+  backdrop-filter: blur(5px) !important;
+  transition: all 0.3s ease !important;
+  border-radius: 20px !important;
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+}
+
+.bpw-quick-reply:hover {
+  background: rgba(147, 51, 234, 0.2) !important;
+  border-color: #9333EA !important;
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.3) !important;
+}
+
+/* Buttons in Messages */
+.bpw-button,
+[class*="button"]:not([class*="send"]) {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.15) 0%, rgba(124, 58, 237, 0.1) 100%) !important;
+  border: 1px solid rgba(147, 51, 234, 0.4) !important;
+  color: #9333EA !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  border-radius: 8px !important;
+  padding: 10px 20px !important;
+}
+
+.bpw-button:hover {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.25) 0%, rgba(124, 58, 237, 0.2) 100%) !important;
+  border-color: #9333EA !important;
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.3) !important;
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+.bpw-msg-list::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.bpw-msg-list::-webkit-scrollbar-track {
+  background: #F8F9FA !important;
+  border-radius: 10px !important;
+}
+
+.bpw-msg-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%) !important;
+  border-radius: 10px !important;
+}
+
+.bpw-msg-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #A855F7 0%, #8B5CF6 100%) !important;
+}
+
+/* ========================================
+   TYPING INDICATOR
+   ======================================== */
+
+.bpw-typing-bubble,
+[class*="typing"],
+[class*="Typing"] {
+  background: rgba(147, 51, 234, 0.15) !important;
+  border: 1px solid rgba(147, 51, 234, 0.3) !important;
+  border-radius: 12px !important;
+}
+
+.bpw-typing-bubble span {
+  background: #9333EA !important;
+  box-shadow: 0 0 5px rgba(147, 51, 234, 0.5) !important;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.bpw-powered,
+[class*="powered"],
+[class*="footer"] {
+  color: rgba(31, 41, 55, 0.5) !important;
+  font-size: 11px !important;
+}
+
+.bpw-powered a {
+  color: #9333EA !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.bpw-powered a:hover {
+  color: #7C3AED !important;
+  text-shadow: 0 0 10px rgba(147, 51, 234, 0.5) !important;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes purpleGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(147, 51, 234, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(147, 51, 234, 0.5); }
+}
+
+.bpw-layout {
+  animation: purpleGlow 3s ease-in-out infinite !important;
+}
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+   ======================================== */
+
+@media (max-width: 768px) {
+  .bpw-layout {
+    border-radius: 0 !important;
+    max-height: 100vh !important;
+  }
+  
+  .bpw-header,
+  #bp-web-widget header {
+    padding: 12px !important;
+  }
+  
+  .bpw-header-title {
+    font-size: 16px !important;
+  }
+}
+
+/* ========================================
+   ADDITIONAL OVERRIDES (FALLBACK)
+   ======================================== */
+
+/* Force Purple Gradient on all possible header selectors */
+div[class*="header"],
+div[id*="header"],
+[role="banner"] {
+  background: linear-gradient(135deg, #9333EA 0%, #7C3AED 50%, #6366F1 100%) !important;
+}
+
+/* Force Light Background on all possible container selectors */
+div[class*="container"],
+div[class*="layout"],
+[role="main"] {
+  background: #FFFFFF !important;
+}
+
+/* Force Purple on all bot message variations */
+div[class*="bot"][class*="message"],
+div[class*="assistant"][class*="message"] {
+  background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%) !important;
+  color: #FFFFFF !important;
+}
+
+/* Force Purple on all user message variations */
+div[class*="user"][class*="message"],
+div[class*="visitor"][class*="message"] {
+  background: #9333EA !important;
+  color: #FFFFFF !important;
+}

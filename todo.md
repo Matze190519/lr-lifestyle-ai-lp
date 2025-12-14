@@ -29,3 +29,8 @@
 - [x] Chatbot-Styling an Landing Page angepasst (Deep Navy, Cyan, Gold)
 - [x] Anleitung zum CSS-Upload erstellt (BOTPRESS_STYLING_ANLEITUNG.md)
 - [x] Fallback zu WhatsApp bei Botpress-Fehler implementiert
+
+## Completed (Phase 4)
+- [x] Botpress Custom CSS auf Purple Gradient Design umgestellt
+- [x] CSS auf CDN hochgeladen (https://files.manuscdn.com/...)
+- [x] Anleitung für Botpress-Dashboard erstellt
