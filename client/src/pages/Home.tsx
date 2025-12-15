@@ -272,6 +272,26 @@ const FAQSection = () => {
     {
       q: "Woher weiß ich, welche Produkte für mich geeignet sind?",
       a: "LR bietet ein breites Portfolio an Gesundheits- und Schönheitsprodukten, darunter Aloe Vera, Nahrungsergänzung (Lifetakt), Parfüms (Mood Infusion & Iconic Elixirs) und Kosmetik (Zeitgard). Lina kann Ihnen helfen, schnell Produktinformationen zu finden, und es steht ein LR Duftfinder zur Verfügung, um die richtige Emotion oder den passenden Duft zu finden."
+    },
+    {
+      q: "Für wen ist das LR Business geeignet?",
+      a: "Das LR Business ist für jeden geeignet, der sich ein flexibles Einkommen aufbauen möchte:\n\n• Angestellte: Raus aus dem Hamsterrad – bauen Sie sich nebenberuflich Sicherheit (Plan B) auf, ohne Ihren Job zu kündigen.\n• Selbständige: Kein Personal, keine Miete, kein Warenlager – nutzen Sie ein fertiges Milliarden-System ohne das klassische Risiko.\n• Mamas & Papas: Arbeiten Sie vom Küchentisch oder Spielplatz aus – volle Flexibilität für Ihre Familie dank Home-Office.\n• Quereinsteiger: Sie haben noch nie verkauft? Perfekt. Unser KI-System und Mentoring machen Sie fit. Jeder kann das lernen.\n\nAlles was Sie brauchen, ist Ihr Smartphone oder Laptop."
+    },
+    {
+      q: "Welche Startersets gibt es und was kosten sie?",
+      a: "LR bietet verschiedene Startersets für den Einstieg an. Die Startpaket-Gebühr beträgt 29,90 € (100 PW) für das Printpaket. Darüber hinaus gibt es das Profi Business Startpaket mit 2.000 PW, das bereits die Hälfte der Qualifikation für das Autokonzept (4.000 PW) abdeckt. Die Startersets bieten erhebliche Ersparnisse gegenüber dem Einzelkauf und enthalten Produkte sowie wichtige Werkzeuge für Ihren Start."
+    },
+    {
+      q: "Wie funktioniert das duplizierbare System?",
+      a: "Unser System ist darauf ausgelegt, dass Sie es 1:1 an neue Partner weitergeben können. Sie erhalten:\n\n• 100+ Post-Vorlagen, Scripts und Checklisten – kein Rätselraten.\n• Einen klaren 30-Tage-Plan mit konkreten Aufgaben.\n• Fertige Videos und Präsentationen zum Teilen.\n• Lina KI für automatisierte Content-Erstellung.\n\nWas bei Ihnen funktioniert, geben Sie einfach weiter – neue Partner verstehen den Einstieg schnell und können sofort loslegen."
+    },
+    {
+      q: "Welche Unterstützung bekomme ich vom Team?",
+      a: "Sie sind nie allein. Das LR Lifestyle Team bietet umfassende Unterstützung:\n\n• Persönliches Mentoring: Mentoren mit 30+ Jahren Erfahrung begleiten Sie.\n• WhatsApp-Gruppen: Schneller Austausch und Hilfe von der Community.\n• Zoom-Calls: Regelmäßige Trainings und Q&A-Sessions.\n• Events: Networking und Weiterbildung auf Veranstaltungen.\n• Lina KI: 24/7 verfügbar für alle Fragen rund um LR, Produkte und Vertrieb.\n\nVon Tag 1 an haben Sie ein starkes Team an Ihrer Seite."
+    },
+    {
+      q: "Kann ich das Business auch international aufbauen?",
+      a: "Ja, LR Health & Beauty ist in 32 Ländern aktiv. Sie können Ihr Netzwerk über Landesgrenzen hinweg aufbauen und von internationalen Umsätzen profitieren. Das Geschäftsmodell funktioniert 100% online, sodass Sie Partner und Kunden weltweit gewinnen können – alles von zu Hause aus mit Ihrem Smartphone oder Laptop."
     }
   ];
 

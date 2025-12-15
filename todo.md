@@ -54,3 +54,11 @@
 ## Completed (Phase 8)
 - [x] Alle FAQ-Antworten mit korrekten Texten vom User ersetzt (13 Fragen)
 - [x] FAQ-Überschrift und Subheadline aktualisiert
+
+## Completed (Phase 9)
+- [x] 5 weitere relevante FAQ-Fragen basierend auf lrlifestyle.pro generiert und hinzugefügt:
+  - Für wen ist das LR Business geeignet?
+  - Welche Startersets gibt es und was kosten sie?
+  - Wie funktioniert das duplizierbare System?
+  - Welche Unterstützung bekomme ich vom Team?
+  - Kann ich das Business auch international aufbauen?
