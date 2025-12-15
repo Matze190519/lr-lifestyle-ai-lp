@@ -37,9 +37,19 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-10 pb-10">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-background z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background opacity-60"></div>
+      {/* 40 Jahre LR Logo - Top Right */}
+      <div className="absolute top-4 right-4 z-50">
+        <img 
+          src="/images/lr-40-years-logo.jpg" 
+          alt="40 Jahre LR Success Story" 
+          className="w-24 h-auto md:w-32 lg:w-40 rounded-lg shadow-lg gold-glow"
+        />
+      </div>
+      
+      {/* Background Elements - Gold Particles */}
+      <div className="absolute inset-0 bg-background z-0 gold-particles">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#D4AF37]/15 via-background to-background opacity-80"></div>
+        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#D4AF37]/10 via-transparent to-transparent"></div>
       </div>
 
       <div className="container relative z-10 grid lg:grid-cols-2 gap-8 items-center max-w-6xl">
@@ -49,14 +59,14 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="space-y-6 text-center lg:text-left"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium font-mono mx-auto lg:mx-0">
-            <Zap className="w-3 h-3" />
-            <span>AI POWERED BUSINESS</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full gold-border text-xs font-bold font-mono mx-auto lg:mx-0 gold-glow">
+            <Zap className="w-3 h-3 text-[#D4AF37]" />
+            <span className="gold-gradient-text">40 JAHRE ERFOLGSGESCHICHTE</span>
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight">
             Starte dein LR-Business – <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">mit KI, System & Team.</span>
+            <span className="gold-gradient-text">mit KI, System & Team.</span>
           </h1>
           
           <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0">
@@ -66,7 +76,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
             <Button 
               size="lg" 
-              className="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-lg px-8 h-14 shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] transition-all duration-300 w-full sm:w-auto" 
+              className="gold-button text-lg px-8 h-14 rounded-xl w-full sm:w-auto" 
               onClick={() => {
                 trackEvent('Contact');
                 window.open(whatsappLink, '_blank');
@@ -77,11 +87,11 @@ const HeroSection = () => {
             </Button>
           </div>
           
-          <div className="flex flex-wrap justify-center lg:justify-start gap-3 text-xs text-muted-foreground pt-2">
-            <span className="flex items-center gap-1 bg-muted/30 px-2 py-1 rounded"><ShieldCheck className="w-3 h-3 text-primary" /> LR seit 1985</span>
-            <span className="flex items-center gap-1 bg-muted/30 px-2 py-1 rounded"><Info className="w-3 h-3 text-primary" /> Info-Paket kostenlos</span>
-            <span className="flex items-center gap-1 bg-muted/30 px-2 py-1 rounded"><ShieldCheck className="w-3 h-3 text-primary" /> DSGVO-konform</span>
-            <span className="flex items-center gap-1 bg-muted/30 px-2 py-1 rounded"><MessageCircle className="w-3 h-3 text-primary" /> Antwort meist &lt;24h</span>
+<div className="flex flex-wrap justify-center lg:justify-start gap-3 text-xs text-muted-foreground pt-2">
+            <span className="flex items-center gap-1 gold-border px-3 py-1.5 rounded-full"><ShieldCheck className="w-3 h-3 text-[#D4AF37]" /> LR seit 1985</span>
+            <span className="flex items-center gap-1 gold-border px-3 py-1.5 rounded-full"><Info className="w-3 h-3 text-[#D4AF37]" /> Info-Paket kostenlos</span>
+            <span className="flex items-center gap-1 gold-border px-3 py-1.5 rounded-full"><ShieldCheck className="w-3 h-3 text-[#D4AF37]" /> DSGVO-konform</span>
+            <span className="flex items-center gap-1 gold-border px-3 py-1.5 rounded-full"><MessageCircle className="w-3 h-3 text-[#D4AF37]" /> Antwort meist &lt;24h</span>
           </div>
         </motion.div>
 
@@ -91,7 +101,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative hidden lg:block"
         >
-          <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-2xl shadow-primary/5 aspect-[4/5] max-w-md mx-auto">
+          <div className="relative rounded-2xl overflow-hidden gold-border shadow-2xl gold-glow aspect-[4/5] max-w-md mx-auto">
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent z-10"></div>
             <img 
               src="/images/hero-ai-lifestyle.png" 
@@ -100,14 +110,14 @@ const HeroSection = () => {
             />
             
             {/* Floating UI Element */}
-            <div className="absolute bottom-8 left-8 right-8 z-20 bg-background/60 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg">
+            <div className="absolute bottom-8 left-8 right-8 z-20 bg-background/80 backdrop-blur-md gold-border p-4 rounded-xl gold-glow">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                  <Zap className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-full bg-[#D4AF37]/20 flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-[#D4AF37]" />
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">Status</p>
-                  <p className="font-bold text-foreground text-sm">Fast Track Active*</p>
+                  <p className="font-bold gold-gradient-text text-sm">Fast Track Active*</p>
                 </div>
               </div>
             </div>
@@ -127,15 +137,15 @@ const WhatIsLRSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-card/30 border-y border-white/5">
+    <section className="py-12 bg-card/30 border-y border-[#D4AF37]/10">
       <div className="container max-w-3xl">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold font-poppins">Was ist LR in 20 Sekunden?</h2>
+          <h2 className="text-2xl font-bold font-poppins"><span className="gold-gradient-text">Was ist LR in 20 Sekunden?</span></h2>
         </div>
         <div className="grid md:grid-cols-2 gap-4">
           {points.map((point, i) => (
-            <div key={i} className="flex items-start gap-3 bg-background/50 p-4 rounded-lg border border-white/5">
-              <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div key={i} className="flex items-start gap-3 bg-background/50 p-4 rounded-lg gold-border">
+              <CheckCircle2 className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
               <p className="text-sm text-muted-foreground">{point}</p>
             </div>
           ))}
@@ -186,23 +196,23 @@ const SocialProofSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-card/30 border-y border-white/5">
+    <section className="py-16 bg-card/30 border-y border-[#D4AF37]/10">
       <div className="container max-w-6xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-2">Echte Menschen. Echte Umsetzung.</h2>
+          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Echte Menschen. Echte Umsetzung.</span></h2>
           <p className="text-sm text-muted-foreground">Ergebnisse ohne leere Versprechen.</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <Card key={i} className="bg-background/40 border-primary/10 hover:border-primary/30 transition-all backdrop-blur-sm">
+            <Card key={i} className="bg-background/40 gold-border hover:gold-glow transition-all backdrop-blur-sm">
               <CardContent className="p-6 relative">
-                <div className="absolute top-4 right-4 px-2 py-1 bg-primary/10 rounded text-[10px] font-mono text-primary uppercase tracking-wider">
+                <div className="absolute top-4 right-4 px-2 py-1 bg-[#D4AF37]/10 rounded text-[10px] font-mono text-[#D4AF37] uppercase tracking-wider">
                   {t.badge}
                 </div>
                 <p className="text-sm italic text-muted-foreground mb-4 leading-relaxed">"{t.quote}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-xs font-bold">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37]/30 to-[#B8860B]/20 flex items-center justify-center text-xs font-bold text-[#D4AF37]">
                     {t.author.charAt(0)}
                   </div>
                   <div>
@@ -299,14 +309,14 @@ const FAQSection = () => {
     <section className="py-16">
       <div className="container max-w-3xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-2">Häufige Fragen & Antworten</h2>
+          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Häufige Fragen & Antworten</span></h2>
           <p className="text-sm text-muted-foreground">Ihr Weg zum Erfolg mit LR – Alles, was Sie wissen müssen.</p>
         </div>
         
         <Accordion type="single" collapsible className="w-full space-y-2">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="border border-white/5 bg-card/20 rounded-lg px-4">
-              <AccordionTrigger className="text-sm font-medium hover:text-primary text-left">
+            <AccordionItem key={i} value={`item-${i}`} className="gold-border bg-card/20 rounded-lg px-4">
+              <AccordionTrigger className="text-sm font-medium hover:text-[#D4AF37] text-left">
                 {faq.q}
               </AccordionTrigger>
               <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
@@ -326,27 +336,27 @@ const FastTrackSection = () => {
       <div className="container max-w-4xl">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Fast Track Card */}
-          <Card className="bg-gradient-to-br from-background to-primary/5 border-primary/20 shadow-lg relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-bl-full -mr-10 -mt-10"></div>
+          <Card className="bg-gradient-to-br from-background to-[#D4AF37]/5 gold-border shadow-lg relative overflow-hidden gold-glow">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/10 rounded-bl-full -mr-10 -mt-10"></div>
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                  <TrendingUp className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-full bg-[#D4AF37]/20 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-[#D4AF37]" />
                 </div>
-                <h3 className="text-xl font-bold font-poppins">Fast Track Bonus*</h3>
+                <h3 className="text-xl font-bold font-poppins gold-gradient-text">Fast Track Bonus*</h3>
               </div>
               
               <div className="space-y-4 mb-6">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                <div className="text-2xl font-bold gold-gradient-text">
                   300 €* / 1.100 €* / 2.000 €*
                 </div>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2">
-                    <ArrowRight className="w-4 h-4 text-primary" />
+                    <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
                     Klarer Startplan (was wann zu tun ist)
                   </li>
                   <li className="flex items-center gap-2">
-                    <ArrowRight className="w-4 h-4 text-primary" />
+                    <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
                     WhatsApp-Check: Welche Stufe passt zu dir?
                   </li>
                 </ul>
@@ -358,28 +368,28 @@ const FastTrackSection = () => {
           </Card>
 
           {/* Autokonzept Card */}
-          <Card className="bg-gradient-to-br from-background to-secondary/5 border-secondary/20 shadow-lg relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-secondary/10 rounded-bl-full -mr-10 -mt-10"></div>
+          <Card className="bg-gradient-to-br from-background to-[#B8860B]/5 gold-border shadow-lg relative overflow-hidden gold-glow">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-[#B8860B]/10 rounded-bl-full -mr-10 -mt-10"></div>
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
-                  <Car className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-full bg-[#B8860B]/20 flex items-center justify-center">
+                  <Car className="w-5 h-5 text-[#D4AF37]" />
                 </div>
-                <h3 className="text-xl font-bold font-poppins">Autokonzept*</h3>
+                <h3 className="text-xl font-bold font-poppins gold-gradient-text">Autokonzept*</h3>
               </div>
               
               <div className="space-y-4 mb-6">
                 <ul className="space-y-3 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
                     Dienst-/Firmenwagenmodell über Partnerkonditionen*
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
                     Je nach Stufe kann ein monatlicher Zuschuss möglich sein*
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
                     Du bekommst die Übersicht: Voraussetzungen, Modelle, Ablauf
                   </li>
                 </ul>
@@ -400,41 +410,41 @@ const LinaSection = () => {
     {
       title: "Wissen & Coaching",
       desc: "Umfassendes LR-Wissen und persönliches Coaching – Lina kennt jeden Karriereplan, jedes Produkt und jeden Einwand. Sie coacht dich wie ein erfahrener Mentor.",
-      icon: <Users className="w-5 h-5 text-primary" />
+      icon: <Users className="w-5 h-5 text-[#D4AF37]" />
     },
     {
       title: "Vertrieb & WhatsApp",
       desc: "Automatisierte Kundenbetreuung, FAQ-Bot, Follow-up-Erinnerungen, Lead-Qualifizierung.",
-      icon: <MessageCircle className="w-5 h-5 text-primary" />
+      icon: <MessageCircle className="w-5 h-5 text-[#D4AF37]" />
     },
     {
       title: "Social Media",
       desc: "Content-Vorlagen für Reels, Posts und Stories. Hashtag-Vorschläge, Posting-Zeiten, Trend-Analyse.",
-      icon: <Smartphone className="w-5 h-5 text-primary" />
+      icon: <Smartphone className="w-5 h-5 text-[#D4AF37]" />
     },
     {
       title: "24/7 Verfügbar",
       desc: "Immer für dich da – auch nachts und am Wochenende. Perfekt für Nebenbei-Starter.",
-      icon: <Zap className="w-5 h-5 text-primary" />
+      icon: <Zap className="w-5 h-5 text-[#D4AF37]" />
     }
   ];
 
   return (
-    <section className="py-16 bg-card/30 border-y border-white/5">
+    <section className="py-16 bg-card/30 border-y border-[#D4AF37]/10">
       <div className="container max-w-4xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-2">Lina – deine vollumfängliche Business-Partnerin</h2>
+          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – deine vollumfängliche Business-Partnerin</span></h2>
           <p className="text-sm text-muted-foreground">Keine Erfahrung? Lina regelt das.</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {features.map((f, i) => (
-            <Card key={i} className="bg-background/40 border-primary/10 hover:border-primary/30 transition-all text-center">
+            <Card key={i} className="bg-background/40 gold-border hover:gold-glow transition-all text-center">
               <CardContent className="p-6 flex flex-col items-center">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-[#D4AF37]/10 flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="font-bold mb-2 text-sm">{f.title}</h3>
+                <h3 className="font-bold mb-2 text-sm gold-gradient-text">{f.title}</h3>
                 <p className="text-xs text-muted-foreground">{f.desc}</p>
               </CardContent>
             </Card>
@@ -477,11 +487,11 @@ const FinalCTASection = () => {
     <section id="contact" className="py-16 relative">
       <div className="container max-w-3xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-8">Willst du das Info-Paket per WhatsApp?</h2>
+          <h2 className="text-2xl font-bold font-poppins mb-8"><span className="gold-gradient-text">Willst du das Info-Paket per WhatsApp?</span></h2>
           
           <Button 
             size="lg" 
-            className="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-lg px-10 h-16 shadow-xl w-full md:w-auto mb-8" 
+            className="gold-button text-lg px-10 h-16 rounded-xl w-full md:w-auto mb-8" 
             onClick={() => {
               trackEvent('Contact');
               window.open(whatsappLink, '_blank');
@@ -498,9 +508,9 @@ const FinalCTASection = () => {
           </div>
         </div>
 
-        <Card className="bg-card border-primary/10 shadow-lg overflow-hidden max-w-md mx-auto">
-          <div className="p-6 bg-muted/30 border-b border-white/5">
-            <h3 className="font-bold text-center">Kein WhatsApp?</h3>
+        <Card className="bg-card gold-border shadow-lg overflow-hidden max-w-md mx-auto gold-glow">
+          <div className="p-6 bg-[#D4AF37]/5 border-b border-[#D4AF37]/20">
+            <h3 className="font-bold text-center gold-gradient-text">Kein WhatsApp?</h3>
             <p className="text-xs text-center text-muted-foreground">Nutze das 20-Sekunden-Formular</p>
           </div>
           <div className="p-6">
@@ -578,7 +588,7 @@ const FinalCTASection = () => {
                   )}
                 />
                 
-                <Button type="submit" variant="secondary" className="w-full font-bold">
+                <Button type="submit" className="w-full font-bold gold-button rounded-lg">
                   Absenden
                 </Button>
               </form>
@@ -592,12 +602,12 @@ const FinalCTASection = () => {
 
 const Footer = () => {
   return (
-    <footer className="py-8 border-t border-white/5 bg-background text-[10px] text-muted-foreground text-center">
+    <footer className="py-8 border-t border-[#D4AF37]/20 bg-background text-[10px] text-muted-foreground text-center">
       <div className="container space-y-4 max-w-4xl">
         <p>*Details zu Voraussetzungen, Fast Track Bonus und Autokonzept im kostenlosen Info-Paket. Keine Erfolgsgarantie; Ergebnisse hängen von individuellem Einsatz ab.</p>
         <div className="flex justify-center gap-6 text-xs">
-          <a href="/impressum" className="hover:text-primary transition-colors">Impressum</a>
-          <a href="/datenschutz" className="hover:text-primary transition-colors">Datenschutz</a>
+          <a href="/impressum" className="hover:text-[#D4AF37] transition-colors">Impressum</a>
+          <a href="/datenschutz" className="hover:text-[#D4AF37] transition-colors">Datenschutz</a>
         </div>
         <p className="opacity-50">© 2025 LR Lifestyle AI</p>
       </div>
@@ -623,9 +633,9 @@ export default function Home() {
       <Footer />
       
       {/* Sticky WhatsApp Button for Mobile */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-lg border-t border-white/10 md:hidden z-50">
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/90 backdrop-blur-lg border-t border-[#D4AF37]/30 md:hidden z-50">
         <Button 
-          className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold h-12 shadow-lg"
+          className="w-full gold-button font-bold h-12 rounded-xl"
           onClick={() => {
             trackEvent('Contact');
             window.open("https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.%20Interesse%3A%20%5BFast%20Track%2FAuto%2FBeides%5D.%20Vorname%3A%20____", '_blank');
