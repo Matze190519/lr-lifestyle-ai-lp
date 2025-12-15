@@ -37,3 +37,8 @@
 
 ## Bugs Fixed (Phase 5)
 - [x] Botpress isOpen() Fehler behoben - Lokales State-Tracking statt API-Aufruf
+
+## Completed (Phase 6)
+- [x] FAQ-Sektion massiv erweitert (10 Fragen mit detaillierten Antworten)
+- [x] Lina-Sektion ausgebaut (6 Features: Wissen, Coaching, WhatsApp, Social Media, Live-Telefonie, Gedächtnis, 24/7)
+- [x] Chatbot-Button repariert (zeigt sich nach 2 Sekunden, Fallback zu WhatsApp)

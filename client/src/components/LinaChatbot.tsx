@@ -14,38 +14,23 @@ declare global {
 
 export default function LinaChatbot() {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [isBotpressReady, setIsBotpressReady] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    // Warte darauf, dass Botpress geladen ist
-    const checkBotpress = setInterval(() => {
-      if (window.botpress) {
-        setIsBotpressReady(true);
-        clearInterval(checkBotpress);
-        console.log("✓ Botpress Webchat geladen und bereit");
-      }
-    }, 500);
+    // Zeige den Button nach 2 Sekunden (damit Botpress Zeit zum Laden hat)
+    const timer = setTimeout(() => {
+      setShowButton(true);
+    }, 2000);
 
-    // Cleanup nach 10 Sekunden
-    const timeout = setTimeout(() => {
-      clearInterval(checkBotpress);
-      if (!window.botpress) {
-        console.warn("⚠️ Botpress konnte nicht geladen werden");
-      }
-    }, 10000);
-
-    return () => {
-      clearInterval(checkBotpress);
-      clearTimeout(timeout);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   const toggleChat = () => {
     if (window.botpress) {
       try {
         window.botpress.toggle();
-        // Toggle den lokalen State (ohne isOpen() zu verwenden)
         setIsChatOpen(prev => !prev);
+        console.log("✓ Botpress Webchat geöffnet");
       } catch (error) {
         console.error("Fehler beim Öffnen des Chatbots:", error);
         // Fallback: Öffne WhatsApp
@@ -57,8 +42,8 @@ export default function LinaChatbot() {
     }
   };
 
-  // Zeige den Button nur, wenn Botpress bereit ist
-  if (!isBotpressReady) {
+  // Zeige den Button immer (auch wenn Botpress nicht geladen ist)
+  if (!showButton) {
     return null;
   }
 

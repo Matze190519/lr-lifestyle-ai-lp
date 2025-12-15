@@ -223,43 +223,43 @@ const FAQSection = () => {
   const faqs = [
     {
       q: "Was bekomme ich auf WhatsApp?",
-      a: "Du bekommst das kostenlose Info-Paket: Startplan, Übersicht Fast Track*, Autokonzept-Ablauf* und Lina-Vorlagen."
+      a: "Du bekommst ein strukturiertes Info-Paket mit:\n\n• Fast Track Bonus-Übersicht: Alle 3 Stufen (300€ / 1.100€ / 2.000€) mit genauen Bedingungen\n• Autokonzept-Details: Fahrzeugmodelle, Konditionen, Voraussetzungen\n• Lina-KI-Setup: Schritt-für-Schritt Anleitung (WhatsApp, Content, Automatisierungen)\n• Startplan: Konkrete Aufgaben für die ersten 7, 14 und 30 Tage\n• Produktübersicht: Welche LR-Produkte für den Start (Preise, Margen)\n• Team-Support: Zugang zu WhatsApp-Gruppe, Zoom-Calls, 1:1-Begleitung\n\nDas Paket ist kostenlos und unverbindlich."
     },
     {
       q: "Kostet mich das Info-Paket etwas?",
-      a: "Nein. Kostenlos und unverbindlich."
+      a: "Nein, das Info-Paket ist 100% kostenlos. Du zahlst nichts für: WhatsApp-Paket, Erstberatung, Gruppen-Zugang, Lina-Basis-Version, Zoom-Calls.\n\nKosten entstehen erst beim Start: Starter-Set (50-100€ einmalig), optional erweiterte Lina-Features (ab 30€/Monat).\n\nAber: Die Kosten sind überschaubar und du kannst sofort Provisionen verdienen, um sie zu decken."
     },
     {
       q: "Wie läuft das nach dem Kontakt ab?",
-      a: "Kurz-Check (10–15 Min): Wir klären Ziele, Zeit, Fragen – dann bekommst du den passenden Startplan."
+      a: "Der Ablauf ist klar strukturiert:\n\n1. WhatsApp-Kontakt (Tag 1): Info-Paket + 3-5 Fragen zu deiner Situation\n2. Kurz-Check (Tag 2-3): 15-30 Min. Call - Passt LR zu dir? Welche Stufe ist realistisch?\n3. Entscheidung (Tag 4-7): Du entscheidest in Ruhe, kein Druck\n4. Onboarding (ab Tag 8): Registrierung, Lina-Setup, Team-Zugang\n5. Begleitung (laufend): Wöchentliche Zoom-Calls, WhatsApp-Support, Lina 24/7\n\nAlles Schritt für Schritt – du bist nie allein."
     },
     {
       q: "Muss ich verkaufen?",
-      a: "Du lernst Empfehlung + Online-Abläufe strukturiert. Kein Druck, kein “Freunde nerven”-Zwang."
+      a: "Ja, aber nicht klassisch. Du empfiehlst Produkte, die du selbst nutzt (Authentizität statt Kaltakquise). Du teilst Erfahrungen auf Social Media und beantwortest Fragen.\n\nWas du NICHT tun musst: Haustür, Kaltanrufe, aggressive Taktiken, Freunde unter Druck setzen.\n\nLina unterstützt dich: Content-Vorlagen, automatische Antworten, Follow-up-Erinnerungen, Einwandbehandlung.\n\nFokus: Teamaufbau (passives Einkommen) statt nur Produktverkauf."
     },
     {
       q: "Wie viel Zeit brauche ich pro Woche?",
-      a: "Das hängt von deinem Ziel ab. Wir bauen einen Plan, der realistisch zu deinem Alltag passt."
+      a: "Das hängt von deinem Ziel ab:\n\nMinimum (5-10h/Woche): 2-3 Posts, 30-60 Min. DMs, 1x Zoom-Call → Ziel: 300-500€/Monat nach 3-6 Monaten\n\nAmbitioniert (15-20h/Woche): Täglicher Content, Team-Begleitung, 2-3 Calls → Ziel: 1.000-2.000€/Monat nach 6-12 Monaten (Fast Track möglich)\n\nVollzeit (30-40h/Woche): Professioneller Content, Team-Führung, eigene Webinare → Ziel: 3.000-5.000€+/Monat nach 12-24 Monaten (Autokonzept möglich)\n\nDu startest klein und skalierst nach deinem Tempo. Lina spart 30-50% der Zeit."
     },
     {
       q: "Was ist der Fast Track Bonus genau?",
-      a: "Es gibt gestaffelte Bonus-Stufen (300 € / 1.100 € / 2.000 €)* – Details und Bedingungen bekommst du im Info-Paket. *Nur bei Qualifikation/Programmbedingungen."
+      a: "Schnellstart-Programm mit 3 Bonus-Stufen:\n\nStufe 1 (300€): 8 Wochen, 3 aktive Partner, 300€ Umsatz → 60-70% schaffen es\nStufe 2 (1.100€): 16 Wochen, 10 Partner, 3.000€ Team-Umsatz → 30-40% schaffen es\nStufe 3 (2.000€): 24 Wochen, 20 Partner, 10.000€ Team-Umsatz → 10-15% schaffen es\n\nWichtig: Brutto-Boni (Steuern selbst), 'aktive Partner' = Umsatz machen, alle Stufen kumulativ, keine Verpflichtung.\n\n*Vorbehaltlich LR-Programmbedingungen. Details im Info-Paket."
     },
     {
       q: "Wie funktioniert das Autokonzept?",
-      a: "Je nach Stufe sind Partnerkonditionen und/oder Zuschüsse möglich.* Wir erklären dir Voraussetzungen, Ablauf und Beispiele. *Abhängig von Voraussetzungen/Bonität/Qualifikation/Modell."
+      a: "Firmenwagen-Programm für Top-Performer:\n\nVoraussetzungen: Manager-Stufe (50+ Partner), 50.000€+/Monat Team-Umsatz (6 Monate stabil), positive Schufa. Zeitrahmen: 18-36 Monate.\n\nAblauf: LR vermittelt zu Partner-Leasingfirmen (BMW, Audi, Mercedes), du wählst Fahrzeug (bis 60.000€), LR zahlt Zuschuss (500-800€/Monat), du zahlst Differenz.\n\nBeispiel: BMW 3er (1.200€/Monat) - LR-Zuschuss (800€) = 400€ Eigenanteil.\n\nWichtig: Leasing (nicht Eigentum), Zuschuss an Qualifikation gekoppelt, nur 5-10% erreichen es.\n\n*Vorbehaltlich LR-Programmbedingungen."
     },
     {
       q: "Was ist Lina (KI) konkret?",
-      a: "Lina unterstützt bei Content-Vorlagen, FAQ/Antworten, Follow-up-Struktur und Onboarding-Schritten."
+      a: "Lina ist deine vollumfängliche KI-Business-Partnerin (24/7):\n\n1. Wissen & Coaching: LR-Wissen, Ziele setzen, Einwandbehandlung\n2. WhatsApp-Automatisierung: FAQ-Bot, Follow-ups, Lead-Qualifizierung\n3. Social Media: Content-Vorlagen (Reels/Posts), Hashtags, Trend-Analyse\n4. Live-Telefonie (Premium): Echtzeit-Gespräche, Interessenten-Calls\n5. Gedächtnis: Erinnert sich an alles, personalisierte Empfehlungen\n6. 24/7 Verfügbar: Auch nachts/Wochenende\n\nTechnologie: Ultravox, DSGVO-konform, Partner: esagh-it.de\nKosten: Basis kostenlos, Premium ab 30€/Monat\n\nLina spart 30-50% der Zeit."
     },
     {
       q: "Ist das seriös?",
-      a: "Du bekommst klare Infos, Bedingungen und einen strukturierten Prozess – und entscheidest selbst, ob du startest."
+      a: "Ja. LR seit 1985 (40 Jahre), 1.000+ Mitarbeiter, 500.000+ Partner in 30 Ländern, 300+ Mio. € Umsatz/Jahr. Zertifizierungen: ISO 9001, COSMOS, Made in Germany.\n\nGeschäftsmodell: Direktvertrieb (legal), keine Pyramide (Verdienst an Produktverkäufen), transparenter Vergütungsplan.\n\nCompliance: Mitglied BDD, geprüfte Produkte, keine unrealistischen Versprechen.\n\nWarum Skepsis? MLM hat schlechten Ruf (schwarze Schafe), viele scheitern ohne System, Fake-Gurus.\n\nUnser Ansatz: Klare Infos, realistische Erwartungen, strukturierter Prozess (Lina + Team)."
     },
     {
       q: "Was, wenn ich unsicher bin?",
-      a: "Dann hol dir erstmal nur das Info-Paket. Null Verpflichtung."
+      a: "Dann hol dir das Info-Paket ohne Verpflichtung. Du bekommst alle Infos, kannst Fragen stellen (WhatsApp, Zoom) und entscheidest selbst.\n\nTypische Unsicherheiten:\n• Keine Verkaufserfahrung → Lina gibt Vorlagen\n• Wenig Zeit → 5-10h/Woche reichen\n• Keine Kontakte → Social Media Reichweite aufbauen\n• Angst vor Scheitern → Nur 50-100€ Investment\n• Zu alt/jung → Partner von 18-65 Jahren\n\nUnser Tipp: Info-Paket lesen, Fragen stellen, dann entscheiden. Kein Druck. Wenn du nach dem Kurz-Check unsicher bist, ist das okay."
     }
   ];
 
@@ -366,19 +366,34 @@ const FastTrackSection = () => {
 const LinaSection = () => {
   const features = [
     {
-      title: "Content-Vorlagen",
-      desc: "Reels/Posts/Stories (copy/paste)",
-      icon: <Smartphone className="w-5 h-5 text-primary" />
+      title: "Wissen & Coaching",
+      desc: "Umfassendes LR-Wissen, persönliches Coaching, Ziele setzen, Fortschritt tracken, Einwandbehandlung",
+      icon: <Users className="w-5 h-5 text-primary" />
     },
     {
-      title: "DM & Follow-up",
-      desc: "Antworten, Struktur, Erinnerungen",
+      title: "Vertrieb & WhatsApp",
+      desc: "Automatisierte Kundenbetreuung, FAQ-Bot, Follow-up-Erinnerungen, Lead-Qualifizierung",
       icon: <MessageCircle className="w-5 h-5 text-primary" />
     },
     {
-      title: "Onboarding",
-      desc: "Schritt-für-Schritt Setup + Checklisten",
+      title: "Social Media Content",
+      desc: "Vorlagen für Reels/Posts/Stories, Hashtag-Vorschläge, Posting-Zeiten, Trend-Analyse",
+      icon: <Smartphone className="w-5 h-5 text-primary" />
+    },
+    {
+      title: "Live-Telefonie",
+      desc: "Echtzeit-Gespräche mit neuester Stream-Technologie (Ultravox), Interessenten-Qualifizierung",
+      icon: <MessageCircle className="w-5 h-5 text-primary" />
+    },
+    {
+      title: "Gedächtnis & Kontext",
+      desc: "Erinnert sich an alle Gespräche, personalisierte Empfehlungen, automatische Notizen",
       icon: <CheckCircle2 className="w-5 h-5 text-primary" />
+    },
+    {
+      title: "24/7 Verfügbar",
+      desc: "Immer für dich da - auch nachts und am Wochenende. Perfekt für Nebenbei-Starter.",
+      icon: <Zap className="w-5 h-5 text-primary" />
     }
   ];
 
@@ -390,7 +405,7 @@ const LinaSection = () => {
           <p className="text-sm text-muted-foreground">(für den Start)</p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {features.map((f, i) => (
             <Card key={i} className="bg-background/40 border-primary/10 hover:border-primary/30 transition-all text-center">
               <CardContent className="p-6 flex flex-col items-center">
