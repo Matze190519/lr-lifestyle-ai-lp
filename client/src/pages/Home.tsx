@@ -251,7 +251,7 @@ const FAQSection = () => {
     },
     {
       q: "Was ist Lina (KI) konkret?",
-      a: "Lina ist deine vollumfängliche KI-Business-Partnerin (24/7):\n\n1. Wissen & Coaching: LR-Wissen, Ziele setzen, Einwandbehandlung\n2. WhatsApp-Automatisierung: FAQ-Bot, Follow-ups, Lead-Qualifizierung\n3. Social Media: Content-Vorlagen (Reels/Posts), Hashtags, Trend-Analyse\n4. Live-Telefonie (Premium): Echtzeit-Gespräche, Interessenten-Calls\n5. Gedächtnis: Erinnert sich an alles, personalisierte Empfehlungen\n6. 24/7 Verfügbar: Auch nachts/Wochenende\n\nTechnologie: Ultravox, DSGVO-konform, Partner: esagh-it.de\nKosten: Basis kostenlos, Premium ab 30€/Monat\n\nLina spart 30-50% der Zeit."
+      a: "Lina ist deine vollumfängliche Business-Partnerin. Sie weiß alles über LR, unterstützt dich im Vertrieb, erstellt Content für Social Media und ist 24/7 verfügbar auf allen deinen Geräten.\n\n1. Wissen & Coaching: Umfassendes LR-Wissen und persönliches Coaching – Lina kennt jeden Karriereplan, jedes Produkt und jeden Einwand. Sie coacht dich wie ein erfahrener Mentor.\n\n2. Vertrieb & WhatsApp: Automatisierte Kundenbetreuung, FAQ-Bot, Follow-up-Erinnerungen, Lead-Qualifizierung.\n\n3. Social Media: Content-Vorlagen für Reels, Posts und Stories. Hashtag-Vorschläge, Posting-Zeiten, Trend-Analyse.\n\n4. 24/7 Verfügbar: Immer für dich da – auch nachts und am Wochenende. Perfekt für Nebenbei-Starter."
     },
     {
       q: "Ist das seriös?",
@@ -367,32 +367,22 @@ const LinaSection = () => {
   const features = [
     {
       title: "Wissen & Coaching",
-      desc: "Umfassendes LR-Wissen, persönliches Coaching, Ziele setzen, Fortschritt tracken, Einwandbehandlung",
+      desc: "Umfassendes LR-Wissen und persönliches Coaching – Lina kennt jeden Karriereplan, jedes Produkt und jeden Einwand. Sie coacht dich wie ein erfahrener Mentor.",
       icon: <Users className="w-5 h-5 text-primary" />
     },
     {
       title: "Vertrieb & WhatsApp",
-      desc: "Automatisierte Kundenbetreuung, FAQ-Bot, Follow-up-Erinnerungen, Lead-Qualifizierung",
+      desc: "Automatisierte Kundenbetreuung, FAQ-Bot, Follow-up-Erinnerungen, Lead-Qualifizierung.",
       icon: <MessageCircle className="w-5 h-5 text-primary" />
     },
     {
-      title: "Social Media Content",
-      desc: "Vorlagen für Reels/Posts/Stories, Hashtag-Vorschläge, Posting-Zeiten, Trend-Analyse",
+      title: "Social Media",
+      desc: "Content-Vorlagen für Reels, Posts und Stories. Hashtag-Vorschläge, Posting-Zeiten, Trend-Analyse.",
       icon: <Smartphone className="w-5 h-5 text-primary" />
     },
     {
-      title: "Live-Telefonie",
-      desc: "Echtzeit-Gespräche mit neuester Stream-Technologie (Ultravox), Interessenten-Qualifizierung",
-      icon: <MessageCircle className="w-5 h-5 text-primary" />
-    },
-    {
-      title: "Gedächtnis & Kontext",
-      desc: "Erinnert sich an alle Gespräche, personalisierte Empfehlungen, automatische Notizen",
-      icon: <CheckCircle2 className="w-5 h-5 text-primary" />
-    },
-    {
       title: "24/7 Verfügbar",
-      desc: "Immer für dich da - auch nachts und am Wochenende. Perfekt für Nebenbei-Starter.",
+      desc: "Immer für dich da – auch nachts und am Wochenende. Perfekt für Nebenbei-Starter.",
       icon: <Zap className="w-5 h-5 text-primary" />
     }
   ];
@@ -401,11 +391,11 @@ const LinaSection = () => {
     <section className="py-16 bg-card/30 border-y border-white/5">
       <div className="container max-w-4xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-2">Lina = dein KI-Assistenzsystem</h2>
-          <p className="text-sm text-muted-foreground">(für den Start)</p>
+          <h2 className="text-2xl font-bold font-poppins mb-2">Lina – deine vollumfängliche Business-Partnerin</h2>
+          <p className="text-sm text-muted-foreground">Keine Erfahrung? Lina regelt das.</p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {features.map((f, i) => (
             <Card key={i} className="bg-background/40 border-primary/10 hover:border-primary/30 transition-all text-center">
               <CardContent className="p-6 flex flex-col items-center">
@@ -419,8 +409,8 @@ const LinaSection = () => {
           ))}
         </div>
         
-        <p className="text-center text-sm text-muted-foreground">
-          Du musst kein Technik-Profi sein – wir richten es mit dir ein.
+        <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto">
+          Lina ist deine vollumfängliche Business-Partnerin. Sie weiß alles über LR, unterstützt dich im Vertrieb, erstellt Content für Social Media und ist <strong>24/7 verfügbar auf allen deinen Geräten</strong>.
         </p>
       </div>
     </section>
