@@ -50,3 +50,7 @@
 - [x] FAQ mit echten Lina-Daten von lrlifestyle.pro aktualisiert (Frage 8)
 - [x] Lina-Sektion mit korrekten Infos von lrlifestyle.pro aktualisiert (4 Features statt 6)
 - [x] Lina-Überschrift und Beschreibung korrigiert
+
+## Completed (Phase 8)
+- [x] Alle FAQ-Antworten mit korrekten Texten vom User ersetzt (13 Fragen)
+- [x] FAQ-Überschrift und Subheadline aktualisiert

@@ -222,44 +222,56 @@ const SocialProofSection = () => {
 const FAQSection = () => {
   const faqs = [
     {
-      q: "Was bekomme ich auf WhatsApp?",
-      a: "Du bekommst ein strukturiertes Info-Paket mit:\n\n• Fast Track Bonus-Übersicht: Alle 3 Stufen (300€ / 1.100€ / 2.000€) mit genauen Bedingungen\n• Autokonzept-Details: Fahrzeugmodelle, Konditionen, Voraussetzungen\n• Lina-KI-Setup: Schritt-für-Schritt Anleitung (WhatsApp, Content, Automatisierungen)\n• Startplan: Konkrete Aufgaben für die ersten 7, 14 und 30 Tage\n• Produktübersicht: Welche LR-Produkte für den Start (Preise, Margen)\n• Team-Support: Zugang zu WhatsApp-Gruppe, Zoom-Calls, 1:1-Begleitung\n\nDas Paket ist kostenlos und unverbindlich."
+      q: "Was ist Lina (KI) konkret?",
+      a: "Lina ist Ihre persönliche digitale Partnerin und KI-Assistentin im LR Lifestyle Team, erreichbar über WhatsApp. Sie wurde entwickelt, um Sie rund um die Uhr (24/7) zu unterstützen. Lina dient als Mentorin, hilft beim Onboarding neuer Partner, beim Aufbau des Teams, bei der Produktberatung und sogar bei der Formulierung wirkungsvoller WhatsApp-Nachrichten für Interessenten. Lina kann auch Live-Coachings und Telefongespräche führen, um Sie optimal voranzubringen."
     },
     {
-      q: "Kostet mich das Info-Paket etwas?",
-      a: "Nein, das Info-Paket ist 100% kostenlos. Du zahlst nichts für: WhatsApp-Paket, Erstberatung, Gruppen-Zugang, Lina-Basis-Version, Zoom-Calls.\n\nKosten entstehen erst beim Start: Starter-Set (50-100€ einmalig), optional erweiterte Lina-Features (ab 30€/Monat).\n\nAber: Die Kosten sind überschaubar und du kannst sofort Provisionen verdienen, um sie zu decken."
+      q: "Was bekomme ich auf WhatsApp?",
+      a: "Über WhatsApp erhalten Sie direkten Zugriff auf Lina, Ihren kostenlosen Coach. Sie bietet umfangreiche Unterstützung und Tools:\n\n• Produktwissen: Blitzschnelle Antworten und detaillierte Informationen zu LR Produkten.\n• Social Media Hilfe: Generierung von Post-Texten, Bildern und Videos für Plattformen wie Instagram, Facebook oder TikTok.\n• Vertriebs- und Verkaufsvorlagen: Fertige WhatsApp-Vorlagen für den Erstkontakt oder das Nachfassen.\n• Coaching: Unterstützung bei der Zielsetzung und Übung von Verkaufsgesprächen oder Geschäftsvorstellungen."
+    },
+    {
+      q: "Kostet mich das Info-Paket oder der Start etwas?",
+      a: "Der Support durch Lina als Ihr persönlicher Coach ist kostenlos. Der offizielle Start als LR Partner beginnt jedoch mit einer einmaligen Erstbestellung, bei der eine Startpaket-Gebühr von 29,90 € (100 PW) für das Printpaket anfällt. Die Startersets selbst bieten erhebliche Ersparnisse gegenüber dem Einzelkauf."
     },
     {
       q: "Wie läuft das nach dem Kontakt ab?",
-      a: "Der Ablauf ist klar strukturiert:\n\n1. WhatsApp-Kontakt (Tag 1): Info-Paket + 3-5 Fragen zu deiner Situation\n2. Kurz-Check (Tag 2-3): 15-30 Min. Call - Passt LR zu dir? Welche Stufe ist realistisch?\n3. Entscheidung (Tag 4-7): Du entscheidest in Ruhe, kein Druck\n4. Onboarding (ab Tag 8): Registrierung, Lina-Setup, Team-Zugang\n5. Begleitung (laufend): Wöchentliche Zoom-Calls, WhatsApp-Support, Lina 24/7\n\nAlles Schritt für Schritt – du bist nie allein."
+      a: "Nach der Entscheidung zur Partnerschaft beginnt das strukturierte Onboarding. Die ersten Schritte umfassen:\n\n• Die Auswahl und Bestellung eines passenden Startersets, das Produkte und Werkzeuge enthält.\n• Die Online-Registrierung und die Aktivierung Ihres persönlichen Shop-Links.\n• Die Einführung in die wichtigsten Tools wie LR Neo, MyOffice und die Connect App.\n• Das Sammeln erster Kontakte (Namensliste) und die Vorbereitung auf die ersten Produkt- oder Geschäftsvorstellungen, oft mit Unterstützung durch Lina."
     },
     {
-      q: "Muss ich verkaufen?",
-      a: "Ja, aber nicht klassisch. Du empfiehlst Produkte, die du selbst nutzt (Authentizität statt Kaltakquise). Du teilst Erfahrungen auf Social Media und beantwortest Fragen.\n\nWas du NICHT tun musst: Haustür, Kaltanrufe, aggressive Taktiken, Freunde unter Druck setzen.\n\nLina unterstützt dich: Content-Vorlagen, automatische Antworten, Follow-up-Erinnerungen, Einwandbehandlung.\n\nFokus: Teamaufbau (passives Einkommen) statt nur Produktverkauf."
+      q: "Ist das LR Geschäft seriös?",
+      a: "Ja, LR Health & Beauty ist ein etabliertes und seriöses europäisches Social-Commerce-Unternehmen. Es wurde 1985 gegründet und feierte 2025 sein 40-jähriges Bestehen. LR operiert in 32 Ländern, legt Wert auf höchste Produktqualität (\"Made in Germany\"), und arbeitet mit Prominenten zusammen. Die Qualität der Aloe Vera Produkte wird durch unabhängige Siegel wie das SGS INSTITUT FRESENIUS und das IASC-Siegel bestätigt."
+    },
+    {
+      q: "Muss ich verkaufen oder kann ich nur Team aufbauen?",
+      a: "Das LR Geschäftsmodell basiert auf drei Säulen:\n\n1. Eigenbedarf (Produkte zum Vorteilspreis nutzen).\n2. Verkauf (Produkte an Kunden weiterempfehlen und die Handelsspanne von ca. 30–40 % als direkten Verdienst erhalten).\n3. Weiterempfehlung und Teamaufbau (neue Partner gewinnen und Boni auf deren Umsätze erhalten).\n\nEs gibt keine Verpflichtung, Produkte zu verkaufen."
     },
     {
       q: "Wie viel Zeit brauche ich pro Woche?",
-      a: "Das hängt von deinem Ziel ab:\n\nMinimum (5-10h/Woche): 2-3 Posts, 30-60 Min. DMs, 1x Zoom-Call → Ziel: 300-500€/Monat nach 3-6 Monaten\n\nAmbitioniert (15-20h/Woche): Täglicher Content, Team-Begleitung, 2-3 Calls → Ziel: 1.000-2.000€/Monat nach 6-12 Monaten (Fast Track möglich)\n\nVollzeit (30-40h/Woche): Professioneller Content, Team-Führung, eigene Webinare → Ziel: 3.000-5.000€+/Monat nach 12-24 Monaten (Autokonzept möglich)\n\nDu startest klein und skalierst nach deinem Tempo. Lina spart 30-50% der Zeit."
+      a: "Das Geschäftsmodell ermöglicht eine flexible Zeiteinteilung und das ortsunabhängige Arbeiten. Sie können das Geschäft haupt- oder nebenberuflich starten, je nachdem, wie es in Ihre Work-Life-Balance passt. Es wird empfohlen, täglich mit mindestens einer Person über LR zu sprechen, wobei schon 30 Minuten fokussierter LR-Zeit pro Tag zum Erfolg beitragen können."
     },
     {
       q: "Was ist der Fast Track Bonus genau?",
-      a: "Schnellstart-Programm mit 3 Bonus-Stufen:\n\nStufe 1 (300€): 8 Wochen, 3 aktive Partner, 300€ Umsatz → 60-70% schaffen es\nStufe 2 (1.100€): 16 Wochen, 10 Partner, 3.000€ Team-Umsatz → 30-40% schaffen es\nStufe 3 (2.000€): 24 Wochen, 20 Partner, 10.000€ Team-Umsatz → 10-15% schaffen es\n\nWichtig: Brutto-Boni (Steuern selbst), 'aktive Partner' = Umsatz machen, alle Stufen kumulativ, keine Verpflichtung.\n\n*Vorbehaltlich LR-Programmbedingungen. Details im Info-Paket."
+      a: "Der Fast Track Bonus ist ein spezielles Programm, das neue Partner für die schnelle Erreichung der ersten drei Karrierestufen (Junior Manager, Junior Teamleiter, Orgaleiter) belohnt. Er garantiert einen monatlichen Mindestbonus für bis zu 12 Monate. Dieser garantierte Betrag wird gezahlt, falls der regulär errechnete Bonus niedriger ausfällt (Uplift)."
     },
     {
-      q: "Wie funktioniert das Autokonzept?",
-      a: "Firmenwagen-Programm für Top-Performer:\n\nVoraussetzungen: Manager-Stufe (50+ Partner), 50.000€+/Monat Team-Umsatz (6 Monate stabil), positive Schufa. Zeitrahmen: 18-36 Monate.\n\nAblauf: LR vermittelt zu Partner-Leasingfirmen (BMW, Audi, Mercedes), du wählst Fahrzeug (bis 60.000€), LR zahlt Zuschuss (500-800€/Monat), du zahlst Differenz.\n\nBeispiel: BMW 3er (1.200€/Monat) - LR-Zuschuss (800€) = 400€ Eigenanteil.\n\nWichtig: Leasing (nicht Eigentum), Zuschuss an Qualifikation gekoppelt, nur 5-10% erreichen es.\n\n*Vorbehaltlich LR-Programmbedingungen."
+      q: "Wie hoch ist der garantierte Bonus in den Fast Track Stufen?",
+      a: "Die garantierten Mindestboni sind:\n\n• Junior Manager: 300 € pro Monat.\n• Junior Teamleiter: 1.100 € pro Monat.\n• Orgaleiter: 2.000 € pro Monat.\n\nDiese Beträge werden zusätzlich zur Handelsspanne und zum Autobonus gezahlt."
     },
     {
-      q: "Was ist Lina (KI) konkret?",
-      a: "Lina ist deine vollumfängliche Business-Partnerin. Sie weiß alles über LR, unterstützt dich im Vertrieb, erstellt Content für Social Media und ist 24/7 verfügbar auf allen deinen Geräten.\n\n1. Wissen & Coaching: Umfassendes LR-Wissen und persönliches Coaching – Lina kennt jeden Karriereplan, jedes Produkt und jeden Einwand. Sie coacht dich wie ein erfahrener Mentor.\n\n2. Vertrieb & WhatsApp: Automatisierte Kundenbetreuung, FAQ-Bot, Follow-up-Erinnerungen, Lead-Qualifizierung.\n\n3. Social Media: Content-Vorlagen für Reels, Posts und Stories. Hashtag-Vorschläge, Posting-Zeiten, Trend-Analyse.\n\n4. 24/7 Verfügbar: Immer für dich da – auch nachts und am Wochenende. Perfekt für Nebenbei-Starter."
+      q: "Wie funktioniert das LR Autokonzept?",
+      a: "Das Autokonzept ist ein attraktives Firmenwagenprogramm, das qualifizierten Partnern ermöglicht, Fahrzeuge von Top-Marken wie VW, Audi, Mercedes-Benz oder BMW zu besonders günstigen Leasingkonditionen zu erhalten. Ein großer Vorteil ist, dass die Leasingverträge oft ohne Anzahlung und ohne Schlussrate abgeschlossen werden. Die Qualifikation ist bereits ab der Stufe Junior Manager (4.000 PW) möglich. Zusätzlich erhalten Partner einen monatlichen Autobonus (z.B. 55 € für Junior Manager), der die Leasingkosten erheblich reduziert."
     },
     {
-      q: "Ist das seriös?",
-      a: "Ja. LR seit 1985 (40 Jahre), 1.000+ Mitarbeiter, 500.000+ Partner in 30 Ländern, 300+ Mio. € Umsatz/Jahr. Zertifizierungen: ISO 9001, COSMOS, Made in Germany.\n\nGeschäftsmodell: Direktvertrieb (legal), keine Pyramide (Verdienst an Produktverkäufen), transparenter Vergütungsplan.\n\nCompliance: Mitglied BDD, geprüfte Produkte, keine unrealistischen Versprechen.\n\nWarum Skepsis? MLM hat schlechten Ruf (schwarze Schafe), viele scheitern ohne System, Fake-Gurus.\n\nUnser Ansatz: Klare Infos, realistische Erwartungen, strukturierter Prozess (Lina + Team)."
+      q: "Was, wenn ich unsicher bin oder Bedenken habe?",
+      a: "Unsicherheit ist am Anfang normal. Das LR Geschäftsmodell ist mit geringem Risiko verbunden, da kein hohes Startkapital oder Lagerhaltung erforderlich ist. Lina, Ihr Coach, ist rund um die Uhr verfügbar, um spezifische Bedenken anzusprechen und zu klären. Sie kann Ihnen helfen, alle Fragen zum Geschäftsmodell und zu möglichen Ängsten (z.B. Angst vor Social Media oder davor, keine Kontakte zu finden) zu entmystifizieren."
     },
     {
-      q: "Was, wenn ich unsicher bin?",
-      a: "Dann hol dir das Info-Paket ohne Verpflichtung. Du bekommst alle Infos, kannst Fragen stellen (WhatsApp, Zoom) und entscheidest selbst.\n\nTypische Unsicherheiten:\n• Keine Verkaufserfahrung → Lina gibt Vorlagen\n• Wenig Zeit → 5-10h/Woche reichen\n• Keine Kontakte → Social Media Reichweite aufbauen\n• Angst vor Scheitern → Nur 50-100€ Investment\n• Zu alt/jung → Partner von 18-65 Jahren\n\nUnser Tipp: Info-Paket lesen, Fragen stellen, dann entscheiden. Kein Druck. Wenn du nach dem Kurz-Check unsicher bist, ist das okay."
+      q: "Gibt es für höhere Karrierestufen einen garantierten Bonus?",
+      a: "Ja, für höhere Karrierestufen ab Orgaleiter gibt es den Business Track Bonus. Dieses Programm garantiert ebenfalls feste Mindestboni (z.B. 2.000 € für Orgaleiter, 3.000 € für Bronze-Orgaleiter). Der Partner erhält immer den höheren Betrag zwischen dem regulär errechneten Bonus und dem garantierten Business Track Bonus."
+    },
+    {
+      q: "Woher weiß ich, welche Produkte für mich geeignet sind?",
+      a: "LR bietet ein breites Portfolio an Gesundheits- und Schönheitsprodukten, darunter Aloe Vera, Nahrungsergänzung (Lifetakt), Parfüms (Mood Infusion & Iconic Elixirs) und Kosmetik (Zeitgard). Lina kann Ihnen helfen, schnell Produktinformationen zu finden, und es steht ein LR Duftfinder zur Verfügung, um die richtige Emotion oder den passenden Duft zu finden."
     }
   ];
 
@@ -267,8 +279,8 @@ const FAQSection = () => {
     <section className="py-16">
       <div className="container max-w-3xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-2">Häufige Fragen</h2>
-          <p className="text-sm text-muted-foreground">Alles, was du wissen musst.</p>
+          <h2 className="text-2xl font-bold font-poppins mb-2">Häufige Fragen & Antworten</h2>
+          <p className="text-sm text-muted-foreground">Ihr Weg zum Erfolg mit LR – Alles, was Sie wissen müssen.</p>
         </div>
         
         <Accordion type="single" collapsible className="w-full space-y-2">
