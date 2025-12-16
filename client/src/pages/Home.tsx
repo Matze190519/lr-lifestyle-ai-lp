@@ -422,9 +422,9 @@ const FastTrackSection = () => {
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Fast Track Bonus*</h3>
               </div>
               
-              {/* Bild von Präsentation */}
+              {/* Fast Track Programm Bild */}
               <div className="mb-4 rounded-lg overflow-hidden">
-                <img src="/images/fast-track-bonus.png" alt="Fast Track Bonus Stufen" className="w-full h-auto" />
+                <img src="/images/fast-track-programm.png" alt="Fast Track Bonus Programm" className="w-full h-auto rounded-lg" />
               </div>
               
               <div className="space-y-4 mb-4">
@@ -458,24 +458,28 @@ const FastTrackSection = () => {
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Autokonzept*</h3>
               </div>
               
-              {/* Bild von Präsentation - Audi */}
-              <div className="mb-4 rounded-lg overflow-hidden">
-                <img src="/images/autokonzept-audi.jpg" alt="LR Autokonzept - Audi S5 Avant" className="w-full h-auto rounded-lg" />
+              {/* Audi S5 Avant Bild */}
+              <div className="mb-4 flex justify-center">
+                <img src="/images/autokonzept-s5.png" alt="Audi S5 Avant" className="w-full max-w-[280px] h-auto" />
               </div>
               
-              <div className="space-y-4 mb-4">
+              <div className="space-y-3 mb-4">
+                <div className="text-center">
+                  <p className="text-lg font-semibold gold-gradient-text">Dein Firmenwagen</p>
+                  <p className="text-xs text-muted-foreground">VW, Audi, Mercedes, BMW</p>
+                </div>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
-                    Dienst-/Firmenwagenmodell über Partnerkonditionen*
+                    <span>Firmenwagen über <strong className="text-white">Partnerkonditionen</strong></span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
-                    Je nach Stufe kann ein monatlicher Zuschuss möglich sein*
+                    <span>Monatlicher <strong className="text-white">Autobonus</strong> je nach Stufe</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
-                    Du bekommst die Übersicht: Voraussetzungen, Modelle, Ablauf
+                    <span>Ab <strong className="text-white">Junior Manager</strong> qualifiziert</span>
                   </li>
                 </ul>
               </div>

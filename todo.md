@@ -110,3 +110,9 @@
 ## Phase 14 - Autokonzept Bild Fix
 - [x] Falsches Autokonzept-Bild entfernt
 - [x] Passendes Auto-Bild (Audi S5 Avant schwarz) gefunden und eingefügt
+
+
+## Phase 15 - Bilder und Texte verbessern
+- [x] S5 Avant transparent Bild verwendet (vom User bereitgestellt)
+- [x] Fast Track Programm Bild eingefügt (vom User bereitgestellt)
+- [x] Autokonzept-Texte verbessert (Dein Firmenwagen, Marken, bessere Bullet Points)
