@@ -72,16 +72,16 @@ const HeroSection = () => {
             className="space-y-8"
           >
             <div>
-              <p className="text-sm text-[#C9A86C] uppercase tracking-wider mb-2">Bist du zufrieden, wie dein Leben gerade läuft?</p>
+              <p className="text-sm text-[#C9A86C] uppercase tracking-wider mb-2 font-medium">Bist du es leid, für fremde Träume zu arbeiten?</p>
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-4">
-                <span className="text-white">Dein Ausweg aus dem Hamsterrad:</span>
+                <span className="text-white">Dein Weg zur finanziellen Freiheit:</span>
                 <br />
                 <span className="gold-gradient-text">Bis zu 2.000 € garantierter</span>
                 <br />
                 <span className="gold-gradient-text">monatlicher Bonus</span>
               </h1>
               <p className="text-sm text-white/70 leading-relaxed">
-                Lerne das bewährte System von Platin-Organleiter Matthias kennen, das ihn vom Dachdecker zum <strong className="text-white">5.000 € passivem Monatseinkommen</strong> führte. Mit erprobter Strategie und deinem kostenlosen KI-Coach Lina!
+                Matthias war Dachdecker – heute ist er <strong className="text-white">Platin-Organleiter</strong>. Nach nur einem Jahr: <strong className="text-white">5.000 € passives Einkommen</strong>. Heute? <strong className="gold-gradient-text">Ein Vielfaches davon.</strong> Mit seinem erprobten System und deinem persönlichen KI-Coach Lina zeigt er dir, wie auch du das schaffen kannst.
               </p>
             </div>
             
@@ -90,25 +90,25 @@ const HeroSection = () => {
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <TrendingUp className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Garantiertes Einkommen:</span> 300 € bis 2.000 € monatlich für 12 Monate</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Garantierter Bonus:</span> 300€ bis 2.000€/Monat – 12 Monate lang, zusätzlich zur Handelsspanne</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <Smartphone className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">24/7 KI-Coach Lina:</span> WhatsApp-Vorlagen, Content & Live-Coaching</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Dein KI-Coach Lina:</span> 24/7 WhatsApp-Support, fertige Vorlagen, Live-Coaching</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <Car className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Firmenwagen ab Start:</span> VW, Audi, Mercedes zu 70-80% günstiger</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Firmenwagen-Programm:</span> Audi, BMW, Mercedes – bis zu 80% günstiger als privat</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <Users className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Vererbares Vermögen:</span> Passives Einkommen auf 40 Jahren LR-Erfahrung</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Vererbbar:</span> Baue ein Vermögen auf, das du deinen Kindern hinterlässt</p>
               </div>
             </div>
 
@@ -204,28 +204,28 @@ const HeroSection = () => {
 const WhatIsLRSection = () => {
   const benefits = [
     {
-      title: "Garantiertes Top-Einkommen",
-      desc: "Das Fast Track Programm sichert dir für bis zu 12 Monate einen Mindestbonus von 300 € bis 2.000 € monatlich – zusätzlich zu deiner Handelsspanne."
+      title: "Garantierter Bonus – kein Risiko",
+      desc: "Das Fast Track Programm zahlt dir 12 Monate lang einen garantierten Mindestbonus: 300€, 1.100€ oder 2.000€ monatlich – zusätzlich zu deiner Handelsspanne. Bis zu 24.000€ im ersten Jahr!"
     },
     {
-      title: "Dein 24/7 KI-Coach Lina",
-      desc: "Du startest nie allein! Lina liefert dir WhatsApp-Vorlagen, Social Media Content und sogar Live-Coaching für Verkaufsgespräche."
+      title: "Lina – Dein unfairer Vorteil",
+      desc: "Während andere alleine kämpfen, hast du einen KI-Coach, der 24/7 für dich arbeitet: WhatsApp-Vorlagen, Social Media Content, Live-Coaching – alles auf Knopfdruck."
     },
     {
-      title: "Dein Firmenwagen ab Start",
-      desc: "Qualifiziere dich schon ab Junior Manager für das LR-Autokonzept: VW, Audi, Mercedes zu 70–80% günstigeren Konditionen."
+      title: "Firmenwagen? Ab Tag 1 möglich",
+      desc: "Audi, BMW, Mercedes, VW – bis zu 80% günstiger als privat. Schon ab Junior Manager qualifizierst du dich für das legendäre LR-Autokonzept."
     },
     {
-      title: "Vererbares Vermögen",
-      desc: "Baue dir ein krisensicheres, passives Einkommen auf, das du vollständig an deine Kinder vererben kannst."
+      title: "Baue echtes Vermögen auf",
+      desc: "Kein Job, der endet wenn du aufhörst. Dein passives Einkommen wächst – und du kannst es komplett an deine Kinder vererben. Echte finanzielle Freiheit."
     },
     {
-      title: "Fokus auf den Erfolg anderer",
-      desc: "Unser Geschäft basiert auf einfacher Duplikation. Je erfolgreicher dein Team, desto erfolgreicher du."
+      title: "Dein Erfolg = Teamerfolg",
+      desc: "Vergiss Ellenbogen-Mentalität. Bei uns gewinnst du, wenn dein Team gewinnt. Einfache Duplikation – was für dich funktioniert, funktioniert für alle."
     },
     {
-      title: "Deutsche Premium-Qualität",
-      desc: "Arbeite mit Gesundheits- und Schönheitsprodukten \"Made in Germany\" – zertifiziert vom SGS INSTITUT FRESENIUS."
+      title: "Premium-Produkte, die sich verkaufen",
+      desc: "Keine China-Ware. LR-Produkte sind \"Made in Germany\", SGS-zertifiziert und haben Millionen zufriedener Kunden. Du verkaufst Qualität, nicht Schrott."
     }
   ];
 
@@ -502,7 +502,7 @@ const FastTrackSection = () => {
             </CardContent>
           </Card>
 
-          {/* Autokonzept Card */}
+          {/* Autokonzept Card - Erweitert */}
           <Card className="bg-black/80 shadow-lg relative border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
@@ -518,22 +518,32 @@ const FastTrackSection = () => {
               </div>
               
               <div className="space-y-3 mb-4">
-                <div className="text-center">
-                  <p className="text-lg font-semibold gold-gradient-text">Dein Firmenwagen</p>
-                  <p className="text-xs text-muted-foreground">VW, Audi, Mercedes, BMW</p>
+                <div className="text-center mb-3">
+                  <p className="text-lg font-semibold gold-gradient-text">Dein Traumwagen wartet</p>
+                  <p className="text-xs text-white/70">Audi • BMW • Mercedes • VW</p>
                 </div>
+                
+                {/* Highlight: Ersparnis */}
+                <div className="text-center p-2 rounded-lg bg-gradient-to-r from-[#C9A86C]/10 via-[#C9A86C]/20 to-[#C9A86C]/10 border border-[#C9A86C]/30">
+                  <p className="text-sm font-semibold text-white">Bis zu <span className="gold-gradient-text">80% günstiger</span> als privat</p>
+                </div>
+                
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
-                    <span>Firmenwagen über <strong className="text-white">Partnerkonditionen</strong></span>
+                    <span><strong className="text-white">Exklusive Partnerkonditionen</strong> über LR</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
-                    <span>Monatlicher <strong className="text-white">Autobonus</strong> je nach Stufe</span>
+                    <span><strong className="text-white">Monatlicher Autobonus</strong> je nach Karrierestufe</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
-                    <span>Ab <strong className="text-white">Junior Manager</strong> qualifiziert</span>
+                    <span>Qualifikation ab <strong className="text-white">Junior Manager</strong></span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
+                    <span><strong className="text-white">Dienst- oder Firmenwagen</strong> möglich</span>
                   </li>
                 </ul>
               </div>
@@ -551,23 +561,23 @@ const FastTrackSection = () => {
 const LinaSection = () => {
   const features = [
     {
-      title: "Wissen & Coaching",
-      desc: "Umfassendes LR-Wissen und persönliches Coaching – Lina kennt jeden Karriereplan, jedes Produkt und jeden Einwand. Sie coacht dich wie ein erfahrener Mentor.",
+      title: "Dein Wissens-Turbo",
+      desc: "Lina kennt ALLES über LR: Produkte, Karrierepläne, Einwandbehandlung. Sie coacht dich wie ein Mentor mit 20 Jahren Erfahrung – nur schneller.",
       icon: <Users className="w-5 h-5 text-[#C9A86C]" />
     },
     {
-      title: "Vertrieb & WhatsApp",
-      desc: "Automatisierte Kundenbetreuung, FAQ-Bot, Follow-up-Erinnerungen, Lead-Qualifizierung.",
+      title: "Vertrieb auf Autopilot",
+      desc: "Fertige WhatsApp-Vorlagen, automatische Follow-ups, Lead-Qualifizierung. Lina macht die Arbeit – du erntest die Ergebnisse.",
       icon: <MessageCircle className="w-5 h-5 text-[#C9A86C]" />
     },
     {
-      title: "Social Media",
-      desc: "Content-Vorlagen für Reels, Posts und Stories. Hashtag-Vorschläge, Posting-Zeiten, Trend-Analyse.",
+      title: "Content-Maschine",
+      desc: "Reels, Posts, Stories – auf Knopfdruck. Hashtags, beste Posting-Zeiten, Trend-Analyse. Dein Social Media läuft wie von selbst.",
       icon: <Smartphone className="w-5 h-5 text-[#C9A86C]" />
     },
     {
-      title: "24/7 Verfügbar",
-      desc: "Immer für dich da – auch nachts und am Wochenende. Perfekt für Nebenbei-Starter.",
+      title: "24/7 – Immer da",
+      desc: "Nachts um 2 eine Frage? Lina antwortet. Sonntag eine Idee? Lina hilft. Perfekt für alle, die nebenbei starten.",
       icon: <Zap className="w-5 h-5 text-[#C9A86C]" />
     }
   ];
@@ -576,8 +586,8 @@ const LinaSection = () => {
     <section className="py-16 section-glow ">
       <div className="container max-w-4xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – deine vollumfängliche Business-Partnerin</span></h2>
-          <p className="text-sm text-muted-foreground">Keine Erfahrung? Lina regelt das.</p>
+          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – Dein unfairer Vorteil</span></h2>
+          <p className="text-sm text-muted-foreground">Während andere alleine kämpfen, hast du eine KI, die für dich arbeitet.</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -595,7 +605,7 @@ const LinaSection = () => {
         </div>
         
         <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto">
-          Lina ist deine vollumfängliche Business-Partnerin. Sie weiß alles über LR, unterstützt dich im Vertrieb, erstellt Content für Social Media und ist <strong>24/7 verfügbar auf allen deinen Geräten</strong>.
+          <strong className="text-white">Stell dir vor:</strong> Du hast einen erfahrenen Mentor, der nie schläft, nie genervt ist und immer die perfekte Antwort hat. Das ist Lina. <strong className="gold-gradient-text">Dein unfairer Vorteil gegenüber allen, die noch ohne KI arbeiten.</strong>
         </p>
       </div>
     </section>
