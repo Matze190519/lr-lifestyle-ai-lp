@@ -442,36 +442,60 @@ const FastTrackSection = () => {
     <section className="py-16 section-glow">
       <div className="container max-w-4xl">
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Fast Track Card */}
+          {/* Fast Track Card - Optimiertes Design */}
           <Card className="bg-black/80 shadow-lg relative border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
             <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-[#C9A86C]" />
                 </div>
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Fast Track Bonus*</h3>
               </div>
               
-              {/* Fast Track Programm Bild */}
-              <div className="mb-4 rounded-lg overflow-hidden">
-                <img src="/images/fast-track-programm.png" alt="Fast Track Bonus Programm" className="w-full h-auto rounded-lg" />
+              {/* Visuell ansprechende Stufen-Darstellung */}
+              <div className="mb-5">
+                <div className="flex justify-between gap-2 mb-4">
+                  {/* Stufe 1 */}
+                  <div className="flex-1 text-center p-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/20 to-transparent border border-[#C9A86C]/30">
+                    <p className="text-xs text-[#C9A86C] mb-1">STUFE 1</p>
+                    <p className="text-xl font-bold text-white">300€</p>
+                    <p className="text-[10px] text-white/50">Junior Manager</p>
+                  </div>
+                  {/* Stufe 2 */}
+                  <div className="flex-1 text-center p-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/30 to-transparent border border-[#C9A86C]/40">
+                    <p className="text-xs text-[#C9A86C] mb-1">STUFE 2</p>
+                    <p className="text-xl font-bold text-white">1.100€</p>
+                    <p className="text-[10px] text-white/50">Junior Teamleiter</p>
+                  </div>
+                  {/* Stufe 3 */}
+                  <div className="flex-1 text-center p-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/40 to-transparent border border-[#C9A86C]/50">
+                    <p className="text-xs text-[#C9A86C] mb-1">STUFE 3</p>
+                    <p className="text-xl font-bold text-white">2.000€</p>
+                    <p className="text-[10px] text-white/50">Orgaleiter</p>
+                  </div>
+                </div>
+                
+                {/* Highlight Badge */}
+                <div className="text-center p-3 rounded-lg bg-gradient-to-r from-[#C9A86C]/20 via-[#C9A86C]/30 to-[#C9A86C]/20 border border-[#C9A86C]/40">
+                  <p className="text-sm font-semibold text-white">Bis zu <span className="gold-gradient-text text-lg">24.000€</span> in 12 Monaten</p>
+                  <p className="text-[10px] text-white/60">+ Autobonus + Handelsspanne</p>
+                </div>
               </div>
               
-              <div className="space-y-4 mb-4">
-                <div className="text-xl font-bold gold-gradient-text">
-                  300 €* / 1.100 €* / 2.000 €*
-                </div>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <ArrowRight className="w-4 h-4 text-[#C9A86C]" />
-                    Klarer Startplan (was wann zu tun ist)
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ArrowRight className="w-4 h-4 text-[#C9A86C]" />
-                    WhatsApp-Check: Welche Stufe passt zu dir?
-                  </li>
-                </ul>
-              </div>
+              <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#C9A86C]" />
+                  <span>Garantierter <strong className="text-white">Mindestbonus</strong> für 12 Monate</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#C9A86C]" />
+                  <span>Klarer <strong className="text-white">Startplan</strong> (was wann zu tun ist)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#C9A86C]" />
+                  <span>WhatsApp-Check: <strong className="text-white">Welche Stufe</strong> passt zu dir?</span>
+                </li>
+              </ul>
               <p className="text-[10px] text-muted-foreground opacity-70">
                 *Nur bei Erreichen der Programmbedingungen/Qualifikation. Details im Info-Paket.
               </p>
