@@ -213,7 +213,7 @@ const WhatIsLRSection = () => {
         </div>
         <div className="grid md:grid-cols-2 gap-4">
           {points.map((point, i) => (
-            <div key={i} className="flex items-start gap-3 bg-black/80 p-4 rounded-lg white-glow border border-white/10">
+            <div key={i} className="flex items-start gap-3 bg-black/80 p-4 rounded-lg border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
               <CheckCircle2 className="w-5 h-5 text-[#C9A86C] shrink-0 mt-0.5" />
               <p className="text-sm text-muted-foreground">{point}</p>
             </div>
@@ -280,7 +280,7 @@ const SocialProofSection = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <Card key={i} className="bg-black/80 white-glow transition-all backdrop-blur-sm border border-white/10">
+            <Card key={i} className="bg-black/80 transition-all backdrop-blur-sm border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
               <CardContent className="p-6 relative">
                 <div className="absolute top-4 right-4 px-2 py-1 bg-[#C9A86C]/10 rounded text-[10px] font-mono text-[#C9A86C] uppercase tracking-wider">
                   {t.badge}
@@ -392,7 +392,7 @@ const FAQSection = () => {
         
         <Accordion type="single" collapsible className="w-full space-y-2">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="bg-black/80 rounded-lg px-4 white-glow border border-white/10">
+            <AccordionItem key={i} value={`item-${i}`} className="bg-black/80 rounded-lg px-4 border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
               <AccordionTrigger className="text-sm font-medium hover:text-[#C9A86C] text-left">
                 {faq.q}
               </AccordionTrigger>
@@ -413,9 +413,8 @@ const FastTrackSection = () => {
       <div className="container max-w-4xl">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Fast Track Card */}
-          <Card className="bg-black/80 shadow-lg relative white-glow border border-white/10">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-[#C9A86C]/10 rounded-bl-full -mr-10 -mt-10"></div>
-            <CardContent className="p-8">
+          <Card className="bg-black/80 shadow-lg relative border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
+            <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-[#C9A86C]" />
@@ -423,8 +422,13 @@ const FastTrackSection = () => {
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Fast Track Bonus*</h3>
               </div>
               
-              <div className="space-y-4 mb-6">
-                <div className="text-2xl font-bold gold-gradient-text">
+              {/* Bild von Präsentation */}
+              <div className="mb-4 rounded-lg overflow-hidden">
+                <img src="/images/fast-track-bonus.png" alt="Fast Track Bonus Stufen" className="w-full h-auto" />
+              </div>
+              
+              <div className="space-y-4 mb-4">
+                <div className="text-xl font-bold gold-gradient-text">
                   300 €* / 1.100 €* / 2.000 €*
                 </div>
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -445,9 +449,8 @@ const FastTrackSection = () => {
           </Card>
 
           {/* Autokonzept Card */}
-          <Card className="bg-black/80 shadow-lg relative white-glow border border-white/10">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-[#C9A86C]/10 rounded-bl-full -mr-10 -mt-10"></div>
-            <CardContent className="p-8">
+          <Card className="bg-black/80 shadow-lg relative border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
+            <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
                   <Car className="w-5 h-5 text-[#C9A86C]" />
@@ -455,8 +458,13 @@ const FastTrackSection = () => {
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Autokonzept*</h3>
               </div>
               
-              <div className="space-y-4 mb-6">
-                <ul className="space-y-3 text-sm text-muted-foreground">
+              {/* Bild von Präsentation - Audi */}
+              <div className="mb-4 rounded-lg overflow-hidden">
+                <img src="/images/autokonzept-audi.png" alt="LR Autokonzept - Audi" className="w-full h-auto" />
+              </div>
+              
+              <div className="space-y-4 mb-4">
+                <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
                     Dienst-/Firmenwagenmodell über Partnerkonditionen*
@@ -516,7 +524,7 @@ const LinaSection = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {features.map((f, i) => (
-            <Card key={i} className="bg-black/80 white-glow transition-all text-center border border-white/10">
+            <Card key={i} className="bg-black/80 transition-all text-center border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
               <CardContent className="p-6 flex flex-col items-center">
                 <div className="w-10 h-10 rounded-full bg-[#C9A86C]/10 flex items-center justify-center mb-4">
                   {f.icon}

@@ -98,3 +98,10 @@
 - [x] Glow-Effekt hinter Fast Track/Autokonzept/LINA/Testimonials Rahmen hinzugefügt
 - [x] Echte Bilder für Testimonials generiert und integriert (Sabrina, Kevin, Miriam, Tobias, Anja, Deniz)
 - [x] Lina Chat Konfiguration (User macht das selbst - Bot läuft auf mehreren Seiten)
+
+## Phase 13 - Fast Track & Autokonzept Design Fix
+- [x] Glow-Effekt auf Fast Track und Autokonzept Karten angewendet
+- [x] Bild von Folie 26 für Fast Track Karte hinzugefügt
+- [x] Autokonzept Bild (Audi Q8) hinzugefügt
+
+- [x] Einheitlicher weißer Glow auf ALLE Karten (WhatIsLR, Fast Track, Autokonzept, LINA, Testimonials, FAQ)
