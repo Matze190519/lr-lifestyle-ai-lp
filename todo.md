@@ -93,3 +93,8 @@
 ## Pending
 - [ ] Meta Pixel Integration für Landing Page
 - [ ] Text-Inhalte prüfen (User-Feedback ausstehend)
+
+## Completed (Phase 12 - Design Fixes)
+- [x] Glow-Effekt hinter Fast Track/Autokonzept/LINA/Testimonials Rahmen hinzugefügt
+- [x] Echte Bilder für Testimonials generiert und integriert (Sabrina, Kevin, Miriam, Tobias, Anja, Deniz)
+- [x] Lina Chat Konfiguration (User macht das selbst - Bot läuft auf mehreren Seiten)

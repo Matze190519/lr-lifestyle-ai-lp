@@ -230,37 +230,43 @@ const SocialProofSection = () => {
       quote: "Ich hatte null Plan – jetzt hab ich endlich einen klaren Startablauf und weiß, was ich täglich machen soll.",
       author: "Sabrina, 34",
       role: "Nebenjob",
-      badge: "Onboarding"
+      badge: "Onboarding",
+      image: "/images/testimonial-sabrina.png"
     },
     {
       quote: "Das Beste: Die Vorlagen. Ich muss nichts erfinden – ich setze nur um.",
       author: "Kevin, 27",
       role: "Quereinsteiger",
-      badge: "Vorlagen"
+      badge: "Vorlagen",
+      image: "/images/testimonial-kevin.png"
     },
     {
       quote: "Ich wollte erst nur Infos. Nach dem Kurz-Check war alles plötzlich logisch.",
       author: "Miriam, 41",
       role: "Familie & Job",
-      badge: "Kurz-Check"
+      badge: "Kurz-Check",
+      image: "/images/testimonial-miriam.png"
     },
     {
       quote: "Lina spart mir Zeit: Antworten, Ideen, Follow-ups – ich bleibe dran.",
       author: "Tobias, 38",
       role: "selbstständig",
-      badge: "WhatsApp Support"
+      badge: "WhatsApp Support",
+      image: "/images/testimonial-tobias.png"
     },
     {
       quote: "Kein Druck, kein Gelaber – einfach Schritt-für-Schritt.",
       author: "Anja, 52",
       role: "Neustart",
-      badge: "Onboarding"
+      badge: "Onboarding",
+      image: "/images/testimonial-anja.png"
     },
     {
       quote: "Ich hatte Angst vor Technik. Setup war easy, weil ich geführt werde.",
       author: "Deniz, 29",
       role: "digital interessiert",
-      badge: "Vorlagen"
+      badge: "Vorlagen",
+      image: "/images/testimonial-deniz.png"
     }
   ];
 
@@ -281,9 +287,11 @@ const SocialProofSection = () => {
                 </div>
                 <p className="text-sm italic text-muted-foreground mb-4 leading-relaxed">"{t.quote}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C9A86C]/30 to-[#C9A86C]/20 flex items-center justify-center text-xs font-bold text-[#C9A86C]">
-                    {t.author.charAt(0)}
-                  </div>
+                  <img 
+                    src={t.image} 
+                    alt={t.author} 
+                    className="w-10 h-10 rounded-full object-cover border-2 border-[#C9A86C]/30"
+                  />
                   <div>
                     <p className="font-bold text-sm">{t.author}</p>
                     <p className="text-[10px] text-muted-foreground uppercase">{t.role}</p>
@@ -405,7 +413,7 @@ const FastTrackSection = () => {
       <div className="container max-w-4xl">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Fast Track Card */}
-          <Card className="bg-black/80 shadow-lg relative overflow-hidden card-glow white-glow border border-white/10">
+          <Card className="bg-black/80 shadow-lg relative white-glow border border-white/10">
             <div className="absolute top-0 right-0 w-20 h-20 bg-[#C9A86C]/10 rounded-bl-full -mr-10 -mt-10"></div>
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-4">
@@ -437,7 +445,7 @@ const FastTrackSection = () => {
           </Card>
 
           {/* Autokonzept Card */}
-          <Card className="bg-black/80 shadow-lg relative overflow-hidden card-glow white-glow border border-white/10">
+          <Card className="bg-black/80 shadow-lg relative white-glow border border-white/10">
             <div className="absolute top-0 right-0 w-20 h-20 bg-[#C9A86C]/10 rounded-bl-full -mr-10 -mt-10"></div>
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-4">
