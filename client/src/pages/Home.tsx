@@ -72,39 +72,43 @@ const HeroSection = () => {
             className="space-y-8"
           >
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-                <span className="gold-gradient-text">DEIN BUSINESS.</span>
+              <p className="text-sm text-[#C9A86C] uppercase tracking-wider mb-2">Bist du zufrieden, wie dein Leben gerade läuft?</p>
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-4">
+                <span className="text-white">Dein Ausweg aus dem Hamsterrad:</span>
                 <br />
-                <span className="gold-gradient-text">DEINE KI.</span>
+                <span className="gold-gradient-text">Bis zu 2.000 € garantierter</span>
                 <br />
-                <span className="gold-gradient-text">DEIN ERFOLG.</span>
+                <span className="gold-gradient-text">monatlicher Bonus</span>
               </h1>
+              <p className="text-sm text-white/70 leading-relaxed">
+                Lerne das bewährte System von Platin-Organleiter Matthias kennen, das ihn vom Dachdecker zum <strong className="text-white">5.000 € passivem Monatseinkommen</strong> führte. Mit erprobter Strategie und deinem kostenlosen KI-Coach Lina!
+              </p>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
-                  <Zap className="w-3 h-3 text-black" />
+                  <TrendingUp className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90"><span className="gold-gradient-text font-semibold">Erfolgreichsten Monate</span> seit 40 Jahren!</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Garantiertes Einkommen:</span> 300 € bis 2.000 € monatlich für 12 Monate</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <Smartphone className="w-3 h-3 text-black" />
+                </div>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">24/7 KI-Coach Lina:</span> WhatsApp-Vorlagen, Content & Live-Coaching</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <Car className="w-3 h-3 text-black" />
+                </div>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Firmenwagen ab Start:</span> VW, Audi, Mercedes zu 70-80% günstiger</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <Users className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90">Über <span className="gold-gradient-text font-semibold">18.000 neue Karrieren</span> in 2024</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
-                  <TrendingUp className="w-3 h-3 text-black" />
-                </div>
-                <p className="text-white/90"><span className="gold-gradient-text font-semibold">10.635 neue Junior Manager</span></p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
-                  <ArrowRight className="w-3 h-3 text-black" />
-                </div>
-                <p className="text-white/90">Der beste Zeitpunkt ist <span className="gold-gradient-text font-bold">JETZT</span></p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Vererbares Vermögen:</span> Passives Einkommen auf 40 Jahren LR-Erfahrung</p>
               </div>
             </div>
 
@@ -118,9 +122,9 @@ const HeroSection = () => {
                 }}
               >
                 <MessageCircle className="mr-2 w-5 h-5" />
-                Jetzt durchstarten
+                Kostenlose Infos & Lina-Demo
               </Button>
-              <p className="text-xs text-white/50 mt-3">Kostenloses Info-Paket per WhatsApp</p>
+              <p className="text-xs text-white/50 mt-3">Sichere dir deinen persönlichen Erfolgs-Fahrplan!</p>
             </div>
           </motion.div>
 
@@ -198,24 +202,50 @@ const HeroSection = () => {
 };
 
 const WhatIsLRSection = () => {
-  const points = [
-    "LR = Direktvertrieb / Empfehlungsmarketing (Produkte + Teamaufbau)",
-    "Du startest nebenbei – Schritt für Schritt",
-    "Du verdienst über Provisionen (abhängig von Aktivität & Team)",
-    "Du bekommst von uns System + Begleitung + KI-Support (Lina)"
+  const benefits = [
+    {
+      title: "Garantiertes Top-Einkommen",
+      desc: "Das Fast Track Programm sichert dir für bis zu 12 Monate einen Mindestbonus von 300 € bis 2.000 € monatlich – zusätzlich zu deiner Handelsspanne."
+    },
+    {
+      title: "Dein 24/7 KI-Coach Lina",
+      desc: "Du startest nie allein! Lina liefert dir WhatsApp-Vorlagen, Social Media Content und sogar Live-Coaching für Verkaufsgespräche."
+    },
+    {
+      title: "Dein Firmenwagen ab Start",
+      desc: "Qualifiziere dich schon ab Junior Manager für das LR-Autokonzept: VW, Audi, Mercedes zu 70–80% günstigeren Konditionen."
+    },
+    {
+      title: "Vererbares Vermögen",
+      desc: "Baue dir ein krisensicheres, passives Einkommen auf, das du vollständig an deine Kinder vererben kannst."
+    },
+    {
+      title: "Fokus auf den Erfolg anderer",
+      desc: "Unser Geschäft basiert auf einfacher Duplikation. Je erfolgreicher dein Team, desto erfolgreicher du."
+    },
+    {
+      title: "Deutsche Premium-Qualität",
+      desc: "Arbeite mit Gesundheits- und Schönheitsprodukten \"Made in Germany\" – zertifiziert vom SGS INSTITUT FRESENIUS."
+    }
   ];
 
   return (
     <section className="py-12 section-glow ">
-      <div className="container max-w-3xl">
+      <div className="container max-w-4xl">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold font-poppins"><span className="gold-gradient-text">Was ist LR in 20 Sekunden?</span></h2>
+          <h2 className="text-2xl font-bold font-poppins"><span className="gold-gradient-text">Warum LR + KI = Dein Erfolg?</span></h2>
+          <p className="text-sm text-white/60 mt-2">6 Gründe, warum jetzt der beste Zeitpunkt ist</p>
         </div>
         <div className="grid md:grid-cols-2 gap-4">
-          {points.map((point, i) => (
-            <div key={i} className="flex items-start gap-3 bg-black/80 p-4 rounded-lg border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
-              <CheckCircle2 className="w-5 h-5 text-[#C9A86C] shrink-0 mt-0.5" />
-              <p className="text-sm text-muted-foreground">{point}</p>
+          {benefits.map((benefit, i) => (
+            <div key={i} className="bg-black/80 p-5 rounded-lg border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1)' }}>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#C9A86C] shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-white mb-1">{benefit.title}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{benefit.desc}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
