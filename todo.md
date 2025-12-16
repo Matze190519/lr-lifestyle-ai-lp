@@ -73,3 +73,23 @@
 - [x] Gradient-Effekte und Glow-Effekte in Gold hinzugefügt
 - [x] Gold Buttons mit Shimmer-Animation
 - [x] Alle Sektionen aktualisiert (Hero, WhatIsLR, FastTrack, Autokonzept, Lina, SocialProof, FAQ, FinalCTA, Footer)
+
+## Completed (External Sites)
+- [x] Meta Pixel (677297092936141) mit korrekten Währungsparametern auf lrlifestyle.pro integrieren
+- [x] Video-Link auf lrlifestyle.pro korrigieren (https://www.youtube.com/watch?v=fGd5jwI1EJo)
+- [x] Meta Pixel (677297092936141) auf ki-voice.net integrieren
+
+## Completed (Phase 11 - White Glow Design Fix)
+- [x] Logo-Position korrigiert (nicht mehr überlappend mit Rahmen)
+- [x] White Glow auf alle Karten angewendet:
+  - [x] WhatIsLR Karten
+  - [x] Fast Track Bonus Karte
+  - [x] Autokonzept Karte
+  - [x] LINA Feature Karten
+  - [x] Testimonial Karten
+  - [x] FAQ Accordion Items
+- [x] Konsistentes Design: Schwarz/Gold mit weißem Glow-Effekt
+
+## Pending
+- [ ] Meta Pixel Integration für Landing Page
+- [ ] Text-Inhalte prüfen (User-Feedback ausstehend)

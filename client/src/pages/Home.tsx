@@ -36,92 +36,161 @@ const HeroSection = () => {
   const whatsappLink = "https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.%20Interesse%3A%20%5BFast%20Track%2FAuto%2FBeides%5D.%20Vorname%3A%20____";
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-10 pb-10">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      {/* Background - Black with radial white glow like presentation */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 1) 60%)'
+        }}
+      >
+        {/* Gold border frame with WHITE GLOW box-shadow */}
+        <div 
+          className="absolute inset-6 md:inset-10 lg:inset-14 border border-[#C9A86C]/60 rounded-xl"
+          style={{
+            boxShadow: '0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.5), 0 0 90px rgba(255, 255, 255, 0.4), 0 0 120px rgba(255, 255, 255, 0.3)'
+          }}
+        ></div>
+      </div>
+
       {/* 40 Jahre LR Logo - Top Right */}
-      <div className="absolute top-4 right-4 z-50">
+      <div className="absolute top-10 right-10 md:top-16 md:right-16 lg:top-20 lg:right-20 z-50">
         <img 
-          src="/images/lr-40-years-logo.jpg" 
+          src="/images/lr-40-years-black-bg.jpg" 
           alt="40 Jahre LR Success Story" 
-          className="w-24 h-auto md:w-32 lg:w-40 rounded-lg shadow-lg gold-glow"
+          className="w-14 h-auto md:w-16 lg:w-20 rounded-md"
         />
       </div>
-      
-      {/* Background Elements - Gold Particles */}
-      <div className="absolute inset-0 bg-background z-0 gold-particles">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#D4AF37]/15 via-background to-background opacity-80"></div>
-        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#D4AF37]/10 via-transparent to-transparent"></div>
-      </div>
 
-      <div className="container relative z-10 grid lg:grid-cols-2 gap-8 items-center max-w-6xl">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="space-y-6 text-center lg:text-left"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full gold-border text-xs font-bold font-mono mx-auto lg:mx-0 gold-glow">
-            <Zap className="w-3 h-3 text-[#D4AF37]" />
-            <span className="gold-gradient-text">40 JAHRE ERFOLGSGESCHICHTE</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight">
-            Starte dein LR-Business – <br />
-            <span className="gold-gradient-text">mit KI, System & Team.</span>
-          </h1>
-          
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0">
-            Hol dir das kostenlose WhatsApp-Info-Paket: Fast Track, Autokonzept & Lina-KI-Setup.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
-            <Button 
-              size="lg" 
-              className="gold-button text-lg px-8 h-14 rounded-xl w-full sm:w-auto" 
-              onClick={() => {
-                trackEvent('Contact');
-                window.open(whatsappLink, '_blank');
-              }}
-            >
-              <MessageCircle className="mr-2 w-6 h-6" />
-              Infos per WhatsApp
-            </Button>
-          </div>
-          
-<div className="flex flex-wrap justify-center lg:justify-start gap-3 text-xs text-muted-foreground pt-2">
-            <span className="flex items-center gap-1 gold-border px-3 py-1.5 rounded-full"><ShieldCheck className="w-3 h-3 text-[#D4AF37]" /> LR seit 1985</span>
-            <span className="flex items-center gap-1 gold-border px-3 py-1.5 rounded-full"><Info className="w-3 h-3 text-[#D4AF37]" /> Info-Paket kostenlos</span>
-            <span className="flex items-center gap-1 gold-border px-3 py-1.5 rounded-full"><ShieldCheck className="w-3 h-3 text-[#D4AF37]" /> DSGVO-konform</span>
-            <span className="flex items-center gap-1 gold-border px-3 py-1.5 rounded-full"><MessageCircle className="w-3 h-3 text-[#D4AF37]" /> Antwort meist &lt;24h</span>
-          </div>
-        </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative hidden lg:block"
-        >
-          <div className="relative rounded-2xl overflow-hidden gold-border shadow-2xl gold-glow aspect-[4/5] max-w-md mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent z-10"></div>
-            <img 
-              src="/images/hero-ai-lifestyle.png" 
-              alt="Entrepreneur with AI Interface" 
-              className="w-full h-full object-cover"
-            />
+      <div className="container relative z-10 max-w-5xl py-16 px-8 md:px-16 lg:px-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Text Content */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            className="space-y-8"
+          >
+            <div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+                <span className="gold-gradient-text">DEIN BUSINESS.</span>
+                <br />
+                <span className="gold-gradient-text">DEINE KI.</span>
+                <br />
+                <span className="gold-gradient-text">DEIN ERFOLG.</span>
+              </h1>
+            </div>
             
-            {/* Floating UI Element */}
-            <div className="absolute bottom-8 left-8 right-8 z-20 bg-background/80 backdrop-blur-md gold-border p-4 rounded-xl gold-glow">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#D4AF37]/20 flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-[#D4AF37]" />
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <Zap className="w-3 h-3 text-black" />
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Status</p>
-                  <p className="font-bold gold-gradient-text text-sm">Fast Track Active*</p>
+                <p className="text-white/90"><span className="gold-gradient-text font-semibold">Erfolgreichsten Monate</span> seit 40 Jahren!</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <Users className="w-3 h-3 text-black" />
+                </div>
+                <p className="text-white/90">Über <span className="gold-gradient-text font-semibold">18.000 neue Karrieren</span> in 2024</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <TrendingUp className="w-3 h-3 text-black" />
+                </div>
+                <p className="text-white/90"><span className="gold-gradient-text font-semibold">10.635 neue Junior Manager</span></p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <ArrowRight className="w-3 h-3 text-black" />
+                </div>
+                <p className="text-white/90">Der beste Zeitpunkt ist <span className="gold-gradient-text font-bold">JETZT</span></p>
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <Button 
+                size="lg" 
+                className="gold-button text-base md:text-lg px-8 h-14 rounded-lg" 
+                onClick={() => {
+                  trackEvent('Contact');
+                  window.open(whatsappLink, '_blank');
+                }}
+              >
+                <MessageCircle className="mr-2 w-5 h-5" />
+                Jetzt durchstarten
+              </Button>
+              <p className="text-xs text-white/50 mt-3">Kostenloses Info-Paket per WhatsApp</p>
+            </div>
+          </motion.div>
+
+          {/* Right Side - Stats Card */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="hidden lg:block"
+          >
+            <div className="relative p-8 rounded-2xl bg-[#0a0a0a]/80 backdrop-blur-sm animate-float shadow-[0_0_30px_rgba(255,255,255,0.5),0_0_60px_rgba(255,255,255,0.3),0_0_90px_rgba(255,255,255,0.2)]">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="text-center p-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/20 to-transparent border border-white/20">
+                  <p className="text-2xl font-bold gold-gradient-text">300€</p>
+                  <p className="text-xs text-white/60 mt-1">Stufe 1*</p>
+                </div>
+                <div className="text-center p-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/30 to-transparent border border-white/20">
+                  <p className="text-2xl font-bold gold-gradient-text">1.100€</p>
+                  <p className="text-xs text-white/60 mt-1">Stufe 2*</p>
+                </div>
+                <div className="text-center p-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/40 to-transparent border border-white/20">
+                  <p className="text-2xl font-bold gold-gradient-text">2.000€</p>
+                  <p className="text-xs text-white/60 mt-1">Stufe 3*</p>
+                </div>
+              </div>
+              
+              <div className="text-center mb-6">
+                <p className="text-lg font-semibold gold-gradient-text">Fast Track Bonus*</p>
+                <p className="text-xs text-white/50 mt-1">*Bei Erreichen der Programmbedingungen</p>
+              </div>
+
+              {/* Features */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-[#C9A86C]/10 border border-white/15">
+                  <Car className="w-5 h-5 text-[#C9A86C]" />
+                  <span className="text-sm text-white/80">Autokonzept verfügbar*</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-[#C9A86C]/10 border border-white/15">
+                  <Smartphone className="w-5 h-5 text-[#C9A86C]" />
+                  <span className="text-sm text-white/80">LINA KI-Support inklusive</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-[#C9A86C]/10 border border-white/15">
+                  <Users className="w-5 h-5 text-[#C9A86C]" />
+                  <span className="text-sm text-white/80">Team & System Ready</span>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
+        </div>
+
+        {/* Trust Badges */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex flex-wrap justify-center gap-4 mt-12 pt-8 "
+        >
+          <span className="flex items-center gap-2 text-xs text-white/60 px-4 py-2 rounded-full border border-white/20">
+            <ShieldCheck className="w-4 h-4 text-[#C9A86C]" /> LR seit 1985
+          </span>
+          <span className="flex items-center gap-2 text-xs text-white/60 px-4 py-2 rounded-full border border-white/20">
+            <Info className="w-4 h-4 text-[#C9A86C]" /> Info-Paket kostenlos
+          </span>
+          <span className="flex items-center gap-2 text-xs text-white/60 px-4 py-2 rounded-full border border-white/20">
+            <ShieldCheck className="w-4 h-4 text-[#C9A86C]" /> DSGVO-konform
+          </span>
+          <span className="flex items-center gap-2 text-xs text-white/60 px-4 py-2 rounded-full border border-white/20">
+            <MessageCircle className="w-4 h-4 text-[#C9A86C]" /> Antwort &lt;24h
+          </span>
         </motion.div>
       </div>
     </section>
@@ -137,15 +206,15 @@ const WhatIsLRSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-card/30 border-y border-[#D4AF37]/10">
+    <section className="py-12 section-glow ">
       <div className="container max-w-3xl">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold font-poppins"><span className="gold-gradient-text">Was ist LR in 20 Sekunden?</span></h2>
         </div>
         <div className="grid md:grid-cols-2 gap-4">
           {points.map((point, i) => (
-            <div key={i} className="flex items-start gap-3 bg-background/50 p-4 rounded-lg gold-border">
-              <CheckCircle2 className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+            <div key={i} className="flex items-start gap-3 bg-black/80 p-4 rounded-lg white-glow border border-white/10">
+              <CheckCircle2 className="w-5 h-5 text-[#C9A86C] shrink-0 mt-0.5" />
               <p className="text-sm text-muted-foreground">{point}</p>
             </div>
           ))}
@@ -196,7 +265,7 @@ const SocialProofSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-card/30 border-y border-[#D4AF37]/10">
+    <section className="py-16 section-glow ">
       <div className="container max-w-6xl">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Echte Menschen. Echte Umsetzung.</span></h2>
@@ -205,14 +274,14 @@ const SocialProofSection = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <Card key={i} className="bg-background/40 gold-border hover:gold-glow transition-all backdrop-blur-sm">
+            <Card key={i} className="bg-black/80 white-glow transition-all backdrop-blur-sm border border-white/10">
               <CardContent className="p-6 relative">
-                <div className="absolute top-4 right-4 px-2 py-1 bg-[#D4AF37]/10 rounded text-[10px] font-mono text-[#D4AF37] uppercase tracking-wider">
+                <div className="absolute top-4 right-4 px-2 py-1 bg-[#C9A86C]/10 rounded text-[10px] font-mono text-[#C9A86C] uppercase tracking-wider">
                   {t.badge}
                 </div>
                 <p className="text-sm italic text-muted-foreground mb-4 leading-relaxed">"{t.quote}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37]/30 to-[#B8860B]/20 flex items-center justify-center text-xs font-bold text-[#D4AF37]">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C9A86C]/30 to-[#C9A86C]/20 flex items-center justify-center text-xs font-bold text-[#C9A86C]">
                     {t.author.charAt(0)}
                   </div>
                   <div>
@@ -306,7 +375,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-16">
+    <section className="py-16 section-glow">
       <div className="container max-w-3xl">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Häufige Fragen & Antworten</span></h2>
@@ -315,8 +384,8 @@ const FAQSection = () => {
         
         <Accordion type="single" collapsible className="w-full space-y-2">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="gold-border bg-card/20 rounded-lg px-4">
-              <AccordionTrigger className="text-sm font-medium hover:text-[#D4AF37] text-left">
+            <AccordionItem key={i} value={`item-${i}`} className="bg-black/80 rounded-lg px-4 white-glow border border-white/10">
+              <AccordionTrigger className="text-sm font-medium hover:text-[#C9A86C] text-left">
                 {faq.q}
               </AccordionTrigger>
               <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
@@ -332,16 +401,16 @@ const FAQSection = () => {
 
 const FastTrackSection = () => {
   return (
-    <section className="py-16">
+    <section className="py-16 section-glow">
       <div className="container max-w-4xl">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Fast Track Card */}
-          <Card className="bg-gradient-to-br from-background to-[#D4AF37]/5 gold-border shadow-lg relative overflow-hidden gold-glow">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/10 rounded-bl-full -mr-10 -mt-10"></div>
+          <Card className="bg-black/80 shadow-lg relative overflow-hidden card-glow white-glow border border-white/10">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-[#C9A86C]/10 rounded-bl-full -mr-10 -mt-10"></div>
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-[#D4AF37]/20 flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-[#D4AF37]" />
+                <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-[#C9A86C]" />
                 </div>
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Fast Track Bonus*</h3>
               </div>
@@ -352,11 +421,11 @@ const FastTrackSection = () => {
                 </div>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2">
-                    <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
+                    <ArrowRight className="w-4 h-4 text-[#C9A86C]" />
                     Klarer Startplan (was wann zu tun ist)
                   </li>
                   <li className="flex items-center gap-2">
-                    <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
+                    <ArrowRight className="w-4 h-4 text-[#C9A86C]" />
                     WhatsApp-Check: Welche Stufe passt zu dir?
                   </li>
                 </ul>
@@ -368,12 +437,12 @@ const FastTrackSection = () => {
           </Card>
 
           {/* Autokonzept Card */}
-          <Card className="bg-gradient-to-br from-background to-[#B8860B]/5 gold-border shadow-lg relative overflow-hidden gold-glow">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-[#B8860B]/10 rounded-bl-full -mr-10 -mt-10"></div>
+          <Card className="bg-black/80 shadow-lg relative overflow-hidden card-glow white-glow border border-white/10">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-[#C9A86C]/10 rounded-bl-full -mr-10 -mt-10"></div>
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-[#B8860B]/20 flex items-center justify-center">
-                  <Car className="w-5 h-5 text-[#D4AF37]" />
+                <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
+                  <Car className="w-5 h-5 text-[#C9A86C]" />
                 </div>
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Autokonzept*</h3>
               </div>
@@ -381,15 +450,15 @@ const FastTrackSection = () => {
               <div className="space-y-4 mb-6">
                 <ul className="space-y-3 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
                     Dienst-/Firmenwagenmodell über Partnerkonditionen*
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
                     Je nach Stufe kann ein monatlicher Zuschuss möglich sein*
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#C9A86C] shrink-0 mt-0.5" />
                     Du bekommst die Übersicht: Voraussetzungen, Modelle, Ablauf
                   </li>
                 </ul>
@@ -410,27 +479,27 @@ const LinaSection = () => {
     {
       title: "Wissen & Coaching",
       desc: "Umfassendes LR-Wissen und persönliches Coaching – Lina kennt jeden Karriereplan, jedes Produkt und jeden Einwand. Sie coacht dich wie ein erfahrener Mentor.",
-      icon: <Users className="w-5 h-5 text-[#D4AF37]" />
+      icon: <Users className="w-5 h-5 text-[#C9A86C]" />
     },
     {
       title: "Vertrieb & WhatsApp",
       desc: "Automatisierte Kundenbetreuung, FAQ-Bot, Follow-up-Erinnerungen, Lead-Qualifizierung.",
-      icon: <MessageCircle className="w-5 h-5 text-[#D4AF37]" />
+      icon: <MessageCircle className="w-5 h-5 text-[#C9A86C]" />
     },
     {
       title: "Social Media",
       desc: "Content-Vorlagen für Reels, Posts und Stories. Hashtag-Vorschläge, Posting-Zeiten, Trend-Analyse.",
-      icon: <Smartphone className="w-5 h-5 text-[#D4AF37]" />
+      icon: <Smartphone className="w-5 h-5 text-[#C9A86C]" />
     },
     {
       title: "24/7 Verfügbar",
       desc: "Immer für dich da – auch nachts und am Wochenende. Perfekt für Nebenbei-Starter.",
-      icon: <Zap className="w-5 h-5 text-[#D4AF37]" />
+      icon: <Zap className="w-5 h-5 text-[#C9A86C]" />
     }
   ];
 
   return (
-    <section className="py-16 bg-card/30 border-y border-[#D4AF37]/10">
+    <section className="py-16 section-glow ">
       <div className="container max-w-4xl">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – deine vollumfängliche Business-Partnerin</span></h2>
@@ -439,9 +508,9 @@ const LinaSection = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {features.map((f, i) => (
-            <Card key={i} className="bg-background/40 gold-border hover:gold-glow transition-all text-center">
+            <Card key={i} className="bg-black/80 white-glow transition-all text-center border border-white/10">
               <CardContent className="p-6 flex flex-col items-center">
-                <div className="w-10 h-10 rounded-full bg-[#D4AF37]/10 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-[#C9A86C]/10 flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
                 <h3 className="font-bold mb-2 text-sm gold-gradient-text">{f.title}</h3>
@@ -509,7 +578,7 @@ const FinalCTASection = () => {
         </div>
 
         <Card className="bg-card gold-border shadow-lg overflow-hidden max-w-md mx-auto gold-glow">
-          <div className="p-6 bg-[#D4AF37]/5 border-b border-[#D4AF37]/20">
+          <div className="p-6 bg-[#C9A86C]/5 ">
             <h3 className="font-bold text-center gold-gradient-text">Kein WhatsApp?</h3>
             <p className="text-xs text-center text-muted-foreground">Nutze das 20-Sekunden-Formular</p>
           </div>
@@ -602,12 +671,12 @@ const FinalCTASection = () => {
 
 const Footer = () => {
   return (
-    <footer className="py-8 border-t border-[#D4AF37]/20 bg-background text-[10px] text-muted-foreground text-center">
+    <footer className="py-8  bg-background text-[10px] text-muted-foreground text-center">
       <div className="container space-y-4 max-w-4xl">
         <p>*Details zu Voraussetzungen, Fast Track Bonus und Autokonzept im kostenlosen Info-Paket. Keine Erfolgsgarantie; Ergebnisse hängen von individuellem Einsatz ab.</p>
         <div className="flex justify-center gap-6 text-xs">
-          <a href="/impressum" className="hover:text-[#D4AF37] transition-colors">Impressum</a>
-          <a href="/datenschutz" className="hover:text-[#D4AF37] transition-colors">Datenschutz</a>
+          <a href="/impressum" className="hover:text-[#C9A86C] transition-colors">Impressum</a>
+          <a href="/datenschutz" className="hover:text-[#C9A86C] transition-colors">Datenschutz</a>
         </div>
         <p className="opacity-50">© 2025 LR Lifestyle AI</p>
       </div>
@@ -633,7 +702,7 @@ export default function Home() {
       <Footer />
       
       {/* Sticky WhatsApp Button for Mobile */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/90 backdrop-blur-lg border-t border-[#D4AF37]/30 md:hidden z-50">
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/90 backdrop-blur-lg border-t border-[#C9A86C]/30 md:hidden z-50">
         <Button 
           className="w-full gold-button font-bold h-12 rounded-xl"
           onClick={() => {
