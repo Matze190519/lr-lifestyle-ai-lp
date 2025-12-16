@@ -105,3 +105,8 @@
 - [x] Autokonzept Bild (Audi Q8) hinzugefügt
 
 - [x] Einheitlicher weißer Glow auf ALLE Karten (WhatIsLR, Fast Track, Autokonzept, LINA, Testimonials, FAQ)
+
+
+## Phase 14 - Autokonzept Bild Fix
+- [x] Falsches Autokonzept-Bild entfernt
+- [x] Passendes Auto-Bild (Audi S5 Avant schwarz) gefunden und eingefügt

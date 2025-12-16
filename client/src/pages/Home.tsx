@@ -460,7 +460,7 @@ const FastTrackSection = () => {
               
               {/* Bild von Präsentation - Audi */}
               <div className="mb-4 rounded-lg overflow-hidden">
-                <img src="/images/autokonzept-audi.png" alt="LR Autokonzept - Audi" className="w-full h-auto" />
+                <img src="/images/autokonzept-audi.jpg" alt="LR Autokonzept - Audi S5 Avant" className="w-full h-auto rounded-lg" />
               </div>
               
               <div className="space-y-4 mb-4">
