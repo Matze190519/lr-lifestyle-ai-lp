@@ -629,6 +629,13 @@ const FinalCTASection = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     trackEvent('Lead');
+    // Meta Pixel Lead Event
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Lead', {
+        content_name: 'LR Info-Paket Anfrage',
+        content_category: values.interest || 'Allgemein',
+      });
+    }
     toast.success("Anfrage gesendet!", {
       description: "Wir melden uns in Kürze bei dir.",
     });
@@ -647,6 +654,13 @@ const FinalCTASection = () => {
             className="gold-button text-lg px-10 h-16 rounded-xl w-full md:w-auto mb-8" 
             onClick={() => {
               trackEvent('Contact');
+              // Meta Pixel Lead Event for WhatsApp
+              if (typeof window !== 'undefined' && (window as any).fbq) {
+                (window as any).fbq('track', 'Lead', {
+                  content_name: 'WhatsApp Kontakt',
+                  content_category: 'WhatsApp',
+                });
+              }
               window.open(whatsappLink, '_blank');
             }}
           >
