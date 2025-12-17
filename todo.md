@@ -238,3 +238,8 @@
 - [x] Farben an Landing Page anpassen (schwarz/gold)
 - [x] Routing für About-Seite in App.tsx (/about und /ueber-uns)
 - [ ] Mathias Bild - User ändert es selbst
+
+## Phase 29 - Mathias Bild
+- [x] Mathias Bild vom User erhalten
+- [x] Bild in /client/public/images/mathias.png kopiert
+- [x] About-Seite aktualisiert mit neuem Bildpfad

@@ -119,7 +119,7 @@ const About = () => {
             <div className="md:col-span-1">
               <div className="aspect-square rounded-xl bg-gradient-to-br from-[#C9A86C]/20 to-black border border-[#C9A86C]/30 flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/images/mathias-placeholder.jpg" 
+                  src="/images/mathias.png" 
                   alt="Mathias Vinzing" 
                   className="w-full h-full object-cover"
                   onError={(e) => {
