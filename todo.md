@@ -219,3 +219,11 @@
   - [x] Trust Badges unten
 - [x] Gold-Gradient zurückgebracht (inline styles für Mobile)
 - [x] Kein Leerraum, professionelle Struktur
+
+
+## Phase 27 - Mobile Layout Lücken beheben
+- [x] Große schwarze Lücke zwischen Header und Headline entfernen
+- [x] Große schwarze Lücke zwischen Buttons und Trust Badges entfernen
+- [x] flex-1 justify-center durch kompakte Struktur ersetzen
+- [x] min-h-screen nur auf Desktop (md:min-h-[90vh])
+- [x] Alle Elemente eng zusammen ohne Leerraum

@@ -36,7 +36,7 @@ const HeroSection = () => {
   const whatsappLink = "https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.%20Interesse%3A%20%5BFast%20Track%2FAuto%2FBeides%5D.%20Vorname%3A%20____";
 
   return (
-    <section className="relative min-h-screen md:min-h-[90vh] flex items-center overflow-hidden bg-black">
+    <section className="relative md:min-h-[90vh] md:flex md:items-center overflow-hidden bg-black">
       {/* Background - Black with radial white glow - nur auf Desktop */}
       <div 
         className="absolute inset-0 z-0 hidden md:block"
@@ -62,8 +62,8 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* MOBILE LAYOUT - Nach Best Practices */}
-      <div className="md:hidden w-full min-h-screen flex flex-col">
+      {/* MOBILE LAYOUT - Kompakt ohne Lücken */}
+      <div className="md:hidden w-full">
         {/* Sticky Promo Banner */}
         <div 
           className="w-full py-2 px-4 text-center text-xs font-medium"
@@ -82,8 +82,8 @@ const HeroSection = () => {
           <span className="text-[11px] text-[#C9A86C] font-medium">Deutsches Unternehmen seit 1985</span>
         </div>
 
-        {/* Hero Content */}
-        <div className="flex-1 flex flex-col justify-center px-5 py-6">
+        {/* Hero Content - Kompakt */}
+        <div className="px-5 pt-6 pb-4">
           {/* Headline mit Gold-Gradient */}
           <h1 className="text-2xl font-bold mb-3 leading-tight">
             <span style={{ background: 'linear-gradient(135deg, #C9A86C 0%, #E8D5A3 50%, #C9A86C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Dein Weg zur</span>
@@ -92,12 +92,12 @@ const HeroSection = () => {
           </h1>
 
           {/* Sub-Headline */}
-          <p className="text-white/90 text-sm mb-5 leading-relaxed">
+          <p className="text-white/90 text-sm mb-4 leading-relaxed">
             Starte mit LR + KI-Coach Lina. <strong className="text-[#C9A86C]">Bis zu 2.000€/Monat</strong> garantierter Bonus.*
           </p>
 
           {/* 3 Benefits - Kompakt */}
-          <div className="space-y-2 mb-5">
+          <div className="space-y-2 mb-4">
             <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-[#C9A86C]/30">
               <TrendingUp className="w-4 h-4 text-[#C9A86C] shrink-0" />
               <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">300€ - 2.000€</strong> monatlicher Bonus</span>
@@ -142,7 +142,7 @@ const HeroSection = () => {
           <p className="text-[9px] text-white/40 mt-3 text-center">*Bei Erreichen der Programmbedingungen. Details im Info-Paket.</p>
         </div>
 
-        {/* Trust Badges - Unten */}
+        {/* Trust Badges */}
         <div className="px-4 pb-4">
           <div className="flex justify-center gap-4 text-[10px] text-white/50">
             <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> DSGVO</span>
