@@ -160,3 +160,10 @@
 
 - [x] Embedded Chat implementieren mit Client ID 32dfe644-9e09-4072-bd72-34340d56cb7b
 - [x] Chat funktioniert jetzt! Embedded Mode löst das Allowed Origins Problem
+
+
+## Phase 21 - UX Optimierungen
+- [x] Kontaktformular höher positioniert (nach 6 Gründe, vor Fast Track)
+- [x] Texte gekürzt - Matthias Story kompakter
+- [x] Mobile Hero optimiert - min-height 70vh statt 90vh, weniger Padding
+- [x] Lina Chat Auto-Open deaktiviert - Chat versteckt initial, Toggle-Button hinzugefügt

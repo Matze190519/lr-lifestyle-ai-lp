@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useEffect } from "react";
-import LinaChatbot from "@/components/LinaChatbot";
+
 
 // --- Schema & Types ---
 const formSchema = z.object({
@@ -36,7 +36,7 @@ const HeroSection = () => {
   const whatsappLink = "https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.%20Interesse%3A%20%5BFast%20Track%2FAuto%2FBeides%5D.%20Vorname%3A%20____";
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center overflow-hidden">
       {/* Background - Black with radial white glow like presentation */}
       <div 
         className="absolute inset-0 z-0"
@@ -62,7 +62,7 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container relative z-10 max-w-5xl py-16 px-8 md:px-16 lg:px-20">
+      <div className="container relative z-10 max-w-5xl py-8 md:py-16 px-6 md:px-16 lg:px-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Text Content */}
           <motion.div 
@@ -81,7 +81,7 @@ const HeroSection = () => {
                 <span className="gold-gradient-text">monatlicher Bonus</span>
               </h1>
               <p className="text-sm text-white/70 leading-relaxed">
-                Matthias war Dachdecker – heute ist er <strong className="text-white">Platin-Organleiter</strong>. Nach nur einem Jahr: <strong className="text-white">5.000 € passives Einkommen</strong>. Heute? <strong className="gold-gradient-text">Ein Vielfaches davon.</strong> Mit seinem erprobten System und deinem persönlichen KI-Coach Lina zeigt er dir, wie auch du das schaffen kannst.
+                Matthias: <strong className="text-white">Nach 1 Jahr 5.000€/Monat</strong>. Heute? <strong className="gold-gradient-text">Ein Vielfaches.</strong> Mit seinem System + KI-Coach Lina schaffst du das auch.
               </p>
             </div>
             
@@ -788,15 +788,15 @@ export default function Home() {
     trackEvent('PageView');
   }, []);  return (
     <div className="min-h-screen bg-background text-foreground font-sans">
-      <LinaChatbot />
+
       <div className="selection:bg-primary/30 pb-20 md:pb-0">
       <HeroSection />
       <WhatIsLRSection />
+      <FinalCTASection />
       <FastTrackSection />
       <LinaSection />
       <SocialProofSection />
       <FAQSection />
-      <FinalCTASection />
       <Footer />
       
       {/* Sticky WhatsApp Button for Mobile */}

@@ -41,7 +41,7 @@
       data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
     
     <!-- Botpress Embedded Webchat v3.4 -->
-    <div id="bp-embedded-webchat" style="position: fixed; bottom: 20px; right: 20px; width: 400px; height: 600px; z-index: 9999; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3);"></div>
+    <div id="bp-embedded-webchat" style="position: fixed; bottom: 20px; right: 20px; width: 400px; height: 600px; z-index: 9999; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); display: none;"></div>
     <script src="https://cdn.botpress.cloud/webchat/v3.4/inject.js"></script>
     <script>
       window.addEventListener('load', function() {
@@ -59,6 +59,21 @@
             "embeddedChatId": "bp-embedded-webchat"
           }
         });
+        
+        // Füge einen Toggle-Button hinzu
+        const toggleBtn = document.createElement('button');
+        toggleBtn.innerHTML = '💬 Chat mit Lina';
+        toggleBtn.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 10000; background: linear-gradient(135deg, #C9A86C 0%, #8B7355 100%); color: white; border: none; padding: 16px 24px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 20px rgba(201, 168, 108, 0.4); transition: all 0.3s;';
+        toggleBtn.onmouseover = () => toggleBtn.style.transform = 'scale(1.05)';
+        toggleBtn.onmouseout = () => toggleBtn.style.transform = 'scale(1)';
+        toggleBtn.onclick = () => {
+          const chatDiv = document.getElementById('bp-embedded-webchat');
+          if (chatDiv.style.display === 'none') {
+            chatDiv.style.display = 'block';
+            toggleBtn.style.display = 'none';
+          }
+        };
+        document.body.appendChild(toggleBtn);
       });
     </script>
   </body>
