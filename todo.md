@@ -227,3 +227,14 @@
 - [x] flex-1 justify-center durch kompakte Struktur ersetzen
 - [x] min-h-screen nur auf Desktop (md:min-h-[90vh])
 - [x] Alle Elemente eng zusammen ohne Leerraum
+
+
+## Phase 28 - Lina-Texte & About-Seite
+- [x] Lina-Texte erweitern: Bilder, Texte, Videos erstellen
+- [x] Lina-Texte erweitern: Live-Telefonieren Feature
+- [x] Lina Section Headline geändert: "Lina – Deine KI-Assistentin"
+- [x] Benefits Section Lina-Text aktualisiert (keine Dopplung mehr)
+- [x] About-Seite von lrlifestyle.pro/about übernehmen
+- [x] Farben an Landing Page anpassen (schwarz/gold)
+- [x] Routing für About-Seite in App.tsx (/about und /ueber-uns)
+- [ ] Mathias Bild - User ändert es selbst

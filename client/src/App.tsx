@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import ThankYou from "./pages/ThankYou";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
+import About from "./pages/About";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -17,6 +18,8 @@ function Router() {
       <Route path={"/danke"} component={ThankYou} />
       <Route path={"/impressum"} component={Impressum} />
       <Route path={"/datenschutz"} component={Datenschutz} />
+      <Route path={"/about"} component={About} />
+      <Route path={"/ueber-uns"} component={About} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

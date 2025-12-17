@@ -304,8 +304,8 @@ const WhatIsLRSection = () => {
       desc: "Das Fast Track Programm zahlt dir 12 Monate lang einen garantierten Mindestbonus: 300€, 1.100€ oder 2.000€ monatlich – zusätzlich zu deiner Handelsspanne. Bis zu 24.000€ im ersten Jahr!"
     },
     {
-      title: "Lina – Dein unfairer Vorteil",
-      desc: "Während andere alleine kämpfen, hast du einen KI-Coach, der 24/7 für dich arbeitet: WhatsApp-Vorlagen, Social Media Content, Live-Coaching – alles auf Knopfdruck."
+      title: "Lina – Deine KI-Assistentin",
+      desc: "Lina erstellt dir Bilder, Texte und Videos – und kann sogar für dich telefonieren. 24/7 verfügbar, nie genervt, immer bereit."
     },
     {
       title: "Firmenwagen? Ab Tag 1 möglich",
@@ -657,24 +657,24 @@ const FastTrackSection = () => {
 const LinaSection = () => {
   const features = [
     {
-      title: "Dein Wissens-Turbo",
-      desc: "Lina kennt ALLES über LR: Produkte, Karrierepläne, Einwandbehandlung. Sie coacht dich wie ein Mentor mit 20 Jahren Erfahrung – nur schneller.",
-      icon: <Users className="w-5 h-5 text-[#C9A86C]" />
-    },
-    {
-      title: "Vertrieb auf Autopilot",
-      desc: "Fertige WhatsApp-Vorlagen, automatische Follow-ups, Lead-Qualifizierung. Lina macht die Arbeit – du erntest die Ergebnisse.",
-      icon: <MessageCircle className="w-5 h-5 text-[#C9A86C]" />
-    },
-    {
-      title: "Content-Maschine",
-      desc: "Reels, Posts, Stories – auf Knopfdruck. Hashtags, beste Posting-Zeiten, Trend-Analyse. Dein Social Media läuft wie von selbst.",
+      title: "Bilder & Videos",
+      desc: "Lina erstellt dir professionelle Bilder, Videos und Reels für Social Media – auf Knopfdruck. Kein Grafikdesigner nötig.",
       icon: <Smartphone className="w-5 h-5 text-[#C9A86C]" />
     },
     {
-      title: "24/7 – Immer da",
-      desc: "Nachts um 2 eine Frage? Lina antwortet. Sonntag eine Idee? Lina hilft. Perfekt für alle, die nebenbei starten.",
+      title: "Texte & Vorlagen",
+      desc: "Fertige WhatsApp-Nachrichten, Posts, Stories und Verkaufstexte. Lina schreibt – du kopierst und sendest.",
+      icon: <MessageCircle className="w-5 h-5 text-[#C9A86C]" />
+    },
+    {
+      title: "Live-Telefonieren",
+      desc: "Lina kann für dich telefonieren! Sie führt Gespräche mit Interessenten, beantwortet Fragen und qualifiziert Leads.",
       icon: <Zap className="w-5 h-5 text-[#C9A86C]" />
+    },
+    {
+      title: "24/7 Coaching",
+      desc: "Produktwissen, Karrierepläne, Einwandbehandlung – Lina coacht dich wie ein Mentor mit 20 Jahren Erfahrung. Rund um die Uhr.",
+      icon: <Users className="w-5 h-5 text-[#C9A86C]" />
     }
   ];
 
@@ -682,8 +682,8 @@ const LinaSection = () => {
     <section className="py-16 section-glow ">
       <div className="container max-w-4xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – Dein unfairer Vorteil</span></h2>
-          <p className="text-sm text-muted-foreground">Während andere alleine kämpfen, hast du eine KI, die für dich arbeitet.</p>
+          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – Deine KI-Assistentin</span></h2>
+          <p className="text-sm text-muted-foreground">Sie erstellt Bilder, Texte, Videos – und kann sogar für dich telefonieren.</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -701,7 +701,7 @@ const LinaSection = () => {
         </div>
         
         <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto">
-          <strong className="text-white">Stell dir vor:</strong> Du hast einen erfahrenen Mentor, der nie schläft, nie genervt ist und immer die perfekte Antwort hat. Das ist Lina. <strong className="gold-gradient-text">Dein unfairer Vorteil gegenüber allen, die noch ohne KI arbeiten.</strong>
+          <strong className="text-white">Stell dir vor:</strong> Eine KI, die nie schläft, nie genervt ist und dir Bilder, Texte und Videos erstellt – oder sogar für dich telefoniert. <strong className="gold-gradient-text">Das ist Lina.</strong>
         </p>
       </div>
     </section>
