@@ -197,3 +197,12 @@
 - [x] Nur kurzer Text auf Mobile: "Starte dein eigenes Business mit LR + KI-Coach Lina"
 - [x] Bullet Points nur auf Desktop
 - [x] Kompaktes, sauberes Layout auf Mobile
+
+
+## Phase 25 - Mobile Hero RICHTIG machen
+- [x] Komplett separates Mobile Layout erstellt
+- [x] Header mit Logo + "Deutsches Unternehmen seit 1985"
+- [x] Klare Headline ohne Leerraum
+- [x] 3 Key Points als kompakte Icons (Bonus, KI-Coach, Firmenwagen)
+- [x] Button normale Größe (h-12 statt h-14/h-16)
+- [x] Kein verschwendeter Platz, professionelle Struktur

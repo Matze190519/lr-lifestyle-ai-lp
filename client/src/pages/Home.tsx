@@ -36,17 +36,17 @@ const HeroSection = () => {
   const whatsappLink = "https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.%20Interesse%3A%20%5BFast%20Track%2FAuto%2FBeides%5D.%20Vorname%3A%20____";
 
   return (
-    <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background - Black with radial white glow like presentation */}
+    <section className="relative min-h-screen md:min-h-[90vh] flex items-center overflow-hidden bg-black">
+      {/* Background - Black with radial white glow - nur auf Desktop */}
       <div 
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 hidden md:block"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 1) 60%)'
         }}
       >
         {/* Gold border frame with WHITE GLOW box-shadow */}
         <div 
-          className="absolute inset-6 md:inset-10 lg:inset-14 border border-[#C9A86C]/60 rounded-xl"
+          className="absolute inset-10 lg:inset-14 border border-[#C9A86C]/60 rounded-xl"
           style={{
             boxShadow: '0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.5), 0 0 90px rgba(255, 255, 255, 0.4), 0 0 120px rgba(255, 255, 255, 0.3)'
           }}
@@ -62,42 +62,89 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container relative z-10 max-w-5xl py-6 md:py-16 px-6 md:px-16 lg:px-20">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+      {/* MOBILE LAYOUT */}
+      <div className="md:hidden w-full px-4 py-8">
+        {/* Mobile Header mit Logo */}
+        <div className="flex items-center justify-between mb-6">
+          <img 
+            src="/images/lr-40-years-black-bg.jpg" 
+            alt="40 Jahre LR" 
+            className="w-12 h-auto rounded"
+          />
+          <span className="text-xs text-[#C9A86C] font-medium">Deutsches Unternehmen seit 1985</span>
+        </div>
+
+        {/* Mobile Headline */}
+        <h1 className="text-3xl font-bold mb-4">
+          <span className="gold-gradient-text">Bis zu 2.000€</span>
+          <br />
+          <span className="text-white">monatlicher Bonus*</span>
+        </h1>
+
+        {/* Mobile Subtext */}
+        <p className="text-white/70 text-sm mb-6">
+          Starte dein eigenes Business mit LR + KI-Coach Lina.
+        </p>
+
+        {/* Mobile 3 Key Points */}
+        <div className="grid grid-cols-3 gap-2 mb-6">
+          <div className="text-center p-3 rounded-lg bg-[#C9A86C]/10 border border-[#C9A86C]/30">
+            <TrendingUp className="w-5 h-5 text-[#C9A86C] mx-auto mb-1" />
+            <p className="text-xs text-white/80">Bonus</p>
+          </div>
+          <div className="text-center p-3 rounded-lg bg-[#C9A86C]/10 border border-[#C9A86C]/30">
+            <Smartphone className="w-5 h-5 text-[#C9A86C] mx-auto mb-1" />
+            <p className="text-xs text-white/80">KI-Coach</p>
+          </div>
+          <div className="text-center p-3 rounded-lg bg-[#C9A86C]/10 border border-[#C9A86C]/30">
+            <Car className="w-5 h-5 text-[#C9A86C] mx-auto mb-1" />
+            <p className="text-xs text-white/80">Firmenwagen</p>
+          </div>
+        </div>
+
+        {/* Mobile CTA Button - normale Größe */}
+        <Button 
+          className="w-full h-12 rounded-lg font-semibold text-base" 
+          style={{
+            background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+            color: 'white'
+          }}
+          onClick={() => {
+            trackEvent('Contact');
+            window.open(whatsappLink, '_blank');
+          }}
+        >
+          <MessageCircle className="mr-2 w-5 h-5" />
+          Kostenlose Infos per WhatsApp
+        </Button>
+        <p className="text-[10px] text-white/40 mt-2 text-center">*Bei Erreichen der Programmbedingungen</p>
+      </div>
+
+      {/* DESKTOP LAYOUT */}
+      <div className="container relative z-10 max-w-5xl py-16 px-16 lg:px-20 hidden md:block">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Text Content */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            className="space-y-6 md:space-y-8"
+            className="space-y-8"
           >
-            {/* Mobile: Logo + Headline zusammen */}
-            <div className="flex items-start justify-between md:block">
-              <div className="flex-1">
-                {/* Desktop: kleiner Text */}
-                <p className="hidden md:block text-sm text-[#C9A86C] uppercase tracking-wider mb-2 font-medium">Bist du es leid, für fremde Träume zu arbeiten?</p>
-                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-                  <span className="gold-gradient-text">Bis zu 2.000€</span>
-                  <br />
-                  <span className="text-white">monatlicher Bonus*</span>
-                </h1>
-              </div>
-              {/* Mobile: Logo rechts neben Headline */}
-              <img 
-                src="/images/lr-40-years-black-bg.jpg" 
-                alt="40 Jahre LR" 
-                className="w-16 h-auto rounded-md ml-4 md:hidden"
-              />
+            <div>
+              <p className="text-sm text-[#C9A86C] uppercase tracking-wider mb-2 font-medium">Bist du es leid, für fremde Träume zu arbeiten?</p>
+              <h1 className="text-3xl lg:text-4xl font-bold leading-tight">
+                <span className="gold-gradient-text">Bis zu 2.000€</span>
+                <br />
+                <span className="text-white">monatlicher Bonus*</span>
+              </h1>
             </div>
             
-            {/* Mobile: Nur kurzer Text */}
-            <p className="text-base md:text-sm text-white/80 leading-relaxed">
-              <span className="md:hidden">Starte dein eigenes Business mit LR + KI-Coach Lina.</span>
-              <span className="hidden md:inline">Matthias: <strong className="text-white">Nach 1 Jahr 5.000€/Monat</strong>. Heute? <strong className="gold-gradient-text">Ein Vielfaches.</strong> Mit seinem System + KI-Coach Lina schaffst du das auch.</span>
+            <p className="text-sm text-white/80 leading-relaxed">
+              Matthias: <strong className="text-white">Nach 1 Jahr 5.000€/Monat</strong>. Heute? <strong className="gold-gradient-text">Ein Vielfaches.</strong> Mit seinem System + KI-Coach Lina schaffst du das auch.
             </p>
             
-            {/* Bullet Points - nur auf Desktop */}
-            <div className="hidden md:block space-y-3">
+            {/* Bullet Points */}
+            <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <TrendingUp className="w-3 h-3 text-black" />
@@ -125,10 +172,10 @@ const HeroSection = () => {
             </div>
 
             {/* CTA Button */}
-            <div className="pt-2 md:pt-4">
+            <div className="pt-4">
               <Button 
                 size="lg" 
-                className="w-full md:w-auto text-lg md:text-base px-8 h-14 md:h-14 rounded-xl font-bold shadow-lg transition-all duration-300 hover:scale-105" 
+                className="text-base px-8 h-14 rounded-xl font-bold shadow-lg transition-all duration-300 hover:scale-105" 
                 style={{
                   background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
                   color: 'white'
@@ -141,7 +188,7 @@ const HeroSection = () => {
                 <MessageCircle className="mr-2 w-6 h-6" />
                 Jetzt Info-Paket holen
               </Button>
-              <p className="text-xs text-white/50 mt-3 text-center md:text-left">*Bei Erreichen der Programmbedingungen</p>
+              <p className="text-xs text-white/50 mt-3">*Bei Erreichen der Programmbedingungen</p>
             </div>
           </motion.div>
 
