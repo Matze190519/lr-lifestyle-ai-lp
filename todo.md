@@ -291,3 +291,9 @@
 - [x] Animierter weißer Lichtstrahl der um den Rahmen fegt (conic-gradient + rotation)
 - [x] Weißen Glow zurückgebracht (box-shadow mit rgba 255,255,255)
 - [x] €-Zeichen bei 1.100€ und 2.000€ gefixt (text-base statt text-lg)
+
+
+## Phase 36 - €-Zeichen endgültig fixen + Lichtstrahl dezenter
+- [x] €-Zeichen: kleinere Schrift (text-sm) + gold-gradient-text
+- [x] Lichtstrahl dezenter (6s statt 4s, weniger Opacity)
+- [x] Stufen-Boxen kompakter mit gold-gradient Beträgen
