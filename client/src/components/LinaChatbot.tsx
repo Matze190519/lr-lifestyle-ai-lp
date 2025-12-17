@@ -25,21 +25,33 @@ export default function LinaChatbot() {
     return () => clearTimeout(timer);
   }, []);
 
-  const toggleChat = () => {
+  const openChat = () => {
     if (window.botpress) {
       try {
-        window.botpress.toggle();
-        setIsChatOpen(prev => !prev);
+        window.botpress.open();
+        setIsChatOpen(true);
         console.log("✓ Botpress Webchat geöffnet");
       } catch (error) {
         console.error("Fehler beim Öffnen des Chatbots:", error);
-        // Fallback: Öffne WhatsApp
         window.open("https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.", "_blank");
       }
     } else {
       console.warn("Botpress nicht verfügbar - Fallback zu WhatsApp");
       window.open("https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.", "_blank");
     }
+  };
+
+  const closeChat = () => {
+    if (window.botpress) {
+      try {
+        window.botpress.close();
+        setIsChatOpen(false);
+        console.log("✓ Botpress Webchat geschlossen");
+      } catch (error) {
+        console.error("Fehler beim Schließen des Chatbots:", error);
+      }
+    }
+    setIsChatOpen(false);
   };
 
   // Zeige den Button immer (auch wenn Botpress nicht geladen ist)
@@ -49,22 +61,36 @@ export default function LinaChatbot() {
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Floating Chat Button - Gold Design */}
       <Button
-        onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 hover:scale-110"
-        aria-label="Chat mit Lina öffnen"
+        onClick={isChatOpen ? closeChat : openChat}
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 border-2 border-[#C9A86C]/50"
+        style={{
+          background: isChatOpen 
+            ? 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)' 
+            : 'linear-gradient(135deg, #C9A86C 0%, #8B7355 50%, #C9A86C 100%)',
+          boxShadow: isChatOpen 
+            ? '0 0 20px rgba(255, 255, 255, 0.3)' 
+            : '0 0 30px rgba(201, 168, 108, 0.5), 0 0 60px rgba(201, 168, 108, 0.3)'
+        }}
+        aria-label={isChatOpen ? "Chat mit Lina schließen" : "Chat mit Lina öffnen"}
       >
         {isChatOpen ? (
-          <X className="w-6 h-6 text-white" />
+          <X className="w-6 h-6 text-[#C9A86C]" />
         ) : (
-          <MessageCircle className="w-6 h-6 text-white" />
+          <MessageCircle className="w-6 h-6 text-black" />
         )}
       </Button>
 
-      {/* Optional: Badge mit "Lina" Label */}
+      {/* Badge mit "Lina" Label - Gold Design */}
       {!isChatOpen && (
-        <div className="fixed bottom-24 right-6 z-50 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce">
+        <div 
+          className="fixed bottom-24 right-6 z-50 text-black px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce"
+          style={{
+            background: 'linear-gradient(135deg, #C9A86C 0%, #8B7355 50%, #C9A86C 100%)',
+            boxShadow: '0 0 20px rgba(201, 168, 108, 0.4)'
+          }}
+        >
           💬 Chat mit Lina
         </div>
       )}
