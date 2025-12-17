@@ -62,7 +62,7 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container relative z-10 max-w-5xl py-8 md:py-16 px-6 md:px-16 lg:px-20">
+      <div className="container relative z-10 max-w-5xl py-8 md:py-16 px-8 md:px-16 lg:px-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Text Content */}
           <motion.div 
@@ -85,46 +85,51 @@ const HeroSection = () => {
               </p>
             </div>
             
-            <div className="space-y-3">
+            <div className="space-y-4 md:space-y-3">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
-                  <TrendingUp className="w-3 h-3 text-black" />
+                <div className="w-7 h-7 md:w-6 md:h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <TrendingUp className="w-4 h-4 md:w-3 md:h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Garantierter Bonus:</span> 300€ bis 2.000€/Monat – 12 Monate lang, zusätzlich zur Handelsspanne</p>
+                <p className="text-white/90 text-base md:text-sm"><span className="gold-gradient-text font-semibold">Garantierter Bonus:</span> 300€ bis 2.000€/Monat</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
-                  <Smartphone className="w-3 h-3 text-black" />
+                <div className="w-7 h-7 md:w-6 md:h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <Smartphone className="w-4 h-4 md:w-3 md:h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Dein KI-Coach Lina:</span> 24/7 WhatsApp-Support, fertige Vorlagen, Live-Coaching</p>
+                <p className="text-white/90 text-base md:text-sm"><span className="gold-gradient-text font-semibold">KI-Coach Lina:</span> 24/7 Support + Vorlagen</p>
               </div>
-              <div className="flex items-start gap-3">
+              {/* Weitere Bullet Points nur auf Desktop */}
+              <div className="hidden md:flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <Car className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Firmenwagen-Programm:</span> Audi, BMW, Mercedes – bis zu 80% günstiger als privat</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Firmenwagen-Programm:</span> Audi, BMW, Mercedes – bis zu 80% günstiger</p>
               </div>
-              <div className="flex items-start gap-3">
+              <div className="hidden md:flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <Users className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Vererbbar:</span> Baue ein Vermögen auf, das du deinen Kindern hinterlässt</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Vererbbar:</span> Baue ein Vermögen auf</p>
               </div>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-6 md:pt-4">
               <Button 
                 size="lg" 
-                className="gold-button text-base md:text-lg px-8 h-14 rounded-lg" 
+                className="w-full md:w-auto text-lg md:text-base px-8 h-16 md:h-14 rounded-xl font-bold shadow-lg transition-all duration-300 hover:scale-105" 
+                style={{
+                  background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+                  color: 'white'
+                }}
                 onClick={() => {
                   trackEvent('Contact');
                   window.open(whatsappLink, '_blank');
                 }}
               >
-                <MessageCircle className="mr-2 w-5 h-5" />
-                Kostenlose Infos & Lina-Demo
+                <MessageCircle className="mr-2 w-6 h-6" />
+                WhatsApp: Kostenlose Infos
               </Button>
-              <p className="text-xs text-white/50 mt-3">Sichere dir deinen persönlichen Erfolgs-Fahrplan!</p>
+              <p className="text-sm md:text-xs text-white/60 mt-4 md:mt-3 text-center md:text-left">Sichere dir deinen persönlichen Erfolgs-Fahrplan!</p>
             </div>
           </motion.div>
 
@@ -644,14 +649,18 @@ const FinalCTASection = () => {
   }
 
   return (
-    <section id="contact" className="py-16 relative">
-      <div className="container max-w-3xl">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-8"><span className="gold-gradient-text">Willst du das Info-Paket per WhatsApp?</span></h2>
+    <section id="contact" className="py-12 md:py-16 relative">
+      <div className="container max-w-3xl px-6 md:px-4">
+        <div className="text-center mb-8 md:mb-10">
+          <h2 className="text-3xl md:text-2xl font-bold font-poppins mb-6 md:mb-8"><span className="gold-gradient-text">Jetzt Info-Paket sichern!</span></h2>
           
           <Button 
             size="lg" 
-            className="gold-button text-lg px-10 h-16 rounded-xl w-full md:w-auto mb-8" 
+            className="w-full md:w-auto text-xl md:text-lg px-10 h-20 md:h-16 rounded-2xl md:rounded-xl font-bold shadow-2xl mb-8 transition-all duration-300 hover:scale-105" 
+            style={{
+              background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+              color: 'white'
+            }}
             onClick={() => {
               trackEvent('Contact');
               // Meta Pixel Lead Event for WhatsApp
@@ -664,21 +673,23 @@ const FinalCTASection = () => {
               window.open(whatsappLink, '_blank');
             }}
           >
-            <MessageCircle className="mr-2 w-6 h-6" />
-            WhatsApp öffnen
+            <MessageCircle className="mr-3 w-7 h-7 md:w-6 md:h-6" />
+            WhatsApp: Jetzt starten
           </Button>
           
-          <div className="flex items-center justify-center gap-4 opacity-50">
-            <div className="h-px bg-border w-20"></div>
-            <span className="text-xs uppercase tracking-widest">Oder</span>
-            <div className="h-px bg-border w-20"></div>
+          <div className="flex items-center justify-center gap-4 opacity-40 my-6">
+            <div className="h-px bg-border w-16 md:w-20"></div>
+            <span className="text-xs uppercase tracking-widest">Oder Formular</span>
+            <div className="h-px bg-border w-16 md:w-20"></div>
           </div>
         </div>
 
-        <Card className="bg-card gold-border shadow-lg overflow-hidden max-w-md mx-auto gold-glow">
-          <div className="p-6 bg-[#C9A86C]/5 ">
-            <h3 className="font-bold text-center gold-gradient-text">Kein WhatsApp?</h3>
-            <p className="text-xs text-center text-muted-foreground">Nutze das 20-Sekunden-Formular</p>
+        <Card className="bg-card gold-border shadow-2xl overflow-hidden max-w-md mx-auto" style={{
+          boxShadow: '0 0 40px rgba(201, 168, 108, 0.6), 0 0 80px rgba(201, 168, 108, 0.4)'
+        }}>
+          <div className="p-6 md:p-6 bg-gradient-to-b from-[#C9A86C]/10 to-transparent">
+            <h3 className="text-xl md:text-lg font-bold text-center gold-gradient-text">Kein WhatsApp?</h3>
+            <p className="text-sm md:text-xs text-center text-muted-foreground mt-1">Nutze das 20-Sekunden-Formular</p>
           </div>
           <div className="p-6">
             <Form {...form}>
@@ -809,16 +820,20 @@ export default function Home() {
       <Footer />
       
       {/* Sticky WhatsApp Button for Mobile */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/90 backdrop-blur-lg border-t border-[#C9A86C]/30 md:hidden z-50">
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-black/95 backdrop-blur-lg border-t border-[#25D366]/30 md:hidden z-50">
         <Button 
-          className="w-full gold-button font-bold h-12 rounded-xl"
+          className="w-full font-bold h-14 rounded-xl shadow-2xl transition-all duration-300 active:scale-95"
+          style={{
+            background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+            color: 'white'
+          }}
           onClick={() => {
             trackEvent('Contact');
             window.open("https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20will%20das%20LR%2BKI%20Info-Paket.%20Interesse%3A%20%5BFast%20Track%2FAuto%2FBeides%5D.%20Vorname%3A%20____", '_blank');
           }}
         >
-          <MessageCircle className="mr-2 w-5 h-5" />
-          WhatsApp Infos
+          <MessageCircle className="mr-2 w-6 h-6" />
+          WhatsApp: Jetzt Info-Paket holen
         </Button>
       </div>
       </div>

@@ -171,4 +171,21 @@
 
 ## Phase 22 - Netlify Forms Aktivierung
 - [x] Kontaktformular für Netlify Forms konfiguriert (data-netlify="true", form-name, honeypot)
-- [ ] Änderungen zu GitHub pushen
+- [x] Änderungen zu GitHub gepusht
+
+
+## Phase 23 - Mobile Hero Redesign
+- [ ] Weniger Text - nur 2 Bullet Points statt 4
+- [ ] Mehr Padding/Rand - Text klebt am Bildschirmrand
+- [ ] WhatsApp Button GRÜN gestalten - muss hervorstechen
+- [ ] Besseres Spacing zwischen Elementen
+- [ ] Stats-Karte auf Mobile verstecken oder kompakter machen
+
+
+## Phase 23 - Mobile Komplett-Überarbeitung
+- [x] Hero: Nur 2 Bullet Points auf Mobile (Bonus + Lina), 4 auf Desktop
+- [x] Hero: Mehr Padding (px-6 → px-8), größere Icons und Text
+- [x] WhatsApp Button: GRÜN (#25D366 WhatsApp-Grün), w-full auf Mobile, h-16
+- [x] Kontaktformular: "Jetzt Info-Paket sichern!", grüner WhatsApp Button (h-20)
+- [x] Sticky WhatsApp Button: Grün, h-14, besserer Text
+- [x] Struktur: Klare Hierarchie, mehr Whitespace, bessere Lesbarkeit
