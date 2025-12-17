@@ -62,62 +62,94 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* MOBILE LAYOUT */}
-      <div className="md:hidden w-full px-4 py-8">
-        {/* Mobile Header mit Logo */}
-        <div className="flex items-center justify-between mb-6">
+      {/* MOBILE LAYOUT - Nach Best Practices */}
+      <div className="md:hidden w-full min-h-screen flex flex-col">
+        {/* Sticky Promo Banner */}
+        <div 
+          className="w-full py-2 px-4 text-center text-xs font-medium"
+          style={{ background: 'linear-gradient(90deg, #C9A86C 0%, #E8D5A3 50%, #C9A86C 100%)' }}
+        >
+          <span className="text-black">Bis zu 24.000€ Bonus im ersten Jahr möglich*</span>
+        </div>
+
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[#C9A86C]/20">
           <img 
             src="/images/lr-40-years-black-bg.jpg" 
             alt="40 Jahre LR" 
-            className="w-12 h-auto rounded"
+            className="w-10 h-auto rounded"
           />
-          <span className="text-xs text-[#C9A86C] font-medium">Deutsches Unternehmen seit 1985</span>
+          <span className="text-[11px] text-[#C9A86C] font-medium">Deutsches Unternehmen seit 1985</span>
         </div>
 
-        {/* Mobile Headline */}
-        <h1 className="text-3xl font-bold mb-4">
-          <span className="gold-gradient-text">Bis zu 2.000€</span>
-          <br />
-          <span className="text-white">monatlicher Bonus*</span>
-        </h1>
+        {/* Hero Content */}
+        <div className="flex-1 flex flex-col justify-center px-5 py-6">
+          {/* Headline mit Gold-Gradient */}
+          <h1 className="text-2xl font-bold mb-3 leading-tight">
+            <span style={{ background: 'linear-gradient(135deg, #C9A86C 0%, #E8D5A3 50%, #C9A86C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Dein Weg zur</span>
+            <br />
+            <span style={{ background: 'linear-gradient(135deg, #C9A86C 0%, #E8D5A3 50%, #C9A86C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>finanziellen Freiheit</span>
+          </h1>
 
-        {/* Mobile Subtext */}
-        <p className="text-white/70 text-sm mb-6">
-          Starte dein eigenes Business mit LR + KI-Coach Lina.
-        </p>
+          {/* Sub-Headline */}
+          <p className="text-white/90 text-sm mb-5 leading-relaxed">
+            Starte mit LR + KI-Coach Lina. <strong className="text-[#C9A86C]">Bis zu 2.000€/Monat</strong> garantierter Bonus.*
+          </p>
 
-        {/* Mobile 3 Key Points */}
-        <div className="grid grid-cols-3 gap-2 mb-6">
-          <div className="text-center p-3 rounded-lg bg-[#C9A86C]/10 border border-[#C9A86C]/30">
-            <TrendingUp className="w-5 h-5 text-[#C9A86C] mx-auto mb-1" />
-            <p className="text-xs text-white/80">Bonus</p>
+          {/* 3 Benefits - Kompakt */}
+          <div className="space-y-2 mb-5">
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-[#C9A86C]/30">
+              <TrendingUp className="w-4 h-4 text-[#C9A86C] shrink-0" />
+              <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">300€ - 2.000€</strong> monatlicher Bonus</span>
+            </div>
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-[#C9A86C]/30">
+              <Smartphone className="w-4 h-4 text-[#C9A86C] shrink-0" />
+              <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">KI-Coach Lina</strong> 24/7 Support</span>
+            </div>
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-[#C9A86C]/30">
+              <Car className="w-4 h-4 text-[#C9A86C] shrink-0" />
+              <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">Firmenwagen</strong> ab Junior Manager</span>
+            </div>
           </div>
-          <div className="text-center p-3 rounded-lg bg-[#C9A86C]/10 border border-[#C9A86C]/30">
-            <Smartphone className="w-5 h-5 text-[#C9A86C] mx-auto mb-1" />
-            <p className="text-xs text-white/80">KI-Coach</p>
+
+          {/* CTA Buttons */}
+          <div className="space-y-3">
+            <Button 
+              className="w-full h-12 rounded-lg font-semibold text-sm" 
+              style={{
+                background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+                color: 'white'
+              }}
+              onClick={() => {
+                trackEvent('Contact');
+                window.open(whatsappLink, '_blank');
+              }}
+            >
+              <MessageCircle className="mr-2 w-4 h-4" />
+              WhatsApp: Kostenlose Infos
+            </Button>
+            <Button 
+              variant="outline"
+              className="w-full h-10 rounded-lg font-medium text-xs border-[#C9A86C]/50 text-[#C9A86C] hover:bg-[#C9A86C]/10"
+              onClick={() => {
+                document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Oder: Formular ausfüllen
+            </Button>
           </div>
-          <div className="text-center p-3 rounded-lg bg-[#C9A86C]/10 border border-[#C9A86C]/30">
-            <Car className="w-5 h-5 text-[#C9A86C] mx-auto mb-1" />
-            <p className="text-xs text-white/80">Firmenwagen</p>
-          </div>
+
+          <p className="text-[9px] text-white/40 mt-3 text-center">*Bei Erreichen der Programmbedingungen. Details im Info-Paket.</p>
         </div>
 
-        {/* Mobile CTA Button - normale Größe */}
-        <Button 
-          className="w-full h-12 rounded-lg font-semibold text-base" 
-          style={{
-            background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
-            color: 'white'
-          }}
-          onClick={() => {
-            trackEvent('Contact');
-            window.open(whatsappLink, '_blank');
-          }}
-        >
-          <MessageCircle className="mr-2 w-5 h-5" />
-          Kostenlose Infos per WhatsApp
-        </Button>
-        <p className="text-[10px] text-white/40 mt-2 text-center">*Bei Erreichen der Programmbedingungen</p>
+        {/* Trust Badges - Unten */}
+        <div className="px-4 pb-4">
+          <div className="flex justify-center gap-4 text-[10px] text-white/50">
+            <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> DSGVO</span>
+            <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Kostenlos</span>
+            <span className="flex items-center gap-1"><MessageCircle className="w-3 h-3" /> 24h Antwort</span>
+          </div>
+        </div>
       </div>
 
       {/* DESKTOP LAYOUT */}
