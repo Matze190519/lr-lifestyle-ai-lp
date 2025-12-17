@@ -40,47 +40,24 @@
       src="%VITE_ANALYTICS_ENDPOINT%/umami"
       data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
     
-    <!-- Botpress Webchat v3.4 - Manual Init (works on all domains) -->
+    <!-- Botpress Embedded Webchat v3.4 -->
+    <div id="bp-embedded-webchat" style="position: fixed; bottom: 20px; right: 20px; width: 400px; height: 600px; z-index: 9999; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3);"></div>
     <script src="https://cdn.botpress.cloud/webchat/v3.4/inject.js"></script>
     <script>
       window.addEventListener('load', function() {
         window.botpress.init({
           "botId": "cac882a1-cf8f-4b8f-9740-8f96ea9558db",
+          "clientId": "32dfe644-9e09-4072-bd72-34340d56cb7b",
           "configuration": {
             "version": "v2",
             "botName": "Lina vom LR Lifestyle Team",
             "botAvatar": "https://files.bpcontent.cloud/2025/09/30/22/20250930222336-BY08EPCV.jpeg",
-            "botDescription": "Hallo, ich bin Lina, der Chat bot des LR Lifestyle Teams. Achtung, diese Version von mir ist extrem eingeschr\u00e4nkt, wenn du im LR Lifestyle Team bist werden alle Funktionen f\u00fcr dich freigeschaltet. ",
-            "website": {},
-            "email": {
-              "title": "Info@lr-lifestyle.info",
-              "link": "Info@lr-lifestyle.info"
-            },
-            "phone": {
-              "title": "+491715060008",
-              "link": "+491715060008"
-            },
-            "termsOfService": {},
-            "privacyPolicy": {},
-            "color": "#9333EA",
+            "botDescription": "Hallo, ich bin Lina, der Chat bot des LR Lifestyle Teams.",
+            "color": "#C9A86C",
             "variant": "solid",
-            "headerVariant": "solid",
             "themeMode": "dark",
-            "fontFamily": "AR One Sans",
-            "radius": 4,
-            "feedbackEnabled": false,
-            "footer": "[\u26a1 LR Lifestyle Team](https://botpress.com/?from=webchat)",
-            "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/11/17/18/20251117183249-ODXZWBXJ.css",
-            "allowFileUpload": true,
-            "soundEnabled": true,
-            "toggleChatId": "bp-embedded-webchat",
-            "embeddedChatId": "bp-embedded-webchat",
-            "proactiveMessageEnabled": false,
-            "proactiveBubbleMessage": "Hi! \ud83d\udc4b Need help?",
-            "proactiveBubbleTriggerType": "afterDelay",
-            "proactiveBubbleDelayTime": 10
-          },
-          "clientId": "32dfe644-9e09-4072-bd72-34340d56cb7b"
+            "embeddedChatId": "bp-embedded-webchat"
+          }
         });
       });
     </script>

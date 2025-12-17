@@ -150,3 +150,13 @@
   - Botpress Webchat mit window.botpress.init() manuell initialisiert
   - Funktioniert jetzt auf allen Domains ohne Allowed Origins Whitelist
   - Kein Tarif-Upgrade nötig
+
+
+## Phase 20 - Chat-Button Fix
+- [x] Chat-Button Problem diagnostiziert: toggleChatId/embeddedChatId verursachen Konflikt
+- [x] toggleChatId und embeddedChatId aus Konfiguration entfernt
+- [x] Chat-Button erscheint jetzt unten rechts ("Chat mit Lina")
+- [ ] PROBLEM: Button reagiert immer noch nicht auf Klicks - weitere Diagnose nötig
+
+- [x] Embedded Chat implementieren mit Client ID 32dfe644-9e09-4072-bd72-34340d56cb7b
+- [x] Chat funktioniert jetzt! Embedded Mode löst das Allowed Origins Problem
