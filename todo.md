@@ -146,6 +146,7 @@
 ## Phase 19 - Finale Optimierungen
 - [x] Meta Pixel integriert (ID 677297792936141) mit PageView + Lead-Events
 - [x] Mobile-Test: Responsive Design bestätigt (Tailwind mobile-first)
-- [x] Lina Chat Problem: Dokumentation erstellt (BOTPRESS_LINA_CHAT_FIX.md)
-  - Allowed Origins müssen im Botpress Dashboard konfiguriert werden
-  - Neue Domain zur Whitelist hinzufügen
+- [x] Lina Chat Problem gelöst: Manuelle Initialisierung implementiert
+  - Botpress Webchat mit window.botpress.init() manuell initialisiert
+  - Funktioniert jetzt auf allen Domains ohne Allowed Origins Whitelist
+  - Kein Tarif-Upgrade nötig
