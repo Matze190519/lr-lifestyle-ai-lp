@@ -304,8 +304,8 @@ const WhatIsLRSection = () => {
       desc: "Das Fast Track Programm zahlt dir 12 Monate lang einen garantierten Mindestbonus: 300€, 1.100€ oder 2.000€ monatlich – zusätzlich zu deiner Handelsspanne. Bis zu 24.000€ im ersten Jahr!"
     },
     {
-      title: "Lina – Deine KI-Assistentin",
-      desc: "Lina erstellt dir Bilder, Texte und Videos – und kann sogar für dich telefonieren. 24/7 verfügbar, nie genervt, immer bereit."
+      title: "Lina – Vertrieb 2.0",
+      desc: "Ruf Lina an! Sie erstellt Bilder, Texte, Videos – und bespricht mit dir deine Ziele mit einem klaren Plan. Die Zukunft des Vertriebs."
     },
     {
       title: "Firmenwagen? Ab Tag 1 möglich",
@@ -657,6 +657,11 @@ const FastTrackSection = () => {
 const LinaSection = () => {
   const features = [
     {
+      title: "Live-Anrufe",
+      desc: "Ruf Lina an! Sie führt Coaching-Gespräche, Geschäftsvorstellungen und bespricht deine Ziele – mit einem klaren Plan zur Umsetzung.",
+      icon: <Zap className="w-5 h-5 text-[#C9A86C]" />
+    },
+    {
       title: "Bilder & Videos",
       desc: "Lina erstellt dir professionelle Bilder, Videos und Reels für Social Media – auf Knopfdruck. Kein Grafikdesigner nötig.",
       icon: <Smartphone className="w-5 h-5 text-[#C9A86C]" />
@@ -665,11 +670,6 @@ const LinaSection = () => {
       title: "Texte & Vorlagen",
       desc: "Fertige WhatsApp-Nachrichten, Posts, Stories und Verkaufstexte. Lina schreibt – du kopierst und sendest.",
       icon: <MessageCircle className="w-5 h-5 text-[#C9A86C]" />
-    },
-    {
-      title: "Live-Telefonieren",
-      desc: "Lina kann für dich telefonieren! Sie führt Gespräche mit Interessenten, beantwortet Fragen und qualifiziert Leads.",
-      icon: <Zap className="w-5 h-5 text-[#C9A86C]" />
     },
     {
       title: "24/7 Coaching",
@@ -682,8 +682,8 @@ const LinaSection = () => {
     <section className="py-16 section-glow ">
       <div className="container max-w-4xl">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – Deine KI-Assistentin</span></h2>
-          <p className="text-sm text-muted-foreground">Sie erstellt Bilder, Texte, Videos – und kann sogar für dich telefonieren.</p>
+          <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – Vertrieb 2.0</span></h2>
+          <p className="text-sm text-muted-foreground">Ruf sie an, lass dir Bilder und Texte erstellen – die Zukunft des Vertriebs.</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -701,7 +701,7 @@ const LinaSection = () => {
         </div>
         
         <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto">
-          <strong className="text-white">Stell dir vor:</strong> Eine KI, die nie schläft, nie genervt ist und dir Bilder, Texte und Videos erstellt – oder sogar für dich telefoniert. <strong className="gold-gradient-text">Das ist Lina.</strong>
+          <strong className="text-white">Stell dir vor:</strong> Du rufst Lina an, besprichst deine Ziele – und sie gibt dir einen genauen Plan, wie du sie erreichst. <strong className="gold-gradient-text">Das ist Vertrieb 2.0.</strong>
         </p>
       </div>
     </section>

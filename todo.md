@@ -243,3 +243,12 @@
 - [x] Mathias Bild vom User erhalten
 - [x] Bild in /client/public/images/mathias.png kopiert
 - [x] About-Seite aktualisiert mit neuem Bildpfad
+
+
+## Phase 30 - Lina-Texte Korrektur & Bild Glow
+- [x] Lina Section: Live-Anrufe Feature (du kannst sie anrufen)
+- [x] Lina Section: Coaching, Termine, Geschäftsvorstellungen
+- [x] Lina Section: Ziele besprechen, persönlicher Plan
+- [x] Lina Section: "Vertrieb 2.0" Headline und Messaging
+- [x] Benefits Section: Lina-Text auf "Vertrieb 2.0" aktualisiert
+- [x] About-Seite: Weißer Glow hinter Mathias Bild
