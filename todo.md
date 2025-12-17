@@ -285,3 +285,9 @@
 - [x] Animierter Gold-Lichtstrahl um alle Rahmen (gold-border-glow)
 - [x] Alle Cards auf gold-border-glow umgestellt
 - [x] Finale Version für Meta Ads
+
+
+## Phase 35 - Animierter Lichtstrahl wie ki-voice.net
+- [x] Animierter weißer Lichtstrahl der um den Rahmen fegt (conic-gradient + rotation)
+- [x] Weißen Glow zurückgebracht (box-shadow mit rgba 255,255,255)
+- [x] €-Zeichen bei 1.100€ und 2.000€ gefixt (text-base statt text-lg)

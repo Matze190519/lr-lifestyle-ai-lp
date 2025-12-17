@@ -668,19 +668,19 @@ const FastTrackSection = () => {
                   {/* Stufe 1 */}
                   <div className="flex-1 text-center p-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/20 to-transparent border border-[#C9A86C]/30">
                     <p className="text-xs text-[#C9A86C] mb-1">STUFE 1</p>
-                    <p className="text-lg font-bold text-white whitespace-nowrap">300 €</p>
+                    <p className="text-base font-bold text-white whitespace-nowrap">300€</p>
                     <p className="text-[10px] text-white/50">Junior Manager</p>
                   </div>
                   {/* Stufe 2 */}
                   <div className="flex-1 text-center p-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/30 to-transparent border border-[#C9A86C]/40">
                     <p className="text-xs text-[#C9A86C] mb-1">STUFE 2</p>
-                    <p className="text-lg font-bold text-white whitespace-nowrap">1.100 €</p>
+                    <p className="text-base font-bold text-white whitespace-nowrap">1.100€</p>
                     <p className="text-[10px] text-white/50">Junior Teamleiter</p>
                   </div>
                   {/* Stufe 3 */}
                   <div className="flex-1 text-center p-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/40 to-transparent border border-[#C9A86C]/50">
                     <p className="text-xs text-[#C9A86C] mb-1">STUFE 3</p>
-                    <p className="text-lg font-bold text-white whitespace-nowrap">2.000 €</p>
+                    <p className="text-base font-bold text-white whitespace-nowrap">2.000€</p>
                     <p className="text-[10px] text-white/50">Orgaleiter</p>
                   </div>
                 </div>
