@@ -167,3 +167,8 @@
 - [x] Texte gekürzt - Matthias Story kompakter
 - [x] Mobile Hero optimiert - min-height 70vh statt 90vh, weniger Padding
 - [x] Lina Chat Auto-Open deaktiviert - Chat versteckt initial, Toggle-Button hinzugefügt
+
+
+## Phase 22 - Netlify Forms Aktivierung
+- [x] Kontaktformular für Netlify Forms konfiguriert (data-netlify="true", form-name, honeypot)
+- [ ] Änderungen zu GitHub pushen

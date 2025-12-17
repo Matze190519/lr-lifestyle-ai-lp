@@ -682,7 +682,16 @@ const FinalCTASection = () => {
           </div>
           <div className="p-6">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <form 
+                name="contact" 
+                method="POST" 
+                data-netlify="true" 
+                data-netlify-honeypot="bot-field"
+                onSubmit={form.handleSubmit(onSubmit)} 
+                className="space-y-4"
+              >
+                {/* Hidden field for Netlify */}
+                <input type="hidden" name="form-name" value="contact" />
                 <FormField
                   control={form.control}
                   name="name"
