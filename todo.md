@@ -259,3 +259,13 @@
 - [x] Startseite: Mathias Section mit großem rundem Bild + Link zur About-Seite
 - [x] Footer: "Über uns" Link hinzugefügt
 - [ ] Lina-Bild hinzufügen (warte auf User)
+
+
+## Phase 32 - Video, Lina-Bild, Logo, Business Track
+- [x] Video kopieren + Mercedes-Vorschaubild kopieren (ohne LR-Kennzeichen)
+- [x] Lina-Bild kopieren + Logo kopieren
+- [x] Autokonzept: Video einbetten mit Mercedes-Vorschaubild
+- [x] About-Seite: Lina-Bild mit Vertrieb 2.0 Section hinzugefügt
+- [x] About-Seite: Löwenstarkes Team Logo unter "Dein Partner für finanzielle Freiheit"
+- [x] Business Track Section mit Tabelle (2.000€ - 40.000€)
+- [x] Hinweis "Auch viel mehr als 2.000€ möglich" in Headline

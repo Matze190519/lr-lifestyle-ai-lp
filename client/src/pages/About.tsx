@@ -21,9 +21,18 @@ const About = () => {
           <h1 className="text-3xl md:text-5xl font-bold font-poppins mb-6">
             <span className="gold-gradient-text">LR Lifestyle Team</span>
           </h1>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
+          <p className="text-lg text-white/80 max-w-2xl mx-auto mb-8">
             Dein Partner für finanzielle Freiheit
           </p>
+          {/* Team Logo */}
+          <div className="flex justify-center">
+            <img 
+              src="/images/logo-team.png" 
+              alt="Löwenstarkes Team - LR Lifestyle Team" 
+              className="w-32 h-32 md:w-40 md:h-40 rounded-full"
+              style={{ boxShadow: '0 0 30px rgba(201, 168, 108, 0.4)' }}
+            />
+          </div>
         </div>
       </section>
 
@@ -238,6 +247,52 @@ const About = () => {
                   <p className="text-sm text-white/60">100+ Posts, Scripts, Checklisten</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Lina Section */}
+      <section className="py-16 bg-gradient-to-b from-black to-[#0a0a0a]">
+        <div className="container max-w-4xl">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            {/* Lina Bild */}
+            <div className="shrink-0">
+              <div 
+                className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-[#C9A86C]/50"
+                style={{ boxShadow: '0 0 30px rgba(201, 168, 108, 0.4), 0 0 60px rgba(201, 168, 108, 0.2)' }}
+              >
+                <img 
+                  src="/images/lina.png" 
+                  alt="Lina - KI-Assistentin" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            
+            {/* Text */}
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl font-bold font-poppins mb-2">
+                <span className="gold-gradient-text">Lina – Vertrieb 2.0</span>
+              </h2>
+              <p className="text-sm text-[#C9A86C] mb-4">Deine KI-Assistentin | 24/7 verfügbar</p>
+              <p className="text-white/80 leading-relaxed mb-4 max-w-lg">
+                <strong className="text-white">Ruf Lina an!</strong> Sie führt Coaching-Gespräche, Geschäftsvorstellungen und bespricht mit dir deine Ziele – mit einem klaren Plan zur Umsetzung.
+              </p>
+              <ul className="space-y-2 text-sm text-white/70">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#C9A86C]" />
+                  Live-Anrufe für Coaching & Termine
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#C9A86C]" />
+                  Bilder, Texte & Videos erstellen
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#C9A86C]" />
+                  Ziele besprechen & Pläne erstellen
+                </li>
+              </ul>
             </div>
           </div>
         </div>

@@ -579,6 +579,63 @@ const FAQSection = () => {
   );
 };
 
+const BusinessTrackSection = () => {
+  const stufen = [
+    { stufe: "Orgaleiter", bonus: "2.000", kriterien: "100 PW Eigenumsatz, 6 aktive Linien, 24.000 PW Gesamtumsatz" },
+    { stufe: "Bronze Orgaleiter", bonus: "3.000", kriterien: "100 PW Eigenumsatz, 6 aktive Linien, 50.000 PW Gesamtumsatz" },
+    { stufe: "Silber Orgaleiter", bonus: "5.000", kriterien: "100 PW Eigenumsatz, 6 aktive Linien, 100.000 PW Gesamtumsatz" },
+    { stufe: "Gold Orgaleiter", bonus: "10.000", kriterien: "100 PW Eigenumsatz, 7 aktive Linien, 250.000 PW Gesamtumsatz" },
+    { stufe: "Platin Orgaleiter", bonus: "15.000", kriterien: "100 PW Eigenumsatz, 10 aktive Linien (21%-Linien), 350.000 PW Gesamtumsatz" },
+    { stufe: "Präsident", bonus: "40.000", kriterien: "100 PW Eigenumsatz, 10 aktive Linien (21%-Linien), 2.000.000 PW Gesamtumsatz" },
+  ];
+
+  return (
+    <section className="py-16 section-glow">
+      <div className="container max-w-4xl">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold font-poppins mb-2">
+            <span className="gold-gradient-text">Business Track – Auch viel mehr als 2.000€ möglich!</span>
+          </h2>
+          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+            Der Business Track garantiert fixe monatliche Mindestboni (zusätzlich zur Handelsspanne und zum Autobonus), um finanzielle Sicherheit und planbares Wachstum zu gewährleisten.
+          </p>
+        </div>
+
+        {/* Tabelle */}
+        <Card className="bg-black/80 border border-white/30 overflow-hidden" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2)' }}>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[#C9A86C]/30 bg-[#C9A86C]/10">
+                  <th className="px-4 py-3 text-left font-semibold gold-gradient-text">Karrierestufe</th>
+                  <th className="px-4 py-3 text-center font-semibold gold-gradient-text">Garantierter Bonus</th>
+                  <th className="px-4 py-3 text-left font-semibold gold-gradient-text hidden md:table-cell">Qualifikation (Auszug)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stufen.map((s, i) => (
+                  <tr key={i} className="border-b border-white/10 hover:bg-[#C9A86C]/5 transition-colors">
+                    <td className="px-4 py-3 font-medium text-white">{s.stufe}</td>
+                    <td className="px-4 py-3 text-center">
+                      <span className="gold-gradient-text font-bold text-lg">{s.bonus}€</span>
+                      <span className="text-white/50 text-xs block">/Monat</span>
+                    </td>
+                    <td className="px-4 py-3 text-white/60 text-xs hidden md:table-cell">{s.kriterien}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+        <p className="text-center text-xs text-muted-foreground mt-4">
+          <strong className="text-[#C9A86C]">Zusätzliche Boni:</strong> Die Handelsspanne und der Autobonus werden immer zusätzlich zu den garantierten Beträgen aus dem Business Track gezahlt.
+        </p>
+      </div>
+    </section>
+  );
+};
+
 const FastTrackSection = () => {
   return (
     <section className="py-16 section-glow">
@@ -654,9 +711,17 @@ const FastTrackSection = () => {
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Autokonzept*</h3>
               </div>
               
-              {/* Audi S5 Avant Bild */}
-              <div className="mb-4 flex justify-center">
-                <img src="/images/autokonzept-s5.png" alt="Audi S5 Avant" className="w-full max-w-[280px] h-auto" />
+              {/* Autokonzept Video mit Mercedes Vorschaubild */}
+              <div className="mb-4 rounded-lg overflow-hidden">
+                <video 
+                  className="w-full h-auto rounded-lg"
+                  controls
+                  poster="/images/mercedes-preview.png"
+                  preload="metadata"
+                >
+                  <source src="/images/autokonzept-video.mp4" type="video/mp4" />
+                  Dein Browser unterstützt keine Videos.
+                </video>
               </div>
               
               <div className="space-y-3 mb-4">
@@ -952,6 +1017,7 @@ export default function Home() {
       <WhatIsLRSection />
       <FinalCTASection />
       <FastTrackSection />
+      <BusinessTrackSection />
       <LinaSection />
       <MathiasSection />
       <SocialProofSection />
