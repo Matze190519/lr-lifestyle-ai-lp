@@ -189,3 +189,11 @@
 - [x] Kontaktformular: "Jetzt Info-Paket sichern!", grüner WhatsApp Button (h-20)
 - [x] Sticky WhatsApp Button: Grün, h-14, besserer Text
 - [x] Struktur: Klare Hierarchie, mehr Whitespace, bessere Lesbarkeit
+
+
+## Phase 24 - Mobile Hero Komplett-Redesign
+- [x] Kleiner Text oben entfernt auf Mobile
+- [x] Logo neben Headline positioniert (nicht überlappend)
+- [x] Nur kurzer Text auf Mobile: "Starte dein eigenes Business mit LR + KI-Coach Lina"
+- [x] Bullet Points nur auf Desktop
+- [x] Kompaktes, sauberes Layout auf Mobile

@@ -53,59 +53,70 @@ const HeroSection = () => {
         ></div>
       </div>
 
-      {/* 40 Jahre LR Logo - Top Right */}
-      <div className="absolute top-10 right-10 md:top-16 md:right-16 lg:top-20 lg:right-20 z-50">
+      {/* 40 Jahre LR Logo - Top Right - nur auf Desktop */}
+      <div className="absolute top-16 right-16 lg:top-20 lg:right-20 z-50 hidden md:block">
         <img 
           src="/images/lr-40-years-black-bg.jpg" 
           alt="40 Jahre LR Success Story" 
-          className="w-14 h-auto md:w-16 lg:w-20 rounded-md"
+          className="w-16 lg:w-20 rounded-md"
         />
       </div>
 
-      <div className="container relative z-10 max-w-5xl py-8 md:py-16 px-8 md:px-16 lg:px-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-10 max-w-5xl py-6 md:py-16 px-6 md:px-16 lg:px-20">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left Side - Text Content */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            className="space-y-8"
+            className="space-y-6 md:space-y-8"
           >
-            <div>
-              <p className="text-sm text-[#C9A86C] uppercase tracking-wider mb-2 font-medium">Bist du es leid, für fremde Träume zu arbeiten?</p>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-4">
-                <span className="text-white">Dein Weg zur finanziellen Freiheit:</span>
-                <br />
-                <span className="gold-gradient-text">Bis zu 2.000 € garantierter</span>
-                <br />
-                <span className="gold-gradient-text">monatlicher Bonus</span>
-              </h1>
-              <p className="text-sm text-white/70 leading-relaxed">
-                Matthias: <strong className="text-white">Nach 1 Jahr 5.000€/Monat</strong>. Heute? <strong className="gold-gradient-text">Ein Vielfaches.</strong> Mit seinem System + KI-Coach Lina schaffst du das auch.
-              </p>
+            {/* Mobile: Logo + Headline zusammen */}
+            <div className="flex items-start justify-between md:block">
+              <div className="flex-1">
+                {/* Desktop: kleiner Text */}
+                <p className="hidden md:block text-sm text-[#C9A86C] uppercase tracking-wider mb-2 font-medium">Bist du es leid, für fremde Träume zu arbeiten?</p>
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+                  <span className="gold-gradient-text">Bis zu 2.000€</span>
+                  <br />
+                  <span className="text-white">monatlicher Bonus*</span>
+                </h1>
+              </div>
+              {/* Mobile: Logo rechts neben Headline */}
+              <img 
+                src="/images/lr-40-years-black-bg.jpg" 
+                alt="40 Jahre LR" 
+                className="w-16 h-auto rounded-md ml-4 md:hidden"
+              />
             </div>
             
-            <div className="space-y-4 md:space-y-3">
+            {/* Mobile: Nur kurzer Text */}
+            <p className="text-base md:text-sm text-white/80 leading-relaxed">
+              <span className="md:hidden">Starte dein eigenes Business mit LR + KI-Coach Lina.</span>
+              <span className="hidden md:inline">Matthias: <strong className="text-white">Nach 1 Jahr 5.000€/Monat</strong>. Heute? <strong className="gold-gradient-text">Ein Vielfaches.</strong> Mit seinem System + KI-Coach Lina schaffst du das auch.</span>
+            </p>
+            
+            {/* Bullet Points - nur auf Desktop */}
+            <div className="hidden md:block space-y-3">
               <div className="flex items-start gap-3">
-                <div className="w-7 h-7 md:w-6 md:h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
-                  <TrendingUp className="w-4 h-4 md:w-3 md:h-3 text-black" />
+                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <TrendingUp className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-base md:text-sm"><span className="gold-gradient-text font-semibold">Garantierter Bonus:</span> 300€ bis 2.000€/Monat</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Garantierter Bonus:</span> 300€ bis 2.000€/Monat</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-7 h-7 md:w-6 md:h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
-                  <Smartphone className="w-4 h-4 md:w-3 md:h-3 text-black" />
+                <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
+                  <Smartphone className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-base md:text-sm"><span className="gold-gradient-text font-semibold">KI-Coach Lina:</span> 24/7 Support + Vorlagen</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">KI-Coach Lina:</span> 24/7 Support + Vorlagen</p>
               </div>
-              {/* Weitere Bullet Points nur auf Desktop */}
-              <div className="hidden md:flex items-start gap-3">
+              <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <Car className="w-3 h-3 text-black" />
                 </div>
                 <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Firmenwagen-Programm:</span> Audi, BMW, Mercedes – bis zu 80% günstiger</p>
               </div>
-              <div className="hidden md:flex items-start gap-3">
+              <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <Users className="w-3 h-3 text-black" />
                 </div>
@@ -113,10 +124,11 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="pt-6 md:pt-4">
+            {/* CTA Button */}
+            <div className="pt-2 md:pt-4">
               <Button 
                 size="lg" 
-                className="w-full md:w-auto text-lg md:text-base px-8 h-16 md:h-14 rounded-xl font-bold shadow-lg transition-all duration-300 hover:scale-105" 
+                className="w-full md:w-auto text-lg md:text-base px-8 h-14 md:h-14 rounded-xl font-bold shadow-lg transition-all duration-300 hover:scale-105" 
                 style={{
                   background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
                   color: 'white'
@@ -127,9 +139,9 @@ const HeroSection = () => {
                 }}
               >
                 <MessageCircle className="mr-2 w-6 h-6" />
-                WhatsApp: Kostenlose Infos
+                Jetzt Info-Paket holen
               </Button>
-              <p className="text-sm md:text-xs text-white/60 mt-4 md:mt-3 text-center md:text-left">Sichere dir deinen persönlichen Erfolgs-Fahrplan!</p>
+              <p className="text-xs text-white/50 mt-3 text-center md:text-left">*Bei Erreichen der Programmbedingungen</p>
             </div>
           </motion.div>
 
