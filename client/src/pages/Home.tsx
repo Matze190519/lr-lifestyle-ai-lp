@@ -350,6 +350,52 @@ const WhatIsLRSection = () => {
   );
 };
 
+const MathiasSection = () => {
+  return (
+    <section className="py-16 section-glow">
+      <div className="container max-w-4xl">
+        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+          {/* Mathias Bild - Groß und Rund */}
+          <div className="shrink-0">
+            <a href="/about" className="block">
+              <div 
+                className="w-48 h-48 md:w-64 md:h-64 rounded-full border-2 border-[#C9A86C]/50 overflow-hidden transition-transform hover:scale-105"
+                style={{ boxShadow: '0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.2)' }}
+              >
+                <img 
+                  src="/images/mathias.png" 
+                  alt="Mathias Vinzing" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </a>
+          </div>
+          
+          {/* Text */}
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-bold font-poppins mb-2">
+              <span className="gold-gradient-text">Mathias Vinzing</span>
+            </h2>
+            <p className="text-sm text-[#C9A86C] mb-4">Platin-Orgaleiter | Dein Coach</p>
+            <p className="text-white/80 leading-relaxed mb-6 max-w-lg">
+              Vom Dachdecker zum Platin-Orgaleiter. Heute lebe ich auf Mallorca und betreibe mein LR-Business digital – mit LINA als KI-Assistentin. <strong className="text-white">Ich zeige dir, wie du das auch schaffst.</strong>
+            </p>
+            <a 
+              href="/about" 
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[#C9A86C]/50 text-[#C9A86C] hover:bg-[#C9A86C]/10 transition-colors text-sm font-medium"
+            >
+              Mehr über mich erfahren
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const SocialProofSection = () => {
   const testimonials = [
     {
@@ -884,6 +930,7 @@ const Footer = () => {
       <div className="container space-y-4 max-w-4xl">
         <p>*Details zu Voraussetzungen, Fast Track Bonus und Autokonzept im kostenlosen Info-Paket. Keine Erfolgsgarantie; Ergebnisse hängen von individuellem Einsatz ab.</p>
         <div className="flex justify-center gap-6 text-xs">
+          <a href="/about" className="hover:text-[#C9A86C] transition-colors">Über uns</a>
           <a href="/impressum" className="hover:text-[#C9A86C] transition-colors">Impressum</a>
           <a href="/datenschutz" className="hover:text-[#C9A86C] transition-colors">Datenschutz</a>
         </div>
@@ -906,6 +953,7 @@ export default function Home() {
       <FinalCTASection />
       <FastTrackSection />
       <LinaSection />
+      <MathiasSection />
       <SocialProofSection />
       <FAQSection />
       <Footer />

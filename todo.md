@@ -252,3 +252,10 @@
 - [x] Lina Section: "Vertrieb 2.0" Headline und Messaging
 - [x] Benefits Section: Lina-Text auf "Vertrieb 2.0" aktualisiert
 - [x] About-Seite: Weißer Glow hinter Mathias Bild
+
+
+## Phase 31 - About-Link & Mathias Bild
+- [x] About-Seite: Mathias Bild rund machen (rounded-full)
+- [x] Startseite: Mathias Section mit großem rundem Bild + Link zur About-Seite
+- [x] Footer: "Über uns" Link hinzugefügt
+- [ ] Lina-Bild hinzufügen (warte auf User)

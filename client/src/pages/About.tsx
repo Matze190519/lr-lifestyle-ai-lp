@@ -117,7 +117,7 @@ const About = () => {
           <div className="grid md:grid-cols-3 gap-8 items-start">
             {/* Mathias Bild mit weißem Glow */}
             <div className="md:col-span-1">
-              <div className="aspect-square rounded-xl bg-gradient-to-br from-[#C9A86C]/20 to-black border border-[#C9A86C]/30 flex items-center justify-center overflow-hidden" style={{ boxShadow: '0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.2)' }}>
+              <div className="aspect-square rounded-full bg-gradient-to-br from-[#C9A86C]/20 to-black border-2 border-[#C9A86C]/50 flex items-center justify-center overflow-hidden" style={{ boxShadow: '0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.2)' }}>
                 <img 
                   src="/images/mathias.png" 
                   alt="Mathias Vinzing" 
