@@ -269,3 +269,9 @@
 - [x] About-Seite: Löwenstarkes Team Logo unter "Dein Partner für finanzielle Freiheit"
 - [x] Business Track Section mit Tabelle (2.000€ - 40.000€)
 - [x] Hinweis "Auch viel mehr als 2.000€ möglich" in Headline
+
+
+## Phase 33 - Business Track als Dropdown
+- [x] Vize-Präsident mit 25.000€ hinzugefügt
+- [x] Business Track als Akkordeon/Dropdown umgebaut
+- [x] Übersichtlicher für Besucher - Tabelle nur bei Klick sichtbar

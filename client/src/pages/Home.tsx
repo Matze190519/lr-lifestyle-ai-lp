@@ -586,51 +586,63 @@ const BusinessTrackSection = () => {
     { stufe: "Silber Orgaleiter", bonus: "5.000", kriterien: "100 PW Eigenumsatz, 6 aktive Linien, 100.000 PW Gesamtumsatz" },
     { stufe: "Gold Orgaleiter", bonus: "10.000", kriterien: "100 PW Eigenumsatz, 7 aktive Linien, 250.000 PW Gesamtumsatz" },
     { stufe: "Platin Orgaleiter", bonus: "15.000", kriterien: "100 PW Eigenumsatz, 10 aktive Linien (21%-Linien), 350.000 PW Gesamtumsatz" },
+    { stufe: "Vize-Präsident", bonus: "25.000", kriterien: "100 PW Eigenumsatz, 10 aktive Linien (21%-Linien), 1.000.000 PW Gesamtumsatz" },
     { stufe: "Präsident", bonus: "40.000", kriterien: "100 PW Eigenumsatz, 10 aktive Linien (21%-Linien), 2.000.000 PW Gesamtumsatz" },
   ];
 
   return (
     <section className="py-16 section-glow">
       <div className="container max-w-4xl">
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <h2 className="text-2xl font-bold font-poppins mb-2">
-            <span className="gold-gradient-text">Business Track – Auch viel mehr als 2.000€ möglich!</span>
+            <span className="gold-gradient-text">Auch viel mehr als 2.000€ möglich!</span>
           </h2>
-          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-            Der Business Track garantiert fixe monatliche Mindestboni (zusätzlich zur Handelsspanne und zum Autobonus), um finanzielle Sicherheit und planbares Wachstum zu gewährleisten.
+          <p className="text-sm text-muted-foreground">
+            Der Business Track garantiert fixe monatliche Mindestboni.
           </p>
         </div>
 
-        {/* Tabelle */}
-        <Card className="bg-black/80 border border-white/30 overflow-hidden" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2)' }}>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-[#C9A86C]/30 bg-[#C9A86C]/10">
-                  <th className="px-4 py-3 text-left font-semibold gold-gradient-text">Karrierestufe</th>
-                  <th className="px-4 py-3 text-center font-semibold gold-gradient-text">Garantierter Bonus</th>
-                  <th className="px-4 py-3 text-left font-semibold gold-gradient-text hidden md:table-cell">Qualifikation (Auszug)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stufen.map((s, i) => (
-                  <tr key={i} className="border-b border-white/10 hover:bg-[#C9A86C]/5 transition-colors">
-                    <td className="px-4 py-3 font-medium text-white">{s.stufe}</td>
-                    <td className="px-4 py-3 text-center">
-                      <span className="gold-gradient-text font-bold text-lg">{s.bonus}€</span>
-                      <span className="text-white/50 text-xs block">/Monat</span>
-                    </td>
-                    <td className="px-4 py-3 text-white/60 text-xs hidden md:table-cell">{s.kriterien}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Card>
-
-        <p className="text-center text-xs text-muted-foreground mt-4">
-          <strong className="text-[#C9A86C]">Zusätzliche Boni:</strong> Die Handelsspanne und der Autobonus werden immer zusätzlich zu den garantierten Beträgen aus dem Business Track gezahlt.
-        </p>
+        {/* Akkordeon für Business Track Details */}
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="business-track" className="bg-black/80 rounded-lg px-4 border border-white/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2)' }}>
+            <AccordionTrigger className="text-sm font-medium hover:text-[#C9A86C]">
+              <div className="flex items-center gap-3">
+                <TrendingUp className="w-5 h-5 text-[#C9A86C]" />
+                <span className="gold-gradient-text font-bold">Business Track Stufen anzeigen</span>
+                <span className="text-white/60 text-xs ml-2">(2.000€ – 40.000€/Monat)</span>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="pt-4 pb-2">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-[#C9A86C]/30 bg-[#C9A86C]/10">
+                        <th className="px-3 py-2 text-left font-semibold gold-gradient-text text-xs">Karrierestufe</th>
+                        <th className="px-3 py-2 text-center font-semibold gold-gradient-text text-xs">Bonus/Monat</th>
+                        <th className="px-3 py-2 text-left font-semibold gold-gradient-text text-xs hidden md:table-cell">Qualifikation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stufen.map((s, i) => (
+                        <tr key={i} className="border-b border-white/10">
+                          <td className="px-3 py-2 font-medium text-white text-xs">{s.stufe}</td>
+                          <td className="px-3 py-2 text-center">
+                            <span className="gold-gradient-text font-bold">{s.bonus}€</span>
+                          </td>
+                          <td className="px-3 py-2 text-white/60 text-xs hidden md:table-cell">{s.kriterien}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-center text-[10px] text-muted-foreground mt-3">
+                  <strong className="text-[#C9A86C]">+</strong> Handelsspanne und Autobonus kommen immer oben drauf!
+                </p>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     </section>
   );
