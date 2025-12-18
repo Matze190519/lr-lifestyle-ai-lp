@@ -96,17 +96,17 @@ const HeroSection = () => {
             Starte mit LR + KI-Coach Lina. <strong className="text-[#C9A86C]">Bis zu 2.000€/Monat</strong> garantierter Bonus.*
           </p>
 
-          {/* 3 Benefits - Kompakt */}
+          {/* 3 Benefits - Kompakt mit Lichtstrahl */}
           <div className="space-y-2 mb-4">
-            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-[#C9A86C]/30">
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 gold-border-glow">
               <TrendingUp className="w-4 h-4 text-[#C9A86C] shrink-0" />
               <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">300€ - 2.000€</strong> monatlicher Bonus</span>
             </div>
-            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-[#C9A86C]/30">
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 gold-border-glow">
               <Smartphone className="w-4 h-4 text-[#C9A86C] shrink-0" />
               <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">KI-Coach Lina</strong> 24/7 Support</span>
             </div>
-            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-[#C9A86C]/30">
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 gold-border-glow">
               <Car className="w-4 h-4 text-[#C9A86C] shrink-0" />
               <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">Firmenwagen</strong> ab Junior Manager</span>
             </div>

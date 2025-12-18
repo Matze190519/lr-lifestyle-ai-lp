@@ -315,3 +315,8 @@
 - [x] About-Seite: Cards mit gold-border-glow
 - [x] About-Seite: Lina Bild mit weißem Glow
 - [x] Lichtstrahl-Effekte auf Fast Track + Autokonzept Cards
+
+
+## Phase 40 - Mobile Lichtstrahl + About Bild
+- [x] Mobile: Lichtstrahl-Effekte auf 3 Benefit-Boxen oben
+- [x] About-Seite: Mathias Bild kleiner auf Mobile (w-48 h-48)
