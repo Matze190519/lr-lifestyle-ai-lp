@@ -324,3 +324,7 @@
 
 ## Phase 41 - Mobile Lichtstrahl-Effekte fixen
 - [x] Lichtstrahl-Effekte auf Mobile sichtbar machen (shimmer statt rotation)
+
+
+## Phase 42 - Lichtstrahl wie bei Teammitgliedern
+- [x] Original dezenter Lichtstrahl wiederhergestellt (conic-gradient rotation)
