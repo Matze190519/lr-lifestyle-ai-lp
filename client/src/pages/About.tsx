@@ -54,7 +54,7 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mt-10">
-            <Card className="bg-black/80 border border-[#C9A86C]/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.2)' }}>
+            <Card className="bg-black/80 gold-border-glow">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
@@ -68,7 +68,7 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-black/80 border border-[#C9A86C]/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.2)' }}>
+            <Card className="bg-black/80 gold-border-glow">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
@@ -82,7 +82,7 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-black/80 border border-[#C9A86C]/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.2)' }}>
+            <Card className="bg-black/80 gold-border-glow">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
@@ -96,7 +96,7 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-black/80 border border-[#C9A86C]/30" style={{ boxShadow: '0 0 20px rgba(255, 255, 255, 0.2)' }}>
+            <Card className="bg-black/80 gold-border-glow">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-[#C9A86C]/20 flex items-center justify-center">
@@ -256,17 +256,20 @@ const About = () => {
       <section className="py-16 bg-gradient-to-b from-black to-[#0a0a0a]">
         <div className="container max-w-4xl">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            {/* Lina Bild */}
+            {/* Lina Bild mit weißem Glow */}
             <div className="shrink-0">
-              <div 
-                className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-[#C9A86C]/50"
-                style={{ boxShadow: '0 0 30px rgba(201, 168, 108, 0.4), 0 0 60px rgba(201, 168, 108, 0.2)' }}
-              >
-                <img 
-                  src="/images/lina.png" 
-                  alt="Lina - KI-Assistentin" 
-                  className="w-full h-full object-cover"
-                />
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-white/30 blur-xl"></div>
+                <div 
+                  className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-[#C9A86C]/50"
+                  style={{ boxShadow: '0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3)' }}
+                >
+                  <img 
+                    src="/images/lina.png" 
+                    alt="Lina - KI-Assistentin" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
             

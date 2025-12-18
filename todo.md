@@ -307,3 +307,11 @@
 
 ## Phase 38 - Lichtstrahl auf Fast Track Card
 - [x] gold-border-glow auf das große Fast Track Fenster im Hero-Bereich
+
+
+## Phase 39 - Komplettes Design-Update
+- [x] Lina weißer Glow hinter dem Bild (Home + About)
+- [x] €-Zeichen: text-xl + Leerzeichen ("300 €", "1.100 €", "2.000 €")
+- [x] About-Seite: Cards mit gold-border-glow
+- [x] About-Seite: Lina Bild mit weißem Glow
+- [x] Lichtstrahl-Effekte auf Fast Track + Autokonzept Cards

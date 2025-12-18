@@ -233,17 +233,17 @@ const HeroSection = () => {
           >
             <div className="relative p-8 rounded-2xl bg-[#0a0a0a]/95 backdrop-blur-sm animate-float gold-border-glow">
               {/* Stats Grid */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center p-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/20 to-transparent border border-white/20">
-                  <p className="text-2xl font-bold gold-gradient-text">300€</p>
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                <div className="text-center px-3 py-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/20 to-transparent border border-white/20">
+                  <p className="text-xl font-bold gold-gradient-text">300 €</p>
                   <p className="text-xs text-white/60 mt-1">Stufe 1*</p>
                 </div>
-                <div className="text-center p-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/30 to-transparent border border-white/20">
-                  <p className="text-2xl font-bold gold-gradient-text">1.100€</p>
+                <div className="text-center px-3 py-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/30 to-transparent border border-white/20">
+                  <p className="text-xl font-bold gold-gradient-text">1.100 €</p>
                   <p className="text-xs text-white/60 mt-1">Stufe 2*</p>
                 </div>
-                <div className="text-center p-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/40 to-transparent border border-white/20">
-                  <p className="text-2xl font-bold gold-gradient-text">2.000€</p>
+                <div className="text-center px-3 py-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/40 to-transparent border border-white/20">
+                  <p className="text-xl font-bold gold-gradient-text">2.000 €</p>
                   <p className="text-xs text-white/60 mt-1">Stufe 3*</p>
                 </div>
               </div>
@@ -804,6 +804,15 @@ const LinaSection = () => {
     <section className="py-16 section-glow ">
       <div className="container max-w-4xl">
         <div className="text-center mb-10">
+          {/* Lina Bild mit weißem Glow */}
+          <div className="relative w-32 h-32 mx-auto mb-6">
+            <div className="absolute inset-0 rounded-full bg-white/30 blur-xl"></div>
+            <img 
+              src="/images/lina.png" 
+              alt="Lina - KI-Coach" 
+              className="relative w-32 h-32 rounded-full object-cover border-2 border-[#C9A86C]/50 shadow-[0_0_30px_rgba(255,255,255,0.5)]"
+            />
+          </div>
           <h2 className="text-2xl font-bold font-poppins mb-2"><span className="gold-gradient-text">Lina – Vertrieb 2.0</span></h2>
           <p className="text-sm text-muted-foreground">Ruf sie an, lass dir Bilder und Texte erstellen – die Zukunft des Vertriebs.</p>
         </div>
