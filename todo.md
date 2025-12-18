@@ -341,3 +341,9 @@
 - [x] Lead-Event mit value: 10.00 und currency: 'EUR' beim Formular-Submit
 - [x] Erweiterten Abgleich aktiviert (fn, ln, ph - ohne email da nicht im Formular)
 - [x] Zu GitHub gepusht
+
+
+## Phase 45 - Netlify 404 Fix
+- [x] netlify.toml im Root erstellt (publish: dist/public, command: pnpm run build)
+- [x] _redirects in client/public erstellt (/* -> /index.html 200)
+- [x] Zu GitHub gepusht
