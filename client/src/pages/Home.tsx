@@ -666,21 +666,21 @@ const FastTrackSection = () => {
               <div className="mb-5">
                 <div className="flex justify-between gap-2 mb-4">
                   {/* Stufe 1 */}
-                  <div className="flex-1 text-center px-2 py-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/20 to-transparent border border-[#C9A86C]/30">
+                  <div className="flex-1 text-center px-4 py-3 rounded-lg bg-black/80 gold-border-glow">
                     <p className="text-[10px] text-[#C9A86C] mb-1">STUFE 1</p>
-                    <p className="text-sm font-bold gold-gradient-text">300€</p>
+                    <p className="text-sm font-bold gold-gradient-text">300 €</p>
                     <p className="text-[9px] text-white/50">Junior Manager</p>
                   </div>
                   {/* Stufe 2 */}
-                  <div className="flex-1 text-center px-2 py-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/30 to-transparent border border-[#C9A86C]/40">
+                  <div className="flex-1 text-center px-4 py-3 rounded-lg bg-black/80 gold-border-glow">
                     <p className="text-[10px] text-[#C9A86C] mb-1">STUFE 2</p>
-                    <p className="text-sm font-bold gold-gradient-text">1.100€</p>
+                    <p className="text-sm font-bold gold-gradient-text">1.100 €</p>
                     <p className="text-[9px] text-white/50">Teamleiter</p>
                   </div>
                   {/* Stufe 3 */}
-                  <div className="flex-1 text-center px-2 py-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/40 to-transparent border border-[#C9A86C]/50">
+                  <div className="flex-1 text-center px-4 py-3 rounded-lg bg-black/80 gold-border-glow">
                     <p className="text-[10px] text-[#C9A86C] mb-1">STUFE 3</p>
-                    <p className="text-sm font-bold gold-gradient-text">2.000€</p>
+                    <p className="text-sm font-bold gold-gradient-text">2.000 €</p>
                     <p className="text-[9px] text-white/50">Orgaleiter</p>
                   </div>
                 </div>

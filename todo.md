@@ -297,3 +297,9 @@
 - [x] €-Zeichen: kleinere Schrift (text-sm) + gold-gradient-text
 - [x] Lichtstrahl dezenter (6s statt 4s, weniger Opacity)
 - [x] Stufen-Boxen kompakter mit gold-gradient Beträgen
+
+
+## Phase 37 - Padding rechts + Lichtstrahl oben
+- [x] Mehr Padding rechts in Stufen-Boxen (px-4 statt px-2)
+- [x] Leerzeichen vor €-Zeichen ("300 €" statt "300€")
+- [x] gold-border-glow Klasse zu allen 3 Stufen-Boxen hinzugefügt
