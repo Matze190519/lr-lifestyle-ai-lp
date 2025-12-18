@@ -856,27 +856,13 @@ const FinalCTASection = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     trackEvent('Lead');
-    
-    // Meta Pixel Lead Event mit value, currency und erweitertem Abgleich
+    // Meta Pixel Lead Event
     if (typeof window !== 'undefined' && (window as any).fbq) {
-      // Erweiterten Abgleich mit Nutzerdaten aktivieren
-      const nameParts = values.name.trim().split(' ');
-      const firstName = nameParts[0] || '';
-      const lastName = nameParts.slice(1).join(' ') || '';
-      
       (window as any).fbq('track', 'Lead', {
-        value: 10.00,
-        currency: 'EUR',
         content_name: 'LR Info-Paket Anfrage',
         content_category: values.interest || 'Allgemein',
-      }, {
-        // Erweiterte Abgleichparameter (ohne E-Mail da Formular nur Telefon hat)
-        fn: firstName.toLowerCase(),
-        ln: lastName.toLowerCase(),
-        ph: values.phone?.replace(/[^0-9]/g, ''),
       });
     }
-    
     toast.success("Anfrage gesendet!", {
       description: "Wir melden uns in Kürze bei dir.",
     });

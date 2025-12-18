@@ -40,39 +40,75 @@
       src="%VITE_ANALYTICS_ENDPOINT%/umami"
       data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
     
-    <!-- Botpress Embedded Webchat v3.4 -->
-    <div id="bp-embedded-webchat" style="position: fixed; bottom: 20px; right: 20px; width: 400px; height: 600px; z-index: 9999; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); display: none;"></div>
-    <script src="https://cdn.botpress.cloud/webchat/v3.4/inject.js"></script>
+    <!-- Botpress Embedded Webchat v3.5 -->
+    <div id="bp-chat-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: none;">
+      <!-- Close Button - Gold X -->
+      <button id="bp-close-btn" style="position: absolute; top: -12px; right: -12px; z-index: 10001; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #C9A86C 0%, #8B7355 100%); border: 2px solid #fff; color: white; font-size: 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.4); transition: all 0.2s; line-height: 1;">×</button>
+      <!-- Chat Widget Container -->
+      <div id="bp-embedded-webchat" style="width: 380px; height: 550px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3);"></div>
+    </div>
+    
+    <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
     <script>
       window.addEventListener('load', function() {
+        // Initialize Botpress with the exact config from the JSON
         window.botpress.init({
           "botId": "cac882a1-cf8f-4b8f-9740-8f96ea9558db",
           "clientId": "32dfe644-9e09-4072-bd72-34340d56cb7b",
           "configuration": {
             "version": "v2",
             "botName": "Lina vom LR Lifestyle Team",
-            "botAvatar": "https://files.bpcontent.cloud/2025/09/30/22/20250930222336-BY08EPCV.jpeg",
+            "botAvatar": "https://files.bpcontent.cloud/2025/12/18/15/20251218152614-0O7ZM8O6.jpeg",
             "botDescription": "Hallo, ich bin Lina, der Chat bot des LR Lifestyle Teams.",
+            "email": {
+              "title": "Info@lr-lifestyle.info",
+              "link": "Info@lr-lifestyle.info"
+            },
+            "phone": {
+              "title": "+491715060008",
+              "link": "+491715060008"
+            },
             "color": "#C9A86C",
             "variant": "solid",
+            "headerVariant": "solid",
             "themeMode": "dark",
-            "embeddedChatId": "bp-embedded-webchat"
+            "fontFamily": "AR One Sans",
+            "radius": 4,
+            "feedbackEnabled": false,
+            "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/11/17/18/20251117183249-ODXZWBXJ.css",
+            "allowFileUpload": true,
+            "soundEnabled": true,
+            "embeddedChatId": "bp-embedded-webchat",
+            "proactiveMessageEnabled": false
           }
         });
         
-        // Füge einen Toggle-Button hinzu
-        const toggleBtn = document.createElement('button');
+        var chatContainer = document.getElementById('bp-chat-container');
+        var closeBtn = document.getElementById('bp-close-btn');
+        
+        // Toggle-Button erstellen (Gold Design)
+        var toggleBtn = document.createElement('button');
         toggleBtn.innerHTML = '💬 Chat mit Lina';
         toggleBtn.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 10000; background: linear-gradient(135deg, #C9A86C 0%, #8B7355 100%); color: white; border: none; padding: 16px 24px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 20px rgba(201, 168, 108, 0.4); transition: all 0.3s;';
-        toggleBtn.onmouseover = () => toggleBtn.style.transform = 'scale(1.05)';
-        toggleBtn.onmouseout = () => toggleBtn.style.transform = 'scale(1)';
-        toggleBtn.onclick = () => {
-          const chatDiv = document.getElementById('bp-embedded-webchat');
-          if (chatDiv.style.display === 'none') {
-            chatDiv.style.display = 'block';
-            toggleBtn.style.display = 'none';
-          }
+        toggleBtn.onmouseover = function() { toggleBtn.style.transform = 'scale(1.05)'; };
+        toggleBtn.onmouseout = function() { toggleBtn.style.transform = 'scale(1)'; };
+        
+        // Chat öffnen
+        toggleBtn.onclick = function() {
+          chatContainer.style.display = 'block';
+          toggleBtn.style.display = 'none';
         };
+        
+        // Chat schließen mit X-Button
+        closeBtn.onclick = function() {
+          chatContainer.style.display = 'none';
+          toggleBtn.style.display = 'block';
+        };
+        
+        // Hover-Effekt für Close-Button
+        closeBtn.onmouseover = function() { closeBtn.style.transform = 'scale(1.1)'; closeBtn.style.background = 'linear-gradient(135deg, #E8D5A3 0%, #C9A86C 100%)'; };
+        closeBtn.onmouseout = function() { closeBtn.style.transform = 'scale(1)'; closeBtn.style.background = 'linear-gradient(135deg, #C9A86C 0%, #8B7355 100%)'; };
+        
         document.body.appendChild(toggleBtn);
       });
     </script>
