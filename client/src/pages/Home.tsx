@@ -481,75 +481,75 @@ const FAQSection = () => {
   const faqs = [
     {
       q: "Was ist Lina (KI) konkret?",
-      a: "Lina ist Ihre persönliche digitale Partnerin und KI-Assistentin im LR Lifestyle Team, erreichbar über WhatsApp. Sie wurde entwickelt, um Sie rund um die Uhr (24/7) zu unterstützen. Lina dient als Mentorin, hilft beim Onboarding neuer Partner, beim Aufbau des Teams, bei der Produktberatung und sogar bei der Formulierung wirkungsvoller WhatsApp-Nachrichten für Interessenten. Lina kann auch Live-Coachings und Telefongespräche führen, um Sie optimal voranzubringen."
+      a: "Lina ist deine persönliche KI-Assistentin im LR Lifestyle Team. Du erreichst sie über den Chat auf dieser Seite oder per WhatsApp. Sie unterstützt dich rund um die Uhr (24/7) – beim Onboarding, Teamaufbau, bei der Produktberatung und bei der Formulierung wirkungsvoller Nachrichten für Interessenten. Lina kann auch Live-Coachings und Telefongespräche führen, um dich optimal voranzubringen."
     },
     {
-      q: "Was bekomme ich auf WhatsApp?",
-      a: "Über WhatsApp erhalten Sie direkten Zugriff auf Lina, Ihren kostenlosen Coach. Sie bietet umfangreiche Unterstützung und Tools:\n\n• Produktwissen: Blitzschnelle Antworten und detaillierte Informationen zu LR Produkten.\n• Social Media Hilfe: Generierung von Post-Texten, Bildern und Videos für Plattformen wie Instagram, Facebook oder TikTok.\n• Vertriebs- und Verkaufsvorlagen: Fertige WhatsApp-Vorlagen für den Erstkontakt oder das Nachfassen.\n• Coaching: Unterstützung bei der Zielsetzung und Übung von Verkaufsgesprächen oder Geschäftsvorstellungen."
+      q: "Was bekomme ich nach dem Kontakt?",
+      a: "Nach deiner Anfrage erhältst du per WhatsApp dein kostenloses Info-Paket mit allen wichtigen Informationen zum LR Geschäftsmodell, den Verdienstmöglichkeiten und dem Fast Track Bonus. Außerdem bekommst du Zugang zu Lina, deinem persönlichen KI-Coach, der dir bei allen Fragen weiterhilft."
     },
     {
       q: "Kostet mich das Info-Paket oder der Start etwas?",
-      a: "Der Support durch Lina als Ihr persönlicher Coach ist kostenlos. Der offizielle Start als LR Partner beginnt jedoch mit einer einmaligen Erstbestellung, bei der eine Startpaket-Gebühr von 29,90 € (100 PW) für das Printpaket anfällt. Die Startersets selbst bieten erhebliche Ersparnisse gegenüber dem Einzelkauf."
+      a: "Das Info-Paket und der Support durch Lina sind komplett kostenlos. Der offizielle Start als LR Partner beginnt mit dem Printpaket (29,90 €) plus einer Erstbestellung von mindestens 150 €. Die Produkte in den Startersets sind stark subventioniert und deutlich günstiger als im Einzelkauf.\n\nIm Paket enthalten:\n• Dein eigener Online-Shop mit Direktbelieferung – LR liefert direkt an deine Kunden\n• 30–50 % Provision auf alle verkauften Produkte\n• Eine eigene Webseite, übersetzbar in 20 Sprachen\n• Zugang zu Lina, deinem KI-Coach mit 24/7 Support\n• Persönliche Unterstützung von Matthias und dem LR Lifestyle Team"
     },
     {
       q: "Wie läuft das nach dem Kontakt ab?",
-      a: "Nach der Entscheidung zur Partnerschaft beginnt das strukturierte Onboarding. Die ersten Schritte umfassen:\n\n• Die Auswahl und Bestellung eines passenden Startersets, das Produkte und Werkzeuge enthält.\n• Die Online-Registrierung und die Aktivierung Ihres persönlichen Shop-Links.\n• Die Einführung in die wichtigsten Tools wie LR Neo, MyOffice und die Connect App.\n• Das Sammeln erster Kontakte (Namensliste) und die Vorbereitung auf die ersten Produkt- oder Geschäftsvorstellungen, oft mit Unterstützung durch Lina."
+      a: "Nach deiner Anfrage bekommst du per WhatsApp dein Info-Paket zugeschickt. Wenn du dich für den Start entscheidest, führt dich Lina durch alle nächsten Schritte:\n\n• Auswahl und Bestellung eines passenden Startersets\n• Online-Registrierung und Aktivierung deines persönlichen Shop-Links\n• Einführung in die wichtigsten Tools (LR Neo, MyOffice, Connect App)\n• Vorbereitung auf deine ersten Produkt- oder Geschäftsvorstellungen"
     },
     {
       q: "Ist das LR Geschäft seriös?",
-      a: "Ja, LR Health & Beauty ist ein etabliertes und seriöses europäisches Social-Commerce-Unternehmen. Es wurde 1985 gegründet und feierte 2025 sein 40-jähriges Bestehen. LR operiert in 32 Ländern, legt Wert auf höchste Produktqualität (\"Made in Germany\"), und arbeitet mit Prominenten zusammen. Die Qualität der Aloe Vera Produkte wird durch unabhängige Siegel wie das SGS INSTITUT FRESENIUS und das IASC-Siegel bestätigt."
+      a: "Ja, LR Health & Beauty ist ein etabliertes europäisches Social-Commerce-Unternehmen. Es wurde 1985 gegründet und feiert 2025 sein 40-jähriges Bestehen. LR ist in 32 Ländern aktiv und legt Wert auf höchste Produktqualität (\"Made in Germany\"). Die Qualität der Aloe Vera Produkte wird durch unabhängige Siegel wie das SGS INSTITUT FRESENIUS und das IASC-Siegel bestätigt."
     },
     {
       q: "Muss ich verkaufen oder kann ich nur Team aufbauen?",
-      a: "Das LR Geschäftsmodell basiert auf drei Säulen:\n\n1. Eigenbedarf (Produkte zum Vorteilspreis nutzen).\n2. Verkauf (Produkte an Kunden weiterempfehlen und die Handelsspanne von ca. 30–40 % als direkten Verdienst erhalten).\n3. Weiterempfehlung und Teamaufbau (neue Partner gewinnen und Boni auf deren Umsätze erhalten).\n\nEs gibt keine Verpflichtung, Produkte zu verkaufen."
+      a: "Das LR Geschäftsmodell basiert auf drei Säulen:\n\n1. Eigenbedarf (Produkte zum Vorteilspreis nutzen)\n2. Verkauf (Produkte weiterempfehlen und 30–50 % Provision verdienen)\n3. Teamaufbau (neue Partner gewinnen und Boni auf deren Umsätze erhalten)\n\nEs gibt keine Verpflichtung, Produkte zu verkaufen."
     },
     {
       q: "Wie viel Zeit brauche ich pro Woche?",
-      a: "Das Geschäftsmodell ermöglicht eine flexible Zeiteinteilung und das ortsunabhängige Arbeiten. Sie können das Geschäft haupt- oder nebenberuflich starten, je nachdem, wie es in Ihre Work-Life-Balance passt. Es wird empfohlen, täglich mit mindestens einer Person über LR zu sprechen, wobei schon 30 Minuten fokussierter LR-Zeit pro Tag zum Erfolg beitragen können."
+      a: "Das Geschäftsmodell ermöglicht flexible Zeiteinteilung und ortsunabhängiges Arbeiten. Du kannst haupt- oder nebenberuflich starten – ganz wie es in dein Leben passt. Empfohlen wird, täglich mit mindestens einer Person über LR zu sprechen. Schon 30 Minuten fokussierte LR-Zeit pro Tag können zum Erfolg beitragen."
     },
     {
       q: "Was ist der Fast Track Bonus genau?",
-      a: "Der Fast Track Bonus ist ein spezielles Programm, das neue Partner für die schnelle Erreichung der ersten drei Karrierestufen (Junior Manager, Junior Teamleiter, Orgaleiter) belohnt. Er garantiert einen monatlichen Mindestbonus für bis zu 12 Monate. Dieser garantierte Betrag wird gezahlt, falls der regulär errechnete Bonus niedriger ausfällt (Uplift)."
+      a: "Der Fast Track Bonus belohnt neue Partner für die schnelle Erreichung der ersten drei Karrierestufen (Junior Manager, Junior Teamleiter, Orgaleiter). Er garantiert einen monatlichen Mindestbonus für bis zu 12 Monate. Falls dein regulär errechneter Bonus niedriger ausfällt, bekommst du den garantierten Betrag (Uplift)."
     },
     {
       q: "Wie hoch ist der garantierte Bonus in den Fast Track Stufen?",
-      a: "Die garantierten Mindestboni sind:\n\n• Junior Manager: 300 € pro Monat.\n• Junior Teamleiter: 1.100 € pro Monat.\n• Orgaleiter: 2.000 € pro Monat.\n\nDiese Beträge werden zusätzlich zur Handelsspanne und zum Autobonus gezahlt."
+      a: "Die garantierten Mindestboni sind:\n\n• Junior Manager: 300 € pro Monat\n• Junior Teamleiter: 1.100 € pro Monat\n• Orgaleiter: 2.000 € pro Monat\n\nDiese Beträge werden zusätzlich zur Handelsspanne und zum Autobonus gezahlt."
     },
     {
       q: "Wie funktioniert das LR Autokonzept?",
-      a: "Das Autokonzept ist ein attraktives Firmenwagenprogramm, das qualifizierten Partnern ermöglicht, Fahrzeuge von Top-Marken wie VW, Audi, Mercedes-Benz oder BMW zu besonders günstigen Leasingkonditionen zu erhalten. Ein großer Vorteil ist, dass die Leasingverträge oft ohne Anzahlung und ohne Schlussrate abgeschlossen werden. Die Qualifikation ist bereits ab der Stufe Junior Manager (4.000 PW) möglich. Zusätzlich erhalten Partner einen monatlichen Autobonus (z.B. 55 € für Junior Manager), der die Leasingkosten erheblich reduziert."
+      a: "Das Autokonzept ist ein Firmenwagenprogramm für qualifizierte Partner. Du bekommst Fahrzeuge von VW, Audi, Mercedes-Benz oder BMW zu besonders günstigen Leasingkonditionen – oft ohne Anzahlung und ohne Schlussrate. Die Qualifikation ist ab Junior Manager (4.000 PW) möglich. Zusätzlich erhältst du einen monatlichen Autobonus (z.B. 55 € für Junior Manager), der die Leasingkosten erheblich reduziert."
     },
     {
       q: "Was, wenn ich unsicher bin oder Bedenken habe?",
-      a: "Unsicherheit ist am Anfang normal. Das LR Geschäftsmodell ist mit geringem Risiko verbunden, da kein hohes Startkapital oder Lagerhaltung erforderlich ist. Lina, Ihr Coach, ist rund um die Uhr verfügbar, um spezifische Bedenken anzusprechen und zu klären. Sie kann Ihnen helfen, alle Fragen zum Geschäftsmodell und zu möglichen Ängsten (z.B. Angst vor Social Media oder davor, keine Kontakte zu finden) zu entmystifizieren."
+      a: "Unsicherheit ist am Anfang völlig normal. Das LR Geschäftsmodell ist risikoarm – kein hohes Startkapital, keine Lagerhaltung nötig. Lina ist rund um die Uhr für dich da, um alle Fragen zu klären und Bedenken anzusprechen – egal ob es um Social Media geht oder die Sorge, keine Kontakte zu finden."
     },
     {
       q: "Gibt es für höhere Karrierestufen einen garantierten Bonus?",
-      a: "Ja, für höhere Karrierestufen ab Orgaleiter gibt es den Business Track Bonus. Dieses Programm garantiert ebenfalls feste Mindestboni (z.B. 2.000 € für Orgaleiter, 3.000 € für Bronze-Orgaleiter). Der Partner erhält immer den höheren Betrag zwischen dem regulär errechneten Bonus und dem garantierten Business Track Bonus."
+      a: "Ja, ab Orgaleiter gibt es den Business Track Bonus mit festen Mindestboni (z.B. 2.000 € für Orgaleiter, 3.000 € für Bronze-Orgaleiter). Du erhältst immer den höheren Betrag – entweder deinen regulär errechneten Bonus oder den garantierten Business Track Bonus."
     },
     {
       q: "Woher weiß ich, welche Produkte für mich geeignet sind?",
-      a: "LR bietet ein breites Portfolio an Gesundheits- und Schönheitsprodukten, darunter Aloe Vera, Nahrungsergänzung (Lifetakt), Parfüms (Mood Infusion & Iconic Elixirs) und Kosmetik (Zeitgard). Lina kann Ihnen helfen, schnell Produktinformationen zu finden, und es steht ein LR Duftfinder zur Verfügung, um die richtige Emotion oder den passenden Duft zu finden."
+      a: "LR bietet ein breites Portfolio: Aloe Vera, Nahrungsergänzung (Lifetakt), Parfüms und Kosmetik (Zeitgard). Lina hilft dir, schnell die passenden Produkte zu finden. Außerdem gibt es einen LR Duftfinder für die Wahl des richtigen Parfüms."
     },
     {
       q: "Für wen ist das LR Business geeignet?",
-      a: "Das LR Business ist für jeden geeignet, der sich ein flexibles Einkommen aufbauen möchte:\n\n• Angestellte: Raus aus dem Hamsterrad – bauen Sie sich nebenberuflich Sicherheit (Plan B) auf, ohne Ihren Job zu kündigen.\n• Selbständige: Kein Personal, keine Miete, kein Warenlager – nutzen Sie ein fertiges Milliarden-System ohne das klassische Risiko.\n• Mamas & Papas: Arbeiten Sie vom Küchentisch oder Spielplatz aus – volle Flexibilität für Ihre Familie dank Home-Office.\n• Quereinsteiger: Sie haben noch nie verkauft? Perfekt. Unser KI-System und Mentoring machen Sie fit. Jeder kann das lernen.\n\nAlles was Sie brauchen, ist Ihr Smartphone oder Laptop."
+      a: "Das LR Business ist für jeden, der sich ein flexibles Einkommen aufbauen möchte:\n\n• Angestellte: Baue dir nebenberuflich einen Plan B auf, ohne deinen Job zu kündigen\n• Selbständige: Kein Personal, keine Miete, kein Warenlager – nutze ein fertiges System ohne klassisches Risiko\n• Mamas & Papas: Arbeite vom Küchentisch oder Spielplatz – volle Flexibilität für deine Familie\n• Quereinsteiger: Noch nie verkauft? Kein Problem. Unser KI-System und Mentoring machen dich fit\n\nAlles was du brauchst, ist dein Smartphone oder Laptop."
     },
     {
       q: "Welche Startersets gibt es und was kosten sie?",
-      a: "LR bietet verschiedene Startersets für den Einstieg an. Die Startpaket-Gebühr beträgt 29,90 € (100 PW) für das Printpaket. Darüber hinaus gibt es das Profi Business Startpaket mit 2.000 PW, das bereits die Hälfte der Qualifikation für das Autokonzept (4.000 PW) abdeckt. Die Startersets bieten erhebliche Ersparnisse gegenüber dem Einzelkauf und enthalten Produkte sowie wichtige Werkzeuge für Ihren Start."
+      a: "Für den Start brauchst du das Printpaket (29,90 €) plus eine Erstbestellung von mindestens 150 €. Die Produkte sind stark subventioniert – du bekommst deutlich mehr Wert als du bezahlst.\n\nWas du bekommst:\n• Deinen eigenen Online-Shop – LR liefert direkt an deine Kunden\n• 30–50 % Provision auf verkaufte Produkte\n• Eine Webseite in 20 Sprachen\n• Zugang zu Lina (KI-Coach) + Support vom LR Lifestyle Team\n\nDas Profi Business Startpaket mit 2.000 PW deckt bereits die Hälfte der Qualifikation fürs Autokonzept (4.000 PW) ab."
     },
     {
       q: "Wie funktioniert das duplizierbare System?",
-      a: "Unser System ist darauf ausgelegt, dass Sie es 1:1 an neue Partner weitergeben können. Sie erhalten:\n\n• 100+ Post-Vorlagen, Scripts und Checklisten – kein Rätselraten.\n• Einen klaren 30-Tage-Plan mit konkreten Aufgaben.\n• Fertige Videos und Präsentationen zum Teilen.\n• Lina KI für automatisierte Content-Erstellung.\n\nWas bei Ihnen funktioniert, geben Sie einfach weiter – neue Partner verstehen den Einstieg schnell und können sofort loslegen."
+      a: "Unser System ist so aufgebaut, dass du es 1:1 an neue Partner weitergeben kannst:\n\n• 100+ Post-Vorlagen, Scripts und Checklisten\n• Ein klarer 30-Tage-Plan mit konkreten Aufgaben\n• Fertige Videos und Präsentationen zum Teilen\n• Lina KI für automatisierte Content-Erstellung\n\nWas bei dir funktioniert, gibst du einfach weiter – neue Partner können sofort loslegen."
     },
     {
       q: "Welche Unterstützung bekomme ich vom Team?",
-      a: "Sie sind nie allein. Das LR Lifestyle Team bietet umfassende Unterstützung:\n\n• Persönliches Mentoring: Mentoren mit 30+ Jahren Erfahrung begleiten Sie.\n• WhatsApp-Gruppen: Schneller Austausch und Hilfe von der Community.\n• Zoom-Calls: Regelmäßige Trainings und Q&A-Sessions.\n• Events: Networking und Weiterbildung auf Veranstaltungen.\n• Lina KI: 24/7 verfügbar für alle Fragen rund um LR, Produkte und Vertrieb.\n\nVon Tag 1 an haben Sie ein starkes Team an Ihrer Seite."
+      a: "Du bist nie allein. Das LR Lifestyle Team bietet:\n\n• Persönliches Mentoring: Matthias und erfahrene Mentoren begleiten dich\n• WhatsApp-Gruppen: Schneller Austausch und Hilfe von der Community\n• Zoom-Calls: Regelmäßige Trainings und Q&A-Sessions\n• Events: Networking und Weiterbildung auf Veranstaltungen\n• Lina KI: 24/7 verfügbar für alle Fragen\n\nVon Tag 1 an hast du ein starkes Team an deiner Seite."
     },
     {
       q: "Kann ich das Business auch international aufbauen?",
-      a: "Ja, LR Health & Beauty ist in 32 Ländern aktiv. Sie können Ihr Netzwerk über Landesgrenzen hinweg aufbauen und von internationalen Umsätzen profitieren. Das Geschäftsmodell funktioniert 100% online, sodass Sie Partner und Kunden weltweit gewinnen können – alles von zu Hause aus mit Ihrem Smartphone oder Laptop."
+      a: "Ja, LR ist in 32 Ländern aktiv. Du kannst dein Netzwerk über Landesgrenzen hinweg aufbauen und von internationalen Umsätzen profitieren. Das Geschäftsmodell funktioniert 100% online – Partner und Kunden weltweit, alles von zu Hause aus."
     }
   ];
 
@@ -722,17 +722,32 @@ const FastTrackSection = () => {
                 <h3 className="text-xl font-bold font-poppins gold-gradient-text">Autokonzept*</h3>
               </div>
               
-              {/* Autokonzept Video mit Mercedes Vorschaubild */}
-              <div className="mb-4 rounded-lg overflow-hidden">
+              {/* Autokonzept Video mit Mercedes Vorschaubild - Play Button unten rechts */}
+              <div className="mb-4 rounded-lg overflow-hidden relative group cursor-pointer" onClick={(e) => {
+                const video = e.currentTarget.querySelector('video');
+                const overlay = e.currentTarget.querySelector('.play-overlay');
+                if (video && overlay) {
+                  (overlay as HTMLElement).style.display = 'none';
+                  (video as HTMLVideoElement).controls = true;
+                  (video as HTMLVideoElement).play();
+                }
+              }}>
                 <video 
                   className="w-full h-auto rounded-lg"
-                  controls
                   poster="/images/mercedes-preview.png"
                   preload="metadata"
                 >
                   <source src="/images/autokonzept-video.mp4" type="video/mp4" />
                   Dein Browser unterstützt keine Videos.
                 </video>
+                {/* Custom Play Button - Bottom Right, Semi-transparent */}
+                <div className="play-overlay absolute inset-0 flex items-end justify-end p-3">
+                  <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm border border-white/30 flex items-center justify-center transition-all group-hover:bg-[#C9A86C]/70 group-hover:scale-110">
+                    <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
               
               <div className="space-y-3 mb-4">
