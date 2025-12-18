@@ -303,3 +303,7 @@
 - [x] Mehr Padding rechts in Stufen-Boxen (px-4 statt px-2)
 - [x] Leerzeichen vor €-Zeichen ("300 €" statt "300€")
 - [x] gold-border-glow Klasse zu allen 3 Stufen-Boxen hinzugefügt
+
+
+## Phase 38 - Lichtstrahl auf Fast Track Card
+- [x] gold-border-glow auf das große Fast Track Fenster im Hero-Bereich

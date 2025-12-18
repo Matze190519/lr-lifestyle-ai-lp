@@ -231,7 +231,7 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="hidden lg:block"
           >
-            <div className="relative p-8 rounded-2xl bg-[#0a0a0a]/80 backdrop-blur-sm animate-float shadow-[0_0_30px_rgba(255,255,255,0.5),0_0_60px_rgba(255,255,255,0.3),0_0_90px_rgba(255,255,255,0.2)]">
+            <div className="relative p-8 rounded-2xl bg-[#0a0a0a]/95 backdrop-blur-sm animate-float gold-border-glow">
               {/* Stats Grid */}
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <div className="text-center p-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/20 to-transparent border border-white/20">
