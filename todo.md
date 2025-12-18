@@ -328,3 +328,9 @@
 
 ## Phase 42 - Lichtstrahl wie bei Teammitgliedern
 - [x] Original dezenter Lichtstrahl wiederhergestellt (conic-gradient rotation)
+
+
+## Phase 43 - Meta Pixel Installation
+- [x] Meta Pixel 677297092936141 in index.html eingebaut
+- [x] Seite getestet - keine Fehler
+- [x] Zu GitHub gepusht (Netlify wird automatisch aktualisiert)
