@@ -195,39 +195,41 @@
   
   .gold-border-glow {
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 
-      0 0 10px rgba(255, 255, 255, 0.2),
-      0 0 20px rgba(255, 255, 255, 0.1);
-    overflow: hidden;
+      0 0 15px rgba(255, 255, 255, 0.3),
+      0 0 30px rgba(255, 255, 255, 0.15),
+      inset 0 0 10px rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.98) 0%, rgba(5, 5, 5, 0.98) 100%);
   }
   
   .gold-border-glow::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-      from 0deg,
-      transparent 0deg,
-      transparent 350deg,
-      rgba(255, 255, 255, 0.4) 355deg,
-      rgba(255, 255, 255, 0.6) 357deg,
-      rgba(255, 255, 255, 0.4) 360deg
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 100%
     );
-    animation: rotateBorder 6s linear infinite;
-    z-index: -1;
+    background-size: 200% 100%;
+    animation: shimmerBorder 3s ease-in-out infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
   
-  .gold-border-glow::after {
-    content: '';
-    position: absolute;
-    inset: 1px;
-    background: rgba(0, 0, 0, 0.97);
-    border-radius: inherit;
-    z-index: -1;
+  @keyframes shimmerBorder {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
   
   /* Floating animation for cards */

@@ -320,3 +320,7 @@
 ## Phase 40 - Mobile Lichtstrahl + About Bild
 - [x] Mobile: Lichtstrahl-Effekte auf 3 Benefit-Boxen oben
 - [x] About-Seite: Mathias Bild kleiner auf Mobile (w-48 h-48)
+
+
+## Phase 41 - Mobile Lichtstrahl-Effekte fixen
+- [x] Lichtstrahl-Effekte auf Mobile sichtbar machen (shimmer statt rotation)
