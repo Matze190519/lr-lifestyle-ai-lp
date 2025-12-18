@@ -334,3 +334,10 @@
 - [x] Meta Pixel 677297092936141 in index.html eingebaut
 - [x] Seite getestet - keine Fehler
 - [x] Zu GitHub gepusht (Netlify wird automatisch aktualisiert)
+
+
+## Phase 44 - Meta Pixel Tracking Fix
+- [x] Aktuellen Pixel-Code geprüft
+- [x] Lead-Event mit value: 10.00 und currency: 'EUR' beim Formular-Submit
+- [x] Erweiterten Abgleich aktiviert (fn, ln, ph - ohne email da nicht im Formular)
+- [x] Zu GitHub gepusht
