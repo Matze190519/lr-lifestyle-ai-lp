@@ -12,7 +12,7 @@ import {
 const API_KEY = '75556a09-d9f7-11f0-a99e-066a7fa2e369';
 const AVATAR_ID = '6fe2c441-ea7c-41cc-96b1-9347e953bd6c';
 const CONTEXT_ID = '2e3b2daf-222f-4cd4-ab02-ff3397b5f52f';
-const VOICE_ID = '1c1f2d85-d15f-431b-9e22-f6626ce44199'; // jedermannhandy - geklonte Stimme
+const VOICE_ID = '1c1f2d85-d15f-431b-9e22-f6626ce44199';
 
 export default function LiveAvatarPage() {
   const [sessionState, setSessionState] = useState<SessionState>(SessionState.INACTIVE);
@@ -26,7 +26,6 @@ export default function LiveAvatarPage() {
   const sessionRef = useRef<LiveAvatarSession | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Get session token from API
   const getSessionToken = async () => {
     const response = await fetch('https://api.liveavatar.com/v1/sessions/token', {
       method: 'POST',
@@ -46,15 +45,12 @@ export default function LiveAvatarPage() {
     });
 
     const data = await response.json();
-    
     if (!response.ok) {
       throw new Error(data.detail || data.message || 'Verbindungsfehler');
     }
-
     return data.data.session_token;
   };
 
-  // Initialize session with SDK
   const initializeSession = useCallback(async (token: string) => {
     try {
       const session = new LiveAvatarSession(token, {
@@ -63,10 +59,8 @@ export default function LiveAvatarPage() {
       
       sessionRef.current = session;
 
-      // Session state changes
       session.on(SessionEvent.SESSION_STATE_CHANGED, (state: SessionState) => {
         setSessionState(state);
-        
         if (state === SessionState.DISCONNECTED) {
           session.removeAllListeners();
           session.voiceChat.removeAllListeners();
@@ -75,55 +69,40 @@ export default function LiveAvatarPage() {
         }
       });
 
-      // Stream ready - attach video
       session.on(SessionEvent.SESSION_STREAM_READY, () => {
         setIsStreamReady(true);
         setIsLoading(false);
-        
         if (videoRef.current) {
           session.attach(videoRef.current);
         }
       });
 
-      // Avatar talking events
-      session.on(AgentEventsEnum.AVATAR_SPEAK_STARTED, () => {
-        setIsAvatarTalking(true);
-      });
+      session.on(AgentEventsEnum.AVATAR_SPEAK_STARTED, () => setIsAvatarTalking(true));
+      session.on(AgentEventsEnum.AVATAR_SPEAK_ENDED, () => setIsAvatarTalking(false));
 
-      session.on(AgentEventsEnum.AVATAR_SPEAK_ENDED, () => {
-        setIsAvatarTalking(false);
-      });
-
-      // Voice chat state
       session.voiceChat.on(VoiceChatEvent.STATE_CHANGED, (state: VoiceChatState) => {
         setVoiceChatActive(state === VoiceChatState.ACTIVE);
       });
 
       await session.start();
-      
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Unbekannter Fehler';
-      setError(errorMsg);
+      setError(err instanceof Error ? err.message : 'Unbekannter Fehler');
       setIsLoading(false);
     }
   }, []);
 
-  // Start avatar session
   const handleStart = async () => {
     setIsLoading(true);
     setError(null);
-    
     try {
       const token = await getSessionToken();
       await initializeSession(token);
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Verbindungsfehler';
-      setError(errorMsg);
+      setError(err instanceof Error ? err.message : 'Verbindungsfehler');
       setIsLoading(false);
     }
   };
 
-  // Stop session
   const handleStop = () => {
     if (sessionRef.current) {
       sessionRef.current.stop();
@@ -133,10 +112,8 @@ export default function LiveAvatarPage() {
     }
   };
 
-  // Send text message
   const handleSendMessage = async () => {
     if (!message.trim() || !sessionRef.current) return;
-    
     try {
       await sessionRef.current.message(message);
       setMessage('');
@@ -145,10 +122,8 @@ export default function LiveAvatarPage() {
     }
   };
 
-  // Toggle voice chat
   const handleToggleVoiceChat = async () => {
     if (!sessionRef.current) return;
-    
     try {
       if (voiceChatActive) {
         await sessionRef.current.voiceChat.stop();
@@ -160,14 +135,12 @@ export default function LiveAvatarPage() {
     }
   };
 
-  // Interrupt avatar
   const handleInterrupt = () => {
     if (sessionRef.current) {
       sessionRef.current.interrupt();
     }
   };
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (sessionRef.current) {
@@ -176,72 +149,84 @@ export default function LiveAvatarPage() {
     };
   }, []);
 
-  const isConnected = sessionState === SessionState.CONNECTED;
-  const isInactive = sessionState === SessionState.INACTIVE;
-
   return (
-    <div className="min-h-screen bg-black">
-      {/* Header */}
-      <div className="bg-black/80 border-b border-amber-500/20 py-4">
+    <div className="min-h-screen bg-[#0a0a0a]">
+      {/* Header - matching landing page style */}
+      <div className="border-b border-[#d4af37]/20 py-4">
         <div className="container">
-          <a href="/" className="text-amber-400 hover:text-amber-300 transition-colors">
-            ← Zurück zur Startseite
+          <a 
+            href="/" 
+            className="inline-flex items-center gap-2 text-[#d4af37] hover:text-[#f4cf67] transition-colors text-sm"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Zurück zur Startseite
           </a>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="container py-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="container py-12">
+        <div className="max-w-5xl mx-auto">
           
-          {/* Title */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
-              <span className="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent">
+          {/* Title Section - matching landing page typography */}
+          <div className="text-center mb-10">
+            <p className="text-[#d4af37]/60 text-sm tracking-widest uppercase mb-3">
+              Dein persönlicher KI-Berater
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-[#d4af37] via-[#f4cf67] to-[#d4af37] bg-clip-text text-transparent">
                 Sprich mit Mathias
               </span>
             </h1>
-            <p className="text-gray-400">
-              Dein persönlicher KI-Berater für LR Health & Beauty
+            <p className="text-gray-400 text-lg max-w-xl mx-auto">
+              Stelle deine Fragen zu LR Health & Beauty – live und persönlich.
             </p>
           </div>
 
-          {/* Avatar Video Container */}
-          <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 bg-gradient-to-b from-gray-900 to-black shadow-[0_0_30px_rgba(251,191,36,0.1)]">
+          {/* Avatar Container - Card style matching landing page */}
+          <div className="bg-[#111111] rounded-2xl border border-[#d4af37]/20 overflow-hidden shadow-[0_0_60px_rgba(212,175,55,0.05)]">
             
-            {/* Video Element */}
-            <div className="aspect-video relative">
+            {/* Video Area */}
+            <div className="relative aspect-video bg-black">
               <video
                 ref={videoRef}
                 autoPlay
                 playsInline
-                muted={false}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 style={{ backgroundColor: '#000' }}
               />
               
               {/* Overlay when not connected */}
               {!isStreamReady && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/80">
+                <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
                   {isLoading ? (
                     <div className="text-center">
-                      <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                      <p className="text-amber-400">Verbinde mit Mathias...</p>
+                      <div className="w-16 h-16 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                      <p className="text-[#d4af37] text-lg">Verbinde mit Mathias...</p>
+                      <p className="text-gray-500 text-sm mt-2">Bitte warten</p>
                     </div>
                   ) : (
-                    <div className="text-center p-8">
-                      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(251,191,36,0.3)]">
-                        <svg className="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    <div className="text-center px-8">
+                      {/* Avatar placeholder */}
+                      <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/5 border-2 border-[#d4af37]/30 flex items-center justify-center mx-auto mb-8">
+                        <svg className="w-16 h-16 text-[#d4af37]/50" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                         </svg>
                       </div>
-                      <h2 className="text-xl font-bold text-white mb-2">Bereit zum Gespräch</h2>
-                      <p className="text-gray-400 mb-6">Klicke auf "Gespräch starten" um mit Mathias zu sprechen</p>
+                      <h2 className="text-2xl font-bold text-white mb-3">Bereit für dein Gespräch</h2>
+                      <p className="text-gray-400 mb-8 max-w-md mx-auto">
+                        Klicke auf den Button um ein Live-Gespräch mit Mathias zu starten.
+                      </p>
                       <button
                         onClick={handleStart}
                         disabled={isLoading}
-                        className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-bold py-4 px-8 rounded-xl transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(251,191,36,0.3)]"
+                        className="inline-flex items-center gap-3 bg-[#10b981] hover:bg-[#059669] text-white font-semibold py-4 px-8 rounded-lg transition-all transform hover:scale-[1.02] shadow-lg shadow-[#10b981]/20"
                       >
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
                         Gespräch starten
                       </button>
                     </div>
@@ -249,45 +234,43 @@ export default function LiveAvatarPage() {
                 </div>
               )}
 
-              {/* Talking indicator */}
-              {isStreamReady && isAvatarTalking && (
-                <div className="absolute top-4 left-4">
-                  <div className="flex items-center gap-2 bg-black/70 px-3 py-1.5 rounded-full border border-amber-500/30">
-                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
-                    <span className="text-amber-400 text-sm">Mathias spricht...</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Voice chat indicator */}
-              {isStreamReady && voiceChatActive && (
-                <div className="absolute top-4 right-4">
-                  <div className="flex items-center gap-2 bg-black/70 px-3 py-1.5 rounded-full border border-green-500/30">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-green-400 text-sm">Mikrofon aktiv</span>
-                  </div>
+              {/* Status indicators */}
+              {isStreamReady && (
+                <div className="absolute top-4 left-4 right-4 flex justify-between">
+                  {isAvatarTalking && (
+                    <div className="flex items-center gap-2 bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-[#d4af37]/30">
+                      <div className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse"></div>
+                      <span className="text-[#d4af37] text-sm font-medium">Mathias spricht</span>
+                    </div>
+                  )}
+                  {voiceChatActive && (
+                    <div className="flex items-center gap-2 bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-[#10b981]/30 ml-auto">
+                      <div className="w-2 h-2 bg-[#10b981] rounded-full animate-pulse"></div>
+                      <span className="text-[#10b981] text-sm font-medium">Mikrofon aktiv</span>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
             {/* Controls - only when connected */}
             {isStreamReady && (
-              <div className="p-4 bg-black/50 border-t border-amber-500/20">
+              <div className="p-6 border-t border-[#d4af37]/10 bg-[#0d0d0d]">
                 
                 {/* Text Input */}
-                <div className="flex gap-3 mb-4">
+                <div className="flex gap-3 mb-5">
                   <input
                     type="text"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder="Schreibe eine Nachricht..."
-                    className="flex-1 bg-gray-900 text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500/50 placeholder-gray-500"
+                    placeholder="Schreibe eine Nachricht an Mathias..."
+                    className="flex-1 bg-[#1a1a1a] text-white px-5 py-3.5 rounded-lg border border-[#333] focus:border-[#d4af37]/50 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20 placeholder-gray-500 transition-all"
                   />
                   <button
                     onClick={handleSendMessage}
                     disabled={!message.trim()}
-                    className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 disabled:from-gray-600 disabled:to-gray-700 text-black font-bold px-6 py-3 rounded-xl transition-all disabled:cursor-not-allowed"
+                    className="bg-[#10b981] hover:bg-[#059669] disabled:bg-[#333] disabled:text-gray-500 text-white font-semibold px-6 py-3.5 rounded-lg transition-all disabled:cursor-not-allowed"
                   >
                     Senden
                   </button>
@@ -297,10 +280,10 @@ export default function LiveAvatarPage() {
                 <div className="flex gap-3 justify-center flex-wrap">
                   <button
                     onClick={handleToggleVoiceChat}
-                    className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-all ${
+                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all ${
                       voiceChatActive 
-                        ? 'bg-green-600 hover:bg-green-700 text-white' 
-                        : 'bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600'
+                        ? 'bg-[#10b981] text-white' 
+                        : 'bg-[#1a1a1a] text-gray-300 border border-[#333] hover:border-[#d4af37]/30'
                     }`}
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -311,7 +294,7 @@ export default function LiveAvatarPage() {
                   
                   <button
                     onClick={handleInterrupt}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600 transition-all"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium bg-[#1a1a1a] text-gray-300 border border-[#333] hover:border-[#d4af37]/30 transition-all"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M6 6h12v12H6z"/>
@@ -321,7 +304,7 @@ export default function LiveAvatarPage() {
                   
                   <button
                     onClick={handleStop}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium bg-red-900/50 hover:bg-red-900 text-red-300 border border-red-700/50 transition-all"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium bg-[#1a1a1a] text-red-400 border border-red-900/30 hover:bg-red-900/20 transition-all"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -335,7 +318,7 @@ export default function LiveAvatarPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="mt-4 bg-red-900/30 border border-red-500/50 text-red-300 p-4 rounded-xl text-center">
+            <div className="mt-6 bg-red-900/20 border border-red-500/30 text-red-400 p-4 rounded-lg text-center">
               {error}
               <button 
                 onClick={() => setError(null)} 
@@ -346,22 +329,43 @@ export default function LiveAvatarPage() {
             </div>
           )}
 
-          {/* Info Section */}
-          <div className="mt-8 grid md:grid-cols-3 gap-4">
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
-              <div className="text-amber-400 text-2xl mb-2">💬</div>
-              <h3 className="text-white font-medium mb-1">Text-Chat</h3>
-              <p className="text-gray-500 text-sm">Schreibe deine Fragen direkt</p>
+          {/* Info Cards - matching landing page card style */}
+          <div className="mt-10 grid md:grid-cols-3 gap-4">
+            <div className="bg-[#111111] border border-[#d4af37]/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-lg bg-[#d4af37]/10 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[#d4af37]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                  </svg>
+                </div>
+                <h3 className="text-white font-semibold">Text-Chat</h3>
+              </div>
+              <p className="text-gray-500 text-sm">Schreibe deine Fragen direkt an Mathias.</p>
             </div>
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
-              <div className="text-amber-400 text-2xl mb-2">🎤</div>
-              <h3 className="text-white font-medium mb-1">Sprach-Chat</h3>
-              <p className="text-gray-500 text-sm">Aktiviere das Mikrofon zum Sprechen</p>
+            
+            <div className="bg-[#111111] border border-[#d4af37]/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-lg bg-[#d4af37]/10 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[#d4af37]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                  </svg>
+                </div>
+                <h3 className="text-white font-semibold">Sprach-Chat</h3>
+              </div>
+              <p className="text-gray-500 text-sm">Aktiviere das Mikrofon und sprich direkt.</p>
             </div>
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
-              <div className="text-amber-400 text-2xl mb-2">🤖</div>
-              <h3 className="text-white font-medium mb-1">KI-Berater</h3>
-              <p className="text-gray-500 text-sm">24/7 verfügbar für deine Fragen</p>
+            
+            <div className="bg-[#111111] border border-[#d4af37]/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-lg bg-[#d4af37]/10 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[#d4af37]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                </div>
+                <h3 className="text-white font-semibold">24/7 verfügbar</h3>
+              </div>
+              <p className="text-gray-500 text-sm">Mathias ist rund um die Uhr für dich da.</p>
             </div>
           </div>
 
