@@ -389,3 +389,20 @@
 - [ ] Fix video display issue
 - [ ] Fix audio "too short" error
 - [ ] Test on user device
+
+## Phase 51 - LiveAvatar Embedded auf Hauptseite (wie Lina Chatbot)
+- [ ] LiveAvatar als Popup/Modal auf Hauptseite einbetten (wie Lina Chatbot)
+- [ ] Kein separater Link - direkt eingebettet
+- [ ] Video Display Problem beheben
+- [ ] Stimme Problem beheben (geklonte Stimme statt Roboter)
+- [ ] Testen auf User-Gerät
+
+
+## Phase 51 - LiveAvatar Embedded Popup (wie Lina Chatbot)
+- [x] Create LiveAvatarPopup component embedded on main page
+- [x] Add FAB (floating action button) to trigger popup
+- [x] Implement video display and controls in popup
+- [x] Add voice chat toggle functionality
+- [x] Add text chat input option
+- [x] Fix auto-start - now shows "Gespräch starten" button first
+- [x] Popup opens on FAB click with proper modal overlay

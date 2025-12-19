@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -10,6 +10,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import About from "./pages/About";
 import LiveAvatar from "./pages/LiveAvatar";
+import LiveAvatarFAB from "./components/LiveAvatarFAB";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -30,6 +31,16 @@ function Router() {
   );
 }
 
+// Component to conditionally show FAB only on Home page
+function ConditionalFAB() {
+  const [location] = useLocation();
+  // Only show FAB on home page, not on the dedicated LiveAvatar page
+  if (location === '/' || location === '') {
+    return <LiveAvatarFAB />;
+  }
+  return null;
+}
+
 // NOTE: About Theme
 // - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
 //   to keep consistent foreground/background color across components
@@ -45,6 +56,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <ConditionalFAB />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
