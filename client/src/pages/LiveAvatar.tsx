@@ -1,11 +1,14 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { Room, RoomEvent, Track, RemoteTrack, RemoteTrackPublication, RemoteParticipant } from "livekit-client";
 
 // LiveAvatar Configuration
 const LIVEAVATAR_API_KEY = "75556a09-d9f7-11f0-a99e-066a7fa2e369";
 const AVATAR_ID = "6fe2c441-ea7c-41cc-96b1-9347e953bd6c";
+const VOICE_ID = "1c1f2d85-d15f-431b-9e22-f6626ce44199";
+const CONTEXT_ID = "2e3b2daf-222f-4cd4-ab02-ff3397b5f52f";
 const API_URL = "https://api.liveavatar.com";
 
-// Chroma Key Settings
+// Chroma Key Settings for Green Screen
 const CHROMA_KEY_CONFIG = {
   minHue: 60,
   maxHue: 180,
@@ -17,57 +20,12 @@ export default function LiveAvatarPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const [status, setStatus] = useState<string>("Bereit zum Starten");
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const roomRef = useRef<Room | null>(null);
   const animationFrameRef = useRef<number | null>(null);
-
-  // Fetch session token from LiveAvatar API
-  const getSessionToken = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-
-      const response = await fetch(`${API_URL}/v1/sessions/token`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-API-KEY": LIVEAVATAR_API_KEY,
-        },
-        body: JSON.stringify({
-          mode: "FULL",
-          avatar_id: AVATAR_ID,
-          avatar_persona: {
-            voice_id: "1c1f2d85-d15f-431b-9e22-f6626ce44199", // jedermannhandy - deine geklonte Stimme
-            context_id: "2e3b2daf-222f-4cd4-ab02-ff3397b5f52f",
-            language: "de",
-          },
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || `API Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("API Response:", data);
-      const token = data.data?.session_token;
-      if (!token) {
-        throw new Error("Kein Session Token in der Antwort");
-      }
-      setSessionToken(token);
-      return token;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Unbekannter Fehler";
-      setError(`Fehler beim Verbinden: ${errorMessage}`);
-      console.error("Session token error:", err);
-      return null;
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   // RGB to HSL conversion for chroma key
   const rgbToHsl = (r: number, g: number, b: number) => {
@@ -103,7 +61,10 @@ export default function LiveAvatarPage() {
   const applyChromaKey = useCallback(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    if (!video || !canvas || video.paused || video.ended) return;
+    if (!video || !canvas || video.paused || video.ended || video.readyState < 2) {
+      animationFrameRef.current = requestAnimationFrame(applyChromaKey);
+      return;
+    }
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
@@ -163,42 +124,157 @@ export default function LiveAvatarPage() {
     }
   }, []);
 
-  // Initialize LiveAvatar session
-  const startSession = async () => {
-    const token = await getSessionToken();
-    if (!token) return;
+  // Handle incoming video track
+  const handleTrackSubscribed = useCallback((
+    track: RemoteTrack,
+    publication: RemoteTrackPublication,
+    participant: RemoteParticipant
+  ) => {
+    console.log("Track subscribed:", track.kind, participant.identity);
+    
+    if (track.kind === Track.Kind.Video) {
+      const videoElement = videoRef.current;
+      if (videoElement) {
+        track.attach(videoElement);
+        setStatus("Avatar verbunden!");
+        startChromaKey();
+      }
+    }
+    
+    if (track.kind === Track.Kind.Audio) {
+      // Create audio element for avatar voice
+      const audioElement = document.createElement("audio");
+      audioElement.autoplay = true;
+      track.attach(audioElement);
+    }
+  }, [startChromaKey]);
 
+  // Fetch session token and start LiveKit session
+  const startSession = async () => {
     try {
-      // Dynamic import of LiveAvatar SDK
-      const { LiveAvatarSession } = await import("@heygen/liveavatar-web-sdk");
-      
-      const session = new LiveAvatarSession(token, {
-        voiceChat: true, // Voice chat enabled for real usage
-        apiUrl: API_URL,
+      setIsLoading(true);
+      setError(null);
+      setStatus("Hole Session Token...");
+
+      // Step 1: Get session token
+      const tokenResponse = await fetch(`${API_URL}/v1/sessions/token`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": LIVEAVATAR_API_KEY,
+        },
+        body: JSON.stringify({
+          mode: "FULL",
+          avatar_id: AVATAR_ID,
+          avatar_persona: {
+            voice_id: VOICE_ID,
+            context_id: CONTEXT_ID,
+            language: "de",
+          },
+        }),
       });
 
-      // Attach video element
-      if (videoRef.current) {
-        session.attach(videoRef.current);
+      if (!tokenResponse.ok) {
+        const errorData = await tokenResponse.json();
+        throw new Error(errorData.message || `Token API Error: ${tokenResponse.status}`);
       }
 
-      // Start session
-      await session.start();
+      const tokenData = await tokenResponse.json();
+      const sessionToken = tokenData.data?.session_token;
+      
+      if (!sessionToken) {
+        throw new Error("Kein Session Token erhalten");
+      }
+
+      setStatus("Starte Session...");
+
+      // Step 2: Start session to get LiveKit credentials
+      const startResponse = await fetch(`${API_URL}/v1/sessions/start`, {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "authorization": `Bearer ${sessionToken}`,
+        },
+      });
+
+      if (!startResponse.ok) {
+        const errorData = await startResponse.json();
+        throw new Error(errorData.message || `Start API Error: ${startResponse.status}`);
+      }
+
+      const startData = await startResponse.json();
+      const { livekit_url, livekit_client_token } = startData.data;
+
+      if (!livekit_url || !livekit_client_token) {
+        throw new Error("Keine LiveKit Credentials erhalten");
+      }
+
+      setStatus("Verbinde mit LiveKit...");
+
+      // Step 3: Connect to LiveKit room
+      const room = new Room({
+        adaptiveStream: true,
+        dynacast: true,
+      });
+
+      roomRef.current = room;
+
+      // Set up event handlers
+      room.on(RoomEvent.TrackSubscribed, handleTrackSubscribed);
+      
+      room.on(RoomEvent.Disconnected, () => {
+        console.log("Disconnected from room");
+        setIsConnected(false);
+        setStatus("Verbindung getrennt");
+        stopChromaKey();
+      });
+
+      room.on(RoomEvent.ParticipantConnected, (participant) => {
+        console.log("Participant connected:", participant.identity);
+      });
+
+      // Connect to room
+      await room.connect(livekit_url, livekit_client_token);
+      
       setIsConnected(true);
-      startChromaKey();
+      setStatus("Warte auf Avatar...");
+
+      // Enable microphone for voice chat
+      try {
+        await room.localParticipant.setMicrophoneEnabled(true);
+        setStatus("Mikrofon aktiviert - Sprich mit dem Avatar!");
+      } catch (micError) {
+        console.warn("Mikrofon konnte nicht aktiviert werden:", micError);
+        setStatus("Avatar verbunden (ohne Mikrofon)");
+      }
+
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Unbekannter Fehler";
-      setError(`Session-Fehler: ${errorMessage}`);
+      setError(`Fehler: ${errorMessage}`);
       console.error("Session error:", err);
+      setStatus("Fehler beim Verbinden");
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // Stop session
+  const stopSession = useCallback(() => {
+    if (roomRef.current) {
+      roomRef.current.disconnect();
+      roomRef.current = null;
+    }
+    stopChromaKey();
+    setIsConnected(false);
+    setStatus("Bereit zum Starten");
+  }, [stopChromaKey]);
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      stopChromaKey();
+      stopSession();
     };
-  }, [stopChromaKey]);
+  }, [stopSession]);
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
@@ -208,9 +284,12 @@ export default function LiveAvatarPage() {
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl">
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 bg-clip-text text-transparent">
           LiveAvatar Demo
         </h1>
+
+        {/* Status */}
+        <p className="text-center text-amber-200/80 mb-6">{status}</p>
 
         {/* Avatar Container */}
         <div className="relative mx-auto" style={{ maxWidth: "640px", aspectRatio: "16/9" }}>
@@ -221,13 +300,12 @@ export default function LiveAvatarPage() {
             playsInline
             muted={false}
             className="hidden"
-            onPlay={startChromaKey}
           />
 
           {/* Canvas with chroma key applied (visible) */}
           <canvas
             ref={canvasRef}
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full rounded-2xl border-2 border-amber-500/30"
             style={{
               backgroundColor: "black",
             }}
@@ -239,7 +317,7 @@ export default function LiveAvatarPage() {
               {isLoading ? (
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
-                  <p className="text-amber-200">Verbinde mit Avatar...</p>
+                  <p className="text-amber-200">{status}</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-4">
@@ -268,35 +346,32 @@ export default function LiveAvatarPage() {
         <div className="mt-8 flex justify-center gap-4">
           {!isConnected ? (
             <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                startSession();
-              }}
+              type="button"
+              onClick={startSession}
               disabled={isLoading}
               className="px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-600 text-black font-bold rounded-xl 
                        hover:from-amber-300 hover:to-amber-500 transition-all duration-300
                        disabled:opacity-50 disabled:cursor-not-allowed
-                       shadow-lg shadow-amber-500/30 relative z-50"
+                       shadow-lg shadow-amber-500/30"
             >
               {isLoading ? "Verbinde..." : "Avatar starten"}
             </button>
           ) : (
-            <div className="flex gap-4">
-              <button
-                onClick={() => window.location.reload()}
-                className="px-6 py-3 bg-gray-700 text-white font-medium rounded-xl 
-                         hover:bg-gray-600 transition-all duration-300"
-              >
-                Neu starten
-              </button>
-            </div>
+            <button
+              onClick={stopSession}
+              className="px-6 py-3 bg-red-600 text-white font-medium rounded-xl 
+                       hover:bg-red-500 transition-all duration-300"
+            >
+              Beenden
+            </button>
           )}
         </div>
 
         {/* Info */}
         <p className="mt-8 text-center text-gray-400 text-sm">
           Dieser Avatar verwendet Green Screen Technologie mit Chroma Key Entfernung.
+          <br />
+          <span className="text-amber-400/60">Erlaube den Mikrofon-Zugriff für Voice Chat.</span>
         </p>
       </div>
     </div>
