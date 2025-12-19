@@ -358,3 +358,13 @@
 - [ ] Fix: Falsche Stimme (Roboter statt geklonte Stimme)
 - [ ] Debug: Video-Track Empfang prüfen
 - [ ] Debug: Voice-ID Konfiguration prüfen
+
+## Phase 47 - LiveAvatar Critical Fixes (User Feedback)
+- [x] Fix voice - use cloned voice (jedermannhandy) - voice_id explicitly set
+- [x] Add text input field for avatar communication
+- [x] Fix video autoplay on mobile - tap to play fallback added
+- [x] Read complete documentation - implemented based on official SDK
+- [x] Added voice chat toggle button
+- [x] Added interrupt button
+- [x] Added transcription display
+- [ ] Test on user device

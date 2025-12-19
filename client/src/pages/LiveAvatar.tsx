@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Room, RoomEvent, Track, RemoteTrack, RemoteTrackPublication, RemoteParticipant, RemoteVideoTrack, RemoteAudioTrack } from "livekit-client";
+import { Room, RoomEvent, Track, RemoteTrack, RemoteTrackPublication, RemoteParticipant, RemoteVideoTrack, RemoteAudioTrack, DataPacket_Kind } from "livekit-client";
 
 // LiveAvatar Configuration
 const LIVEAVATAR_API_KEY = "75556a09-d9f7-11f0-a99e-066a7fa2e369";
@@ -7,27 +7,93 @@ const AVATAR_ID = "6fe2c441-ea7c-41cc-96b1-9347e953bd6c";
 const CONTEXT_ID = "2e3b2daf-222f-4cd4-ab02-ff3397b5f52f";
 const API_URL = "https://api.liveavatar.com";
 
+// LiveKit Topics from official SDK
+const LIVEKIT_COMMAND_CHANNEL_TOPIC = "agent-control";
+const LIVEKIT_SERVER_RESPONSE_CHANNEL_TOPIC = "agent-response";
+
 // HeyGen participant ID - this is where the avatar video/audio comes from
 const HEYGEN_PARTICIPANT_ID = "heygen";
+
+// Command Event Types from official SDK
+const CommandEvents = {
+  AVATAR_INTERRUPT: "avatar.interrupt",
+  AVATAR_SPEAK_TEXT: "avatar.speak_text",
+  AVATAR_SPEAK_RESPONSE: "avatar.speak_response",
+  AVATAR_START_LISTENING: "avatar.start_listening",
+  AVATAR_STOP_LISTENING: "avatar.stop_listening",
+};
 
 export default function LiveAvatarPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [isStreamReady, setIsStreamReady] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string>("Bereit zum Starten");
   const [debugInfo, setDebugInfo] = useState<string[]>([]);
+  const [textInput, setTextInput] = useState("");
+  const [transcription, setTranscription] = useState<string>("");
   
   const mediaElementRef = useRef<HTMLVideoElement>(null);
   const roomRef = useRef<Room | null>(null);
   const remoteVideoTrackRef = useRef<RemoteVideoTrack | null>(null);
   const remoteAudioTrackRef = useRef<RemoteAudioTrack | null>(null);
-  const mediaStreamRef = useRef<MediaStream>(new MediaStream());
 
   const addDebug = (msg: string) => {
     console.log("[LiveAvatar]", msg);
     setDebugInfo(prev => [...prev.slice(-9), msg]);
   };
+
+  // Send command event to avatar via LiveKit data channel
+  const sendCommandEvent = useCallback((eventType: string, data?: object) => {
+    const room = roomRef.current;
+    if (!room || room.state !== "connected") {
+      addDebug("Cannot send event - not connected");
+      return;
+    }
+
+    const commandEvent = {
+      event_type: eventType,
+      ...data,
+    };
+
+    addDebug(`Sending: ${eventType}`);
+    const encodedData = new TextEncoder().encode(JSON.stringify(commandEvent));
+    room.localParticipant.publishData(encodedData, {
+      reliable: true,
+      topic: LIVEKIT_COMMAND_CHANNEL_TOPIC,
+    });
+  }, []);
+
+  // Send text message to avatar (avatar will respond via LLM)
+  const sendTextMessage = useCallback(() => {
+    if (!textInput.trim()) return;
+    
+    addDebug(`Sending message: ${textInput}`);
+    sendCommandEvent(CommandEvents.AVATAR_SPEAK_RESPONSE, { text: textInput });
+    setTextInput("");
+  }, [textInput, sendCommandEvent]);
+
+  // Toggle listening mode
+  const toggleListening = useCallback(() => {
+    if (isListening) {
+      sendCommandEvent(CommandEvents.AVATAR_STOP_LISTENING);
+      setIsListening(false);
+      setStatus("Zuhören beendet");
+    } else {
+      sendCommandEvent(CommandEvents.AVATAR_START_LISTENING);
+      setIsListening(true);
+      setStatus("Ich höre zu...");
+    }
+  }, [isListening, sendCommandEvent]);
+
+  // Interrupt avatar
+  const interruptAvatar = useCallback(() => {
+    sendCommandEvent(CommandEvents.AVATAR_INTERRUPT);
+    setIsSpeaking(false);
+    setStatus("Unterbrochen");
+  }, [sendCommandEvent]);
 
   // Attach both tracks to the video element when ready
   const attachMediaToElement = useCallback(() => {
@@ -40,25 +106,35 @@ export default function LiveAvatarPage() {
       return;
     }
     
-    addDebug("Attaching both tracks to video element");
+    addDebug("Attaching tracks to video element");
     
-    // Use MediaStream approach like the official SDK
-    const mediaStream = mediaStreamRef.current;
-    
-    // Clear existing tracks
-    mediaStream.getTracks().forEach(track => mediaStream.removeTrack(track));
-    
-    // Add the new tracks
+    // Create MediaStream with both tracks
+    const mediaStream = new MediaStream();
     mediaStream.addTrack(videoTrack.mediaStreamTrack);
     mediaStream.addTrack(audioTrack.mediaStreamTrack);
     
     // Set the stream to the video element
     videoElement.srcObject = mediaStream;
-    videoElement.play().catch(e => addDebug(`Play error: ${e.message}`));
+    
+    // Try to play with user interaction fallback
+    const playVideo = async () => {
+      try {
+        await videoElement.play();
+        addDebug("Video playing!");
+      } catch (e) {
+        addDebug(`Autoplay blocked - tap to play`);
+        // Add click handler for mobile
+        const playOnClick = () => {
+          videoElement.play();
+          videoElement.removeEventListener('click', playOnClick);
+        };
+        videoElement.addEventListener('click', playOnClick);
+      }
+    };
+    playVideo();
     
     setIsStreamReady(true);
     setStatus("Avatar ist bereit!");
-    addDebug("Stream attached and playing!");
   }, []);
 
   // Handle incoming tracks - only from heygen participant
@@ -87,10 +163,57 @@ export default function LiveAvatarPage() {
     
     // Check if we have both tracks
     if (remoteVideoTrackRef.current && remoteAudioTrackRef.current) {
-      addDebug("Both tracks ready - attaching!");
+      addDebug("Both tracks ready!");
       attachMediaToElement();
     }
   }, [attachMediaToElement]);
+
+  // Handle server events from avatar
+  const handleDataReceived = useCallback((
+    data: Uint8Array,
+    participant?: RemoteParticipant,
+    kind?: DataPacket_Kind,
+    topic?: string
+  ) => {
+    if (topic !== LIVEKIT_SERVER_RESPONSE_CHANNEL_TOPIC) {
+      return;
+    }
+
+    try {
+      const messageString = new TextDecoder().decode(data);
+      const eventMsg = JSON.parse(messageString);
+      addDebug(`Event: ${eventMsg.event_type}`);
+
+      switch (eventMsg.event_type) {
+        case "user.speak_started":
+          setStatus("Du sprichst...");
+          break;
+        case "user.speak_ended":
+          setStatus("Verarbeite...");
+          break;
+        case "avatar.speak_started":
+          setIsSpeaking(true);
+          setStatus("Avatar spricht...");
+          break;
+        case "avatar.speak_ended":
+          setIsSpeaking(false);
+          setStatus("Bereit");
+          break;
+        case "user.transcription_ended":
+          if (eventMsg.text) {
+            setTranscription(`Du: ${eventMsg.text}`);
+          }
+          break;
+        case "avatar.transcription_ended":
+          if (eventMsg.text) {
+            setTranscription(`Avatar: ${eventMsg.text}`);
+          }
+          break;
+      }
+    } catch (e) {
+      console.error("Failed to parse event:", e);
+    }
+  }, []);
 
   // Fetch session token and start LiveKit session
   const startSession = async () => {
@@ -99,13 +222,13 @@ export default function LiveAvatarPage() {
       setError(null);
       setDebugInfo([]);
       setIsStreamReady(false);
+      setTranscription("");
       setStatus("Hole Session Token...");
       addDebug("Starting session...");
 
       // Reset track refs
       remoteVideoTrackRef.current = null;
       remoteAudioTrackRef.current = null;
-      mediaStreamRef.current = new MediaStream();
 
       // Step 1: Get session token (without voice_id to use default avatar voice)
       addDebug("Requesting session token...");
@@ -119,6 +242,7 @@ export default function LiveAvatarPage() {
           mode: "FULL",
           avatar_id: AVATAR_ID,
           avatar_persona: {
+            voice_id: "1c1f2d85-d15f-431b-9e22-f6626ce44199", // jedermannhandy - geklonte Stimme
             context_id: CONTEXT_ID,
             language: "de",
           },
@@ -162,7 +286,7 @@ export default function LiveAvatarPage() {
       }
 
       setStatus("Verbinde mit LiveKit...");
-      addDebug(`Connecting to ${livekit_url}`);
+      addDebug(`Connecting to LiveKit...`);
 
       // Step 3: Connect to LiveKit room
       const room = new Room({
@@ -174,6 +298,7 @@ export default function LiveAvatarPage() {
 
       // Set up event handlers BEFORE connecting
       room.on(RoomEvent.TrackSubscribed, handleTrackSubscribed);
+      room.on(RoomEvent.DataReceived, handleDataReceived);
       
       room.on(RoomEvent.Connected, () => {
         addDebug("Connected to room!");
@@ -184,6 +309,7 @@ export default function LiveAvatarPage() {
         addDebug("Disconnected from room");
         setIsConnected(false);
         setIsStreamReady(false);
+        setIsListening(false);
         setStatus("Verbindung getrennt");
       });
 
@@ -217,6 +343,7 @@ export default function LiveAvatarPage() {
         addDebug("Microphone enabled");
       } catch (micError) {
         addDebug(`Mic error: ${micError}`);
+        // Continue without mic - text input still works
       }
 
     } catch (err) {
@@ -248,8 +375,11 @@ export default function LiveAvatarPage() {
     
     setIsConnected(false);
     setIsStreamReady(false);
+    setIsListening(false);
+    setIsSpeaking(false);
     setStatus("Bereit zum Starten");
     setDebugInfo([]);
+    setTranscription("");
   }, []);
 
   // Cleanup on unmount
@@ -260,79 +390,109 @@ export default function LiveAvatarPage() {
   }, [stopSession]);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex flex-col items-center p-4">
       {/* Background - Black */}
       <div className="absolute inset-0 bg-black" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-4xl">
+      <div className="relative z-10 w-full max-w-2xl">
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 bg-clip-text text-transparent">
+        <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 bg-clip-text text-transparent">
           LiveAvatar Demo
         </h1>
 
         {/* Status */}
-        <p className="text-center text-amber-200/80 mb-6">{status}</p>
+        <p className="text-center text-amber-200/80 text-sm mb-4">{status}</p>
 
         {/* Avatar Container */}
-        <div className="relative mx-auto" style={{ maxWidth: "640px", aspectRatio: "16/9" }}>
+        <div className="relative mx-auto mb-4" style={{ maxWidth: "480px", aspectRatio: "16/9" }}>
           {/* Video Element - The avatar will be displayed here */}
           <video
             ref={mediaElementRef}
             autoPlay
             playsInline
-            className={`w-full h-full rounded-2xl border-2 border-amber-500/30 object-cover ${isStreamReady ? 'block' : 'hidden'}`}
+            muted={false}
+            className={`w-full h-full rounded-xl border-2 border-amber-500/30 object-cover ${isStreamReady ? 'block' : 'hidden'}`}
             style={{ backgroundColor: "black" }}
+            onClick={() => mediaElementRef.current?.play()}
           />
 
           {/* Loading/Placeholder State */}
           {!isStreamReady && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black rounded-2xl border-2 border-amber-500/30">
+            <div className="absolute inset-0 flex items-center justify-center bg-black rounded-xl border-2 border-amber-500/30">
               {isLoading || isConnected ? (
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
-                  <p className="text-amber-200">{status}</p>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                  <p className="text-amber-200 text-sm">{status}</p>
                 </div>
               ) : (
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-                    <svg className="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </div>
-                  <p className="text-amber-200 text-center">
-                    Klicke auf "Start", um den Avatar zu starten
+                  <p className="text-amber-200 text-center text-sm">
+                    Klicke auf "Start"
                   </p>
                 </div>
               )}
             </div>
           )}
+
+          {/* Speaking indicator */}
+          {isSpeaking && (
+            <div className="absolute top-2 right-2 bg-amber-500 text-black text-xs px-2 py-1 rounded-full animate-pulse">
+              Spricht...
+            </div>
+          )}
         </div>
+
+        {/* Transcription */}
+        {transcription && (
+          <div className="mb-4 p-3 bg-gray-900/80 border border-amber-500/30 rounded-lg text-amber-200 text-sm">
+            {transcription}
+          </div>
+        )}
+
+        {/* Text Input - Only show when connected */}
+        {isConnected && isStreamReady && (
+          <div className="mb-4">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={textInput}
+                onChange={(e) => setTextInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && sendTextMessage()}
+                placeholder="Schreibe eine Nachricht..."
+                className="flex-1 px-4 py-3 bg-gray-900 border border-amber-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
+              />
+              <button
+                onClick={sendTextMessage}
+                disabled={!textInput.trim()}
+                className="px-4 py-3 bg-amber-500 text-black font-medium rounded-xl hover:bg-amber-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Senden
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Error Message */}
         {error && (
-          <div className="mt-4 p-4 bg-red-900/50 border border-red-500 rounded-lg text-red-200 text-center">
+          <div className="mb-4 p-3 bg-red-900/50 border border-red-500 rounded-lg text-red-200 text-sm text-center">
             {error}
           </div>
         )}
 
-        {/* Debug Info */}
-        {debugInfo.length > 0 && (
-          <div className="mt-4 p-3 bg-gray-900/80 border border-gray-700 rounded-lg text-xs font-mono text-gray-400 max-h-40 overflow-y-auto">
-            {debugInfo.map((msg, i) => (
-              <div key={i}>{msg}</div>
-            ))}
-          </div>
-        )}
-
         {/* Controls */}
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-3 mb-4">
           {!isConnected ? (
             <button
               type="button"
               onClick={startSession}
               disabled={isLoading}
-              className="px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-600 text-black font-bold rounded-xl 
+              className="px-6 py-3 bg-gradient-to-r from-amber-400 to-amber-600 text-black font-bold rounded-xl 
                        hover:from-amber-300 hover:to-amber-500 transition-all duration-300
                        disabled:opacity-50 disabled:cursor-not-allowed
                        shadow-lg shadow-amber-500/30"
@@ -340,21 +500,52 @@ export default function LiveAvatarPage() {
               {isLoading ? "Verbinde..." : "Avatar starten"}
             </button>
           ) : (
-            <button
-              onClick={stopSession}
-              className="px-6 py-3 bg-red-600 text-white font-medium rounded-xl 
-                       hover:bg-red-500 transition-all duration-300"
-            >
-              Beenden
-            </button>
+            <>
+              {/* Voice Chat Toggle */}
+              <button
+                onClick={toggleListening}
+                className={`px-4 py-3 font-medium rounded-xl transition-all duration-300 ${
+                  isListening 
+                    ? "bg-green-500 text-white animate-pulse" 
+                    : "bg-gray-700 text-white hover:bg-gray-600"
+                }`}
+              >
+                {isListening ? "🎤 Zuhören..." : "🎤 Sprechen"}
+              </button>
+
+              {/* Interrupt Button */}
+              {isSpeaking && (
+                <button
+                  onClick={interruptAvatar}
+                  className="px-4 py-3 bg-orange-500 text-white font-medium rounded-xl hover:bg-orange-400 transition-colors"
+                >
+                  ⏹ Stopp
+                </button>
+              )}
+
+              {/* End Session */}
+              <button
+                onClick={stopSession}
+                className="px-4 py-3 bg-red-600 text-white font-medium rounded-xl hover:bg-red-500 transition-colors"
+              >
+                Beenden
+              </button>
+            </>
           )}
         </div>
 
+        {/* Debug Info */}
+        {debugInfo.length > 0 && (
+          <div className="p-3 bg-gray-900/80 border border-gray-700 rounded-lg text-xs font-mono text-gray-400 max-h-32 overflow-y-auto">
+            {debugInfo.map((msg, i) => (
+              <div key={i}>{msg}</div>
+            ))}
+          </div>
+        )}
+
         {/* Info */}
-        <p className="mt-8 text-center text-gray-400 text-sm">
-          Dein Avatar "Mathias" mit deiner geklonten Stimme.
-          <br />
-          <span className="text-amber-400/60">Erlaube den Mikrofon-Zugriff für Voice Chat.</span>
+        <p className="mt-4 text-center text-gray-500 text-xs">
+          Avatar "Mathias" • Tippe auf das Video falls es nicht automatisch startet
         </p>
       </div>
     </div>
