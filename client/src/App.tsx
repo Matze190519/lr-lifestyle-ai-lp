@@ -9,6 +9,7 @@ import ThankYou from "./pages/ThankYou";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import About from "./pages/About";
+import LiveAvatar from "./pages/LiveAvatar";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -20,6 +21,8 @@ function Router() {
       <Route path={"/datenschutz"} component={Datenschutz} />
       <Route path={"/about"} component={About} />
       <Route path={"/ueber-uns"} component={About} />
+      <Route path={"/liveavatar"} component={LiveAvatar} />
+      <Route path={"/avatar"} component={LiveAvatar} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
