@@ -438,3 +438,22 @@
 - [x] Search HeyGen SDK docs for mobile template
 - [x] Used playsInline and objectFit: contain like HeyGen demo
 - [x] Compact layout with smaller fonts and buttons for mobile
+
+
+## Phase 55 - LiveAvatar Critical Issues (User Feedback)
+- [ ] Fix: Video shows user's head instead of avatar
+- [ ] Fix: Video expands fullscreen on mobile, covering all controls
+- [ ] Fix: Even when minimized, video overlays buttons
+- [ ] Fix: Desktop button overlaps with Lina chat
+- [ ] Research: HeyGen community forums for mobile implementation
+- [ ] Research: GitHub issues for video container solutions
+- [ ] Research: Official docs for correct video element handling
+
+
+## Phase 55 - LiveAvatar Critical Mobile Fix
+- [x] Video container with 16:9 aspect ratio using padding-bottom trick
+- [x] Absolute positioning prevents video from expanding fullscreen
+- [x] FAB button moved higher (bottom-36/bottom-28) to avoid Lina chat overlap
+- [x] Research confirmed: SDK uses LiveKit, attach() method handles video
+- [x] playsInline + WebkitTransform: translateZ(0) prevents iOS fullscreen
+- [x] Controls always visible below video in separate container

@@ -15,8 +15,8 @@ export default function LiveAvatarFAB() {
 
   return (
     <>
-      {/* Floating Action Button */}
-      <div className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50">
+      {/* Floating Action Button - positioned ABOVE Lina chat button */}
+      <div className="fixed bottom-36 md:bottom-28 right-4 md:right-8 z-50">
         <AnimatePresence>
           {showTooltip && !isOpen && (
             <motion.div
@@ -45,16 +45,16 @@ export default function LiveAvatarFAB() {
           }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="relative w-16 h-16 rounded-full bg-gradient-to-br from-[#C9A86C] to-[#8B7355] text-black shadow-lg shadow-[#C9A86C]/30 flex items-center justify-center group"
+          className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#C9A86C] to-[#8B7355] text-black shadow-lg shadow-[#C9A86C]/30 flex items-center justify-center group"
         >
           {/* Pulse animation */}
           <span className="absolute inset-0 rounded-full bg-[#C9A86C] animate-ping opacity-30"></span>
           
           {/* Icon */}
-          <Video className="w-7 h-7 relative z-10" />
+          <Video className="w-6 h-6 md:w-7 md:h-7 relative z-10" />
           
           {/* Online indicator */}
-          <span className="absolute top-0 right-0 w-4 h-4 bg-[#10b981] rounded-full border-2 border-[#0a0a0a]"></span>
+          <span className="absolute top-0 right-0 w-3 h-3 md:w-4 md:h-4 bg-[#10b981] rounded-full border-2 border-[#0a0a0a]"></span>
         </motion.button>
       </div>
 

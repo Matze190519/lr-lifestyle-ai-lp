@@ -26,6 +26,7 @@ export default function LiveAvatarPage() {
   
   const sessionRef = useRef<LiveAvatarSession | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
 
   const getSessionToken = async () => {
     const response = await fetch('https://api.liveavatar.com/v1/sessions/token', {
@@ -168,7 +169,7 @@ export default function LiveAvatarPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] flex flex-col">
-      {/* Header - minimal on mobile */}
+      {/* Header */}
       <div className="border-b border-[#d4af37]/20 py-2 md:py-4 flex-shrink-0">
         <div className="container">
           <a 
@@ -183,12 +184,12 @@ export default function LiveAvatarPage() {
         </div>
       </div>
 
-      {/* Main Content - scrollable */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Main Content */}
+      <div className="flex-1 overflow-y-auto pb-4">
         <div className="container py-3 md:py-8">
           <div className="max-w-lg mx-auto">
             
-            {/* Title - very compact on mobile */}
+            {/* Title */}
             <div className="text-center mb-3 md:mb-6">
               <h1 className="text-xl md:text-3xl font-bold">
                 <span className="bg-gradient-to-r from-[#d4af37] via-[#f4cf67] to-[#d4af37] bg-clip-text text-transparent">
@@ -200,35 +201,54 @@ export default function LiveAvatarPage() {
               </p>
             </div>
 
-            {/* Avatar Card - FIXED SIZE VIDEO */}
+            {/* Avatar Card */}
             <div className="bg-[#111111] rounded-xl border border-[#d4af37]/20 overflow-hidden">
               
-              {/* Video Container - FIXED HEIGHT, NOT FULLSCREEN */}
+              {/* 
+                VIDEO CONTAINER - CRITICAL FOR MOBILE
+                - Fixed aspect ratio using padding-bottom trick
+                - overflow:hidden prevents video from expanding
+                - position:relative/absolute constrains video
+              */}
               <div 
+                ref={videoContainerRef}
                 className="relative bg-black overflow-hidden"
                 style={{ 
-                  height: '200px',  // Fixed height on mobile
-                  maxHeight: '300px' 
+                  // Use aspect ratio for consistent sizing
+                  // 16:9 = 56.25%, 4:3 = 75%, 1:1 = 100%
+                  paddingBottom: '56.25%', // 16:9 aspect ratio
+                  maxHeight: '250px',
+                  height: 'auto'
                 }}
               >
+                {/* Video element - absolutely positioned to fill container */}
                 <video
                   ref={videoRef}
                   autoPlay
                   playsInline
                   muted={needsUserInteraction}
+                  // CRITICAL: These styles prevent fullscreen expansion
                   style={{ 
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
                     width: '100%', 
                     height: '100%', 
                     objectFit: 'contain',
-                    backgroundColor: '#000'
+                    backgroundColor: '#000',
+                    // Prevent iOS fullscreen
+                    WebkitTransform: 'translateZ(0)',
                   }}
+                  // Prevent fullscreen on double-tap (iOS)
+                  onDoubleClick={(e) => e.preventDefault()}
                 />
                 
-                {/* Tap to play overlay for mobile */}
+                {/* Tap to play overlay */}
                 {needsUserInteraction && isStreamReady && (
                   <div 
                     className="absolute inset-0 flex items-center justify-center bg-black/60 cursor-pointer z-10"
                     onClick={handleTapToPlay}
+                    style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
                   >
                     <div className="text-center">
                       <div className="w-14 h-14 rounded-full bg-[#10b981] flex items-center justify-center mx-auto mb-2 animate-pulse">
@@ -236,14 +256,17 @@ export default function LiveAvatarPage() {
                           <path d="M8 5v14l11-7z"/>
                         </svg>
                       </div>
-                      <p className="text-white font-semibold text-sm">Tippen</p>
+                      <p className="text-white font-semibold text-sm">Tippen zum Starten</p>
                     </div>
                   </div>
                 )}
                 
                 {/* Loading/Not connected overlay */}
                 {!isStreamReady && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
+                  <div 
+                    className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]"
+                    style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+                  >
                     {isLoading ? (
                       <div className="text-center">
                         <div className="w-10 h-10 border-3 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
@@ -262,9 +285,12 @@ export default function LiveAvatarPage() {
                   </div>
                 )}
 
-                {/* Status badges - small */}
+                {/* Status badges */}
                 {isStreamReady && !needsUserInteraction && (
-                  <div className="absolute top-2 left-2 right-2 flex justify-between pointer-events-none">
+                  <div 
+                    className="absolute top-2 left-2 right-2 flex justify-between pointer-events-none"
+                    style={{ position: 'absolute' }}
+                  >
                     {isAvatarTalking && (
                       <div className="flex items-center gap-1 bg-black/70 px-2 py-1 rounded-full">
                         <div className="w-1.5 h-1.5 bg-[#d4af37] rounded-full animate-pulse"></div>
@@ -281,10 +307,13 @@ export default function LiveAvatarPage() {
                 )}
               </div>
 
-              {/* Controls - ALWAYS VISIBLE BELOW VIDEO */}
+              {/* 
+                CONTROLS - ALWAYS VISIBLE BELOW VIDEO
+                These are completely separate from the video container
+              */}
               <div className="p-3 bg-[#0d0d0d] space-y-2">
                 
-                {/* Start Button - only when not connected */}
+                {/* Start Button */}
                 {!isStreamReady && !isLoading && (
                   <button
                     onClick={handleStart}
@@ -319,7 +348,7 @@ export default function LiveAvatarPage() {
                       </button>
                     </div>
 
-                    {/* Action Buttons - compact row */}
+                    {/* Action Buttons */}
                     <div className="flex gap-2">
                       <button
                         onClick={handleToggleVoiceChat}
