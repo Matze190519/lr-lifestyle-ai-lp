@@ -12,85 +12,59 @@ import {
 const API_KEY = '75556a09-d9f7-11f0-a99e-066a7fa2e369';
 const AVATAR_ID = '6fe2c441-ea7c-41cc-96b1-9347e953bd6c';
 const CONTEXT_ID = '2e3b2daf-222f-4cd4-ab02-ff3397b5f52f';
-const VOICE_ID = '1c1f2d85-d15f-431b-9e22-f6626ce44199'; // jedermannhandy
+const VOICE_ID = '1c1f2d85-d15f-431b-9e22-f6626ce44199'; // jedermannhandy - geklonte Stimme
 
 export default function LiveAvatarPage() {
-  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [sessionState, setSessionState] = useState<SessionState>(SessionState.INACTIVE);
   const [isStreamReady, setIsStreamReady] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const [isAvatarTalking, setIsAvatarTalking] = useState(false);
-  const [isUserTalking, setIsUserTalking] = useState(false);
   const [voiceChatActive, setVoiceChatActive] = useState(false);
-  const [debugLog, setDebugLog] = useState<string[]>([]);
   
   const sessionRef = useRef<LiveAvatarSession | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const addLog = (msg: string) => {
-    console.log(msg);
-    setDebugLog(prev => [...prev.slice(-20), `${new Date().toLocaleTimeString()}: ${msg}`]);
-  };
-
   // Get session token from API
   const getSessionToken = async () => {
-    setIsLoading(true);
-    setError(null);
-    addLog('Getting session token...');
+    const response = await fetch('https://api.liveavatar.com/v1/sessions/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-KEY': API_KEY,
+      },
+      body: JSON.stringify({
+        mode: 'FULL',
+        avatar_id: AVATAR_ID,
+        avatar_persona: {
+          voice_id: VOICE_ID,
+          context_id: CONTEXT_ID,
+          language: 'de'
+        }
+      }),
+    });
+
+    const data = await response.json();
     
-    try {
-      const response = await fetch('https://api.liveavatar.com/v1/sessions/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': API_KEY,
-        },
-        body: JSON.stringify({
-          mode: 'FULL',
-          avatar_id: AVATAR_ID,
-          avatar_persona: {
-            voice_id: VOICE_ID,
-            context_id: CONTEXT_ID,
-            language: 'de'
-          }
-        }),
-      });
-
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.detail || data.message || 'Failed to get session token');
-      }
-
-      addLog('Session token received!');
-      setSessionToken(data.data.session_token);
-      return data.data.session_token;
-    } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-      addLog(`Error: ${errorMsg}`);
-      setError(errorMsg);
-      setIsLoading(false);
-      return null;
+    if (!response.ok) {
+      throw new Error(data.detail || data.message || 'Verbindungsfehler');
     }
+
+    return data.data.session_token;
   };
 
   // Initialize session with SDK
   const initializeSession = useCallback(async (token: string) => {
-    addLog('Initializing LiveAvatarSession...');
-    
     try {
-      // Create session with voice chat enabled
       const session = new LiveAvatarSession(token, {
         voiceChat: true,
       });
       
       sessionRef.current = session;
 
-      // Set up event listeners
+      // Session state changes
       session.on(SessionEvent.SESSION_STATE_CHANGED, (state: SessionState) => {
-        addLog(`Session state: ${state}`);
         setSessionState(state);
         
         if (state === SessionState.DISCONNECTED) {
@@ -101,54 +75,34 @@ export default function LiveAvatarPage() {
         }
       });
 
+      // Stream ready - attach video
       session.on(SessionEvent.SESSION_STREAM_READY, () => {
-        addLog('Stream ready!');
         setIsStreamReady(true);
         setIsLoading(false);
         
-        // Attach video element
         if (videoRef.current) {
-          addLog('Attaching video element...');
           session.attach(videoRef.current);
         }
       });
 
       // Avatar talking events
       session.on(AgentEventsEnum.AVATAR_SPEAK_STARTED, () => {
-        addLog('Avatar started speaking');
         setIsAvatarTalking(true);
       });
 
       session.on(AgentEventsEnum.AVATAR_SPEAK_ENDED, () => {
-        addLog('Avatar stopped speaking');
         setIsAvatarTalking(false);
       });
 
-      // User talking events
-      session.on(AgentEventsEnum.USER_SPEAK_STARTED, () => {
-        addLog('User started speaking');
-        setIsUserTalking(true);
-      });
-
-      session.on(AgentEventsEnum.USER_SPEAK_ENDED, () => {
-        addLog('User stopped speaking');
-        setIsUserTalking(false);
-      });
-
-      // Voice chat events
+      // Voice chat state
       session.voiceChat.on(VoiceChatEvent.STATE_CHANGED, (state: VoiceChatState) => {
-        addLog(`Voice chat state: ${state}`);
         setVoiceChatActive(state === VoiceChatState.ACTIVE);
       });
 
-      // Start the session
-      addLog('Starting session...');
       await session.start();
-      addLog('Session started!');
       
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-      addLog(`Session error: ${errorMsg}`);
+      const errorMsg = err instanceof Error ? err.message : 'Unbekannter Fehler';
       setError(errorMsg);
       setIsLoading(false);
     }
@@ -156,37 +110,38 @@ export default function LiveAvatarPage() {
 
   // Start avatar session
   const handleStart = async () => {
-    const token = await getSessionToken();
-    if (token) {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const token = await getSessionToken();
       await initializeSession(token);
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : 'Verbindungsfehler';
+      setError(errorMsg);
+      setIsLoading(false);
     }
   };
 
   // Stop session
   const handleStop = () => {
     if (sessionRef.current) {
-      addLog('Stopping session...');
       sessionRef.current.stop();
       sessionRef.current = null;
-      setSessionToken(null);
       setIsStreamReady(false);
       setSessionState(SessionState.INACTIVE);
     }
   };
 
-  // Send text message to avatar
+  // Send text message
   const handleSendMessage = async () => {
     if (!message.trim() || !sessionRef.current) return;
     
-    addLog(`Sending message: ${message}`);
     try {
-      // Use the SDK's message() method for FULL mode
       await sessionRef.current.message(message);
-      addLog('Message sent!');
       setMessage('');
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-      addLog(`Send error: ${errorMsg}`);
+      console.error('Nachricht konnte nicht gesendet werden');
     }
   };
 
@@ -196,23 +151,20 @@ export default function LiveAvatarPage() {
     
     try {
       if (voiceChatActive) {
-        addLog('Stopping voice chat...');
         await sessionRef.current.voiceChat.stop();
       } else {
-        addLog('Starting voice chat...');
         await sessionRef.current.voiceChat.start();
       }
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-      addLog(`Voice chat error: ${errorMsg}`);
+      console.error('Mikrofon-Fehler');
     }
   };
 
   // Interrupt avatar
   const handleInterrupt = () => {
-    if (!sessionRef.current) return;
-    addLog('Interrupting avatar...');
-    sessionRef.current.interrupt();
+    if (sessionRef.current) {
+      sessionRef.current.interrupt();
+    }
   };
 
   // Cleanup on unmount
@@ -224,136 +176,196 @@ export default function LiveAvatarPage() {
     };
   }, []);
 
+  const isConnected = sessionState === SessionState.CONNECTED;
+  const isInactive = sessionState === SessionState.INACTIVE;
+
   return (
-    <div className="min-h-screen bg-black text-white p-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-amber-400 text-center mb-4">
-          LiveAvatar Demo
-        </h1>
-
-        {/* Status */}
-        <div className="text-center mb-4 text-gray-400">
-          {sessionState === SessionState.INACTIVE && 'Bereit zum Starten'}
-          {sessionState === SessionState.CONNECTING && 'Verbinde...'}
-          {sessionState === SessionState.CONNECTED && !isStreamReady && 'Verbunden, warte auf Stream...'}
-          {sessionState === SessionState.CONNECTED && isStreamReady && 'Avatar bereit!'}
-          {sessionState === SessionState.DISCONNECTED && 'Getrennt'}
+    <div className="min-h-screen bg-black">
+      {/* Header */}
+      <div className="bg-black/80 border-b border-amber-500/20 py-4">
+        <div className="container">
+          <a href="/" className="text-amber-400 hover:text-amber-300 transition-colors">
+            ← Zurück zur Startseite
+          </a>
         </div>
+      </div>
 
-        {/* Error display */}
-        {error && (
-          <div className="bg-red-900/50 border border-red-500 text-red-200 p-3 rounded mb-4 text-center">
-            {error}
-          </div>
-        )}
-
-        {/* Video container */}
-        <div className="relative aspect-video bg-gray-900 rounded-lg overflow-hidden mb-4 border-2 border-amber-500/30">
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            className="w-full h-full object-contain"
-          />
+      {/* Main Content */}
+      <div className="container py-8">
+        <div className="max-w-4xl mx-auto">
           
-          {/* Talking indicators */}
-          {isStreamReady && (
-            <div className="absolute top-4 left-4 flex gap-2">
-              {isAvatarTalking && (
-                <span className="bg-green-500 text-white px-2 py-1 rounded text-sm">
-                  Avatar spricht...
-                </span>
+          {/* Title */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              <span className="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent">
+                Sprich mit Mathias
+              </span>
+            </h1>
+            <p className="text-gray-400">
+              Dein persönlicher KI-Berater für LR Health & Beauty
+            </p>
+          </div>
+
+          {/* Avatar Video Container */}
+          <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 bg-gradient-to-b from-gray-900 to-black shadow-[0_0_30px_rgba(251,191,36,0.1)]">
+            
+            {/* Video Element */}
+            <div className="aspect-video relative">
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted={false}
+                className="w-full h-full object-cover"
+                style={{ backgroundColor: '#000' }}
+              />
+              
+              {/* Overlay when not connected */}
+              {!isStreamReady && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/80">
+                  {isLoading ? (
+                    <div className="text-center">
+                      <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                      <p className="text-amber-400">Verbinde mit Mathias...</p>
+                    </div>
+                  ) : (
+                    <div className="text-center p-8">
+                      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                        <svg className="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                      </div>
+                      <h2 className="text-xl font-bold text-white mb-2">Bereit zum Gespräch</h2>
+                      <p className="text-gray-400 mb-6">Klicke auf "Gespräch starten" um mit Mathias zu sprechen</p>
+                      <button
+                        onClick={handleStart}
+                        disabled={isLoading}
+                        className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-bold py-4 px-8 rounded-xl transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(251,191,36,0.3)]"
+                      >
+                        Gespräch starten
+                      </button>
+                    </div>
+                  )}
+                </div>
               )}
-              {isUserTalking && (
-                <span className="bg-blue-500 text-white px-2 py-1 rounded text-sm">
-                  Du sprichst...
-                </span>
+
+              {/* Talking indicator */}
+              {isStreamReady && isAvatarTalking && (
+                <div className="absolute top-4 left-4">
+                  <div className="flex items-center gap-2 bg-black/70 px-3 py-1.5 rounded-full border border-amber-500/30">
+                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                    <span className="text-amber-400 text-sm">Mathias spricht...</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Voice chat indicator */}
+              {isStreamReady && voiceChatActive && (
+                <div className="absolute top-4 right-4">
+                  <div className="flex items-center gap-2 bg-black/70 px-3 py-1.5 rounded-full border border-green-500/30">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-green-400 text-sm">Mikrofon aktiv</span>
+                  </div>
+                </div>
               )}
             </div>
-          )}
-        </div>
 
-        {/* Controls */}
-        <div className="space-y-4">
-          {/* Start/Stop buttons */}
-          {!sessionToken ? (
-            <button
-              onClick={handleStart}
-              disabled={isLoading}
-              className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-gray-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
-            >
-              {isLoading ? 'Verbinde...' : 'Avatar starten'}
-            </button>
-          ) : (
-            <button
-              onClick={handleStop}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
-            >
-              Beenden
-            </button>
-          )}
-
-          {/* Text input - always visible when connected */}
-          {isStreamReady && (
-            <>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Nachricht eingeben..."
-                  className="flex-1 bg-gray-800 text-white px-4 py-3 rounded-lg border border-gray-700 focus:border-amber-500 focus:outline-none"
-                />
-                <button
-                  onClick={handleSendMessage}
-                  disabled={!message.trim()}
-                  className="bg-amber-500 hover:bg-amber-600 disabled:bg-gray-600 text-black font-bold px-6 py-3 rounded-lg transition-colors"
-                >
-                  Senden
-                </button>
-              </div>
-
-              {/* Voice and control buttons */}
-              <div className="flex gap-2 flex-wrap justify-center">
-                <button
-                  onClick={handleToggleVoiceChat}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    voiceChatActive 
-                      ? 'bg-green-600 hover:bg-green-700 text-white' 
-                      : 'bg-gray-700 hover:bg-gray-600 text-white'
-                  }`}
-                >
-                  {voiceChatActive ? '🎤 Mikrofon An' : '🎤 Mikrofon Aus'}
-                </button>
+            {/* Controls - only when connected */}
+            {isStreamReady && (
+              <div className="p-4 bg-black/50 border-t border-amber-500/20">
                 
-                <button
-                  onClick={handleInterrupt}
-                  className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
-                >
-                  ⏹️ Unterbrechen
-                </button>
+                {/* Text Input */}
+                <div className="flex gap-3 mb-4">
+                  <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                    placeholder="Schreibe eine Nachricht..."
+                    className="flex-1 bg-gray-900 text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500/50 placeholder-gray-500"
+                  />
+                  <button
+                    onClick={handleSendMessage}
+                    disabled={!message.trim()}
+                    className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 disabled:from-gray-600 disabled:to-gray-700 text-black font-bold px-6 py-3 rounded-xl transition-all disabled:cursor-not-allowed"
+                  >
+                    Senden
+                  </button>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 justify-center flex-wrap">
+                  <button
+                    onClick={handleToggleVoiceChat}
+                    className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-all ${
+                      voiceChatActive 
+                        ? 'bg-green-600 hover:bg-green-700 text-white' 
+                        : 'bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600'
+                    }`}
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93V7h2v1c0 2.76 2.24 5 5 5s5-2.24 5-5V7h2v1c0 4.08-3.06 7.44-7 7.93V19h3v2H9v-2h3v-3.07z"/>
+                    </svg>
+                    {voiceChatActive ? 'Mikrofon aus' : 'Mikrofon an'}
+                  </button>
+                  
+                  <button
+                    onClick={handleInterrupt}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600 transition-all"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6 6h12v12H6z"/>
+                    </svg>
+                    Stopp
+                  </button>
+                  
+                  <button
+                    onClick={handleStop}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium bg-red-900/50 hover:bg-red-900 text-red-300 border border-red-700/50 transition-all"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                    Beenden
+                  </button>
+                </div>
               </div>
-            </>
-          )}
-        </div>
-
-        {/* Debug log */}
-        <div className="mt-6 bg-gray-900 rounded-lg p-4 max-h-48 overflow-y-auto">
-          <h3 className="text-amber-400 font-bold mb-2">Debug Log:</h3>
-          <div className="text-xs text-gray-400 font-mono space-y-1">
-            {debugLog.map((log, i) => (
-              <div key={i}>{log}</div>
-            ))}
+            )}
           </div>
-        </div>
 
-        {/* Info */}
-        <p className="text-center text-gray-500 text-sm mt-4">
-          Dein Avatar "Mathias" mit deiner geklonten Stimme.
-          <br />
-          Erlaube den Mikrofon-Zugriff für Voice Chat.
-        </p>
+          {/* Error Message */}
+          {error && (
+            <div className="mt-4 bg-red-900/30 border border-red-500/50 text-red-300 p-4 rounded-xl text-center">
+              {error}
+              <button 
+                onClick={() => setError(null)} 
+                className="ml-4 underline hover:no-underline"
+              >
+                Schließen
+              </button>
+            </div>
+          )}
+
+          {/* Info Section */}
+          <div className="mt-8 grid md:grid-cols-3 gap-4">
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
+              <div className="text-amber-400 text-2xl mb-2">💬</div>
+              <h3 className="text-white font-medium mb-1">Text-Chat</h3>
+              <p className="text-gray-500 text-sm">Schreibe deine Fragen direkt</p>
+            </div>
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
+              <div className="text-amber-400 text-2xl mb-2">🎤</div>
+              <h3 className="text-white font-medium mb-1">Sprach-Chat</h3>
+              <p className="text-gray-500 text-sm">Aktiviere das Mikrofon zum Sprechen</p>
+            </div>
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
+              <div className="text-amber-400 text-2xl mb-2">🤖</div>
+              <h3 className="text-white font-medium mb-1">KI-Berater</h3>
+              <p className="text-gray-500 text-sm">24/7 verfügbar für deine Fragen</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );
