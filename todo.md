@@ -368,3 +368,10 @@
 - [x] Added interrupt button
 - [x] Added transcription display
 - [ ] Test on user device
+
+## Phase 48 - LiveAvatar Critical Fixes (User Feedback 2)
+- [x] Text-Eingabefeld - jetzt mit offizieller SDK message() Methode
+- [x] Stimme konfiguriert - voice_id in Session Token
+- [x] Offizielle SDK Methoden: attach(), message(), voiceChat.start/stop(), interrupt()
+- [ ] Test auf User-Gerät
+- [ ] Dokumentation nochmal komplett lesen
