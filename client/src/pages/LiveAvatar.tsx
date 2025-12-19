@@ -1,76 +1,96 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Room, RoomEvent, Track, RemoteTrack, RemoteTrackPublication, RemoteParticipant } from "livekit-client";
+import { Room, RoomEvent, Track, RemoteTrack, RemoteTrackPublication, RemoteParticipant, RemoteVideoTrack, RemoteAudioTrack } from "livekit-client";
 
 // LiveAvatar Configuration
 const LIVEAVATAR_API_KEY = "75556a09-d9f7-11f0-a99e-066a7fa2e369";
 const AVATAR_ID = "6fe2c441-ea7c-41cc-96b1-9347e953bd6c";
-const VOICE_ID = "1c1f2d85-d15f-431b-9e22-f6626ce44199";
 const CONTEXT_ID = "2e3b2daf-222f-4cd4-ab02-ff3397b5f52f";
 const API_URL = "https://api.liveavatar.com";
+
+// HeyGen participant ID - this is where the avatar video/audio comes from
+const HEYGEN_PARTICIPANT_ID = "heygen";
 
 export default function LiveAvatarPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
-  const [hasVideo, setHasVideo] = useState(false);
+  const [isStreamReady, setIsStreamReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string>("Bereit zum Starten");
   const [debugInfo, setDebugInfo] = useState<string[]>([]);
   
-  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const mediaElementRef = useRef<HTMLVideoElement>(null);
   const roomRef = useRef<Room | null>(null);
+  const remoteVideoTrackRef = useRef<RemoteVideoTrack | null>(null);
+  const remoteAudioTrackRef = useRef<RemoteAudioTrack | null>(null);
+  const mediaStreamRef = useRef<MediaStream>(new MediaStream());
 
   const addDebug = (msg: string) => {
     console.log("[LiveAvatar]", msg);
     setDebugInfo(prev => [...prev.slice(-9), msg]);
   };
 
-  // Handle incoming video track
+  // Attach both tracks to the video element when ready
+  const attachMediaToElement = useCallback(() => {
+    const videoElement = mediaElementRef.current;
+    const videoTrack = remoteVideoTrackRef.current;
+    const audioTrack = remoteAudioTrackRef.current;
+    
+    if (!videoElement || !videoTrack || !audioTrack) {
+      addDebug("Waiting for both tracks...");
+      return;
+    }
+    
+    addDebug("Attaching both tracks to video element");
+    
+    // Use MediaStream approach like the official SDK
+    const mediaStream = mediaStreamRef.current;
+    
+    // Clear existing tracks
+    mediaStream.getTracks().forEach(track => mediaStream.removeTrack(track));
+    
+    // Add the new tracks
+    mediaStream.addTrack(videoTrack.mediaStreamTrack);
+    mediaStream.addTrack(audioTrack.mediaStreamTrack);
+    
+    // Set the stream to the video element
+    videoElement.srcObject = mediaStream;
+    videoElement.play().catch(e => addDebug(`Play error: ${e.message}`));
+    
+    setIsStreamReady(true);
+    setStatus("Avatar ist bereit!");
+    addDebug("Stream attached and playing!");
+  }, []);
+
+  // Handle incoming tracks - only from heygen participant
   const handleTrackSubscribed = useCallback((
     track: RemoteTrack,
     publication: RemoteTrackPublication,
     participant: RemoteParticipant
   ) => {
-    addDebug(`Track subscribed: ${track.kind} from ${participant.identity}`);
+    addDebug(`Track: ${track.kind} from ${participant.identity}`);
+    
+    // Only process tracks from the heygen participant (the avatar)
+    if (participant.identity !== HEYGEN_PARTICIPANT_ID) {
+      addDebug(`Ignoring track from ${participant.identity}`);
+      return;
+    }
     
     if (track.kind === Track.Kind.Video) {
-      addDebug("Video track received - attaching to container");
-      const videoContainer = videoContainerRef.current;
-      if (videoContainer) {
-        // Clear previous content
-        videoContainer.innerHTML = '';
-        
-        // Attach video directly to container
-        const videoElement = track.attach();
-        videoElement.style.width = '100%';
-        videoElement.style.height = '100%';
-        videoElement.style.objectFit = 'cover';
-        videoElement.style.borderRadius = '1rem';
-        videoContainer.appendChild(videoElement);
-        
-        setHasVideo(true);
-        setStatus("Avatar Video empfangen!");
-        addDebug("Video element attached successfully");
-      }
+      addDebug("Got VIDEO track from heygen");
+      remoteVideoTrackRef.current = track as RemoteVideoTrack;
     }
     
     if (track.kind === Track.Kind.Audio) {
-      addDebug("Audio track received - attaching");
-      // Attach audio directly - LiveKit handles this
-      const audioElement = track.attach();
-      document.body.appendChild(audioElement);
-      addDebug("Audio element attached");
+      addDebug("Got AUDIO track from heygen");
+      remoteAudioTrackRef.current = track as RemoteAudioTrack;
     }
-  }, []);
-
-  // Handle track unsubscribed
-  const handleTrackUnsubscribed = useCallback((
-    track: RemoteTrack,
-    publication: RemoteTrackPublication,
-    participant: RemoteParticipant
-  ) => {
-    addDebug(`Track unsubscribed: ${track.kind}`);
-    track.detach();
-  }, []);
+    
+    // Check if we have both tracks
+    if (remoteVideoTrackRef.current && remoteAudioTrackRef.current) {
+      addDebug("Both tracks ready - attaching!");
+      attachMediaToElement();
+    }
+  }, [attachMediaToElement]);
 
   // Fetch session token and start LiveKit session
   const startSession = async () => {
@@ -78,10 +98,16 @@ export default function LiveAvatarPage() {
       setIsLoading(true);
       setError(null);
       setDebugInfo([]);
+      setIsStreamReady(false);
       setStatus("Hole Session Token...");
       addDebug("Starting session...");
 
-      // Step 1: Get session token
+      // Reset track refs
+      remoteVideoTrackRef.current = null;
+      remoteAudioTrackRef.current = null;
+      mediaStreamRef.current = new MediaStream();
+
+      // Step 1: Get session token (without voice_id to use default avatar voice)
       addDebug("Requesting session token...");
       const tokenResponse = await fetch(`${API_URL}/v1/sessions/token`, {
         method: "POST",
@@ -93,7 +119,6 @@ export default function LiveAvatarPage() {
           mode: "FULL",
           avatar_id: AVATAR_ID,
           avatar_persona: {
-            voice_id: VOICE_ID,
             context_id: CONTEXT_ID,
             language: "de",
           },
@@ -106,8 +131,6 @@ export default function LiveAvatarPage() {
       }
 
       const tokenData = await tokenResponse.json();
-      addDebug(`Token response: ${JSON.stringify(tokenData.data?.session_id || 'no session_id')}`);
-      
       const sessionToken = tokenData.data?.session_token;
       
       if (!sessionToken) {
@@ -115,7 +138,7 @@ export default function LiveAvatarPage() {
       }
 
       setStatus("Starte Session...");
-      addDebug("Got session token, starting session...");
+      addDebug("Got token, starting session...");
 
       // Step 2: Start session to get LiveKit credentials
       const startResponse = await fetch(`${API_URL}/v1/sessions/start`, {
@@ -132,8 +155,6 @@ export default function LiveAvatarPage() {
       }
 
       const startData = await startResponse.json();
-      addDebug(`LiveKit URL: ${startData.data?.livekit_url}`);
-      
       const { livekit_url, livekit_client_token } = startData.data;
 
       if (!livekit_url || !livekit_client_token) {
@@ -141,55 +162,46 @@ export default function LiveAvatarPage() {
       }
 
       setStatus("Verbinde mit LiveKit...");
-      addDebug("Connecting to LiveKit room...");
+      addDebug(`Connecting to ${livekit_url}`);
 
       // Step 3: Connect to LiveKit room
       const room = new Room({
         adaptiveStream: true,
         dynacast: true,
-        videoCaptureDefaults: {
-          resolution: { width: 1280, height: 720 },
-        },
       });
 
       roomRef.current = room;
 
-      // Set up event handlers
+      // Set up event handlers BEFORE connecting
       room.on(RoomEvent.TrackSubscribed, handleTrackSubscribed);
-      room.on(RoomEvent.TrackUnsubscribed, handleTrackUnsubscribed);
       
       room.on(RoomEvent.Connected, () => {
         addDebug("Connected to room!");
+        setIsConnected(true);
       });
       
       room.on(RoomEvent.Disconnected, () => {
         addDebug("Disconnected from room");
         setIsConnected(false);
-        setHasVideo(false);
+        setIsStreamReady(false);
         setStatus("Verbindung getrennt");
       });
 
       room.on(RoomEvent.ParticipantConnected, (participant) => {
-        addDebug(`Participant connected: ${participant.identity}`);
-      });
-
-      room.on(RoomEvent.TrackPublished, (publication, participant) => {
-        addDebug(`Track published: ${publication.kind} by ${participant.identity}`);
+        addDebug(`Participant joined: ${participant.identity}`);
       });
 
       // Connect to room
       await room.connect(livekit_url, livekit_client_token);
-      addDebug(`Room state: ${room.state}, participants: ${room.remoteParticipants.size}`);
       
-      setIsConnected(true);
-      setStatus("Verbunden - Warte auf Avatar Video...");
+      setStatus("Warte auf Avatar...");
+      addDebug(`Room connected, ${room.remoteParticipants.size} participants`);
 
-      // Check existing participants and their tracks
+      // Check for existing participants and their tracks
       room.remoteParticipants.forEach((participant) => {
         addDebug(`Existing participant: ${participant.identity}`);
         participant.trackPublications.forEach((publication) => {
-          addDebug(`Existing track: ${publication.kind}, subscribed: ${publication.isSubscribed}`);
-          if (publication.track) {
+          if (publication.track && publication.isSubscribed) {
             handleTrackSubscribed(
               publication.track as RemoteTrack,
               publication as RemoteTrackPublication,
@@ -202,11 +214,8 @@ export default function LiveAvatarPage() {
       // Enable microphone for voice chat
       try {
         await room.localParticipant.setMicrophoneEnabled(true);
-        setStatus("Mikrofon aktiviert - Sprich mit dem Avatar!");
         addDebug("Microphone enabled");
       } catch (micError) {
-        console.warn("Mikrofon konnte nicht aktiviert werden:", micError);
-        setStatus("Avatar verbunden (ohne Mikrofon)");
         addDebug(`Mic error: ${micError}`);
       }
 
@@ -227,15 +236,20 @@ export default function LiveAvatarPage() {
       roomRef.current.disconnect();
       roomRef.current = null;
     }
+    
+    // Clean up tracks
+    remoteVideoTrackRef.current = null;
+    remoteAudioTrackRef.current = null;
+    
+    // Clear video element
+    if (mediaElementRef.current) {
+      mediaElementRef.current.srcObject = null;
+    }
+    
     setIsConnected(false);
-    setHasVideo(false);
+    setIsStreamReady(false);
     setStatus("Bereit zum Starten");
     setDebugInfo([]);
-    
-    // Clear video container
-    if (videoContainerRef.current) {
-      videoContainerRef.current.innerHTML = '';
-    }
   }, []);
 
   // Cleanup on unmount
@@ -262,28 +276,22 @@ export default function LiveAvatarPage() {
 
         {/* Avatar Container */}
         <div className="relative mx-auto" style={{ maxWidth: "640px", aspectRatio: "16/9" }}>
-          {/* Video Container - LiveKit will attach video here */}
-          <div
-            ref={videoContainerRef}
-            className="w-full h-full rounded-2xl border-2 border-amber-500/30 overflow-hidden"
-            style={{
-              backgroundColor: "black",
-              minHeight: "360px",
-            }}
+          {/* Video Element - The avatar will be displayed here */}
+          <video
+            ref={mediaElementRef}
+            autoPlay
+            playsInline
+            className={`w-full h-full rounded-2xl border-2 border-amber-500/30 object-cover ${isStreamReady ? 'block' : 'hidden'}`}
+            style={{ backgroundColor: "black" }}
           />
 
           {/* Loading/Placeholder State */}
-          {!hasVideo && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/80 rounded-2xl">
-              {isLoading ? (
+          {!isStreamReady && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black rounded-2xl border-2 border-amber-500/30">
+              {isLoading || isConnected ? (
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
                   <p className="text-amber-200">{status}</p>
-                </div>
-              ) : isConnected ? (
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
-                  <p className="text-amber-200">Warte auf Avatar Video...</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-4">
@@ -344,7 +352,7 @@ export default function LiveAvatarPage() {
 
         {/* Info */}
         <p className="mt-8 text-center text-gray-400 text-sm">
-          Dein Avatar mit deiner geklonten Stimme (jedermannhandy).
+          Dein Avatar "Mathias" mit deiner geklonten Stimme.
           <br />
           <span className="text-amber-400/60">Erlaube den Mikrofon-Zugriff für Voice Chat.</span>
         </p>
