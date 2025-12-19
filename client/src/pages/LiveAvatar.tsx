@@ -8,121 +8,21 @@ const VOICE_ID = "1c1f2d85-d15f-431b-9e22-f6626ce44199";
 const CONTEXT_ID = "2e3b2daf-222f-4cd4-ab02-ff3397b5f52f";
 const API_URL = "https://api.liveavatar.com";
 
-// Chroma Key Settings for Green Screen
-const CHROMA_KEY_CONFIG = {
-  minHue: 60,
-  maxHue: 180,
-  minSaturation: 0.10,
-  threshold: 1.0,
-};
-
 export default function LiveAvatarPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  const [hasVideo, setHasVideo] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string>("Bereit zum Starten");
+  const [debugInfo, setDebugInfo] = useState<string[]>([]);
   
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const roomRef = useRef<Room | null>(null);
-  const animationFrameRef = useRef<number | null>(null);
 
-  // RGB to HSL conversion for chroma key
-  const rgbToHsl = (r: number, g: number, b: number) => {
-    r /= 255;
-    g /= 255;
-    b /= 255;
-    const max = Math.max(r, g, b);
-    const min = Math.min(r, g, b);
-    let h = 0;
-    let s = 0;
-    const l = (max + min) / 2;
-
-    if (max !== min) {
-      const d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r:
-          h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
-          break;
-        case g:
-          h = ((b - r) / d + 2) / 6;
-          break;
-        case b:
-          h = ((r - g) / d + 4) / 6;
-          break;
-      }
-    }
-
-    return { h: h * 360, s, l };
+  const addDebug = (msg: string) => {
+    console.log("[LiveAvatar]", msg);
+    setDebugInfo(prev => [...prev.slice(-9), msg]);
   };
-
-  // Apply chroma key effect
-  const applyChromaKey = useCallback(() => {
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    if (!video || !canvas || video.paused || video.ended || video.readyState < 2) {
-      animationFrameRef.current = requestAnimationFrame(applyChromaKey);
-      return;
-    }
-
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    if (!ctx) return;
-
-    // Match canvas size to video
-    if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
-      canvas.width = video.videoWidth || 640;
-      canvas.height = video.videoHeight || 480;
-    }
-
-    // Draw video frame
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    // Get image data
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-
-    const { minHue, maxHue, minSaturation, threshold } = CHROMA_KEY_CONFIG;
-
-    // Process each pixel
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
-
-      const { h, s } = rgbToHsl(r, g, b);
-
-      // Check if pixel is green (chroma key color)
-      const isGreen = h >= minHue && h <= maxHue && s >= minSaturation;
-      const greenDominance = g / Math.max(r, b, 1);
-
-      if (isGreen && greenDominance >= threshold) {
-        // Make pixel transparent
-        data[i + 3] = 0;
-      }
-    }
-
-    ctx.putImageData(imageData, 0, 0);
-
-    // Continue animation loop
-    animationFrameRef.current = requestAnimationFrame(applyChromaKey);
-  }, []);
-
-  // Start chroma key processing
-  const startChromaKey = useCallback(() => {
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-    applyChromaKey();
-  }, [applyChromaKey]);
-
-  // Stop chroma key processing
-  const stopChromaKey = useCallback(() => {
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-      animationFrameRef.current = null;
-    }
-  }, []);
 
   // Handle incoming video track
   const handleTrackSubscribed = useCallback((
@@ -130,33 +30,59 @@ export default function LiveAvatarPage() {
     publication: RemoteTrackPublication,
     participant: RemoteParticipant
   ) => {
-    console.log("Track subscribed:", track.kind, participant.identity);
+    addDebug(`Track subscribed: ${track.kind} from ${participant.identity}`);
     
     if (track.kind === Track.Kind.Video) {
-      const videoElement = videoRef.current;
-      if (videoElement) {
-        track.attach(videoElement);
-        setStatus("Avatar verbunden!");
-        startChromaKey();
+      addDebug("Video track received - attaching to container");
+      const videoContainer = videoContainerRef.current;
+      if (videoContainer) {
+        // Clear previous content
+        videoContainer.innerHTML = '';
+        
+        // Attach video directly to container
+        const videoElement = track.attach();
+        videoElement.style.width = '100%';
+        videoElement.style.height = '100%';
+        videoElement.style.objectFit = 'cover';
+        videoElement.style.borderRadius = '1rem';
+        videoContainer.appendChild(videoElement);
+        
+        setHasVideo(true);
+        setStatus("Avatar Video empfangen!");
+        addDebug("Video element attached successfully");
       }
     }
     
     if (track.kind === Track.Kind.Audio) {
-      // Create audio element for avatar voice
-      const audioElement = document.createElement("audio");
-      audioElement.autoplay = true;
-      track.attach(audioElement);
+      addDebug("Audio track received - attaching");
+      // Attach audio directly - LiveKit handles this
+      const audioElement = track.attach();
+      document.body.appendChild(audioElement);
+      addDebug("Audio element attached");
     }
-  }, [startChromaKey]);
+  }, []);
+
+  // Handle track unsubscribed
+  const handleTrackUnsubscribed = useCallback((
+    track: RemoteTrack,
+    publication: RemoteTrackPublication,
+    participant: RemoteParticipant
+  ) => {
+    addDebug(`Track unsubscribed: ${track.kind}`);
+    track.detach();
+  }, []);
 
   // Fetch session token and start LiveKit session
   const startSession = async () => {
     try {
       setIsLoading(true);
       setError(null);
+      setDebugInfo([]);
       setStatus("Hole Session Token...");
+      addDebug("Starting session...");
 
       // Step 1: Get session token
+      addDebug("Requesting session token...");
       const tokenResponse = await fetch(`${API_URL}/v1/sessions/token`, {
         method: "POST",
         headers: {
@@ -180,6 +106,8 @@ export default function LiveAvatarPage() {
       }
 
       const tokenData = await tokenResponse.json();
+      addDebug(`Token response: ${JSON.stringify(tokenData.data?.session_id || 'no session_id')}`);
+      
       const sessionToken = tokenData.data?.session_token;
       
       if (!sessionToken) {
@@ -187,6 +115,7 @@ export default function LiveAvatarPage() {
       }
 
       setStatus("Starte Session...");
+      addDebug("Got session token, starting session...");
 
       // Step 2: Start session to get LiveKit credentials
       const startResponse = await fetch(`${API_URL}/v1/sessions/start`, {
@@ -203,6 +132,8 @@ export default function LiveAvatarPage() {
       }
 
       const startData = await startResponse.json();
+      addDebug(`LiveKit URL: ${startData.data?.livekit_url}`);
+      
       const { livekit_url, livekit_client_token } = startData.data;
 
       if (!livekit_url || !livekit_client_token) {
@@ -210,42 +141,73 @@ export default function LiveAvatarPage() {
       }
 
       setStatus("Verbinde mit LiveKit...");
+      addDebug("Connecting to LiveKit room...");
 
       // Step 3: Connect to LiveKit room
       const room = new Room({
         adaptiveStream: true,
         dynacast: true,
+        videoCaptureDefaults: {
+          resolution: { width: 1280, height: 720 },
+        },
       });
 
       roomRef.current = room;
 
       // Set up event handlers
       room.on(RoomEvent.TrackSubscribed, handleTrackSubscribed);
+      room.on(RoomEvent.TrackUnsubscribed, handleTrackUnsubscribed);
+      
+      room.on(RoomEvent.Connected, () => {
+        addDebug("Connected to room!");
+      });
       
       room.on(RoomEvent.Disconnected, () => {
-        console.log("Disconnected from room");
+        addDebug("Disconnected from room");
         setIsConnected(false);
+        setHasVideo(false);
         setStatus("Verbindung getrennt");
-        stopChromaKey();
       });
 
       room.on(RoomEvent.ParticipantConnected, (participant) => {
-        console.log("Participant connected:", participant.identity);
+        addDebug(`Participant connected: ${participant.identity}`);
+      });
+
+      room.on(RoomEvent.TrackPublished, (publication, participant) => {
+        addDebug(`Track published: ${publication.kind} by ${participant.identity}`);
       });
 
       // Connect to room
       await room.connect(livekit_url, livekit_client_token);
+      addDebug(`Room state: ${room.state}, participants: ${room.remoteParticipants.size}`);
       
       setIsConnected(true);
-      setStatus("Warte auf Avatar...");
+      setStatus("Verbunden - Warte auf Avatar Video...");
+
+      // Check existing participants and their tracks
+      room.remoteParticipants.forEach((participant) => {
+        addDebug(`Existing participant: ${participant.identity}`);
+        participant.trackPublications.forEach((publication) => {
+          addDebug(`Existing track: ${publication.kind}, subscribed: ${publication.isSubscribed}`);
+          if (publication.track) {
+            handleTrackSubscribed(
+              publication.track as RemoteTrack,
+              publication as RemoteTrackPublication,
+              participant
+            );
+          }
+        });
+      });
 
       // Enable microphone for voice chat
       try {
         await room.localParticipant.setMicrophoneEnabled(true);
         setStatus("Mikrofon aktiviert - Sprich mit dem Avatar!");
+        addDebug("Microphone enabled");
       } catch (micError) {
         console.warn("Mikrofon konnte nicht aktiviert werden:", micError);
         setStatus("Avatar verbunden (ohne Mikrofon)");
+        addDebug(`Mic error: ${micError}`);
       }
 
     } catch (err) {
@@ -253,6 +215,7 @@ export default function LiveAvatarPage() {
       setError(`Fehler: ${errorMessage}`);
       console.error("Session error:", err);
       setStatus("Fehler beim Verbinden");
+      addDebug(`Error: ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }
@@ -264,10 +227,16 @@ export default function LiveAvatarPage() {
       roomRef.current.disconnect();
       roomRef.current = null;
     }
-    stopChromaKey();
     setIsConnected(false);
+    setHasVideo(false);
     setStatus("Bereit zum Starten");
-  }, [stopChromaKey]);
+    setDebugInfo([]);
+    
+    // Clear video container
+    if (videoContainerRef.current) {
+      videoContainerRef.current.innerHTML = '';
+    }
+  }, []);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -293,31 +262,28 @@ export default function LiveAvatarPage() {
 
         {/* Avatar Container */}
         <div className="relative mx-auto" style={{ maxWidth: "640px", aspectRatio: "16/9" }}>
-          {/* Hidden video element (source for chroma key) */}
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            muted={false}
-            className="hidden"
-          />
-
-          {/* Canvas with chroma key applied (visible) */}
-          <canvas
-            ref={canvasRef}
-            className="w-full h-full rounded-2xl border-2 border-amber-500/30"
+          {/* Video Container - LiveKit will attach video here */}
+          <div
+            ref={videoContainerRef}
+            className="w-full h-full rounded-2xl border-2 border-amber-500/30 overflow-hidden"
             style={{
               backgroundColor: "black",
+              minHeight: "360px",
             }}
           />
 
           {/* Loading/Placeholder State */}
-          {!isConnected && (
+          {!hasVideo && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/80 rounded-2xl">
               {isLoading ? (
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
                   <p className="text-amber-200">{status}</p>
+                </div>
+              ) : isConnected ? (
+                <div className="flex flex-col items-center gap-4">
+                  <div className="w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                  <p className="text-amber-200">Warte auf Avatar Video...</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-4">
@@ -339,6 +305,15 @@ export default function LiveAvatarPage() {
         {error && (
           <div className="mt-4 p-4 bg-red-900/50 border border-red-500 rounded-lg text-red-200 text-center">
             {error}
+          </div>
+        )}
+
+        {/* Debug Info */}
+        {debugInfo.length > 0 && (
+          <div className="mt-4 p-3 bg-gray-900/80 border border-gray-700 rounded-lg text-xs font-mono text-gray-400 max-h-40 overflow-y-auto">
+            {debugInfo.map((msg, i) => (
+              <div key={i}>{msg}</div>
+            ))}
           </div>
         )}
 
@@ -369,7 +344,7 @@ export default function LiveAvatarPage() {
 
         {/* Info */}
         <p className="mt-8 text-center text-gray-400 text-sm">
-          Dieser Avatar verwendet Green Screen Technologie mit Chroma Key Entfernung.
+          Dein Avatar mit deiner geklonten Stimme (jedermannhandy).
           <br />
           <span className="text-amber-400/60">Erlaube den Mikrofon-Zugriff für Voice Chat.</span>
         </p>

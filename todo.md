@@ -352,3 +352,9 @@
 - [x] Rewrote LiveAvatar page with LiveKit Room API
 - [x] Connection successful in sandbox
 - [ ] Test on real device with microphone
+
+## Phase 46 - LiveAvatar Critical Bugs
+- [ ] Fix: Kein Avatar-Bild sichtbar
+- [ ] Fix: Falsche Stimme (Roboter statt geklonte Stimme)
+- [ ] Debug: Video-Track Empfang prüfen
+- [ ] Debug: Voice-ID Konfiguration prüfen
