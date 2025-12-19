@@ -406,3 +406,9 @@
 - [x] Add text chat input option
 - [x] Fix auto-start - now shows "Gespräch starten" button first
 - [x] Popup opens on FAB click with proper modal overlay
+
+
+## Phase 52 - LiveAvatar Page Mobile Fix
+- [x] Fix "Gespräch starten" button not visible on mobile
+- [x] Ensure button is clickable on mobile devices
+- [x] Moved button outside video area for better mobile visibility

@@ -189,18 +189,18 @@ export default function LiveAvatarPage() {
           <div className="bg-[#111111] rounded-2xl border border-[#d4af37]/20 overflow-hidden shadow-[0_0_60px_rgba(212,175,55,0.05)]">
             
             {/* Video Area */}
-            <div className="relative aspect-video bg-black">
+            <div className="relative bg-black" style={{ minHeight: isStreamReady ? 'auto' : '200px' }}>
               <video
                 ref={videoRef}
                 autoPlay
                 playsInline
-                className="w-full h-full object-contain"
+                className={`w-full object-contain ${isStreamReady ? 'aspect-video' : 'hidden'}`}
                 style={{ backgroundColor: '#000' }}
               />
               
               {/* Overlay when not connected */}
               {!isStreamReady && (
-                <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
+                <div className="flex items-center justify-center bg-[#0a0a0a] py-8">
                   {isLoading ? (
                     <div className="text-center">
                       <div className="w-16 h-16 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
@@ -208,27 +208,17 @@ export default function LiveAvatarPage() {
                       <p className="text-gray-500 text-sm mt-2">Bitte warten</p>
                     </div>
                   ) : (
-                    <div className="text-center px-8">
+                    <div className="text-center px-6">
                       {/* Avatar placeholder */}
-                      <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/5 border-2 border-[#d4af37]/30 flex items-center justify-center mx-auto mb-8">
-                        <svg className="w-16 h-16 text-[#d4af37]/50" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/5 border-2 border-[#d4af37]/30 flex items-center justify-center mx-auto mb-6">
+                        <svg className="w-12 h-12 md:w-16 md:h-16 text-[#d4af37]/50" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                         </svg>
                       </div>
-                      <h2 className="text-2xl font-bold text-white mb-3">Bereit für dein Gespräch</h2>
-                      <p className="text-gray-400 mb-8 max-w-md mx-auto">
+                      <h2 className="text-xl md:text-2xl font-bold text-white mb-2">Bereit für dein Gespräch</h2>
+                      <p className="text-gray-400 text-sm md:text-base mb-6 max-w-md mx-auto">
                         Klicke auf den Button um ein Live-Gespräch mit Mathias zu starten.
                       </p>
-                      <button
-                        onClick={handleStart}
-                        disabled={isLoading}
-                        className="inline-flex items-center gap-3 bg-[#10b981] hover:bg-[#059669] text-white font-semibold py-4 px-8 rounded-lg transition-all transform hover:scale-[1.02] shadow-lg shadow-[#10b981]/20"
-                      >
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z"/>
-                        </svg>
-                        Gespräch starten
-                      </button>
                     </div>
                   )}
                 </div>
@@ -252,6 +242,21 @@ export default function LiveAvatarPage() {
                 </div>
               )}
             </div>
+
+            {/* Start Button - outside video area for mobile visibility */}
+            {!isStreamReady && !isLoading && (
+              <div className="p-6 border-t border-[#d4af37]/10 bg-[#0d0d0d]">
+                <button
+                  onClick={handleStart}
+                  className="w-full inline-flex items-center justify-center gap-3 bg-[#10b981] hover:bg-[#059669] text-white font-bold py-4 px-8 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-[#10b981]/30 text-lg"
+                >
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                  </svg>
+                  Gespräch starten
+                </button>
+              </div>
+            )}
 
             {/* Controls - only when connected */}
             {isStreamReady && (
