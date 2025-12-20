@@ -513,3 +513,8 @@
 - [x] Move FAB button to left corner (away from Lina chat)
 - [x] Red Santa button with 🎅 emoji
 - [ ] Check avatar embed ID - HeyGen server issue
+
+
+## Phase 62 - Popup Position Fix
+- [x] Move Santa popup away from Lina chat button
+- [x] Position popup on left side (bottom-left corner)
