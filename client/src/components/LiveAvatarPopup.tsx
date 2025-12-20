@@ -1,8 +1,9 @@
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// HeyGen Embed ID from user
-const EMBED_ID = '30ab5f04-58df-4624-955d-ee875cfe4f25';
+// Santa Claus Avatar - Christmas Special!
+// Mathias ist gerade unterwegs und trägt die Geschenke aus
+const EMBED_ID = '1c690fe7-23e0-49f9-bfba-14344450285b';
 
 interface LiveAvatarPopupProps {
   isOpen: boolean;
@@ -30,7 +31,7 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed z-[101] bg-black rounded-2xl border border-[#C9A86C]/30 shadow-[0_0_60px_rgba(201,168,108,0.15)] overflow-hidden flex flex-col"
+            className="fixed z-[101] bg-black rounded-2xl border border-red-500/30 shadow-[0_0_60px_rgba(239,68,68,0.15)] overflow-hidden flex flex-col"
             style={{
               top: '50%',
               left: '50%',
@@ -40,20 +41,15 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-[#C9A86C]/20 bg-[#0d0d0d] flex-shrink-0">
+            {/* Header - Christmas Style */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-red-500/20 bg-[#0d0d0d] flex-shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#C9A86C]/30 bg-[#1a1a1a]">
-                  <img 
-                    src="/images/mathias.png" 
-                    alt="Mathias" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                  />
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-red-500/30 bg-[#1a1a1a] flex items-center justify-center text-2xl">
+                  🎅
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold text-sm">Mathias – Live Avatar</h3>
-                  <p className="text-[#C9A86C]/60 text-xs">Klicke zum Starten</p>
+                  <h3 className="text-white font-semibold text-sm">Santa Claus – Live Avatar</h3>
+                  <p className="text-red-400/60 text-xs">Vertretung für Mathias 🎄</p>
                 </div>
               </div>
               <button
@@ -64,12 +60,12 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
               </button>
             </div>
 
-            {/* HeyGen Embed - Simple iframe solution */}
+            {/* HeyGen Embed - Santa Claus */}
             <div className="flex-1 bg-black">
               <iframe 
                 src={`https://embed.liveavatar.com/v1/${EMBED_ID}`}
                 allow="microphone"
-                title="LiveAvatar Embed"
+                title="Santa Claus - LiveAvatar"
                 className="w-full h-full"
                 style={{ 
                   border: 'none',

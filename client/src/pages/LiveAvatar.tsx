@@ -1,7 +1,8 @@
 import { ArrowLeft } from 'lucide-react';
 
-// HeyGen Embed ID from user
-const EMBED_ID = '30ab5f04-58df-4624-955d-ee875cfe4f25';
+// Santa Claus Avatar - Christmas Special!
+// Mathias ist gerade unterwegs und trägt die Geschenke aus
+const EMBED_ID = '1c690fe7-23e0-49f9-bfba-14344450285b';
 
 export default function LiveAvatarPage() {
   return (
@@ -24,22 +25,22 @@ export default function LiveAvatarPage() {
         <div className="container py-4 flex-1 flex flex-col">
           <div className="max-w-2xl mx-auto w-full flex-1 flex flex-col">
             
-            {/* Title */}
+            {/* Title - Christmas Edition */}
             <div className="text-center mb-4">
               <h1 className="text-2xl md:text-3xl font-bold">
-                <span className="bg-gradient-to-r from-[#d4af37] via-[#f4cf67] to-[#d4af37] bg-clip-text text-transparent">
-                  Sprich mit Mathias
+                <span className="bg-gradient-to-r from-red-500 via-green-500 to-red-500 bg-clip-text text-transparent">
+                  🎅 Santa Claus
                 </span>
               </h1>
-              <p className="text-gray-400 text-sm">Dein persönlicher KI-Berater</p>
+              <p className="text-gray-400 text-sm">Vertretung für Mathias - er trägt gerade die Geschenke aus!</p>
             </div>
 
-            {/* HeyGen Embed - Simple iframe solution */}
-            <div className="flex-1 min-h-[400px] md:min-h-[500px] rounded-xl overflow-hidden border border-[#d4af37]/20 bg-black">
+            {/* HeyGen Embed - Santa Claus */}
+            <div className="flex-1 min-h-[400px] md:min-h-[500px] rounded-xl overflow-hidden border border-red-500/30 bg-black">
               <iframe 
                 src={`https://embed.liveavatar.com/v1/${EMBED_ID}`}
                 allow="microphone"
-                title="LiveAvatar Embed"
+                title="Santa Claus - LiveAvatar"
                 className="w-full h-full"
                 style={{ 
                   aspectRatio: '16/9',
@@ -50,9 +51,9 @@ export default function LiveAvatarPage() {
               />
             </div>
 
-            {/* Info */}
+            {/* Info - Christmas Style */}
             <p className="text-center text-gray-500 text-xs mt-4">
-              Klicke auf den Avatar um das Gespräch zu starten. Mikrofon-Zugriff wird benötigt.
+              🎄 Ho ho ho! Klicke auf Santa um das Gespräch zu starten. Mikrofon-Zugriff wird benötigt. 🎄
             </p>
 
           </div>

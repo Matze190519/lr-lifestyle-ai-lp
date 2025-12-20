@@ -497,3 +497,11 @@
 - [x] Update LiveAvatar page to use embed (30ab5f04-58df-4624-955d-ee875cfe4f25)
 - [x] Update LiveAvatarPopup to use embed
 - [x] Test on mobile - HeyGen handles all mobile optimization
+
+
+## Phase 60 - Santa Claus Avatar (Christmas Special)
+- [x] Change avatar ID to Santa Claus (1c690fe7-23e0-49f9-bfba-14344450285b)
+- [x] Update greeting text with funny Christmas theme
+- [x] Change name from Mathias to Santa Claus
+- [x] Keep database/knowledge base the same
+- [x] Red/green Christmas color scheme for borders and accents
