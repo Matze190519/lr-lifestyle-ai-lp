@@ -3,11 +3,9 @@ import {
   LiveAvatarSession, 
   SessionState, 
   SessionEvent,
-  VoiceChatState,
-  VoiceChatEvent,
   AgentEventsEnum
 } from '@heygen/liveavatar-web-sdk';
-import { X, Mic, MicOff, Send, Phone, PhoneOff, Square, MessageCircle, Volume2 } from 'lucide-react';
+import { X, Mic, MicOff, Send, Phone, PhoneOff, Volume2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // API Configuration
@@ -28,9 +26,7 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const [isAvatarTalking, setIsAvatarTalking] = useState(false);
-  const [isUserTalking, setIsUserTalking] = useState(false);
   const [voiceChatActive, setVoiceChatActive] = useState(false);
-  const [showTextInput, setShowTextInput] = useState(false);
   
   const sessionRef = useRef<LiveAvatarSession | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -54,6 +50,7 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
     });
 
     const data = await response.json();
+    
     if (!response.ok) {
       throw new Error(data.detail || data.message || 'Verbindungsfehler');
     }
@@ -63,45 +60,43 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
   const initializeSession = useCallback(async (token: string) => {
     try {
       const session = new LiveAvatarSession(token, {
-        voiceChat: true,
+        voiceChat: false,
       });
       
       sessionRef.current = session;
 
       session.on(SessionEvent.SESSION_STATE_CHANGED, (state: SessionState) => {
-        console.log('Session state changed:', state);
         setSessionState(state);
         if (state === SessionState.DISCONNECTED) {
           session.removeAllListeners();
-          session.voiceChat.removeAllListeners();
           setIsStreamReady(false);
           setVoiceChatActive(false);
         }
       });
 
       session.on(SessionEvent.SESSION_STREAM_READY, () => {
-        console.log('Stream ready');
         setIsStreamReady(true);
         setIsLoading(false);
+        
         if (videoRef.current) {
           session.attach(videoRef.current);
+          videoRef.current.play().catch(() => {});
         }
       });
 
-      session.on(AgentEventsEnum.AVATAR_SPEAK_STARTED, () => setIsAvatarTalking(true));
-      session.on(AgentEventsEnum.AVATAR_SPEAK_ENDED, () => setIsAvatarTalking(false));
-      session.on(AgentEventsEnum.USER_SPEAK_STARTED, () => setIsUserTalking(true));
-      session.on(AgentEventsEnum.USER_SPEAK_ENDED, () => setIsUserTalking(false));
-
-      session.voiceChat.on(VoiceChatEvent.STATE_CHANGED, (state: VoiceChatState) => {
-        console.log('Voice chat state:', state);
-        setVoiceChatActive(state === VoiceChatState.ACTIVE);
+      session.on(AgentEventsEnum.AVATAR_SPEAK_STARTED, () => {
+        setIsAvatarTalking(true);
+      });
+      
+      session.on(AgentEventsEnum.AVATAR_SPEAK_ENDED, () => {
+        setIsAvatarTalking(false);
       });
 
       await session.start();
+      
     } catch (err) {
-      console.error('Session error:', err);
-      setError(err instanceof Error ? err.message : 'Unbekannter Fehler');
+      const errorMsg = err instanceof Error ? err.message : 'Unbekannter Fehler';
+      setError(errorMsg);
       setIsLoading(false);
     }
   }, []);
@@ -109,11 +104,13 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
   const handleStart = async () => {
     setIsLoading(true);
     setError(null);
+    
     try {
       const token = await getSessionToken();
       await initializeSession(token);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Verbindungsfehler');
+      const errorMsg = err instanceof Error ? err.message : 'Verbindungsfehler';
+      setError(errorMsg);
       setIsLoading(false);
     }
   };
@@ -134,7 +131,7 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
       await sessionRef.current.message(message);
       setMessage('');
     } catch (err) {
-      console.error('Nachricht konnte nicht gesendet werden');
+      console.error('Message send failed');
     }
   };
 
@@ -143,11 +140,13 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
     try {
       if (voiceChatActive) {
         await sessionRef.current.voiceChat.stop();
+        setVoiceChatActive(false);
       } else {
         await sessionRef.current.voiceChat.start();
+        setVoiceChatActive(true);
       }
     } catch (err) {
-      console.error('Mikrofon-Fehler:', err);
+      console.error('Voice chat error:', err);
     }
   };
 
@@ -157,7 +156,6 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
     }
   };
 
-  // Cleanup on unmount or close
   useEffect(() => {
     if (!isOpen && sessionRef.current) {
       handleStop();
@@ -168,9 +166,6 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
       }
     };
   }, [isOpen]);
-
-  // Don't auto-start - let user click to start
-  // This avoids errors when device permissions are not available
 
   if (!isOpen) return null;
 
@@ -187,87 +182,106 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
             onClick={onClose}
           />
           
-          {/* Popup Container */}
+          {/* Popup - Responsive size */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90vw] md:max-w-2xl md:h-auto md:max-h-[85vh] bg-[#0a0a0a] rounded-2xl border border-[#C9A86C]/30 shadow-[0_0_60px_rgba(201,168,108,0.15)] z-[101] overflow-hidden flex flex-col"
+            className="fixed z-[101] bg-[#0a0a0a] rounded-2xl border border-[#C9A86C]/30 shadow-[0_0_60px_rgba(201,168,108,0.15)] overflow-hidden flex flex-col"
+            style={{
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 'min(95vw, 400px)',
+              maxHeight: '90vh',
+            }}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-[#C9A86C]/20 bg-[#0d0d0d]">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full overflow-hidden border border-[#C9A86C]/30">
+            <div className="flex items-center justify-between px-3 py-2 border-b border-[#C9A86C]/20 bg-[#0d0d0d] flex-shrink-0">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full overflow-hidden border border-[#C9A86C]/30 bg-[#1a1a1a]">
                   <img 
-                    src="/images/mathias-avatar.png" 
+                    src="/images/mathias.png" 
                     alt="Mathias" 
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = '/images/lina.png';
-                    }}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold text-sm">Mathias – Live Avatar</h3>
-                  <p className="text-[#C9A86C]/60 text-xs">
-                    {isStreamReady ? 'Online' : isLoading ? 'Verbinde...' : 'Offline'}
+                  <h3 className="text-white font-semibold text-xs">Mathias – Live Avatar</h3>
+                  <p className="text-[#C9A86C]/60 text-[10px]">
+                    {isStreamReady ? (
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                        Online
+                      </span>
+                    ) : isLoading ? 'Verbinde...' : 'Offline'}
                   </p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
               >
                 <X className="w-4 h-4 text-white/70" />
               </button>
             </div>
 
-            {/* Video Area */}
-            <div className="relative flex-1 min-h-[300px] md:min-h-[400px] bg-black">
+            {/* Video Area - Fixed small size with chroma key CSS */}
+            <div 
+              className="relative flex-shrink-0 overflow-hidden"
+              style={{ 
+                height: '180px',
+                backgroundColor: '#000'
+              }}
+            >
+              {/* Video element with CSS chroma key effect */}
               <video
                 ref={videoRef}
                 autoPlay
                 playsInline
                 muted={false}
                 className="w-full h-full object-contain"
-                style={{ backgroundColor: '#000' }}
+                style={{ 
+                  backgroundColor: '#000',
+                  // CSS filter to reduce green - not perfect but helps
+                  filter: isStreamReady ? 'saturate(0.9)' : 'none',
+                }}
               />
               
-              {/* Overlay when not connected */}
+              {/* Not connected overlay */}
               {!isStreamReady && (
                 <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
                   {isLoading ? (
                     <div className="text-center">
-                      <div className="w-16 h-16 border-4 border-[#C9A86C] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                      <p className="text-[#C9A86C] text-base">Verbinde mit Mathias...</p>
-                      <p className="text-gray-500 text-sm mt-1">Bitte warten</p>
+                      <div className="w-10 h-10 border-2 border-[#C9A86C] border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                      <p className="text-[#C9A86C] text-xs">Verbinde...</p>
                     </div>
                   ) : error ? (
-                    <div className="text-center px-6">
-                      <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
-                        <X className="w-8 h-8 text-red-400" />
+                    <div className="text-center px-4">
+                      <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-2">
+                        <AlertCircle className="w-5 h-5 text-red-400" />
                       </div>
-                      <p className="text-red-400 text-base mb-2">Verbindungsfehler</p>
-                      <p className="text-gray-500 text-sm mb-4">{error}</p>
+                      <p className="text-red-400 text-xs mb-2">{error}</p>
                       <button
                         onClick={handleStart}
-                        className="bg-[#C9A86C] hover:bg-[#E8D5A3] text-black font-semibold py-2 px-6 rounded-lg transition-colors"
+                        className="bg-[#C9A86C] hover:bg-[#E8D5A3] text-black font-semibold py-1.5 px-3 rounded-lg text-xs"
                       >
                         Erneut versuchen
                       </button>
                     </div>
                   ) : (
-                    <div className="text-center px-6">
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#C9A86C]/20 to-[#C9A86C]/5 border-2 border-[#C9A86C]/30 flex items-center justify-center mx-auto mb-4">
-                        <Phone className="w-8 h-8 text-[#C9A86C]/50" />
+                    <div className="text-center px-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C9A86C]/20 to-[#C9A86C]/5 border-2 border-[#C9A86C]/30 flex items-center justify-center mx-auto mb-2">
+                        <Phone className="w-5 h-5 text-[#C9A86C]/50" />
                       </div>
-                      <p className="text-white text-base mb-2">Bereit für dein Gespräch</p>
+                      <p className="text-white text-xs mb-2">Bereit für dein Gespräch</p>
                       <button
                         onClick={handleStart}
-                        className="bg-[#10b981] hover:bg-[#059669] text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center gap-2 mx-auto"
+                        className="bg-[#10b981] hover:bg-[#059669] text-white font-semibold py-2 px-4 rounded-lg text-xs flex items-center justify-center gap-1.5 mx-auto"
                       >
-                        <Phone className="w-5 h-5" />
+                        <Phone className="w-3.5 h-3.5" />
                         Gespräch starten
                       </button>
                     </div>
@@ -275,120 +289,76 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
                 </div>
               )}
 
-              {/* Status indicators */}
+              {/* Status badges when connected */}
               {isStreamReady && (
-                <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
-                  <div className="flex flex-col gap-2">
-                    {isAvatarTalking && (
-                      <div className="flex items-center gap-2 bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-[#C9A86C]/30">
-                        <Volume2 className="w-3 h-3 text-[#C9A86C] animate-pulse" />
-                        <span className="text-[#C9A86C] text-xs font-medium">Mathias spricht</span>
-                      </div>
-                    )}
-                    {isUserTalking && (
-                      <div className="flex items-center gap-2 bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-[#10b981]/30">
-                        <Mic className="w-3 h-3 text-[#10b981] animate-pulse" />
-                        <span className="text-[#10b981] text-xs font-medium">Du sprichst</span>
-                      </div>
-                    )}
-                  </div>
+                <div className="absolute top-1.5 left-1.5 right-1.5 flex justify-between pointer-events-none">
+                  {isAvatarTalking && (
+                    <div className="flex items-center gap-1 bg-black/70 px-1.5 py-0.5 rounded-full">
+                      <Volume2 className="w-2.5 h-2.5 text-[#C9A86C] animate-pulse" />
+                      <span className="text-[#C9A86C] text-[8px]">Spricht</span>
+                    </div>
+                  )}
                   {voiceChatActive && (
-                    <div className="flex items-center gap-2 bg-[#10b981]/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-[#10b981]/30">
-                      <div className="w-2 h-2 bg-[#10b981] rounded-full animate-pulse"></div>
-                      <span className="text-[#10b981] text-xs font-medium">Mikrofon aktiv</span>
+                    <div className="flex items-center gap-1 bg-black/70 px-1.5 py-0.5 rounded-full ml-auto">
+                      <Mic className="w-2.5 h-2.5 text-green-400 animate-pulse" />
+                      <span className="text-green-400 text-[8px]">Mikro an</span>
                     </div>
                   )}
                 </div>
               )}
             </div>
 
-            {/* Controls */}
+            {/* Controls - Always visible when connected */}
             {isStreamReady && (
-              <div className="p-4 border-t border-[#C9A86C]/10 bg-[#0d0d0d]">
-                {/* Text Input (toggleable) */}
-                <AnimatePresence>
-                  {showTextInput && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden mb-3"
-                    >
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={message}
-                          onChange={(e) => setMessage(e.target.value)}
-                          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                          placeholder="Schreibe eine Nachricht..."
-                          className="flex-1 bg-[#1a1a1a] text-white px-4 py-2.5 rounded-lg border border-[#333] focus:border-[#C9A86C]/50 focus:outline-none text-sm placeholder-gray-500"
-                        />
-                        <button
-                          onClick={handleSendMessage}
-                          disabled={!message.trim()}
-                          className="bg-[#C9A86C] hover:bg-[#E8D5A3] disabled:bg-[#333] disabled:text-gray-500 text-black font-semibold px-4 py-2.5 rounded-lg transition-colors"
-                        >
-                          <Send className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Action Buttons */}
-                <div className="flex items-center justify-center gap-3">
-                  {/* Toggle Text Input */}
+              <div className="p-2 bg-[#0d0d0d] border-t border-[#C9A86C]/10 flex-shrink-0 space-y-1.5">
+                {/* Text input */}
+                <div className="flex gap-1.5">
+                  <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                    placeholder="Nachricht eingeben..."
+                    className="flex-1 bg-[#1a1a1a] text-white px-2.5 py-1.5 rounded-lg border border-[#333] focus:border-[#C9A86C]/50 focus:outline-none text-xs placeholder-gray-500"
+                  />
                   <button
-                    onClick={() => setShowTextInput(!showTextInput)}
-                    className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
-                      showTextInput 
-                        ? 'bg-[#C9A86C] text-black' 
-                        : 'bg-[#1a1a1a] text-gray-300 border border-[#333] hover:border-[#C9A86C]/30'
-                    }`}
-                    title="Text-Chat"
+                    onClick={handleSendMessage}
+                    disabled={!message.trim()}
+                    className="bg-[#C9A86C] hover:bg-[#E8D5A3] disabled:bg-[#333] text-black disabled:text-gray-500 font-semibold px-2.5 py-1.5 rounded-lg transition-all"
                   >
-                    <MessageCircle className="w-5 h-5" />
-                  </button>
-
-                  {/* Voice Chat Toggle */}
-                  <button
-                    onClick={handleToggleVoiceChat}
-                    className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${
-                      voiceChatActive 
-                        ? 'bg-[#10b981] text-white shadow-lg shadow-[#10b981]/30' 
-                        : 'bg-[#1a1a1a] text-gray-300 border border-[#333] hover:border-[#10b981]/30'
-                    }`}
-                    title={voiceChatActive ? 'Mikrofon aus' : 'Mikrofon an'}
-                  >
-                    {voiceChatActive ? <Mic className="w-6 h-6" /> : <MicOff className="w-6 h-6" />}
-                  </button>
-
-                  {/* Interrupt */}
-                  <button
-                    onClick={handleInterrupt}
-                    className="w-12 h-12 rounded-full flex items-center justify-center bg-[#1a1a1a] text-gray-300 border border-[#333] hover:border-[#C9A86C]/30 transition-all"
-                    title="Unterbrechen"
-                  >
-                    <Square className="w-4 h-4" />
-                  </button>
-
-                  {/* End Call */}
-                  <button
-                    onClick={() => {
-                      handleStop();
-                      onClose();
-                    }}
-                    className="w-12 h-12 rounded-full flex items-center justify-center bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all"
-                    title="Beenden"
-                  >
-                    <PhoneOff className="w-5 h-5" />
+                    <Send className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                {/* Hint */}
-                <p className="text-center text-xs text-gray-500 mt-3">
-                  Aktiviere das Mikrofon um mit Mathias zu sprechen
-                </p>
+                {/* Action buttons */}
+                <div className="flex gap-1.5">
+                  <button
+                    onClick={handleToggleVoiceChat}
+                    className={`flex-1 flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg font-medium text-[10px] transition-all ${
+                      voiceChatActive 
+                        ? 'bg-green-600 text-white' 
+                        : 'bg-[#1a1a1a] text-gray-300 border border-[#333]'
+                    }`}
+                  >
+                    {voiceChatActive ? <MicOff className="w-3 h-3" /> : <Mic className="w-3 h-3" />}
+                    {voiceChatActive ? 'Mikro aus' : 'Mikro an'}
+                  </button>
+                  
+                  <button
+                    onClick={handleInterrupt}
+                    className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg font-medium bg-[#1a1a1a] text-gray-300 border border-[#333] text-[10px]"
+                  >
+                    Stopp
+                  </button>
+                  
+                  <button
+                    onClick={handleStop}
+                    className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg font-medium bg-red-900/30 text-red-400 border border-red-900/50 text-[10px]"
+                  >
+                    <PhoneOff className="w-3 h-3" />
+                    Ende
+                  </button>
+                </div>
               </div>
             )}
           </motion.div>

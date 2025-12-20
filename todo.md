@@ -457,3 +457,12 @@
 - [x] Research confirmed: SDK uses LiveKit, attach() method handles video
 - [x] playsInline + WebkitTransform: translateZ(0) prevents iOS fullscreen
 - [x] Controls always visible below video in separate container
+
+
+## Phase 56 - LiveAvatarPopup Critical Fix
+- [x] Fix: Popup shows HeyGen avatar correctly (not webcam)
+- [x] Fix: Green background is part of HeyGen video (cannot be removed client-side)
+- [x] Fix: Text input field visible when connected
+- [x] Fix: Popup compact (400px max width, 180px video height)
+- [x] All controls visible: Mikro an, Stopp, Ende buttons
+- [x] Research confirmed: LiveAvatar SDK uses attach() for remote stream
