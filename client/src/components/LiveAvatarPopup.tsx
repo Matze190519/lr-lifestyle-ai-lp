@@ -97,7 +97,14 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
       
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Unbekannter Fehler';
-      setError(errorMsg);
+      // Better error messages for iOS
+      if (errorMsg.includes('aborted')) {
+        setError('Verbindung unterbrochen. Bitte erneut versuchen.');
+      } else if (errorMsg.includes('not allowed') || errorMsg.includes('permission')) {
+        setError('Bitte erlaube Mikrofon-Zugriff in den Browser-Einstellungen.');
+      } else {
+        setError(errorMsg);
+      }
       setIsLoading(false);
     }
   }, []);
@@ -146,8 +153,14 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
         await sessionRef.current.voiceChat.start();
         setVoiceChatActive(true);
       }
-    } catch (err) {
-      console.error('Voice chat error:', err);
+    } catch (err: any) {
+      // Handle iOS permission errors gracefully
+      const errorMsg = err?.message || '';
+      if (errorMsg.includes('not allowed') || errorMsg.includes('permission') || errorMsg.includes('denied')) {
+        setError('Mikrofon-Zugriff verweigert. Bitte in Einstellungen erlauben.');
+      } else {
+        console.error('Voice chat error:', err);
+      }
     }
   };
 
@@ -230,16 +243,15 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
               </button>
             </div>
 
-            {/* Video Area - Using aspect-video like official HeyGen demo */}
-            {/* This container prevents iOS fullscreen takeover */}
+            {/* Video Area - BLACK background, fixed container */}
             <div 
               className="relative w-full aspect-video overflow-hidden flex-shrink-0"
               style={{ 
-                backgroundColor: '#000',
-                maxHeight: '50vh', // Limit height on mobile
+                backgroundColor: '#000000',
+                maxHeight: '50vh',
               }}
             >
-              {/* Video element - EXACTLY like HeyGen official demo */}
+              {/* Video element with BLACK background */}
               <video
                 ref={videoRef}
                 autoPlay
@@ -249,13 +261,15 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
                 muted={false}
                 className="w-full h-full object-contain"
                 style={{ 
-                  backgroundColor: '#000',
+                  backgroundColor: '#000000',
+                  // Slightly desaturate to make green less vibrant
+                  filter: isStreamReady ? 'saturate(0.85) brightness(0.95)' : 'none'
                 }}
               />
               
-              {/* Not connected overlay */}
+              {/* Not connected overlay - BLACK background */}
               {!isStreamReady && (
-                <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
+                <div className="absolute inset-0 flex items-center justify-center bg-black">
                   {isLoading ? (
                     <div className="text-center">
                       <div className="w-12 h-12 border-2 border-[#C9A86C] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>

@@ -84,7 +84,14 @@ export default function LiveAvatarPage() {
       
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Unbekannter Fehler';
-      setError(errorMsg);
+      // Better error messages for iOS
+      if (errorMsg.includes('aborted')) {
+        setError('Verbindung unterbrochen. Bitte erneut versuchen.');
+      } else if (errorMsg.includes('not allowed') || errorMsg.includes('permission')) {
+        setError('Bitte erlaube Mikrofon-Zugriff in den Browser-Einstellungen.');
+      } else {
+        setError(errorMsg);
+      }
       setIsLoading(false);
     }
   }, []);
@@ -133,8 +140,14 @@ export default function LiveAvatarPage() {
         await sessionRef.current.voiceChat.start();
         setVoiceChatActive(true);
       }
-    } catch (err) {
-      console.error('Voice chat error:', err);
+    } catch (err: any) {
+      // Handle iOS permission errors gracefully
+      const errorMsg = err?.message || '';
+      if (errorMsg.includes('not allowed') || errorMsg.includes('permission') || errorMsg.includes('denied')) {
+        setError('Mikrofon-Zugriff verweigert. Bitte in Einstellungen erlauben.');
+      } else {
+        console.error('Voice chat error:', err);
+      }
     }
   };
 
@@ -153,9 +166,9 @@ export default function LiveAvatarPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">
       {/* Header */}
-      <div className="border-b border-[#d4af37]/20 py-3 flex-shrink-0">
+      <div className="border-b border-[#d4af37]/20 py-3 flex-shrink-0 bg-black">
         <div className="container">
           <a 
             href="/" 
@@ -168,7 +181,7 @@ export default function LiveAvatarPage() {
       </div>
 
       {/* Main */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto bg-black">
         <div className="container py-4 md:py-8">
           <div className="max-w-lg mx-auto">
             
@@ -182,26 +195,35 @@ export default function LiveAvatarPage() {
               <p className="text-gray-400 text-sm">Dein KI-Berater</p>
             </div>
 
-            {/* Avatar Card */}
-            <div className="bg-[#111111] rounded-xl border border-[#d4af37]/20 overflow-hidden">
+            {/* Avatar Card - BLACK background */}
+            <div className="bg-black rounded-xl border border-[#d4af37]/20 overflow-hidden">
               
-              {/* Video - Fixed height */}
+              {/* Video - Fixed height, BLACK background */}
               <div 
-                className="relative bg-black"
-                style={{ height: '280px' }}
+                className="relative"
+                style={{ 
+                  height: '280px',
+                  backgroundColor: '#000000'
+                }}
               >
                 <video
                   ref={videoRef}
                   autoPlay
                   playsInline
+                  // @ts-ignore
+                  webkit-playsinline="true"
                   muted={false}
                   className="w-full h-full object-contain"
-                  style={{ backgroundColor: '#000' }}
+                  style={{ 
+                    backgroundColor: '#000000',
+                    // CSS filter to make green background darker/black
+                    filter: isStreamReady ? 'saturate(0.8) brightness(0.95)' : 'none'
+                  }}
                 />
                 
-                {/* Overlay */}
+                {/* Overlay when not connected */}
                 {!isStreamReady && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black">
                     {isLoading ? (
                       <div className="text-center">
                         <div className="w-12 h-12 border-3 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
@@ -211,7 +233,7 @@ export default function LiveAvatarPage() {
                       <div className="text-center px-4">
                         <AlertCircle className="w-10 h-10 text-red-400 mx-auto mb-2" />
                         <p className="text-red-400 text-sm mb-2">Fehler</p>
-                        <p className="text-gray-500 text-xs mb-3">{error}</p>
+                        <p className="text-gray-500 text-xs mb-3 max-w-[250px]">{error}</p>
                         <button
                           onClick={handleStart}
                           className="bg-[#d4af37] text-black font-semibold py-2 px-4 rounded-lg text-sm"
@@ -237,7 +259,7 @@ export default function LiveAvatarPage() {
                   </div>
                 )}
 
-                {/* Status */}
+                {/* Status badges */}
                 {isStreamReady && (
                   <div className="absolute top-2 left-2 right-2 flex justify-between pointer-events-none">
                     {isAvatarTalking && (
@@ -256,9 +278,9 @@ export default function LiveAvatarPage() {
                 )}
               </div>
 
-              {/* Controls */}
+              {/* Controls - BLACK background */}
               {isStreamReady && (
-                <div className="p-3 bg-[#0d0d0d] space-y-2">
+                <div className="p-3 bg-black space-y-2 border-t border-[#333]">
                   {/* Text input */}
                   <div className="flex gap-2">
                     <input
@@ -267,7 +289,7 @@ export default function LiveAvatarPage() {
                       onChange={(e) => setMessage(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                       placeholder="Nachricht..."
-                      className="flex-1 bg-[#1a1a1a] text-white px-3 py-2 rounded-lg border border-[#333] focus:border-[#d4af37]/50 focus:outline-none text-sm"
+                      className="flex-1 bg-[#111] text-white px-3 py-2 rounded-lg border border-[#333] focus:border-[#d4af37]/50 focus:outline-none text-sm"
                     />
                     <button
                       onClick={handleSendMessage}
@@ -285,7 +307,7 @@ export default function LiveAvatarPage() {
                       className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium ${
                         voiceChatActive 
                           ? 'bg-green-600 text-white' 
-                          : 'bg-[#1a1a1a] text-gray-300 border border-[#333]'
+                          : 'bg-[#111] text-gray-300 border border-[#333]'
                       }`}
                     >
                       {voiceChatActive ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
@@ -294,7 +316,7 @@ export default function LiveAvatarPage() {
                     
                     <button
                       onClick={handleInterrupt}
-                      className="px-3 py-2 rounded-lg text-xs font-medium bg-[#1a1a1a] text-gray-300 border border-[#333]"
+                      className="px-3 py-2 rounded-lg text-xs font-medium bg-[#111] text-gray-300 border border-[#333]"
                     >
                       Stopp
                     </button>
