@@ -505,3 +505,11 @@
 - [x] Change name from Mathias to Santa Claus
 - [x] Keep database/knowledge base the same
 - [x] Red/green Christmas color scheme for borders and accents
+
+
+## Phase 61 - Santa Claus Knowledge Base + Button Fix
+- [x] Update knowledge base: Santa as substitute for Mathias
+- [x] Santa knows all Mathias info but speaks as Santa
+- [x] Move FAB button to left corner (away from Lina chat)
+- [x] Red Santa button with 🎅 emoji
+- [ ] Check avatar embed ID - HeyGen server issue
