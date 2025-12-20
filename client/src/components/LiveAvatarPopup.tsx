@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Santa Claus Avatar - Christmas Special!
 // Mathias ist gerade unterwegs und trägt die Geschenke aus
-const EMBED_ID = '1c690fe7-23e0-49f9-bfba-14344450285b';
+// EMBED-ID (nicht Avatar-ID!)
+const EMBED_ID = 'c5d25434-47d0-49a5-b1c5-cef9e488c1da';
 
 interface LiveAvatarPopupProps {
   isOpen: boolean;

@@ -2,7 +2,8 @@ import { ArrowLeft } from 'lucide-react';
 
 // Santa Claus Avatar - Christmas Special!
 // Mathias ist gerade unterwegs und trägt die Geschenke aus
-const EMBED_ID = '1c690fe7-23e0-49f9-bfba-14344450285b';
+// EMBED-ID (nicht Avatar-ID!)
+const EMBED_ID = 'c5d25434-47d0-49a5-b1c5-cef9e488c1da';
 
 export default function LiveAvatarPage() {
   return (
