@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Video } from 'lucide-react';
 import LiveAvatarPopup from './LiveAvatarPopup';
 
 export default function LiveAvatarFAB() {
@@ -45,16 +44,20 @@ export default function LiveAvatarFAB() {
           }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-red-500 to-red-700 text-white shadow-lg shadow-red-500/30 flex items-center justify-center group"
+          className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shadow-lg shadow-red-500/30 flex items-center justify-center group border-2 border-red-500/50"
         >
           {/* Pulse animation */}
           <span className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-30"></span>
           
-          {/* Santa emoji instead of video icon */}
-          <span className="text-2xl md:text-3xl relative z-10">🎅</span>
+          {/* Real Santa Image */}
+          <img 
+            src="/images/santa-button.jpg" 
+            alt="Santa Claus" 
+            className="w-full h-full object-cover relative z-10"
+          />
           
           {/* Online indicator */}
-          <span className="absolute top-0 right-0 w-3 h-3 md:w-4 md:h-4 bg-[#10b981] rounded-full border-2 border-[#0a0a0a]"></span>
+          <span className="absolute top-0 right-0 w-3 h-3 md:w-4 md:h-4 bg-[#10b981] rounded-full border-2 border-[#0a0a0a] z-20"></span>
         </motion.button>
       </div>
 
