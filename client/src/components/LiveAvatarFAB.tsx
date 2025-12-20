@@ -36,29 +36,32 @@ export default function LiveAvatarFAB() {
           )}
         </AnimatePresence>
 
-        <motion.button
-          onClick={() => {
-            console.log('FAB clicked, opening popup');
-            setIsOpen(true);
-            setShowTooltip(false);
-          }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shadow-lg shadow-red-500/30 flex items-center justify-center group border-2 border-red-500/50"
-        >
-          {/* Pulse animation */}
-          <span className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-30"></span>
+        {/* Button wrapper - relative for positioning the indicator */}
+        <div className="relative">
+          <motion.button
+            onClick={() => {
+              console.log('FAB clicked, opening popup');
+              setIsOpen(true);
+              setShowTooltip(false);
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden shadow-lg shadow-red-500/30 flex items-center justify-center group border-2 border-red-500/50"
+          >
+            {/* Pulse animation */}
+            <span className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-30"></span>
+            
+            {/* Real Santa Image */}
+            <img 
+              src="/images/santa-button.jpg" 
+              alt="Santa Claus" 
+              className="w-full h-full object-cover relative z-10"
+            />
+          </motion.button>
           
-          {/* Real Santa Image */}
-          <img 
-            src="/images/santa-button.jpg" 
-            alt="Santa Claus" 
-            className="w-full h-full object-cover relative z-10"
-          />
-          
-          {/* Online indicator - positioned inside the button */}
-          <span className="absolute bottom-2 right-2 w-3 h-3 md:w-4 md:h-4 bg-[#10b981] rounded-full border-2 border-[#0a0a0a] z-20 shadow-[0_0_6px_#10b981]"></span>
-        </motion.button>
+          {/* Online indicator - OUTSIDE the button so it's not clipped */}
+          <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 md:w-5 md:h-5 bg-[#10b981] rounded-full border-2 border-[#0a0a0a] z-30 shadow-[0_0_8px_#10b981]"></span>
+        </div>
       </div>
 
       {/* Popup */}
