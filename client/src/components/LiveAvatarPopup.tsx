@@ -80,6 +80,7 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
         
         if (videoRef.current) {
           session.attach(videoRef.current);
+          // Try to play - may need user interaction on mobile
           videoRef.current.play().catch(() => {});
         }
       });
@@ -182,7 +183,7 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
             onClick={onClose}
           />
           
-          {/* Popup - Responsive size */}
+          {/* Popup - Responsive: larger on desktop, compact on mobile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -192,15 +193,16 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: 'min(95vw, 400px)',
+              // Responsive width: 600px on desktop, 95vw on mobile
+              width: 'min(95vw, 600px)',
               maxHeight: '90vh',
             }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-3 py-2 border-b border-[#C9A86C]/20 bg-[#0d0d0d] flex-shrink-0">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full overflow-hidden border border-[#C9A86C]/30 bg-[#1a1a1a]">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-[#C9A86C]/20 bg-[#0d0d0d] flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#C9A86C]/30 bg-[#1a1a1a]">
                   <img 
                     src="/images/mathias.png" 
                     alt="Mathias" 
@@ -209,11 +211,11 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
                   />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold text-xs">Mathias – Live Avatar</h3>
-                  <p className="text-[#C9A86C]/60 text-[10px]">
+                  <h3 className="text-white font-semibold text-sm">Mathias – Live Avatar</h3>
+                  <p className="text-[#C9A86C]/60 text-xs">
                     {isStreamReady ? (
                       <span className="flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         Online
                       </span>
                     ) : isLoading ? 'Verbinde...' : 'Offline'}
@@ -222,31 +224,32 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
               </div>
               <button
                 onClick={onClose}
-                className="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
               >
-                <X className="w-4 h-4 text-white/70" />
+                <X className="w-5 h-5 text-white/70" />
               </button>
             </div>
 
-            {/* Video Area - Fixed small size with chroma key CSS */}
+            {/* Video Area - Using aspect-video like official HeyGen demo */}
+            {/* This container prevents iOS fullscreen takeover */}
             <div 
-              className="relative flex-shrink-0 overflow-hidden"
+              className="relative w-full aspect-video overflow-hidden flex-shrink-0"
               style={{ 
-                height: '180px',
-                backgroundColor: '#000'
+                backgroundColor: '#000',
+                maxHeight: '50vh', // Limit height on mobile
               }}
             >
-              {/* Video element with CSS chroma key effect */}
+              {/* Video element - EXACTLY like HeyGen official demo */}
               <video
                 ref={videoRef}
                 autoPlay
                 playsInline
+                // @ts-ignore - webkit-playsinline for older iOS
+                webkit-playsinline="true"
                 muted={false}
                 className="w-full h-full object-contain"
                 style={{ 
                   backgroundColor: '#000',
-                  // CSS filter to reduce green - not perfect but helps
-                  filter: isStreamReady ? 'saturate(0.9)' : 'none',
                 }}
               />
               
@@ -255,33 +258,34 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
                 <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
                   {isLoading ? (
                     <div className="text-center">
-                      <div className="w-10 h-10 border-2 border-[#C9A86C] border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-                      <p className="text-[#C9A86C] text-xs">Verbinde...</p>
+                      <div className="w-12 h-12 border-2 border-[#C9A86C] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+                      <p className="text-[#C9A86C] text-sm">Verbinde...</p>
                     </div>
                   ) : error ? (
-                    <div className="text-center px-4">
-                      <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-2">
-                        <AlertCircle className="w-5 h-5 text-red-400" />
+                    <div className="text-center px-6">
+                      <div className="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-3">
+                        <AlertCircle className="w-7 h-7 text-red-400" />
                       </div>
-                      <p className="text-red-400 text-xs mb-2">{error}</p>
+                      <p className="text-red-400 text-sm mb-3">{error}</p>
                       <button
                         onClick={handleStart}
-                        className="bg-[#C9A86C] hover:bg-[#E8D5A3] text-black font-semibold py-1.5 px-3 rounded-lg text-xs"
+                        className="bg-[#C9A86C] hover:bg-[#E8D5A3] text-black font-semibold py-2 px-4 rounded-lg text-sm"
                       >
                         Erneut versuchen
                       </button>
                     </div>
                   ) : (
-                    <div className="text-center px-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C9A86C]/20 to-[#C9A86C]/5 border-2 border-[#C9A86C]/30 flex items-center justify-center mx-auto mb-2">
-                        <Phone className="w-5 h-5 text-[#C9A86C]/50" />
+                    <div className="text-center px-6">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#C9A86C]/20 to-[#C9A86C]/5 border-2 border-[#C9A86C]/30 flex items-center justify-center mx-auto mb-4">
+                        <Phone className="w-7 h-7 text-[#C9A86C]/50" />
                       </div>
-                      <p className="text-white text-xs mb-2">Bereit für dein Gespräch</p>
+                      <p className="text-white text-base mb-1">Bereit für dein Gespräch</p>
+                      <p className="text-gray-400 text-xs mb-4">Klicke um ein Live-Gespräch zu starten</p>
                       <button
                         onClick={handleStart}
-                        className="bg-[#10b981] hover:bg-[#059669] text-white font-semibold py-2 px-4 rounded-lg text-xs flex items-center justify-center gap-1.5 mx-auto"
+                        className="bg-[#10b981] hover:bg-[#059669] text-white font-semibold py-3 px-6 rounded-xl text-sm flex items-center justify-center gap-2 mx-auto shadow-lg shadow-green-900/30"
                       >
-                        <Phone className="w-3.5 h-3.5" />
+                        <Phone className="w-4 h-4" />
                         Gespräch starten
                       </button>
                     </div>
@@ -291,17 +295,17 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
 
               {/* Status badges when connected */}
               {isStreamReady && (
-                <div className="absolute top-1.5 left-1.5 right-1.5 flex justify-between pointer-events-none">
+                <div className="absolute top-3 left-3 right-3 flex justify-between pointer-events-none">
                   {isAvatarTalking && (
-                    <div className="flex items-center gap-1 bg-black/70 px-1.5 py-0.5 rounded-full">
-                      <Volume2 className="w-2.5 h-2.5 text-[#C9A86C] animate-pulse" />
-                      <span className="text-[#C9A86C] text-[8px]">Spricht</span>
+                    <div className="flex items-center gap-1.5 bg-black/70 px-2 py-1 rounded-full">
+                      <Volume2 className="w-3 h-3 text-[#C9A86C] animate-pulse" />
+                      <span className="text-[#C9A86C] text-xs">Spricht</span>
                     </div>
                   )}
                   {voiceChatActive && (
-                    <div className="flex items-center gap-1 bg-black/70 px-1.5 py-0.5 rounded-full ml-auto">
-                      <Mic className="w-2.5 h-2.5 text-green-400 animate-pulse" />
-                      <span className="text-green-400 text-[8px]">Mikro an</span>
+                    <div className="flex items-center gap-1.5 bg-black/70 px-2 py-1 rounded-full ml-auto">
+                      <Mic className="w-3 h-3 text-green-400 animate-pulse" />
+                      <span className="text-green-400 text-xs">Mikrofon aktiv</span>
                     </div>
                   )}
                 </div>
@@ -310,53 +314,53 @@ export default function LiveAvatarPopup({ isOpen, onClose }: LiveAvatarPopupProp
 
             {/* Controls - Always visible when connected */}
             {isStreamReady && (
-              <div className="p-2 bg-[#0d0d0d] border-t border-[#C9A86C]/10 flex-shrink-0 space-y-1.5">
+              <div className="p-4 bg-[#0d0d0d] border-t border-[#C9A86C]/10 flex-shrink-0 space-y-3">
                 {/* Text input */}
-                <div className="flex gap-1.5">
+                <div className="flex gap-2">
                   <input
                     type="text"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder="Nachricht eingeben..."
-                    className="flex-1 bg-[#1a1a1a] text-white px-2.5 py-1.5 rounded-lg border border-[#333] focus:border-[#C9A86C]/50 focus:outline-none text-xs placeholder-gray-500"
+                    placeholder="Schreibe eine Nachricht..."
+                    className="flex-1 bg-[#1a1a1a] text-white px-4 py-3 rounded-xl border border-[#333] focus:border-[#C9A86C]/50 focus:outline-none text-sm placeholder-gray-500"
                   />
                   <button
                     onClick={handleSendMessage}
                     disabled={!message.trim()}
-                    className="bg-[#C9A86C] hover:bg-[#E8D5A3] disabled:bg-[#333] text-black disabled:text-gray-500 font-semibold px-2.5 py-1.5 rounded-lg transition-all"
+                    className="bg-[#C9A86C] hover:bg-[#E8D5A3] disabled:bg-[#333] text-black disabled:text-gray-500 font-semibold px-4 py-3 rounded-xl transition-all"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    <Send className="w-4 h-4" />
                   </button>
                 </div>
 
                 {/* Action buttons */}
-                <div className="flex gap-1.5">
+                <div className="flex gap-2">
                   <button
                     onClick={handleToggleVoiceChat}
-                    className={`flex-1 flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg font-medium text-[10px] transition-all ${
+                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium text-sm transition-all ${
                       voiceChatActive 
                         ? 'bg-green-600 text-white' 
-                        : 'bg-[#1a1a1a] text-gray-300 border border-[#333]'
+                        : 'bg-[#1a1a1a] text-gray-300 border border-[#333] hover:border-[#C9A86C]/30'
                     }`}
                   >
-                    {voiceChatActive ? <MicOff className="w-3 h-3" /> : <Mic className="w-3 h-3" />}
-                    {voiceChatActive ? 'Mikro aus' : 'Mikro an'}
+                    {voiceChatActive ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                    {voiceChatActive ? 'Mikrofon aus' : 'Mikrofon an'}
                   </button>
                   
                   <button
                     onClick={handleInterrupt}
-                    className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg font-medium bg-[#1a1a1a] text-gray-300 border border-[#333] text-[10px]"
+                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium bg-[#1a1a1a] text-gray-300 border border-[#333] hover:border-[#C9A86C]/30 text-sm"
                   >
                     Stopp
                   </button>
                   
                   <button
                     onClick={handleStop}
-                    className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg font-medium bg-red-900/30 text-red-400 border border-red-900/50 text-[10px]"
+                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium bg-red-900/30 text-red-400 border border-red-900/50 hover:bg-red-900/50 text-sm"
                   >
-                    <PhoneOff className="w-3 h-3" />
-                    Ende
+                    <PhoneOff className="w-4 h-4" />
+                    Beenden
                   </button>
                 </div>
               </div>

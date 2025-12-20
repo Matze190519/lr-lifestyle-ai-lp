@@ -466,3 +466,21 @@
 - [x] Fix: Popup compact (400px max width, 180px video height)
 - [x] All controls visible: Mikro an, Stopp, Ende buttons
 - [x] Research confirmed: LiveAvatar SDK uses attach() for remote stream
+
+
+## Phase 57 - LiveAvatar iOS Fullscreen Fix
+- [ ] Fix: Video goes fullscreen on iOS (covers entire screen)
+- [ ] Fix: No controls visible when video plays on iOS
+- [ ] Fix: Picture-in-Picture overlay on iOS
+- [ ] Fix: PC popup too small
+- [ ] Search official LiveAvatar docs for iOS mobile implementation
+- [ ] Find correct video element attributes to prevent iOS fullscreen
+
+
+## Phase 57 - LiveAvatar iOS Fullscreen Fix
+- [x] Fix video going fullscreen on iOS - using aspect-video container like official HeyGen demo
+- [x] Fix controls always visible below video
+- [x] Fix PC size - now 600px width (was 400px)
+- [x] Search official LiveAvatar docs - found LiveAvatarSession.tsx with correct implementation
+- [x] Using playsInline and webkit-playsinline for iOS compatibility
+- [x] Video container with overflow-hidden prevents iOS fullscreen takeover
