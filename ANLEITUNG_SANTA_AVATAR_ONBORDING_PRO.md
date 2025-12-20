@@ -1,29 +1,33 @@
 # Anleitung: Santa Avatar auf onbording.pro einbauen
 
 ## Übersicht
-Diese Anleitung erklärt, wie du den Santa Claus Avatar (HeyGen Streaming Avatar) auf der Webseite onbording.pro einbaust.
+Diese Anleitung erklärt, wie du den Santa Claus Avatar auf der Webseite onbording.pro einbaust.
 
 ---
 
-## 1. HeyGen Embed-ID
+## 1. LiveAvatar Embed-Code
 
-```
-c5d25434-47d0-49a5-b1c5-cef9e488c1da
+**Embed-ID:** `8717c24d-56ba-4a86-a83d-ffe4649cccab`
+
+**Vollständiger Embed-Code:**
+```html
+<iframe 
+  src="https://embed.liveavatar.com/v1/8717c24d-56ba-4a86-a83d-ffe4649cccab" 
+  allow="microphone" 
+  title="LiveAvatar Embed" 
+  style="aspect-ratio: 16/9; width: 100%; border: none;"
+></iframe>
 ```
 
-Diese ID wird im Code verwendet, um den Avatar zu laden.
+Dieser Code wird im Popup verwendet, um den Santa Avatar zu laden.
 
 ---
 
-## 2. Wissensdatenbank hochladen
+## 2. Wissensdatenbank
 
-**Datei:** `SANTA_WISSENSDATENBANK_HEYGEN.txt` (im Anhang)
+Die Wissensdatenbank ist bereits im Avatar konfiguriert (Embed-ID oben).
 
-**Bei HeyGen hochladen:**
-1. Gehe zu HeyGen Dashboard
-2. Öffne den Avatar mit Embed-ID: `c5d25434-47d0-49a5-b1c5-cef9e488c1da`
-3. Lade die Wissensdatenbank-Datei als Knowledge Base hoch
-4. Speichern
+**Datei zur Referenz:** `SANTA_WISSENSDATENBANK_HEYGEN.txt` (im Anhang)
 
 ---
 
@@ -57,8 +61,8 @@ export const LiveAvatarFAB = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          {/* Online Indikator */}
-          <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-black animate-pulse"></div>
+          {/* Online Indikator - WICHTIG: bottom-2 right-2 damit er nicht abgeschnitten wird */}
+          <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-black shadow-[0_0_6px_#10b981]"></div>
         </div>
       </button>
 
@@ -74,7 +78,6 @@ export const LiveAvatarFAB = () => {
 Erstelle die Datei `client/src/components/LiveAvatarPopup.tsx`:
 
 ```tsx
-import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
 
 interface LiveAvatarPopupProps {
@@ -82,25 +85,6 @@ interface LiveAvatarPopupProps {
 }
 
 export const LiveAvatarPopup = ({ onClose }: LiveAvatarPopupProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // HeyGen Script laden
-    const script = document.createElement("script");
-    script.src = "https://labs.heygen.com/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJTYW50YV9DbGF1c19pbl9DaGFp%0D%0AciIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3Yz%0D%0AL2Y3ODNhNmFkOWE2YjRjYjRhZDU0ZWQ3MjM1ZjRjNjc0XzUzMDE1L3ByZXZpZXdfdGFs%0D%0Aa190YXJnZXQud2VicCIsIm5lZWRSZW1vdmVCYWNrZ3JvdW5kIjpmYWxzZSwia25vd2xl%0D%0AZGdlQmFzZUlkIjoiZTZmMzQ0YWU1ZmIyNDYyNjk3YTJhOGI5OGYxNmNhMTkiLCJ1c2Vy%0D%0AbmFtZSI6IjMwZTU5YTU1YzQ0YjRhNjRiNjI5MjVjYTJkMjFkYjQ5In0%3D";
-    script.async = true;
-    
-    if (containerRef.current) {
-      containerRef.current.appendChild(script);
-    }
-
-    return () => {
-      if (containerRef.current && script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, []);
-
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
       <div className="relative w-full max-w-lg bg-black rounded-2xl border border-[#C9A86C]/30 overflow-hidden shadow-2xl">
@@ -130,11 +114,15 @@ export const LiveAvatarPopup = ({ onClose }: LiveAvatarPopupProps) => {
           </button>
         </div>
 
-        {/* Avatar Container */}
-        <div 
-          ref={containerRef}
-          className="w-full aspect-video bg-gradient-to-b from-black to-gray-900"
-        />
+        {/* Avatar Container - IFRAME */}
+        <div className="w-full aspect-video bg-gradient-to-b from-black to-gray-900">
+          <iframe 
+            src="https://embed.liveavatar.com/v1/8717c24d-56ba-4a86-a83d-ffe4649cccab" 
+            allow="microphone" 
+            title="Santa Avatar"
+            className="w-full h-full border-none"
+          />
+        </div>
 
         {/* Footer */}
         <div className="p-3 border-t border-[#C9A86C]/20 text-center">
@@ -214,22 +202,22 @@ Die Wissensdatenbank für onbording.pro enthält:
 ## 7. Nach Weihnachten zurücksetzen
 
 Nach Weihnachten den Avatar wieder auf Mathias umstellen:
-1. Avatar-ID ändern
-2. Wissensdatenbank auf die normale Mathias-Version ändern
-3. Button-Bild auf Mathias ändern
+1. Embed-ID im iframe ändern (auf Mathias Avatar)
+2. Button-Bild auf Mathias ändern
 
 ---
 
 ## Wichtige Hinweise
 
-- Der Avatar ist ein **HeyGen Streaming Avatar**
-- Die Wissensdatenbank muss bei **HeyGen** hochgeladen werden (nicht im Code)
+- Der Avatar wird über einen **iframe** eingebunden
+- Die Wissensdatenbank ist bereits im Avatar konfiguriert
 - Der grüne Online-Punkt zeigt, dass Santa "verfügbar" ist
 - Mobile-optimiert: Das Popup passt sich an kleine Bildschirme an
+- **WICHTIG:** Der Online-Punkt muss `bottom-2 right-2` sein, damit er nicht abgeschnitten wird!
 
 ---
 
 ## Dateien im Anhang
 
-1. `SANTA_WISSENSDATENBANK_HEYGEN.txt` - Wissensdatenbank für HeyGen
-2. `santa-button.jpg` - Santa-Bild für den Button (optional, kann auch anderes Bild verwendet werden)
+1. `SANTA_WISSENSDATENBANK_HEYGEN.txt` - Wissensdatenbank (zur Referenz)
+2. `santa-button.jpg` - Santa-Bild für den Button

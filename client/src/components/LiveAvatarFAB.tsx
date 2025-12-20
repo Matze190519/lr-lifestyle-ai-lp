@@ -57,7 +57,7 @@ export default function LiveAvatarFAB() {
           />
           
           {/* Online indicator - positioned inside the button */}
-          <span className="absolute bottom-1 right-1 w-3 h-3 md:w-4 md:h-4 bg-[#10b981] rounded-full border-2 border-[#0a0a0a] z-20"></span>
+          <span className="absolute bottom-2 right-2 w-3 h-3 md:w-4 md:h-4 bg-[#10b981] rounded-full border-2 border-[#0a0a0a] z-20 shadow-[0_0_6px_#10b981]"></span>
         </motion.button>
       </div>
 
