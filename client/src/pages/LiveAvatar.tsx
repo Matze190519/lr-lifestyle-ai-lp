@@ -21,44 +21,29 @@ export default function LiveAvatarPage() {
         </div>
       </div>
 
-      {/* Main */}
-      <div className="flex-1 flex flex-col bg-black">
-        <div className="container py-4 flex-1 flex flex-col">
-          <div className="max-w-2xl mx-auto w-full flex-1 flex flex-col">
-            
-            {/* Title - Christmas Edition */}
-            <div className="text-center mb-4">
-              <h1 className="text-2xl md:text-3xl font-bold">
-                <span className="bg-gradient-to-r from-red-500 via-green-500 to-red-500 bg-clip-text text-transparent">
-                  🎅 Santa Claus
-                </span>
-              </h1>
-              <p className="text-gray-400 text-sm">Vertretung für Mathias - er trägt gerade die Geschenke aus!</p>
-            </div>
+      {/* Title - Christmas Edition */}
+      <div className="text-center py-3 bg-black">
+        <h1 className="text-xl md:text-2xl font-bold">
+          <span className="bg-gradient-to-r from-red-500 via-green-500 to-red-500 bg-clip-text text-transparent">
+            🎅 Santa Claus
+          </span>
+        </h1>
+        <p className="text-gray-400 text-xs">Vertretung für Mathias - er trägt gerade die Geschenke aus!</p>
+      </div>
 
-            {/* HeyGen Embed - Santa Claus */}
-            <div className="flex-1 min-h-[400px] md:min-h-[500px] rounded-xl overflow-hidden border border-red-500/30 bg-black">
-              <iframe 
-                src={`https://embed.liveavatar.com/v1/${EMBED_ID}`}
-                allow="microphone"
-                title="Santa Claus - LiveAvatar"
-                className="w-full h-full"
-                style={{ 
-                  aspectRatio: '16/9',
-                  minHeight: '400px',
-                  border: 'none',
-                  backgroundColor: '#000'
-                }}
-              />
-            </div>
-
-            {/* Info - Christmas Style */}
-            <p className="text-center text-gray-500 text-xs mt-4">
-              🎄 Ho ho ho! Klicke auf Santa um das Gespräch zu starten. Mikrofon-Zugriff wird benötigt. 🎄
-            </p>
-
-          </div>
-        </div>
+      {/* HeyGen Embed - Takes full remaining height */}
+      <div className="flex-1 bg-black">
+        <iframe 
+          src={`https://embed.liveavatar.com/v1/${EMBED_ID}`}
+          allow="microphone"
+          title="Santa Claus - LiveAvatar"
+          className="w-full h-full"
+          style={{ 
+            border: 'none',
+            backgroundColor: '#000',
+            minHeight: 'calc(100vh - 120px)'
+          }}
+        />
       </div>
     </div>
   );

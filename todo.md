@@ -518,3 +518,10 @@
 ## Phase 62 - Popup Position Fix
 - [x] Move Santa popup away from Lina chat button
 - [x] Position popup on left side (bottom-left corner)
+
+
+## Phase 63 - Mobile Layout + Prompt Fix
+- [x] Fix mobile layout - embed now fills screen properly
+- [x] Fix Santa prompt - created SANTA_WISSENSDATENBANK_HEYGEN.txt
+- [x] Santa vertritt Mathias, ist auch LR Partner, kennt alle Onboarding-Infos
+- [x] Lustiger Startsatz: "Ho ho ho! Mathias trägt für mich die Geschenke aus!"
