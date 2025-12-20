@@ -490,3 +490,10 @@
 - [x] Make video background black (not green) - using #000000 and CSS filter
 - [x] Handle iOS permission errors gracefully - better error messages
 - [x] Fix "operation was aborted" error - user-friendly message
+
+
+## Phase 59 - HeyGen Embed (Simple Solution)
+- [x] Replace LiveAvatar SDK with HeyGen Embed iframe
+- [x] Update LiveAvatar page to use embed (30ab5f04-58df-4624-955d-ee875cfe4f25)
+- [x] Update LiveAvatarPopup to use embed
+- [x] Test on mobile - HeyGen handles all mobile optimization
