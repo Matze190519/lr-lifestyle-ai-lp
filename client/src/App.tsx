@@ -10,7 +10,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import About from "./pages/About";
 import LiveAvatar from "./pages/LiveAvatar";
-import LiveAvatarFAB from "./components/LiveAvatarFAB";
+// import LiveAvatarFAB from "./components/LiveAvatarFAB"; // Removed - Christmas is over
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -32,14 +32,14 @@ function Router() {
 }
 
 // Component to conditionally show FAB only on Home page
-function ConditionalFAB() {
-  const [location] = useLocation();
-  // Only show FAB on home page, not on the dedicated LiveAvatar page
-  if (location === '/' || location === '') {
-    return <LiveAvatarFAB />;
-  }
-  return null;
-}
+// DISABLED - Christmas is over, Avatar removed
+// function ConditionalFAB() {
+//   const [location] = useLocation();
+//   if (location === '/' || location === '') {
+//     return <LiveAvatarFAB />;
+//   }
+//   return null;
+// }
 
 // NOTE: About Theme
 // - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
@@ -56,7 +56,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
-          <ConditionalFAB />
+          {/* <ConditionalFAB /> */}
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
