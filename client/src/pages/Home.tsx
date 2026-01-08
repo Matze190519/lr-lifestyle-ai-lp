@@ -69,7 +69,7 @@ const HeroSection = () => {
           className="w-full py-2 px-4 text-center text-xs font-medium"
           style={{ background: 'linear-gradient(90deg, #C9A86C 0%, #E8D5A3 50%, #C9A86C 100%)' }}
         >
-          <span className="text-black">Bis zu 24.000€ Bonus im ersten Jahr möglich*</span>
+          <span className="text-black">Bis zu 15.000€ Bonus im ersten Jahr möglich*</span>
         </div>
 
         {/* Header */}
@@ -93,14 +93,14 @@ const HeroSection = () => {
 
           {/* Sub-Headline */}
           <p className="text-white/90 text-sm mb-4 leading-relaxed">
-            Starte mit LR + KI-Coach Lina. <strong className="text-[#C9A86C]">Bis zu 2.000€/Monat</strong> garantierter Bonus.*
+            Starte mit LR + KI-Coach Lina. <strong className="text-[#C9A86C]">Bis zu 1.250€/Monat</strong> garantierter Bonus.*
           </p>
 
           {/* 3 Benefits - Kompakt mit Lichtstrahl */}
           <div className="space-y-2 mb-4">
             <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 gold-border-glow">
               <TrendingUp className="w-4 h-4 text-[#C9A86C] shrink-0" />
-              <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">300€ - 2.000€</strong> monatlicher Bonus</span>
+              <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">250€ - 1.250€</strong> monatlicher Bonus</span>
             </div>
             <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 gold-border-glow">
               <Smartphone className="w-4 h-4 text-[#C9A86C] shrink-0" />
@@ -165,7 +165,7 @@ const HeroSection = () => {
             <div>
               <p className="text-sm text-[#C9A86C] uppercase tracking-wider mb-2 font-medium">Bist du es leid, für fremde Träume zu arbeiten?</p>
               <h1 className="text-3xl lg:text-4xl font-bold leading-tight">
-                <span className="gold-gradient-text">Bis zu 2.000€</span>
+                <span className="gold-gradient-text">Bis zu 1.250€</span>
                 <br />
                 <span className="text-white">monatlicher Bonus*</span>
               </h1>
@@ -181,7 +181,7 @@ const HeroSection = () => {
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
                   <TrendingUp className="w-3 h-3 text-black" />
                 </div>
-                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Garantierter Bonus:</span> 300€ bis 2.000€/Monat</p>
+                <p className="text-white/90 text-sm"><span className="gold-gradient-text font-semibold">Garantierter Bonus:</span> 250€ bis 1.250€/Monat</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#C9A86C] flex items-center justify-center shrink-0 mt-0.5">
@@ -235,16 +235,20 @@ const HeroSection = () => {
               {/* Stats Grid */}
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="text-center px-2 py-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/20 to-transparent border border-white/20">
-                  <p className="text-lg font-bold gold-gradient-text whitespace-nowrap">300€</p>
-                  <p className="text-xs text-white/60 mt-1">Stufe 1*</p>
+                  <p className="text-base font-bold gold-gradient-text whitespace-nowrap">250€</p>
+                  <p className="text-[10px] text-white/60 mt-1">Stufe 1*</p>
                 </div>
-                <div className="text-center px-2 py-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/30 to-transparent border border-white/20">
-                  <p className="text-lg font-bold gold-gradient-text whitespace-nowrap">1.100€</p>
-                  <p className="text-xs text-white/60 mt-1">Stufe 2*</p>
+                <div className="text-center px-2 py-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/25 to-transparent border border-white/20">
+                  <p className="text-base font-bold gold-gradient-text whitespace-nowrap">500€</p>
+                  <p className="text-[10px] text-white/60 mt-1">Stufe 2*</p>
                 </div>
-                <div className="text-center px-2 py-4 rounded-lg bg-gradient-to-b from-[#C9A86C]/40 to-transparent border border-white/20">
-                  <p className="text-lg font-bold gold-gradient-text whitespace-nowrap">2.000€</p>
-                  <p className="text-xs text-white/60 mt-1">Stufe 3*</p>
+                <div className="text-center px-2 py-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/35 to-transparent border border-white/20">
+                  <p className="text-base font-bold gold-gradient-text whitespace-nowrap">1.000€</p>
+                  <p className="text-[10px] text-white/60 mt-1">Stufe 3*</p>
+                </div>
+                <div className="text-center px-2 py-3 rounded-lg bg-gradient-to-b from-[#C9A86C]/45 to-transparent border border-white/20">
+                  <p className="text-base font-bold gold-gradient-text whitespace-nowrap">1.250€</p>
+                  <p className="text-[10px] text-white/60 mt-1">Stufe 4*</p>
                 </div>
               </div>
               
@@ -301,7 +305,7 @@ const WhatIsLRSection = () => {
   const benefits = [
     {
       title: "Garantierter Bonus – kein Risiko",
-      desc: "Das Fast Track Programm zahlt dir 12 Monate lang einen garantierten Mindestbonus: 300€, 1.100€ oder 2.000€ monatlich – zusätzlich zu deiner Handelsspanne. Bis zu 24.000€ im ersten Jahr!"
+      desc: "Das Fast Track Programm zahlt dir 12 Monate lang einen garantierten Mindestbonus: 250€, 500€, 1.000€ oder 1.250€ monatlich – zusätzlich zu deiner Handelsspanne. Bis zu 15.000€ im ersten Jahr!"
     },
     {
       title: "Lina – Vertrieb 2.0",
@@ -509,11 +513,11 @@ const FAQSection = () => {
     },
     {
       q: "Was ist der Fast Track Bonus genau?",
-      a: "Der Fast Track Bonus belohnt neue Partner für die schnelle Erreichung der ersten drei Karrierestufen (Junior Manager, Junior Teamleiter, Orgaleiter). Er garantiert einen monatlichen Mindestbonus für bis zu 12 Monate. Falls dein regulär errechneter Bonus niedriger ausfällt, bekommst du den garantierten Betrag (Uplift)."
+      a: "Der Fast Track Bonus belohnt neue Partner für die schnelle Erreichung der ersten vier Karrierestufen (Junior Manager, Manager, Junior Teamleiter, Teamleiter). Er garantiert einen monatlichen Mindestbonus für bis zu 12 Monate. Falls dein regulär errechneter Bonus niedriger ausfällt, bekommst du den garantierten Betrag (Uplift)."
     },
     {
       q: "Wie hoch ist der garantierte Bonus in den Fast Track Stufen?",
-      a: "Die garantierten Mindestboni sind:\n\n• Junior Manager: 300 € pro Monat\n• Junior Teamleiter: 1.100 € pro Monat\n• Orgaleiter: 2.000 € pro Monat\n\nDiese Beträge werden zusätzlich zur Handelsspanne und zum Autobonus gezahlt."
+      a: "Die garantierten Mindestboni sind:\n\n• Junior Manager: 250 € pro Monat\n• Manager: 500 € pro Monat\n• Junior Teamleiter: 1.000 € pro Monat\n• Teamleiter: 1.250 € pro Monat\n\nAb Orgaleiter greift der Business Track mit mind. 2.000 €/Monat. Diese Beträge werden zusätzlich zur Handelsspanne und zum Autobonus gezahlt."
     },
     {
       q: "Wie funktioniert das LR Autokonzept?",
@@ -594,7 +598,7 @@ const BusinessTrackSection = () => {
       <div className="container max-w-4xl">
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold font-poppins mb-2">
-            <span className="gold-gradient-text">Auch viel mehr als 2.000€ möglich!</span>
+            <span className="gold-gradient-text">Auch viel mehr als 1.250€ möglich!</span>
           </h2>
           <p className="text-sm text-muted-foreground">
             Der Business Track garantiert fixe monatliche Mindestboni.
@@ -664,30 +668,36 @@ const FastTrackSection = () => {
               
               {/* Visuell ansprechende Stufen-Darstellung */}
               <div className="mb-5">
-                <div className="flex justify-between gap-2 mb-4">
+                <div className="grid grid-cols-4 gap-1 mb-4">
                   {/* Stufe 1 */}
-                  <div className="flex-1 text-center px-4 py-3 rounded-lg bg-black/80 gold-border-glow">
-                    <p className="text-[10px] text-[#C9A86C] mb-1">STUFE 1</p>
-                    <p className="text-sm font-bold gold-gradient-text">300 €</p>
-                    <p className="text-[9px] text-white/50">Junior Manager</p>
+                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 gold-border-glow">
+                    <p className="text-[9px] text-[#C9A86C] mb-1">STUFE 1</p>
+                    <p className="text-xs font-bold gold-gradient-text">250 €</p>
+                    <p className="text-[8px] text-white/50">Jr. Manager</p>
                   </div>
                   {/* Stufe 2 */}
-                  <div className="flex-1 text-center px-4 py-3 rounded-lg bg-black/80 gold-border-glow">
-                    <p className="text-[10px] text-[#C9A86C] mb-1">STUFE 2</p>
-                    <p className="text-sm font-bold gold-gradient-text">1.100 €</p>
-                    <p className="text-[9px] text-white/50">Teamleiter</p>
+                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 gold-border-glow">
+                    <p className="text-[9px] text-[#C9A86C] mb-1">STUFE 2</p>
+                    <p className="text-xs font-bold gold-gradient-text">500 €</p>
+                    <p className="text-[8px] text-white/50">Manager</p>
                   </div>
                   {/* Stufe 3 */}
-                  <div className="flex-1 text-center px-4 py-3 rounded-lg bg-black/80 gold-border-glow">
-                    <p className="text-[10px] text-[#C9A86C] mb-1">STUFE 3</p>
-                    <p className="text-sm font-bold gold-gradient-text">2.000 €</p>
-                    <p className="text-[9px] text-white/50">Orgaleiter</p>
+                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 gold-border-glow">
+                    <p className="text-[9px] text-[#C9A86C] mb-1">STUFE 3</p>
+                    <p className="text-xs font-bold gold-gradient-text">1.000 €</p>
+                    <p className="text-[8px] text-white/50">Jr. Teaml.</p>
+                  </div>
+                  {/* Stufe 4 */}
+                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 gold-border-glow">
+                    <p className="text-[9px] text-[#C9A86C] mb-1">STUFE 4</p>
+                    <p className="text-xs font-bold gold-gradient-text">1.250 €</p>
+                    <p className="text-[8px] text-white/50">Teamleiter</p>
                   </div>
                 </div>
                 
                 {/* Highlight Badge */}
                 <div className="text-center p-3 rounded-lg bg-gradient-to-r from-[#C9A86C]/20 via-[#C9A86C]/30 to-[#C9A86C]/20 border border-[#C9A86C]/40">
-                  <p className="text-sm font-semibold text-white">Bis zu <span className="gold-gradient-text text-lg">24.000€</span> in 12 Monaten</p>
+                  <p className="text-sm font-semibold text-white">Bis zu <span className="gold-gradient-text text-lg">15.000€</span> in 12 Monaten</p>
                   <p className="text-[10px] text-white/60">+ Autobonus + Handelsspanne</p>
                 </div>
               </div>

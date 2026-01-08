@@ -187,36 +187,48 @@ WAS IST DER FAST TRACK:
 Garantierter Mindestbonus für neue Partner für bis zu 12 Monate.
 Falls dein regulär errechneter Bonus niedriger ausfällt, bekommst du den garantierten Betrag (Uplift).
 
-DIE 3 STUFEN:
-1. Junior Manager: 300 €/Monat* (4.000 PW)
-2. Junior Teamleiter: 1.100 €/Monat* (12.000 PW)
-3. Orgaleiter: 2.000 €/Monat* (24.000 PW)
+DIE 4 STUFEN (Stand Januar 2026):
+1. Junior Manager: 250 €/Monat* (4.000 PW)
+2. Manager: 500 €/Monat* (8.000 PW)
+3. Junior Teamleiter: 1.000 €/Monat* (12.000 PW)
+4. Teamleiter: 1.250 €/Monat* (16.000 PW)
+
+Ab Orgaleiter: Business Track mit mind. 2.000 €/Monat
 
 MAXIMALES POTENZIAL:
-Bis zu 24.000€ im ersten Jahr möglich!
-(2.000€ x 12 Monate = 24.000€)
+Bis zu 15.000€ im ersten Jahr möglich!
+(1.250€ x 12 Monate = 15.000€)
 
 ZUSÄTZLICH:
 - Handelsspanne auf Produktverkäufe (30-50%)
 - Autobonus je nach Karrierestufe
 - Teambonus auf Teamumsatz
 
-QUALIFIKATIONSKRITERIEN:
+QUALIFIKATIONSKRITERIEN (Stand Januar 2026):
 
 Junior Manager (4.000 PW):
 - 4.000 Gesamt-PW
 - 2x 500 PW-Linien
 - 100 PW Eigenumsatz
+- 2.000 Rest-PW
+
+Manager (8.000 PW):
+- 8.000 Gesamt-PW
+- 3x 500 PW-Linien
+- 100 PW Eigenumsatz
+- 4.000 Rest-PW
 
 Junior Teamleiter (12.000 PW):
 - 12.000 Gesamt-PW
-- 3x 500 PW-Linien
+- 4x 500 PW-Linien
 - 100 PW Eigenumsatz
+- 6.000 Rest-PW
 
-Orgaleiter (24.000 PW):
-- 24.000 Gesamt-PW
-- 6x 500 PW-Linien
+Teamleiter (16.000 PW):
+- 16.000 Gesamt-PW
+- 5x 500 PW-Linien
 - 100 PW Eigenumsatz
+- 6.000 Rest-PW
 
 *Keine Garantie. Abhängig von Qualifikation und LR-Bedingungen.
 
