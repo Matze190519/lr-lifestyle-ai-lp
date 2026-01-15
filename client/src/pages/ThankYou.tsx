@@ -16,7 +16,9 @@ export default function ThankYou() {
   const whatsappLink = "https://wa.me/491715060008?text=Hi%20Mathias%2C%20ich%20habe%20das%20Formular%20ausgef%C3%BCllt.%20INFO%20%2B%20%5BFast%20Track%2FAuto%2FBeides%5D";
 
   useEffect(() => {
-    trackEvent('Lead'); // Track Lead event on load
+    // Lead event is already tracked on form submit in Home.tsx
+    // Tracking here would cause duplicate events
+    trackEvent('CompleteRegistration'); // Track page view as registration complete
   }, []);
 
   return (
