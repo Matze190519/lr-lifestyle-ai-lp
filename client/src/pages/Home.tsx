@@ -878,21 +878,44 @@ const FinalCTASection = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    trackEvent('Lead');
-    // Meta Pixel Lead Event
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Lead', {
-        content_name: 'LR Info-Paket Anfrage',
-        content_category: values.interest || 'Allgemein',
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      // Formulardaten an Netlify Forms senden
+      const formData = new URLSearchParams();
+      formData.append('form-name', 'contact');
+      formData.append('name', values.name);
+      formData.append('phone', values.phone);
+      formData.append('interest', values.interest);
+      formData.append('dsgvo', String(values.dsgvo));
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString(),
       });
+
+      if (!response.ok) {
+        throw new Error(`Netlify Form submission failed: ${response.status}`);
+      }
+
+      console.log('Form submitted successfully to Netlify', values);
+      trackEvent('Lead');
+      // Meta Pixel Lead Event
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Lead', {
+          content_name: 'LR Info-Paket Anfrage',
+          content_category: values.interest || 'Allgemein',
+        });
+      }
+      toast.success("Anfrage gesendet!", {
+        description: "Wir melden uns in Kürze bei dir.",
+      });
+      form.reset();
+      setLocation("/danke");
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error("Fehler beim Senden. Bitte versuche es erneut oder kontaktiere uns per WhatsApp.");
     }
-    toast.success("Anfrage gesendet!", {
-      description: "Wir melden uns in Kürze bei dir.",
-    });
-    form.reset();
-    setLocation("/danke");
   }
 
   return (

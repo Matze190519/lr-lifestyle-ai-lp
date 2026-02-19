@@ -46,6 +46,14 @@
   </head>
 
   <body>
+    <!-- Hidden form for Netlify Forms detection (required for SPA/React apps) -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="phone" />
+      <input type="text" name="interest" />
+      <input type="text" name="dsgvo" />
+    </form>
+
     <!-- Meta Pixel noscript fallback -->
     <noscript>
       <img height="1" width="1" style="display:none"
