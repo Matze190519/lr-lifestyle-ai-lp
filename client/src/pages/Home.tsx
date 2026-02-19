@@ -880,7 +880,7 @@ const FinalCTASection = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      // Formulardaten an Netlify Forms senden
+      // Formulardaten für Netlify Forms vorbereiten
       const formData = new URLSearchParams();
       formData.append('form-name', 'contact');
       formData.append('name', values.name);
@@ -888,19 +888,66 @@ const FinalCTASection = () => {
       formData.append('interest', values.interest);
       formData.append('dsgvo', String(values.dsgvo));
 
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formData.toString(),
-      });
+      const bodyString = formData.toString();
+      let submitted = false;
 
-      if (!response.ok) {
-        throw new Error(`Netlify Form submission failed: ${response.status}`);
+      // Methode 1: fetch() mit Timeout-Schutz
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: bodyString,
+          signal: controller.signal,
+          keepalive: true,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          submitted = true;
+          console.log('Form submitted successfully via fetch', values);
+        } else {
+          console.warn('Fetch response not ok:', response.status);
+        }
+      } catch (fetchErr) {
+        console.warn('Fetch failed, trying sendBeacon fallback:', fetchErr);
       }
 
-      console.log('Form submitted successfully to Netlify', values);
+      // Methode 2: sendBeacon als Fallback (wird NICHT durch Navigation abgebrochen)
+      if (!submitted && navigator.sendBeacon) {
+        const blob = new Blob([bodyString], { type: 'application/x-www-form-urlencoded' });
+        const beaconSent = navigator.sendBeacon('/', blob);
+        if (beaconSent) {
+          submitted = true;
+          console.log('Form submitted successfully via sendBeacon', values);
+        }
+      }
+
+      // Methode 3: Letzter Fallback - synchroner XMLHttpRequest
+      if (!submitted) {
+        try {
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', '/', false); // synchron = blockiert bis fertig
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhr.send(bodyString);
+          if (xhr.status >= 200 && xhr.status < 300) {
+            submitted = true;
+            console.log('Form submitted successfully via XHR sync', values);
+          }
+        } catch (xhrErr) {
+          console.error('XHR sync fallback also failed:', xhrErr);
+        }
+      }
+
+      if (!submitted) {
+        throw new Error('Alle Sendemethoden fehlgeschlagen');
+      }
+
+      // Tracking und Navigation erst NACH erfolgreichem Senden
       trackEvent('Lead');
-      // Meta Pixel Lead Event
       if (typeof window !== 'undefined' && (window as any).fbq) {
         (window as any).fbq('track', 'Lead', {
           content_name: 'LR Info-Paket Anfrage',
