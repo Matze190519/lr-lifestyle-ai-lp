@@ -69,7 +69,7 @@ const HeroSection = () => {
           className="w-full py-2 px-4 text-center text-xs font-medium"
           style={{ background: 'linear-gradient(90deg, #C9A86C 0%, #E8D5A3 50%, #C9A86C 100%)' }}
         >
-          <span className="text-black">Bis zu 15.000€ Bonus im ersten Jahr möglich*</span>
+          <span className="text-black">🔥 MÄRZ-AKTION: Starte dein LR Business für nur 99€ statt 250€!</span>
         </div>
 
         {/* Header */}
@@ -93,7 +93,7 @@ const HeroSection = () => {
 
           {/* Sub-Headline */}
           <p className="text-white/90 text-sm mb-4 leading-relaxed">
-            Starte mit LR + KI-Coach Lina. <strong className="text-[#C9A86C]">Bis zu 1.250€/Monat</strong> garantierter Bonus.*
+            <strong className="text-white">🔥 MÄRZ-AKTION:</strong> Starte dein LR Business für nur <strong className="text-[#C9A86C]">99€ statt 250€!</strong> + Bis zu 1.250€/Monat garantierter Bonus.*
           </p>
 
           {/* 3 Benefits - Kompakt mit Lichtstrahl */}
@@ -169,6 +169,10 @@ const HeroSection = () => {
                 <br />
                 <span className="text-white">monatlicher Bonus*</span>
               </h1>
+              {/* März-Aktion Banner */}
+              <div className="mt-4 p-3 rounded-lg border border-[#C9A86C]/60" style={{ background: 'linear-gradient(135deg, rgba(201, 168, 108, 0.15) 0%, rgba(201, 168, 108, 0.05) 100%)' }}>
+                <p className="text-sm font-bold text-white">🔥 MÄRZ-AKTION: Starte für nur <span className="gold-gradient-text text-lg">99€</span> <span className="text-white/60 line-through text-xs">statt 250€</span></p>
+              </div>
             </div>
             
             <p className="text-sm text-white/80 leading-relaxed">
@@ -541,7 +545,7 @@ const FAQSection = () => {
     },
     {
       q: "Welche Startersets gibt es und was kosten sie?",
-      a: "Für den Start brauchst du das Printpaket (29,90 €) plus eine Erstbestellung von mindestens 150 €. Die Produkte sind stark subventioniert – du bekommst deutlich mehr Wert als du bezahlst.\n\nWas du bekommst:\n• Deinen eigenen Online-Shop – LR liefert direkt an deine Kunden\n• 30–50 % Provision auf verkaufte Produkte\n• Eine Webseite in 20 Sprachen\n• Zugang zu Lina (KI-Coach) + Support vom LR Lifestyle Team\n\nDas Profi Business Startpaket mit 2.000 PW deckt bereits die Hälfte der Qualifikation fürs Autokonzept (4.000 PW) ab."
+      a: "🔥 Im März 2026 startest du mit dem Aktions-Startpaket für nur 99€ (statt 250€)! Regulär brauchst du das Printpaket (29,90 €) plus eine Erstbestellung von mindestens 150 €. Die Produkte sind stark subventioniert – du bekommst deutlich mehr Wert als du bezahlst.\n\nWas du bekommst:\n• Deinen eigenen Online-Shop – LR liefert direkt an deine Kunden\n• 30–50 % Provision auf verkaufte Produkte\n• Eine Webseite in 20 Sprachen\n• Zugang zu Lina (KI-Coach) + Support vom LR Lifestyle Team\n\nDas Profi Business Startpaket mit 2.000 PW deckt bereits die Hälfte der Qualifikation fürs Autokonzept (4.000 PW) ab."
     },
     {
       q: "Wie funktioniert das duplizierbare System?",
@@ -1114,7 +1118,7 @@ const Footer = () => {
           <a href="/impressum" className="hover:text-[#C9A86C] transition-colors">Impressum</a>
           <a href="/datenschutz" className="hover:text-[#C9A86C] transition-colors">Datenschutz</a>
         </div>
-        <p className="opacity-50">© 2025 LR Lifestyle AI</p>
+        <p className="opacity-50">© 2026 LR Lifestyle AI</p>
       </div>
     </footer>
   );
