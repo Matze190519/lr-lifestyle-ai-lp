@@ -357,37 +357,37 @@ const WhatIsLRSection = () => {
     </section>
 
     {/* Warum LR? Fakten */}
-    <section className="py-12 section-glow">
-      <div className="container max-w-4xl">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold font-poppins"><span className="gold-gradient-text">Warum LR?</span></h2>
-          <p className="text-sm text-white/60 mt-2">Fakten, die für sich sprechen</p>
+    <section className="py-8 section-glow">
+      <div className="container max-w-lg">
+        <div className="text-center mb-4">
+          <h2 className="text-lg font-bold font-poppins"><span className="gold-gradient-text">Warum LR?</span></h2>
+          <p className="text-xs text-white/60 mt-1">Fakten, die für sich sprechen</p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
-            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">40+</p>
-            <p className="text-xs text-white/60 mt-1">Jahre Markterfahrung</p>
+        <div className="grid grid-cols-3 gap-2">
+          <div className="bg-black/80 p-3 rounded-lg border border-white/10 text-center">
+            <p className="text-base md:text-lg font-bold gold-gradient-text">40+</p>
+            <p className="text-[10px] text-white/60 mt-1">Jahre Markterfahrung</p>
           </div>
-          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
-            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">32</p>
-            <p className="text-xs text-white/60 mt-1">Länder weltweit</p>
+          <div className="bg-black/80 p-3 rounded-lg border border-white/10 text-center">
+            <p className="text-base md:text-lg font-bold gold-gradient-text">32</p>
+            <p className="text-[10px] text-white/60 mt-1">Länder weltweit</p>
           </div>
-          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
-            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">86 Mio.</p>
-            <p className="text-xs text-white/60 mt-1">Liter Aloe Vera Gele verkauft</p>
+          <div className="bg-black/80 p-3 rounded-lg border border-white/10 text-center">
+            <p className="text-base md:text-lg font-bold gold-gradient-text">86 Mio.</p>
+            <p className="text-[10px] text-white/60 mt-1">Liter AV Gele verkauft</p>
           </div>
-          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
-            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">1,7 Mrd. €</p>
-            <p className="text-xs text-white/60 mt-1">Bonus an Partner ausgezahlt</p>
+          <div className="bg-black/80 p-3 rounded-lg border border-white/10 text-center">
+            <p className="text-base md:text-lg font-bold gold-gradient-text">1,7 Mrd. €</p>
+            <p className="text-[10px] text-white/60 mt-1">Bonus ausgezahlt</p>
           </div>
-          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
-            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">40.000+</p>
-            <p className="text-xs text-white/60 mt-1">Autos an Partner übergeben</p>
+          <div className="bg-black/80 p-3 rounded-lg border border-white/10 text-center">
+            <p className="text-base md:text-lg font-bold gold-gradient-text">40.000+</p>
+            <p className="text-[10px] text-white/60 mt-1">Autos übergeben</p>
           </div>
-          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
-            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">Made in</p>
-            <p className="text-lg font-bold text-white">Germany</p>
-            <p className="text-xs text-white/60 mt-1">SGS-zertifizierte Qualität</p>
+          <div className="bg-black/80 p-3 rounded-lg border border-white/10 text-center">
+            <p className="text-base md:text-lg font-bold gold-gradient-text">Made in</p>
+            <p className="text-sm font-bold text-white">Germany</p>
+            <p className="text-[10px] text-white/60 mt-1">SGS-zertifiziert</p>
           </div>
         </div>
       </div>
