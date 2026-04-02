@@ -125,7 +125,7 @@ export default function Datenschutz() {
           </section>
 
           <p className="text-sm opacity-70 pt-8">
-            © 2025 Online Network Vision S.L. Alle Rechte vorbehalten.
+            © 2026 Online Network Vision S.L. Alle Rechte vorbehalten.
           </p>
         </div>
       </div>

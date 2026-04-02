@@ -69,7 +69,7 @@ const HeroSection = () => {
           className="w-full py-2 px-4 text-center text-xs font-medium"
           style={{ background: 'linear-gradient(90deg, #C9A86C 0%, #E8D5A3 50%, #C9A86C 100%)' }}
         >
-          <span className="text-black">🔥 MÄRZ-AKTION: Starte dein LR Business für nur 99€ statt 250€!</span>
+          <span className="text-black">Starte dein eigenes LR Business – ab 119,90 € + bis zu 1.250€/Monat Bonus!</span>
         </div>
 
         {/* Header */}
@@ -93,7 +93,7 @@ const HeroSection = () => {
 
           {/* Sub-Headline */}
           <p className="text-white/90 text-sm mb-4 leading-relaxed">
-            <strong className="text-white">🔥 MÄRZ-AKTION:</strong> Starte dein LR Business für nur <strong className="text-[#C9A86C]">99€ statt 250€!</strong> + Bis zu 1.250€/Monat garantierter Bonus.*
+            Starte dein LR Business <strong className="text-[#C9A86C]">ab 119,90 €</strong> – mit Starter-Sets, 3-Monatssets oder bequemen Abos. Bis zu 1.250€/Monat garantierter Bonus.*
           </p>
 
           {/* 3 Benefits - Kompakt mit Lichtstrahl */}
@@ -169,9 +169,8 @@ const HeroSection = () => {
                 <br />
                 <span className="text-white">monatlicher Bonus*</span>
               </h1>
-              {/* März-Aktion Banner */}
               <div className="mt-4 p-3 rounded-lg border border-[#C9A86C]/60" style={{ background: 'linear-gradient(135deg, rgba(201, 168, 108, 0.15) 0%, rgba(201, 168, 108, 0.05) 100%)' }}>
-                <p className="text-sm font-bold text-white">🔥 MÄRZ-AKTION: Starte für nur <span className="gold-gradient-text text-lg">99€</span> <span className="text-white/60 line-through text-xs">statt 250€</span></p>
+                <p className="text-sm font-bold text-white">Starte <span className="gold-gradient-text text-lg">ab 119,90 €</span> – Starter-Sets, 3-Monatssets & Abos</p>
               </div>
             </div>
             
@@ -497,7 +496,7 @@ const FAQSection = () => {
     },
     {
       q: "Kostet mich das Info-Paket oder der Start etwas?",
-      a: "Das Info-Paket und der Support durch Lina sind komplett kostenlos. Der offizielle Start als LR Partner beginnt mit dem Printpaket (29,90 €) plus einer Erstbestellung von mindestens 150 €. Die Produkte in den Startersets sind stark subventioniert und deutlich günstiger als im Einzelkauf.\n\nIm Paket enthalten:\n• Dein eigener Online-Shop mit Direktbelieferung – LR liefert direkt an deine Kunden\n• 30–50 % Provision auf alle verkauften Produkte\n• Eine eigene Webseite, übersetzbar in 20 Sprachen\n• Zugang zu Lina, deinem KI-Coach mit 24/7 Support\n• Persönliche Unterstützung von Matthias und dem LR Lifestyle Team"
+      a: "Das Info-Paket und der Support durch Lina sind komplett kostenlos. Der offizielle Start als LR Partner beginnt ab 119,90 € Mindestbestellwert. Die Produkte in den Startersets sind stark subventioniert und deutlich günstiger als im Einzelkauf.\n\nIm Paket enthalten:\n• Dein eigener Online-Shop mit Direktbelieferung – LR liefert direkt an deine Kunden\n• 30–50 % Provision auf alle verkauften Produkte\n• Eine eigene Webseite, übersetzbar in 20 Sprachen\n• Zugang zu Lina, deinem KI-Coach mit 24/7 Support\n• Persönliche Unterstützung von Matthias und dem LR Lifestyle Team\n\nZahlungsmöglichkeiten: Klarna, PayPal, Kreditkarte, Apple Pay, Google Pay, Revolut. Bei 3-Monatssets und Abos auch Lastschrift mit Ratenzahlung."
     },
     {
       q: "Wie läuft das nach dem Kontakt ab?",
@@ -505,7 +504,7 @@ const FAQSection = () => {
     },
     {
       q: "Ist das LR Geschäft seriös?",
-      a: "Ja, LR Health & Beauty ist ein etabliertes europäisches Social-Commerce-Unternehmen. Es wurde 1985 gegründet und feiert 2025 sein 40-jähriges Bestehen. LR ist in 32 Ländern aktiv und legt Wert auf höchste Produktqualität (\"Made in Germany\"). Die Qualität der Aloe Vera Produkte wird durch unabhängige Siegel wie das SGS INSTITUT FRESENIUS und das IASC-Siegel bestätigt."
+      a: "Ja, LR Health & Beauty ist ein etabliertes europäisches Social-Commerce-Unternehmen. Es wurde 1985 gegründet und feiert 2025 sein 40-jähriges Bestehen. LR ist in 33 Ländern aktiv und legt Wert auf höchste Produktqualität (\"Made in Germany\"). Die Qualität der Aloe Vera Produkte wird durch unabhängige Siegel wie das SGS INSTITUT FRESENIUS und das IASC-Siegel bestätigt."
     },
     {
       q: "Muss ich verkaufen oder kann ich nur Team aufbauen?",
@@ -545,7 +544,7 @@ const FAQSection = () => {
     },
     {
       q: "Welche Startersets gibt es und was kosten sie?",
-      a: "🔥 Im März 2026 startest du mit dem Aktions-Startpaket für nur 99€ (statt 250€)! Regulär brauchst du das Printpaket (29,90 €) plus eine Erstbestellung von mindestens 150 €. Die Produkte sind stark subventioniert – du bekommst deutlich mehr Wert als du bezahlst.\n\nWas du bekommst:\n• Deinen eigenen Online-Shop – LR liefert direkt an deine Kunden\n• 30–50 % Provision auf verkaufte Produkte\n• Eine Webseite in 20 Sprachen\n• Zugang zu Lina (KI-Coach) + Support vom LR Lifestyle Team\n\nDas Profi Business Startpaket mit 2.000 PW deckt bereits die Hälfte der Qualifikation fürs Autokonzept (4.000 PW) ab."
+      a: "Es gibt verschiedene Möglichkeiten einzusteigen:\n\n• Starter-Sets (Einmalbestellung): z.B. LR Business Mission Set (795,90 €, 2.000 PW), Aloe Vera All-in One (184,90 €), Body Mission 1 oder 3 Monate, Health Mission 6 Monate, Fragrance Set\n• 3-Monatssets (NEU): Health Mission 3 Monate (575,90 €), Aloe Vera Gel 3 Monate (ab 244,50 €), Colostrum & Pro 12+ (284,50 €), Mind Master Gold (254,90 €)\n• Monatsabos (NEU): Bequeme automatische Lieferung, versandkostenfrei, mit Treuegeschenken. Ab 79,90 €/Monat.\n\nMindestbestellwert für Neueinsteiger: 119,90 €. Zahlungsmöglichkeiten: Klarna, PayPal, Kreditkarte, Apple Pay, Google Pay, Revolut. Bei 3-Monatssets und Abos auch Lastschrift mit Ratenzahlung.\n\nDas LR Business Mission Set mit 2.000 PW deckt bereits die Hälfte der Qualifikation fürs Autokonzept (4.000 PW) ab."
     },
     {
       q: "Wie funktioniert das duplizierbare System?",
@@ -557,7 +556,7 @@ const FAQSection = () => {
     },
     {
       q: "Kann ich das Business auch international aufbauen?",
-      a: "Ja, LR ist in 32 Ländern aktiv. Du kannst dein Netzwerk über Landesgrenzen hinweg aufbauen und von internationalen Umsätzen profitieren. Das Geschäftsmodell funktioniert 100% online – Partner und Kunden weltweit, alles von zu Hause aus."
+      a: "Ja, LR ist in 33 Ländern aktiv. Du kannst dein Netzwerk über Landesgrenzen hinweg aufbauen und von internationalen Umsätzen profitieren. Das Geschäftsmodell funktioniert 100% online – Partner und Kunden weltweit, alles von zu Hause aus."
     }
   ];
 
