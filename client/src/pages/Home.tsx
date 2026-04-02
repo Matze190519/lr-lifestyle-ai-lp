@@ -98,15 +98,15 @@ const HeroSection = () => {
 
           {/* 3 Benefits - Kompakt mit Lichtstrahl */}
           <div className="space-y-2 mb-4">
-            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 gold-border-glow">
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-white/10">
               <TrendingUp className="w-4 h-4 text-[#C9A86C] shrink-0" />
               <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">250€ - 1.250€</strong> monatlicher Bonus</span>
             </div>
-            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 gold-border-glow">
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-white/10">
               <Smartphone className="w-4 h-4 text-[#C9A86C] shrink-0" />
               <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">KI-Coach Lina</strong> 24/7 Support</span>
             </div>
-            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 gold-border-glow">
+            <div className="flex items-center gap-3 bg-[#C9A86C]/10 rounded-lg px-3 py-2 border border-white/10">
               <Car className="w-4 h-4 text-[#C9A86C] shrink-0" />
               <span className="text-xs text-white/90"><strong className="text-[#C9A86C]">Firmenwagen</strong> ab Junior Manager</span>
             </div>
@@ -333,6 +333,7 @@ const WhatIsLRSection = () => {
   ];
 
   return (
+    <>
     <section className="py-12 section-glow ">
       <div className="container max-w-4xl">
         <div className="text-center mb-8">
@@ -341,7 +342,7 @@ const WhatIsLRSection = () => {
         </div>
         <div className="grid md:grid-cols-2 gap-4">
           {benefits.map((benefit, i) => (
-            <div key={i} className="bg-black/80 p-5 rounded-lg gold-border-glow">
+            <div key={i} className="bg-black/80 p-5 rounded-lg border border-white/10">
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-[#C9A86C] shrink-0 mt-0.5" />
                 <div>
@@ -354,6 +355,44 @@ const WhatIsLRSection = () => {
         </div>
       </div>
     </section>
+
+    {/* Warum LR? Fakten */}
+    <section className="py-12 section-glow">
+      <div className="container max-w-4xl">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold font-poppins"><span className="gold-gradient-text">Warum LR?</span></h2>
+          <p className="text-sm text-white/60 mt-2">Fakten, die für sich sprechen</p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
+            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">40+</p>
+            <p className="text-xs text-white/60 mt-1">Jahre Markterfahrung</p>
+          </div>
+          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
+            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">32</p>
+            <p className="text-xs text-white/60 mt-1">Länder weltweit</p>
+          </div>
+          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
+            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">86 Mio.</p>
+            <p className="text-xs text-white/60 mt-1">Liter Aloe Vera Gele verkauft</p>
+          </div>
+          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
+            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">1,7 Mrd. €</p>
+            <p className="text-xs text-white/60 mt-1">Bonus an Partner ausgezahlt</p>
+          </div>
+          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
+            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">40.000+</p>
+            <p className="text-xs text-white/60 mt-1">Autos an Partner übergeben</p>
+          </div>
+          <div className="bg-black/80 p-5 rounded-lg border border-white/10 text-center">
+            <p className="text-2xl md:text-3xl font-bold gold-gradient-text">Made in</p>
+            <p className="text-lg font-bold text-white">Germany</p>
+            <p className="text-xs text-white/60 mt-1">SGS-zertifizierte Qualität</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    </>
   );
 };
 
@@ -458,7 +497,7 @@ const SocialProofSection = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <Card key={i} className="bg-black/80 transition-all backdrop-blur-sm gold-border-glow">
+            <Card key={i} className="bg-black/80 transition-all backdrop-blur-sm border border-white/10">
               <CardContent className="p-6 relative">
                 <div className="absolute top-4 right-4 px-2 py-1 bg-[#C9A86C]/10 rounded text-[10px] font-mono text-[#C9A86C] uppercase tracking-wider">
                   {t.badge}
@@ -570,7 +609,7 @@ const FAQSection = () => {
         
         <Accordion type="single" collapsible className="w-full space-y-2">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="bg-black/80 rounded-lg px-4 gold-border-glow">
+            <AccordionItem key={i} value={`item-${i}`} className="bg-black/80 rounded-lg px-4 border border-white/10">
               <AccordionTrigger className="text-sm font-medium hover:text-[#C9A86C] text-left">
                 {faq.q}
               </AccordionTrigger>
@@ -610,7 +649,7 @@ const BusinessTrackSection = () => {
 
         {/* Akkordeon für Business Track Details */}
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="business-track" className="bg-black/80 rounded-lg px-4 gold-border-glow">
+          <AccordionItem value="business-track" className="bg-black/80 rounded-lg px-4 border border-white/10">
             <AccordionTrigger className="text-sm font-medium hover:text-[#C9A86C]">
               <div className="flex items-center gap-3">
                 <TrendingUp className="w-5 h-5 text-[#C9A86C]" />
@@ -673,25 +712,25 @@ const FastTrackSection = () => {
               <div className="mb-5">
                 <div className="grid grid-cols-4 gap-1 mb-4">
                   {/* Stufe 1 */}
-                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 gold-border-glow">
+                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 border border-white/10">
                     <p className="text-[9px] text-[#C9A86C] mb-1">STUFE 1</p>
                     <p className="text-xs font-bold gold-gradient-text">250 €</p>
                     <p className="text-[8px] text-white/50">Jr. Manager</p>
                   </div>
                   {/* Stufe 2 */}
-                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 gold-border-glow">
+                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 border border-white/10">
                     <p className="text-[9px] text-[#C9A86C] mb-1">STUFE 2</p>
                     <p className="text-xs font-bold gold-gradient-text">500 €</p>
                     <p className="text-[8px] text-white/50">Manager</p>
                   </div>
                   {/* Stufe 3 */}
-                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 gold-border-glow">
+                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 border border-white/10">
                     <p className="text-[9px] text-[#C9A86C] mb-1">STUFE 3</p>
                     <p className="text-xs font-bold gold-gradient-text">1.000 €</p>
                     <p className="text-[8px] text-white/50">Jr. Teaml.</p>
                   </div>
                   {/* Stufe 4 */}
-                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 gold-border-glow">
+                  <div className="text-center px-2 py-3 rounded-lg bg-black/80 border border-white/10">
                     <p className="text-[9px] text-[#C9A86C] mb-1">STUFE 4</p>
                     <p className="text-xs font-bold gold-gradient-text">1.250 €</p>
                     <p className="text-[8px] text-white/50">Teamleiter</p>
@@ -847,7 +886,7 @@ const LinaSection = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {features.map((f, i) => (
-            <Card key={i} className="bg-black/80 transition-all text-center gold-border-glow">
+            <Card key={i} className="bg-black/80 transition-all text-center border border-white/10">
               <CardContent className="p-6 flex flex-col items-center">
                 <div className="w-10 h-10 rounded-full bg-[#C9A86C]/10 flex items-center justify-center mb-4">
                   {f.icon}
